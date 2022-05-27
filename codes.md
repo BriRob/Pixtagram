@@ -26,3 +26,10 @@ Comments Table
 Likes Table
     A like belongs to one user.
     A like belongs to one post.
+
+
+
+
+
+for aws
+pipenv install boto3

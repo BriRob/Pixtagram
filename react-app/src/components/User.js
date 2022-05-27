@@ -22,6 +22,7 @@ function User() {
 
   return (
     <ul>
+      {/* <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img> */}
       <li>
         <strong>User Id</strong> {userId}
       </li>
