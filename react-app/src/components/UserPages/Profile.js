@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Profiler } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { getUserThunk } from '../store/user';
+import { getUserThunk } from '../../store/user';
+import './Profile.css'
 
 function User() {
   const dispatch = useDispatch();
@@ -33,14 +34,14 @@ function User() {
     <>
       <ul>
         <li>
-          <strong>{user.full_name}</strong> 
+          <strong>{user.full_name}</strong>
         </li>
         <li>
           <strong>Username</strong> {user.username}
         </li>
-        <li>
+        {/* <li>
           <strong>Email</strong> {user.email}
-        </li>
+        </li> */}
         <li>
           <strong>Bio</strong> {user.bio}
         </li>

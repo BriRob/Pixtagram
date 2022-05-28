@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
-
+import './Splash.css'
 
 function Splash(){
 const history = useHistory()
