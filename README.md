@@ -1,6 +1,22 @@
-# Flask React Project
+# Pixtagram 
 
-This is the starter for the Flask React project.
+Pixtagram is a pixel perfect clone of [Instagram](https://www.instagram.com/) where users can share posts with other users. They can show their support by liking and commenting other's posts.
+
+Check out [Pixtagram](https://github.com/BriRob/Pixtagram/wiki/mvp-feature-list)
+
+## Index
+
+[MVP Feature List](https://github.com/BriRob/Pixtagram/wiki/MVP-Feature-List) |
+[Database Scheme](https://github.com/BriRob/Pixtagram/wiki/Pixtagram-DB-Schema) |
+[User Stories](https://github.com/BriRob/Pixtagram/wiki/Pixtagram-User-Stories)
+
+
+## Technologies Used
+TO BE ADDED
+
+
+
+
 
 ## Getting started
 1. Clone this repository (only this branch)
