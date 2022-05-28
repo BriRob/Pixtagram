@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import User, db
 from app.forms.edit_user_form import EditUserForm
@@ -23,15 +23,22 @@ def users():
 
 
 @user_routes.route('/<int:id>')
-# @login_required
+@login_required
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
 
-@user_routes.route('/<int:id>/edit', methods=["GET", "PUT"])
-# @login_required
+@user_routes.route('/<int:id>/edit', methods=["GET","PUT"])
+@login_required
 def edit_user(id):
+    """
+    Edit a user route
+    """
+
+    # data=request.json
+    # print("What is Data.json??", data)
+
     user = User.query.get(id)
     form = EditUserForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -39,7 +46,11 @@ def edit_user(id):
         user.full_name = form.data['full_name']
         user.profile_pic_url = form.data['profile_pic_url']
         user.bio = form.data['bio']
-        # db.session.add(user)
+        db.session.add(user)
+        print("HELLO FROM EDIT ROUTE")
         db.session.commit()
-        return user.to_dict()
+
+        return {"user": user.to_dict()}
+        # return {"user": [user]}
+    # return {"user": "Blue"}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
