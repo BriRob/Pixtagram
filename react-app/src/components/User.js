@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 function User() {
   const [user, setUser] = useState({});
-  const { userId }  = useParams();
+  const { userId } = useParams();
+  const history = useHistory()
 
   useEffect(() => {
     if (!userId) {
@@ -16,23 +17,32 @@ function User() {
     })();
   }, [userId]);
 
+
+  function toEdit(){
+    history.push(`/users/${userId}/edit`)
+  }
+
+
   if (!user) {
     return null;
   }
 
+  // <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img>
   return (
-    <ul>
-      {/* <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img> */}
-      <li>
-        <strong>User Id</strong> {userId}
-      </li>
-      <li>
-        <strong>Username</strong> {user.username}
-      </li>
-      <li>
-        <strong>Email</strong> {user.email}
-      </li>
-    </ul>
+    <>
+      <ul>
+        <li>
+          <strong>User Id</strong> {userId}
+        </li>
+        <li>
+          <strong>Username</strong> {user.username}
+        </li>
+        <li>
+          <strong>Email</strong> {user.email}
+        </li>
+      </ul>
+      <button onClick={e => toEdit()}>Edit Profile</button>
+    </>
   );
 }
 export default User;
