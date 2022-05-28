@@ -12,10 +12,16 @@ function EditUser() {
   // console.log(currentUser);
   const history = useHistory()
 
+  const displayUserName = currentUser.user.username
+  const userBio = currentUser.user.bio
+  const userFullName = currentUser.user.full_name
+
+
   const [user, setUser] = useState({});
-  const [fullName, setFullName] = useState();
-  const [bio, setBio] = useState();
+  const [fullName, setFullName] = useState(userFullName);
+  const [biography, setBiography] = useState('');
   const [profilePicUrl, setProfilePicUrl] = useState();
+  const [userName, setUserName] = useState(displayUserName);
   const { userId } = useParams();
 
   //   useEffect(() => {
@@ -36,10 +42,16 @@ function EditUser() {
   // const response = await fetch(`/api/users/${userId}/edit`);
   // const user = await response.json();
   // setUser(user);
-  const handleSubmit = async (e) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const form = { fullName, bio, profilePicUrl }
-    const updated_info = await dispatch(editUserThunk(userId, form))
+    const full_name = fullName
+    const bio = biography
+    const profile_pic_url = profilePicUrl
+    const form = { full_name, bio, profile_pic_url }
+    console.log("FORM", form)
+    dispatch(editUserThunk(userId, form))
+    history.push(`/users/${userId}`)
   }
 
   function backToProfile(){
@@ -50,24 +62,49 @@ function EditUser() {
 
   return (
     <>
-      <form onSubmit={e => handleSubmit(e)}>
-        <label>Fullname</label>
-        <input
-          type='text'
-          name='full_name'
-          onChange={(e) => setFullName(e.target.value)}
-          value={fullName}
-        ></input>
-        <label>Bio</label>
-        <input
-          type='text'
-          name='bio'
-          onChange={(e) => setBio(e.target.value)}
-          value={bio}
-        ></input>
-        <label>Edit Profile Pic</label>
-      </form>
-      <button onClick={e => backToProfile()}>Cancel</button>
+      <form onSubmit={handleSubmit}>
+          <label>Username
+            <div>
+              <input
+                type='text'
+                name='userName'
+                value={userName}
+                disabled={true}
+              ></input>
+            </div>
+          </label>
+          <label>Fullname
+            <div>
+              <input
+                type='text'
+                name='full_name'
+                onChange={(e) => setFullName(e.target.value)}
+                value={fullName}
+              ></input>
+            </div>
+          </label>
+          <label>Bio
+            <div>
+              <input
+                type='text'
+                name='biography'
+                onChange={(e) => setBiography(e.target.value)}
+                value={biography}
+              ></input>
+            </div>
+          </label>
+          <label>Edit Profile Pic
+            <div>
+              <input
+                type='text'
+                name='profile_pic'
+                onChange={e => setProfilePicUrl(e.target.value)}
+              ></input>
+            </div>
+          </label>
+        <button type="submit">Submit</button>
+        <button onClick={e => backToProfile()}>Cancel</button>
+        </form>
     </>
   );
 }
