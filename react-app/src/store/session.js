@@ -11,6 +11,7 @@ const removeUser = () => ({
   type: REMOVE_USER,
 })
 
+
 const initialState = { user: null };
 
 export const authenticate = () => async (dispatch) => {
@@ -101,6 +102,7 @@ export const signUp = (full_name, username, email, password) => async (dispatch)
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
+      console.log("ACTION PAYLOAD ------", action.payload)
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
