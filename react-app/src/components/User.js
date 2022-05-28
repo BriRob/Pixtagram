@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import { getUserThunk } from '../store/user';
 
 function User() {
-  const [user, setUser] = useState({});
-  const { userId } = useParams();
+  const dispatch = useDispatch();
   const history = useHistory()
+  const sessionUser = useSelector((state)=> state.session.user)
+  const user = useSelector((state)=> state.userReducer.user)
+  const [isLoaded, setIsLoaded] = useState(false)
+  const { userId } = useParams();
 
   useEffect(() => {
-    if (!userId) {
-      return;
+    if (sessionUser){
+    dispatch(getUserThunk(userId))
+    .then(()=> setIsLoaded(true))
     }
-    (async () => {
-      const response = await fetch(`/api/users/${userId}`);
-      const user = await response.json();
-      setUser(user);
-    })();
-  }, [userId]);
+  }, [dispatch]);
 
 
   function toEdit(){
@@ -23,8 +24,8 @@ function User() {
   }
 
 
-  if (!user) {
-    return null;
+  if (!isLoaded) {
+    return <h1>Loading...</h1>;
   }
 
   // <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img>
@@ -32,7 +33,7 @@ function User() {
     <>
       <ul>
         <li>
-          <strong>User Id</strong> {userId}
+          {/* <strong>User Id</strong> {userId} */}
         </li>
         <li>
           <strong>Username</strong> {user.username}
@@ -40,8 +41,11 @@ function User() {
         <li>
           <strong>Email</strong> {user.email}
         </li>
+        <li>
+          <strong>Bio</strong> {user.bio}
+        </li>
       </ul>
-      <button onClick={e => toEdit()}>Edit Profile</button>
+      {sessionUser.id == userId? <button onClick={e => toEdit()}>Edit Profile</button>: null}
     </>
   );
 }
