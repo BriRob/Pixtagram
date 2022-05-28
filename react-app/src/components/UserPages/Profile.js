@@ -34,16 +34,16 @@ function User() {
     <>
       <ul>
         <li>
-          <strong>{user.full_name}</strong>
+          <strong>{user?.full_name}</strong>
         </li>
         <li>
-          <strong>Username</strong> {user.username}
+          <strong>Username</strong> {user?.username}
         </li>
         {/* <li>
           <strong>Email</strong> {user.email}
         </li> */}
         <li>
-          <strong>Bio</strong> {user.bio}
+          <strong>Bio</strong> {user?.bio}
         </li>
       </ul>
       {sessionUser.id == userId? <button onClick={e => toEdit()}>Edit Profile</button>: null}
