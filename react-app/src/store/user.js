@@ -29,15 +29,20 @@ export const getUserThunk = (userId) => async dispatch => {
 
 // Edit Thunk
 export const editUserThunk = (userId, form) => async dispatch => {
-    const response = await fetch(`/api/users/${userId}/edit`, {
+    console.log("WE GOT HERE")
+
+    const option = {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(form),
-    });
+    }
+
+    const response = await fetch(`/api/users/${userId}/edit`, option);
     if (response.ok) {
-      const data = await response.json();
+        const data = await response.json();
+        console.log("EDIT THUNK SHOULD BE JSON---->", data)
       if (data.errors) {
         return data.errors;
       }
