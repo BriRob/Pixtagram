@@ -33,3 +33,14 @@ Likes Table
 
 for aws
 pipenv install boto3
+
+
+------------------------------------------------------
+    GIT FLOW
+
+    TO pull from a team members branch:
+    - They have to add and commit changes first
+    - Make a new Branch with  ---> ``` git checkout -b <name of your branch> ```
+    - Pull INTO YOUR NEW BRANCH with ---> ``` git pull origin <teammates branch> ```
+
+------------------------------------------------------
