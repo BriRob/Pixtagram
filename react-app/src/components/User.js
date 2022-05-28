@@ -33,7 +33,7 @@ function User() {
     <>
       <ul>
         <li>
-          {/* <strong>User Id</strong> {userId} */}
+          <strong>{user.full_name}</strong> 
         </li>
         <li>
           <strong>Username</strong> {user.username}

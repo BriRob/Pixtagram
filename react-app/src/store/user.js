@@ -51,7 +51,7 @@ export const editUserThunk = (userId, form) => async dispatch => {
 
 const initialState = {}
 
-const userReducer = (state = initialState, action) => {
+export default function userReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case GET_USER:
@@ -69,4 +69,4 @@ const userReducer = (state = initialState, action) => {
   }
 }
 
-export default userReducer
+

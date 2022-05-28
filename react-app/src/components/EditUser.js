@@ -1,47 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { editUserThunk } from "../store/user";
+import { editUserThunk, getUserThunk } from "../store/user";
 
 
 
 function EditUser() {
 
   const dispatch = useDispatch()
-  const currentUser = useSelector(state => state.session);
-  // console.log(currentUser);
+  const sessionUser = useSelector((state)=> state.session.user)
+  const currentUser = useSelector(state => state.userReducer.user)
   const history = useHistory()
 
-  const displayUserName = currentUser.user.username
-  const userBio = currentUser.user.bio
-  const userFullName = currentUser.user.full_name
+  // const displayUserName = currentUser.username
+  // const userBio = currentUser.bio
+  // const userFullName = currentUser.full_name
 
-
-  const [user, setUser] = useState({});
-  const [fullName, setFullName] = useState(userFullName);
-  const [biography, setBiography] = useState('');
+  const [fullName, setFullName] = useState(currentUser?.full_name);
+  const [biography, setBiography] = useState(currentUser?.bio);
   const [profilePicUrl, setProfilePicUrl] = useState();
-  const [userName, setUserName] = useState(displayUserName);
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [userName, setUserName] = useState(currentUser?.username);
   const { userId } = useParams();
 
-  //   useEffect(() => {
-  //     if (!userId) {
-  //       return;
-  //     }
-  //     (async () => {
-  //       const response = await fetch(`/api/users/${userId}/edit`);
-  //       const user = await response.json();
-  //       setUser(user);
-  //     })();
-  //   }, [userId]);
+  
+  
+  useEffect(() => {
+    const setFunc = () => {
+      setBiography(currentUser?.bio)
+      setProfilePicUrl()
+      setFullName(currentUser?.full_name)
+    }
+    dispatch(getUserThunk(userId))
+    .then(() => setFunc())
+    .then(() => setIsLoaded(true))
+  }, [dispatch]);
 
-  //   if (!user) {
-  //     return null;
-  //   }
-
-  // const response = await fetch(`/api/users/${userId}/edit`);
-  // const user = await response.json();
-  // setUser(user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,6 +53,10 @@ function EditUser() {
   }
 
   // {/* <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img> */}
+  
+  if (!isLoaded) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <>
