@@ -8,8 +8,9 @@ import { house, postIcon, exploreIcon, heartHomeIcon, filledHouseIcon, filledPos
 
 const NavBar = () => {
   const user = useSelector((state)=> state.session.user)
-  const userName = user.full_name.split(' ').join('')
+  // const userName = user.full_name.split(' ').join('')
   // console.log(userName)
+  console.log(user.id)
 
   const [searchField, setSearchField] = useState('Seach')
   const [houseColor, setHouseColor] = useState(house)
@@ -79,7 +80,7 @@ const NavBar = () => {
             <NavLink to='/' exact={true} id='post-icon-id' onClick={(e) => fillInPost(e)}>{postIconColor}</NavLink>
             <NavLink to='/' exact={true} id='explore-icon-id' onClick={(e) => fillInExplore(e)}>{exploreIconColor}</NavLink>
             <NavLink to='/' exact={true} id='heart-icon-nav-id' onClick={(e) => fillInNavHeart(e)}>{heartIconColor}</NavLink>
-            <NavLink to={`/users/${userName}`} exact={true}>{profilePicture}</NavLink>
+            <NavLink to={`/users/${user.id}`} exact={true}>{profilePicture}</NavLink>
           </div>
         </div>
       </div>
