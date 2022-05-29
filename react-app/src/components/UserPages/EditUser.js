@@ -4,33 +4,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { editUserThunk, getUserThunk } from "../../store/user";
 import "./EditUser.css";
 
-function EditUser() {
+function EditUser({ users }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const currentUser = useSelector((state) => state.userReducer.user);
+  // const currentUser = useSelector((state) => state.userReducer.user);
+  const { userId } = useParams();
+  const currentUser = users[userId]
   const history = useHistory();
 
   // const displayUserName = currentUser.username
   // const userBio = currentUser.bio
   // const userFullName = currentUser.full_name
 
-  const [fullName, setFullName] = useState(currentUser?.full_name);
-  const [biography, setBiography] = useState(currentUser?.bio);
+  const [fullName, setFullName] = useState(currentUser.full_name);
+  const [biography, setBiography] = useState(currentUser.bio);
   const [profilePicUrl, setProfilePicUrl] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userName, setUserName] = useState(currentUser?.username);
-  const { userId } = useParams();
+  const [userName, setUserName] = useState(currentUser.username);
 
-  const setFunc = () => {
-    setBiography(currentUser?.bio);
-    setProfilePicUrl();
-    setFullName(currentUser?.full_name);
-  };
-  useEffect(() => {
-    dispatch(getUserThunk(userId))
-      .then(() => setFunc())
-      .then(() => setIsLoaded(true));
-  }, [dispatch]);
+  // const setFunc = () => {
+  //   setBiography(currentUser?.bio);
+  //   setProfilePicUrl();
+  //   setFullName(currentUser?.full_name);
+  // };
+  // useEffect(() => {
+    // dispatch(getUserThunk(userId))
+      // .then(() => setFunc())
+      // .then(() => setIsLoaded(true));
+  // }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,13 +51,13 @@ function EditUser() {
 
   // {/* <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img> */}
 
-  if (!isLoaded) {
-    return <h1>Loading...</h1>;
-  }
+  // if (!isLoaded) {
+  //   return <h1>Loading...</h1>;
+  // }
 
   return (
     <>
-      {currentUser && (
+      {/* {currentUser && ( */}
         <form onSubmit={handleSubmit}>
           <label>
             Username
@@ -104,7 +105,7 @@ function EditUser() {
           <button type="submit">Submit</button>
           <button onClick={(e) => backToProfile(e)}>Cancel</button>
         </form>
-      )}
+      {/* )} */}
     </>
   );
 }
