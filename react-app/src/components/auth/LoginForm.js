@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import './LoginForm.css'
 
+// ms-comment may-30
+
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
