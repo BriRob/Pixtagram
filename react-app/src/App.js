@@ -16,6 +16,10 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const users = useSelector((state) => state.userReducer.users)
+  const session = useSelector(state => state.session.user)
+
+  // console.log("SESSION FROM APP.JS",session)
+
   console.log(users)
 
   useEffect(() => {
@@ -32,13 +36,14 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {session && <NavBar />}
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
         <ProtectedRoute path='/users/:userId/edit' exact={true}>
-          <EditUser users={users}/>
+          <EditUser />
+          {/* <EditUser users={users}/> */}
         </ProtectedRoute>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />

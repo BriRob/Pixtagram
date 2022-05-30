@@ -44,3 +44,14 @@ pipenv install boto3
     - Pull INTO YOUR NEW BRANCH with ---> ``` git pull origin <teammates branch> ```
 
 ------------------------------------------------------
+
+
+Colors
+4c516d - independence
+
+
+potential pallet
+https://coolors.co/palette/000100-2a3439-4c516d-979aaa-f8f8f8-f18f01
+
+
+navbar color - #cfd0d4

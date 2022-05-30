@@ -10,7 +10,7 @@ const NavBar = () => {
   const user = useSelector((state)=> state.session.user)
   // const userName = user.full_name.split(' ').join('')
   // console.log(userName)
-  console.log(user.id)
+  // console.log(user.id)
 
   const [searchField, setSearchField] = useState('Seach')
   const [houseColor, setHouseColor] = useState(house)
