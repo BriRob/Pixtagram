@@ -1,46 +1,72 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { editUserThunk, getUserThunk } from "../../store/user";
+import { editUserThunk, getAllUsersThunk, getUserThunk } from "../../store/user";
 import "./EditUser.css";
 
-function EditUser({ users }) {
+function EditUser() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   // const currentUser = useSelector((state) => state.userReducer.user);
+  const users = useSelector((state) => state.userReducer.users);
   const { userId } = useParams();
   const currentUser = users[userId]
   const history = useHistory();
+  // console.log(users)
+  console.log("CURRENT USER", currentUser)
 
   // const displayUserName = currentUser.username
   // const userBio = currentUser.bio
   // const userFullName = currentUser.full_name
 
-  const [fullName, setFullName] = useState(currentUser.full_name);
-  const [biography, setBiography] = useState(currentUser.bio);
+  const [fullName, setFullName] = useState(currentUser?.full_name);
+  const [biography, setBiography] = useState(currentUser?.bio);
   const [profilePicUrl, setProfilePicUrl] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userName, setUserName] = useState(currentUser.username);
+  const [userName, setUserName] = useState(currentUser?.username);
+  // const [fullName, setFullName] = useState();
+  // const [biography, setBiography] = useState();
+  // const [profilePicUrl, setProfilePicUrl] = useState();
+  // const [isLoaded, setIsLoaded] = useState(false);
+  // const [userName, setUserName] = useState();
 
   // const setFunc = () => {
   //   setBiography(currentUser?.bio);
   //   setProfilePicUrl();
   //   setFullName(currentUser?.full_name);
   // };
-  // useEffect(() => {
-    // dispatch(getUserThunk(userId))
+  useEffect(() => {
+    dispatch(getUserThunk(userId))
       // .then(() => setFunc())
-      // .then(() => setIsLoaded(true));
-  // }, [dispatch]);
+      .then(() => setIsLoaded(true));
 
-  const handleSubmit = (e) => {
+    if (currentUser){
+      // setBiography(currentUser.bio)
+      // setProfilePicUrl();
+      // setFullName(currentUser.full_name);
+      // const [fullName, setFullName] = useState(currentUser?.full_name);
+      // const [biography, setBiography] = useState(currentUser?.bio);
+      // const [profilePicUrl, setProfilePicUrl] = useState();
+      // const [isLoaded, setIsLoaded] = useState(false);
+      // const [userName, setUserName] = useState(currentUser?.username);
+    }
+  }, [dispatch]);
+  // console.log("current user bio for edit", currentUser.bio)
+
+  // useEffect(() => {
+  //   dispatch(getAllUsersThunk())
+  // }, [dispatch])
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const full_name = fullName;
     const bio = biography;
     const profile_pic_url = profilePicUrl;
     const form = { full_name, bio, profile_pic_url };
     console.log("FORM", form);
-    dispatch(editUserThunk(userId, form));
+    await dispatch(editUserThunk(userId, form));
+    await dispatch(getAllUsersThunk())
+    await dispatch(getUserThunk(userId))
     history.push(`/users/${userId}`);
   };
 
@@ -51,14 +77,13 @@ function EditUser({ users }) {
 
   // {/* <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img> */}
 
-  // if (!isLoaded) {
-  //   return <h1>Loading...</h1>;
-  // }
+  if (!isLoaded) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <>
-      {/* {currentUser && ( */}
-        <form onSubmit={handleSubmit}>
+        {currentUser.full_name && (<form onSubmit={handleSubmit}>
           <label>
             Username
             <div>
@@ -104,8 +129,7 @@ function EditUser({ users }) {
           </label>
           <button type="submit">Submit</button>
           <button onClick={(e) => backToProfile(e)}>Cancel</button>
-        </form>
-      {/* )} */}
+        </form>)}
     </>
   );
 }

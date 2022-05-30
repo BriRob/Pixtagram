@@ -38,7 +38,8 @@ function App() {
           <LoginForm />
         </Route>
         <ProtectedRoute path='/users/:userId/edit' exact={true}>
-          <EditUser users={users}/>
+          <EditUser />
+          {/* <EditUser users={users}/> */}
         </ProtectedRoute>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
