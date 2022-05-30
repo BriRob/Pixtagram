@@ -6,7 +6,7 @@
     grid-template-columns: 3;
     grid-template-areas: 'logo search icons';
     /* position: fixed; */
-    background-color: white;
+    background-color: #979AAA;
 }
 
 
