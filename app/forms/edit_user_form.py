@@ -33,3 +33,4 @@ class EditUserForm(FlaskForm): # flask form auto does (Req.body)
     profile_pic_url = StringField("profile_pic_url")
     full_name = StringField("full_name", validators=[DataRequired()]) #pass in msg = ''
     bio = StringField("bio")
+    #test
