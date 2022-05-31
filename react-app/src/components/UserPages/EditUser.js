@@ -21,7 +21,7 @@ function EditUser() {
 
   const [fullName, setFullName] = useState(currentUser?.full_name);
   const [biography, setBiography] = useState(currentUser?.bio);
-  const [profilePicUrl, setProfilePicUrl] = useState();
+  const [profilePicUrl, setProfilePicUrl] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [userName, setUserName] = useState(currentUser?.username);
   const [errors, setErrors] = useState([]);
@@ -53,14 +53,21 @@ function EditUser() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
 
-    formData.append("full_name", fullName);
-    formData.append("profile_pic_url", profilePicUrl);
-    formData.append("bio", biography);
+    // const formData = new FormData();
+
+    // console.log(fullName)
+    // console.log(profilePicUrl)
+    // console.log(biography)
+    // formData.append("full_name", fullName);
+    // formData.append("profile_pic_url", profilePicUrl);
+    // formData.append("bio", biography);
+    // console.log(formData["full_name"])
 
     // setImageLoading(true)
-    const data = await dispatch(editUserThunk(userId, formData));
+    // const data = await dispatch(editUserThunk(userId, formData));
+
+
 
 
 
@@ -69,8 +76,12 @@ function EditUser() {
     const bio = biography;
     const profile_pic_url = profilePicUrl;
     const form = { full_name, bio, profile_pic_url };
+
+    // console.log(form)
+    const data = await dispatch(editUserThunk(userId, form));
+
     console.log(form)
-    // const data = await dispatch(editUserThunk(userId, form));
+
 
     console.log("What is Data??--->", data);
     if (data.errors) {
@@ -156,10 +167,11 @@ function EditUser() {
               <div>
                 <input
                   type="file"
-                  name="profile_pic"
+
+                  name="profile_pic_url"
                   onChange={updateImage}
                   // onChange={(e) => setProfilePicUrl(e.target.value)}
-                  accept=".pdf, .jpg"
+                  accept="image/*"
                 ></input>
               </div>
             </label>
