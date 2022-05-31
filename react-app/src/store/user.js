@@ -48,8 +48,6 @@ export const getUserThunk = (userId) => async (dispatch) => {
 
 // Edit Thunk
 export const editUserThunk = (userId, form) => async (dispatch) => {
-  console.log("WE GOT HERE");
-
   const option = {
     method: "PUT",
     headers: {
@@ -61,8 +59,14 @@ export const editUserThunk = (userId, form) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/edit`, option);
   if (response.ok) {
     const user = await response.json();
-    // console.log("EDIT THUNK SHOULD BE JSON---->", user)
     dispatch(editUser(user));
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data;
+    } else {
+     return ['An error occurred. Please try again.']
+    }
   }
   return response;
 };

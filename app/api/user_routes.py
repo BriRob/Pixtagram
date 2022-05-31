@@ -12,7 +12,7 @@ def validation_errors_to_error_messages(validation_errors):
     errorMessages = []
     for field in validation_errors:
         for error in validation_errors[field]:
-            errorMessages.append(f'{field} : {error}')
+            errorMessages.append(f'{error}')
     return errorMessages
 
 @user_routes.route('/')
@@ -47,7 +47,6 @@ def edit_user(id):
         user.profile_pic_url = form.data['profile_pic_url']
         user.bio = form.data['bio']
         db.session.add(user)
-        print("HELLO FROM EDIT ROUTE")
         db.session.commit()
 
         return {"user": user.to_dict()}
