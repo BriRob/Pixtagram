@@ -25,6 +25,8 @@ function EditUser() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [userName, setUserName] = useState(currentUser?.username);
   const [errors, setErrors] = useState([]);
+  const [imageLoading, setImageLoading] = useState(false);
+
 
   const setFunc = (currentUser) => {
     setBiography(currentUser?.bio);
@@ -51,12 +53,24 @@ function EditUser() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+
+    formData.append("full_name", fullName);
+    formData.append("profile_pic_url", profilePicUrl);
+    formData.append("bio", biography);
+
+    // setImageLoading(true)
+    const data = await dispatch(editUserThunk(userId, formData));
+
+
+
+
     const full_name = fullName;
     const bio = biography;
     const profile_pic_url = profilePicUrl;
     const form = { full_name, bio, profile_pic_url };
     console.log(form)
-    const data = await dispatch(editUserThunk(userId, form));
+    // const data = await dispatch(editUserThunk(userId, form));
 
     console.log("What is Data??--->", data);
     if (data.errors) {
@@ -75,6 +89,7 @@ function EditUser() {
     e.preventDefault();
     history.push(`/users/${userId}`);
   }
+
   async function deleteUser(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -83,6 +98,10 @@ function EditUser() {
     return history.push('/')
   }
 
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setProfilePicUrl(file);
+  }
   // {/* <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img> */}
 
   if (!isLoaded) {
@@ -92,13 +111,13 @@ function EditUser() {
       <>
         {currentUser.full_name && (
           <form onSubmit={handleSubmit}>
-            <div>
+            {/* <div>
               {errors.map((error, ind) => (
                 <div id="errors" key={ind}>
                   {error}
                 </div>
               ))}
-            </div>
+            </div> */}
             <label>
               Username
               <div>
@@ -138,7 +157,8 @@ function EditUser() {
                 <input
                   type="file"
                   name="profile_pic"
-                  onChange={(e) => setProfilePicUrl(e.target.value)}
+                  onChange={updateImage}
+                  // onChange={(e) => setProfilePicUrl(e.target.value)}
                   accept=".pdf, .jpg"
                 ></input>
               </div>

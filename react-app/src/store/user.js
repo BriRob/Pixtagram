@@ -47,13 +47,13 @@ export const getUserThunk = (userId) => async (dispatch) => {
 };
 
 // Edit Thunk
-export const editUserThunk = (userId, form) => async (dispatch) => {
+export const editUserThunk = (userId, formData) => async (dispatch) => {
   const option = {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(form),
+    body: JSON.stringify(formData),
   };
 
   const response = await fetch(`/api/users/${userId}/edit`, option);
