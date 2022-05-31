@@ -5,8 +5,11 @@ import {
   editUserThunk,
   getAllUsersThunk,
   getUserThunk,
+  deleteUserThunk
 } from "../../store/user";
 import "./EditUser.css";
+import Splash from "../Splash/Splash";
+import { logout } from "../../store/session";
 
 function EditUser() {
   const dispatch = useDispatch();
@@ -72,6 +75,14 @@ function EditUser() {
     history.push(`/users/${userId}`);
   }
 
+  async function deleteUser(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    await dispatch(deleteUserThunk(userId))
+    await dispatch(logout())
+    return history.push('/')
+  }
+
   // {/* <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img> */}
 
   if (!isLoaded) {
@@ -79,6 +90,9 @@ function EditUser() {
   }
 
   // console.log("ERRORS ARE SET--------", errors)
+  // else if (!currentUser) {
+  //   return <Splash />
+  // }
   return (
     <>
       {currentUser.full_name && (
@@ -137,6 +151,11 @@ function EditUser() {
           <button onClick={(e) => backToProfile(e)}>Cancel</button>
         </form>
       )}
+        {/* <button onClick={e => deleteUser(e)}>Delete Account</button> */}
+        <button onClick={() => {
+          dispatch(deleteUserThunk(userId))
+          return history.push('/')
+        }}>Delete Account</button>
     </>
   );
 }

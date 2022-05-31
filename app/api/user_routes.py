@@ -1,5 +1,7 @@
+from crypt import methods
+from app.api.auth_routes import logout
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask_login import login_required, logout_user
 from app.models import User, db
 from app.forms.edit_user_form import EditUserForm
 
@@ -25,7 +27,7 @@ def users():
 
 
 #Get individual user for profile page
-@user_routes.route('/<int:id>') #alligator brackets pull params for'id'
+@user_routes.route('/<int:id>', methods=['GET']) #alligator brackets pull params for'id'
 @login_required
 def user(id):
     user = User.query.get(id)
@@ -62,3 +64,13 @@ example delete query
     if person == True: person.delete()
 
 '''
+
+# Get individual user for profile page
+@user_routes.route('/<int:id>/delete', methods=['GET', 'DELETE']) #alligator brackets pull params for'id'
+@login_required
+def delete_user(id):
+    user = User.query.get(id)
+    db.session.delete(user)
+    db.session.commit()
+    logout()
+    return user.to_dict()

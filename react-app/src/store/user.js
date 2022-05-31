@@ -71,6 +71,18 @@ export const editUserThunk = (userId, form) => async (dispatch) => {
   return response;
 };
 
+//Delete user
+export const deleteUserThunk = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/users/${userId}/delete`, {
+    method: 'DELETE'
+  });
+  if (response.ok) {
+    const user = await response.json();
+    dispatch(deleteUser(user));
+  }
+  return response;
+};
+
 const initialState = {};
 
 export default function userReducer(state = initialState, action) {
@@ -97,6 +109,15 @@ export default function userReducer(state = initialState, action) {
       newState.user = action.payload.user;
       return newState;
     // return {...state: action.payload}
+    case DELETE_USER:
+      newState = {...state}
+      // console.log(newState);
+      delete newState['user']
+      // console.log(delete newState['user'])
+      // console.log(newState.session)
+      // delete newState.session
+      // console.log(newState);
+      return newState
     default:
       return state;
   }
