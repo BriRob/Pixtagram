@@ -6,18 +6,12 @@ import "./EditUser.css";
 
 function EditUser() {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const sessionUser = useSelector((state) => state.session.user);
   const currentUser = useSelector((state) => state.userReducer.user);
   const users = useSelector((state) => state.userReducer.users);
   const { userId } = useParams();
-  // const currentUser = users[userId]
-  const history = useHistory();
-  // console.log(users)
-  console.log("CURRENT USER", currentUser)
-
-  // const displayUserName = currentUser.username
-  // const userBio = currentUser.bio
-  // const userFullName = currentUser.full_name
 
   const [fullName, setFullName] = useState(currentUser?.full_name);
   const [biography, setBiography] = useState(currentUser?.bio);
@@ -25,38 +19,23 @@ function EditUser() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [userName, setUserName] = useState(currentUser?.username);
   const [errors, setErrors] = useState([]);
-  // const [fullName, setFullName] = useState();
-  // const [biography, setBiography] = useState();
-  // const [profilePicUrl, setProfilePicUrl] = useState();
-  // const [isLoaded, setIsLoaded] = useState(false);
-  // const [userName, setUserName] = useState();
 
-  // const setFunc = () => {
-  //   setBiography(currentUser?.bio);
-  //   setProfilePicUrl();
-  //   setFullName(currentUser?.full_name);
-  // };
+  const setFunc = (currentUser) => {
+    setBiography(currentUser?.bio);
+    setProfilePicUrl();
+    setFullName(currentUser?.full_name);
+  };
+
   useEffect(() => {
     dispatch(getUserThunk(userId))
       // .then(() => setFunc())
-      .then(() => setIsLoaded(true));
+      .then(() => setIsLoaded(true))
 
-    if (currentUser){
-      // setBiography(currentUser.bio)
-      // setProfilePicUrl();
-      // setFullName(currentUser.full_name);
-      // const [fullName, setFullName] = useState(currentUser?.full_name);
-      // const [biography, setBiography] = useState(currentUser?.bio);
-      // const [profilePicUrl, setProfilePicUrl] = useState();
-      // const [isLoaded, setIsLoaded] = useState(false);
-      // const [userName, setUserName] = useState(currentUser?.username);
-    }
-  }, [dispatch]);
-  // console.log("current user bio for edit", currentUser.bio)
+      if(!currentUser){
+        history.push(`/users/${userId}`)
+      }
+  }, [dispatch], currentUser);
 
-  // useEffect(() => {
-  //   dispatch(getAllUsersThunk())
-  // }, [dispatch])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,7 +67,7 @@ function EditUser() {
     return <h1>Loading...</h1>;
   }
 
-  console.log("ERRORS ARE SET--------", errors)
+  // console.log("ERRORS ARE SET--------", errors)
   return (
     <>
         {currentUser.full_name && (<form onSubmit={handleSubmit}>
