@@ -15,17 +15,17 @@ import { getAllUsersThunk } from './store/user';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.userReducer.users)
+  // const users = useSelector((state) => state.userReducer.users)
   const session = useSelector(state => state.session.user)
 
   // console.log("SESSION FROM APP.JS",session)
 
-  console.log(users)
+  // console.log(users)
 
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
-      await dispatch(getAllUsersThunk())
+      // await dispatch(getAllUsersThunk())
       setLoaded(true);
     })();
   }, [dispatch]);
