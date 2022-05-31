@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     full_name = db.Column(db.String(255), nullable=False)
     username = db.Column(db.String(30), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    bio = db.Column(db.Text)
+    bio = db.Column(db.Text, default='')
     verified = db.Column(db.Boolean, default=False)
     hashed_password = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())

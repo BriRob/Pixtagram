@@ -22,12 +22,14 @@ const SignUpForm = () => {
     if (password === repeatPassword) {
       const data = await dispatch(signUp(full_name, username, email, password));
       if (data) {
+        console.log('FROM SIGNUP--DATA', data)
         setErrors(data)
       }
     }
   };
 
 
+  console.log('ERRORS FROM SINGNUP', errors)
 
 
   const updateFullName = (e) => {

@@ -7,10 +7,10 @@ import "./EditUser.css";
 function EditUser() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  // const currentUser = useSelector((state) => state.userReducer.user);
+  const currentUser = useSelector((state) => state.userReducer.user);
   const users = useSelector((state) => state.userReducer.users);
   const { userId } = useParams();
-  const currentUser = users[userId]
+  // const currentUser = users[userId]
   const history = useHistory();
   // console.log(users)
   console.log("CURRENT USER", currentUser)
@@ -67,15 +67,15 @@ function EditUser() {
     const data = await dispatch(editUserThunk(userId, form));
     console.log("What is Data??--->", data)
     if (data.errors) {
-      setErrors(data)
+      setErrors(data.errors)
       console.log("THERE ARE ERRORS", data.errors[0])
-      console.log("ERRORS ARE SET--------", errors)
     } else {
       await dispatch(getAllUsersThunk())
       await dispatch(getUserThunk(userId))
       history.push(`/users/${userId}`);
     }
   };
+
 
   function backToProfile(e) {
     e.preventDefault();
@@ -88,9 +88,15 @@ function EditUser() {
     return <h1>Loading...</h1>;
   }
 
+  console.log("ERRORS ARE SET--------", errors)
   return (
     <>
         {currentUser.full_name && (<form onSubmit={handleSubmit}>
+              <div>
+              {errors.map((error, ind) => (
+                <div id='errors' key={ind}>{error}</div>
+                ))}
+              </div>
           <label>
             Username
             <div>
@@ -136,6 +142,7 @@ function EditUser() {
           </label>
           <button type="submit">Submit</button>
           <button onClick={(e) => backToProfile(e)}>Cancel</button>
+
         </form>)}
     </>
   );
