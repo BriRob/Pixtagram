@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux"
-import { useHistory, useParams } from "react-router-dom"
+import { Redirect, useHistory, useParams } from "react-router-dom"
+import LoginForm from "../auth/LoginForm"
 import './Splash.css'
 
 function Splash(){
@@ -10,6 +11,9 @@ function goToProfile(){
     history.push(`/users/${id}`)
 }
 
+if (!id) {
+    return <Redirect to='/login' />;
+}
 return(
     <>
     <h1>My Home Page</h1>
