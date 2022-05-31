@@ -53,6 +53,7 @@ function EditUser() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     // const formData = new FormData();
 
     // console.log(fullName)
@@ -69,12 +70,18 @@ function EditUser() {
 
 
 
+
+
     const full_name = fullName;
     const bio = biography;
     const profile_pic_url = profilePicUrl;
     const form = { full_name, bio, profile_pic_url };
+
     // console.log(form)
     const data = await dispatch(editUserThunk(userId, form));
+
+    console.log(form)
+
 
     console.log("What is Data??--->", data);
     if (data.errors) {
@@ -160,6 +167,7 @@ function EditUser() {
               <div>
                 <input
                   type="file"
+
                   name="profile_pic_url"
                   onChange={updateImage}
                   // onChange={(e) => setProfilePicUrl(e.target.value)}
