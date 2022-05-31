@@ -44,7 +44,8 @@ def edit_user(id):
     # if "image" not in request.files:
     #     return {"errors": "image required"}, 400
 
-    image = request.files["image"]
+    image = request.files["profile_pic"]
+    print("image ======== \n\n", image)
 
     if not allowed_file(image.filename):
         return {"errors": "file type not permitted"}, 400
@@ -60,6 +61,7 @@ def edit_user(id):
         return upload, 400
 
     url = upload["url"]
+    print("url \n\n", url)
 
     user = User.query.get(id)
     form = EditUserForm() #form is coming from thunk? we can print form.data after this
