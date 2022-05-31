@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { signUp, login } from '../../store/session';
 import './SignUpForm.css'
 
 // ms-comment may-30
@@ -28,6 +28,17 @@ const SignUpForm = () => {
     }
   };
 
+  // Demo Login
+  const demoUser = async (e) => {
+    e.preventDefault();
+    const email = "demo@aa.io"
+    const password = "password"
+
+    const data = await dispatch(login(email, password));
+    if (data) {
+      setErrors(data);
+    }
+  }
 
   console.log('ERRORS FROM SINGNUP', errors)
 
@@ -66,7 +77,7 @@ const SignUpForm = () => {
             <div className='top-logo-container'>
               <h1 id='heading'>Pixtagram</h1>
               <p id='text'>Signup to see photos and videos from your friends.</p>
-              <button className='s-button'>Log in as Demo</button>
+              <button className='s-button' onClick={demoUser}>Log in as Demo</button>
             </div>
 
             <div id='or-divider'>

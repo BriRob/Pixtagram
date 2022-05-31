@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { editUserThunk, getAllUsersThunk, getUserThunk } from "../../store/user";
+import {
+  editUserThunk,
+  getAllUsersThunk,
+  getUserThunk,
+} from "../../store/user";
 import "./EditUser.css";
 
 function EditUser() {
@@ -10,7 +14,7 @@ function EditUser() {
 
   const sessionUser = useSelector((state) => state.session.user);
   const currentUser = useSelector((state) => state.userReducer.user);
-  const users = useSelector((state) => state.userReducer.users);
+  // const users = useSelector((state) => state.userReducer.users);
   const { userId } = useParams();
 
   const [fullName, setFullName] = useState(currentUser?.full_name);
@@ -27,15 +31,21 @@ function EditUser() {
   };
 
   useEffect(() => {
-    dispatch(getUserThunk(userId))
-      // .then(() => setFunc())
-      .then(() => setIsLoaded(true))
+    const controller = new AbortController();
+    if (currentUser) {
+      dispatch(getUserThunk(userId))
+        // .then(() => setFunc())
+        .then(() => setIsLoaded(true));
+    } else {
+      history.push(`/users/${userId}`);
 
-      if(!currentUser){
-        history.push(`/users/${userId}`)
-      }
-  }, [dispatch], currentUser);
+      return () => controller.abort()
+    }
 
+    // if (!currentUser) {
+    //   history.push(`/users/${userId}`);
+    // }
+  }, [dispatch]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,16 +56,16 @@ function EditUser() {
     console.log(form)
     const data = await dispatch(editUserThunk(userId, form));
 
+    console.log("What is Data??--->", data);
     if (data.errors) {
-      setErrors(data.errors)
-      console.log("THERE ARE ERRORS", data.errors[0])
+      setErrors(data.errors);
+      console.log("THERE ARE ERRORS", data.errors[0]);
     } else {
-      await dispatch(getAllUsersThunk())
-      await dispatch(getUserThunk(userId))
+      await dispatch(getAllUsersThunk());
+      await dispatch(getUserThunk(userId));
       history.push(`/users/${userId}`);
     }
   };
-
 
   function backToProfile(e) {
     e.preventDefault();
@@ -71,12 +81,15 @@ function EditUser() {
   // console.log("ERRORS ARE SET--------", errors)
   return (
     <>
-        {currentUser.full_name && (<form onSubmit={handleSubmit}>
-              <div>
-              {errors.map((error, ind) => (
-                <div id='errors' key={ind}>{error}</div>
-                ))}
+      {currentUser.full_name && (
+        <form onSubmit={handleSubmit}>
+          <div>
+            {errors.map((error, ind) => (
+              <div id="errors" key={ind}>
+                {error}
               </div>
+            ))}
+          </div>
           <label>
             Username
             <div>
@@ -122,8 +135,8 @@ function EditUser() {
           </label>
           <button type="submit">Submit</button>
           <button onClick={(e) => backToProfile(e)}>Cancel</button>
-
-        </form>)}
+        </form>
+      )}
     </>
   );
 }
