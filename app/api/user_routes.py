@@ -41,10 +41,15 @@ def user(id):
 def edit_user(id):
 
     print("request.files!!!! ================== \n\n", request.files)
+    # data = request.data
+    # profile_pic_url = request.json["profile_pic_url"]
+    # image = request.json["profile_pic_url"]
+    # print("profile pic \n\n", profile_pic_url)
+
     # if "image" not in request.files:
     #     return {"errors": "image required"}, 400
 
-    image = request.files["profile_pic"]
+    image = request.files["profile_pic_url"]
     print("image ======== \n\n", image)
 
     if not allowed_file(image.filename):
