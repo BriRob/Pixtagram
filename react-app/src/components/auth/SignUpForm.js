@@ -4,6 +4,8 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import './SignUpForm.css'
 
+// ms-comment may-30
+
 const SignUpForm = () => {
   const history = useHistory()
   const [errors, setErrors] = useState([]);
@@ -24,6 +26,8 @@ const SignUpForm = () => {
       }
     }
   };
+
+
 
 
   const updateFullName = (e) => {
