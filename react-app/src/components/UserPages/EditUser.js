@@ -24,6 +24,7 @@ function EditUser() {
   const [profilePicUrl, setProfilePicUrl] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
   const [userName, setUserName] = useState(currentUser?.username);
+  const [errors, setErrors] = useState([]);
   // const [fullName, setFullName] = useState();
   // const [biography, setBiography] = useState();
   // const [profilePicUrl, setProfilePicUrl] = useState();
@@ -63,11 +64,17 @@ function EditUser() {
     const bio = biography;
     const profile_pic_url = profilePicUrl;
     const form = { full_name, bio, profile_pic_url };
-    console.log("FORM", form);
-    await dispatch(editUserThunk(userId, form));
-    await dispatch(getAllUsersThunk())
-    await dispatch(getUserThunk(userId))
-    history.push(`/users/${userId}`);
+    const data = await dispatch(editUserThunk(userId, form));
+    console.log("What is Data??--->", data)
+    if (data.errors) {
+      setErrors(data)
+      console.log("THERE ARE ERRORS", data.errors[0])
+      console.log("ERRORS ARE SET--------", errors)
+    } else {
+      await dispatch(getAllUsersThunk())
+      await dispatch(getUserThunk(userId))
+      history.push(`/users/${userId}`);
+    }
   };
 
   function backToProfile(e) {
