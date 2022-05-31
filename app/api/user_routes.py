@@ -15,6 +15,8 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{error}')
     return errorMessages
 
+
+#Get all users for home feed page
 @user_routes.route('/')
 @login_required
 def users():
@@ -22,25 +24,20 @@ def users():
     return {'users': [user.to_dict() for user in users]}
 
 
-@user_routes.route('/<int:id>')
+#Get individual user for profile page
+@user_routes.route('/<int:id>') #alligator brackets pull params for'id'
 @login_required
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
 
+#Edit User Route
 @user_routes.route('/<int:id>/edit', methods=["GET","PUT"])
 @login_required
 def edit_user(id):
-    """
-    Edit a user route
-    """
-
-    # data=request.json
-    # print("What is Data.json??", data)
-
     user = User.query.get(id)
-    form = EditUserForm()
+    form = EditUserForm() #form is coming from thunk? we can print form.data after this
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user.full_name = form.data['full_name']
@@ -49,7 +46,19 @@ def edit_user(id):
         db.session.add(user)
         db.session.commit()
 
-        return {"user": user.to_dict()}
-        # return {"user": [user]}
-    # return {"user": "Blue"}
+        return {"user": user.to_dict()} #to_dict translates a user class to dic (fake json)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+'''
+    example for possible follower/s query
+    users = User.query.all().filter(userId == followerId)
+'''
+
+'''
+example delete query
+
+    person = user.query.get(id)
+    if person == True: person.delete()
+
+'''

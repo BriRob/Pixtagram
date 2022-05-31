@@ -23,12 +23,13 @@ from wtforms.validators import DataRequired, ValidationError
 def full_name_exists(form, field):
     # Checking for full name, it cannot be blank
     full_name = field.data
-    if full_name == null or full_name == '':
+    if full_name == None or full_name == '': #None is the Py version of null
+        #str.find(" ") to find to try and find spaces.
         raise ValidationError('Full name cannot be empty')
 
 
 
-class EditUserForm(FlaskForm):
+class EditUserForm(FlaskForm): # flask form auto does (Req.body)
     profile_pic_url = StringField("profile_pic_url")
-    full_name = StringField("full_name", validators=[DataRequired()])
+    full_name = StringField("full_name", validators=[DataRequired()]) #pass in msg = ''
     bio = StringField("bio")
