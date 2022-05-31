@@ -55,52 +55,54 @@ const LoginForm = () => {
           </div>
 
           <div id='right-container'>
-            <div id='heading-div'>
-              <h1 id='heading-text'>Pixtagram</h1>
-            </div>
-
-            <div id='login-form-div'>
-              <form id='form-elements' onSubmit={onLogin}>
-                <div>
-                  <label className='input-label' htmlFor='email'>Email</label>
-                  <input
-                    className='l-input'
-                    name='email'
-                    type='text'
-                    placeholder='Email'
-                    value={email}
-                    onChange={updateEmail}
-                  />
-                </div>
-                <div>
-                  <label className='input-label' htmlFor='password'>Password</label>
-                  <input
-                    className='l-input'
-                    name='password'
-                    type='password'
-                    placeholder='Password'
-                    value={password}
-                    onChange={updatePassword}
-                  />
-                </div>
-                <button id='login-button' type='submit'>Login</button>
-                    <div>
-                      {errors.map((error, ind) => (
-                        <div id='errors' key={ind}>{error}</div>
-                      ))}
-                    </div>
-              </form>
-            </div>
-              <div className='l-or-divider'>
-                <div className='l-line'></div>
-                <div id='or'> OR </div>
-                <div className='l-line'></div>
-              </div>
-              <div className='l-demo-div'>
-                <button id='l-demo-button' onClick={demoUser}>Log in as a Demo User</button>
+            <div id='l-border-div'>
+              
+              <div id='heading-div'>
+                <h1 id='heading-text'>Pixtagram</h1>
               </div>
 
-              <div id='b-line'></div>
+              <div id='login-form-div'>
+                <form id='form-elements' onSubmit={onLogin}>
+                  <div>
+                    <label className='input-label' htmlFor='email'>Email</label>
+                    <input
+                      className='l-input'
+                      name='email'
+                      type='text'
+                      placeholder='Email'
+                      value={email}
+                      onChange={updateEmail}
+                    />
+                  </div>
+                  <div>
+                    <label className='input-label' htmlFor='password'>Password</label>
+                    <input
+                      className='l-input'
+                      name='password'
+                      type='password'
+                      placeholder='Password'
+                      value={password}
+                      onChange={updatePassword}
+                    />
+                  </div>
+                  <button id='login-button' type='submit'>Login</button>
+                      <div>
+                        {errors.map((error, ind) => (
+                          <div id='errors' key={ind}>{error}</div>
+                        ))}
+                      </div>
+                </form>
+              </div>
+                <div className='l-or-divider'>
+                  <div className='l-line'></div>
+                  <div id='or'> OR </div>
+                  <div className='l-line'></div>
+                </div>
+                <div className='l-demo-div'>
+                  <button id='l-demo-button' onClick={demoUser}>Log in as a Demo User</button>
+                </div>
+
+            </div>
 
               <div id='l-signup-div'>
                 <p id='l-text'>Don't have an account? <a id='s-link' href='/sign-up'>Sign Up</a></p>
