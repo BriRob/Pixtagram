@@ -111,8 +111,8 @@ export default function userReducer(state = initialState, action) {
     // return {...state: action.payload}
     case DELETE_USER:
       newState = {...state}
-      // console.log(newState);
-      delete newState['user']
+      console.log('deleted newState.session :D')
+      delete newState.user
       // console.log(delete newState['user'])
       // console.log(newState.session)
       // delete newState.session

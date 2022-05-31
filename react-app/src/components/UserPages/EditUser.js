@@ -8,7 +8,6 @@ import {
   deleteUserThunk
 } from "../../store/user";
 import "./EditUser.css";
-import Splash from "../Splash/Splash";
 import { logout } from "../../store/session";
 
 function EditUser() {
@@ -74,12 +73,11 @@ function EditUser() {
     e.preventDefault();
     history.push(`/users/${userId}`);
   }
-
   async function deleteUser(e) {
     e.preventDefault();
     e.stopPropagation();
-    await dispatch(deleteUserThunk(userId))
-    await dispatch(logout())
+    dispatch(deleteUserThunk(userId))
+    dispatch(logout())
     return history.push('/')
   }
 
@@ -87,76 +85,69 @@ function EditUser() {
 
   if (!isLoaded) {
     return <h1>Loading...</h1>;
-  }
-
-  // console.log("ERRORS ARE SET--------", errors)
-  // else if (!currentUser) {
-  //   return <Splash />
-  // }
-  return (
-    <>
-      {currentUser.full_name && (
-        <form onSubmit={handleSubmit}>
-          <div>
-            {errors.map((error, ind) => (
-              <div id="errors" key={ind}>
-                {error}
+  } else {
+    return (
+      <>
+        {currentUser.full_name && (
+          <form onSubmit={handleSubmit}>
+            <div>
+              {errors.map((error, ind) => (
+                <div id="errors" key={ind}>
+                  {error}
+                </div>
+              ))}
+            </div>
+            <label>
+              Username
+              <div>
+                <input
+                  type="text"
+                  name="userName"
+                  value={userName}
+                  disabled={true}
+                ></input>
               </div>
-            ))}
-          </div>
-          <label>
-            Username
-            <div>
-              <input
-                type="text"
-                name="userName"
-                value={userName}
-                disabled={true}
-              ></input>
-            </div>
-          </label>
-          <label>
-            Fullname
-            <div>
-              <input
-                type="text"
-                name="full_name"
-                onChange={(e) => setFullName(e.target.value)}
-                value={fullName}
-              ></input>
-            </div>
-          </label>
-          <label>
-            Bio
-            <div>
-              <input
-                type="text"
-                name="biography"
-                onChange={(e) => setBiography(e.target.value)}
-                value={biography}
-              ></input>
-            </div>
-          </label>
-          <label>
-            Edit Profile Pic
-            <div>
-              <input
-                type="text"
-                name="profile_pic"
-                onChange={(e) => setProfilePicUrl(e.target.value)}
-              ></input>
-            </div>
-          </label>
-          <button type="submit">Submit</button>
-          <button onClick={(e) => backToProfile(e)}>Cancel</button>
-        </form>
-      )}
+            </label>
+            <label>
+              Fullname
+              <div>
+                <input
+                  type="text"
+                  name="full_name"
+                  onChange={(e) => setFullName(e.target.value)}
+                  value={fullName}
+                ></input>
+              </div>
+            </label>
+            <label>
+              Bio
+              <div>
+                <input
+                  type="text"
+                  name="biography"
+                  onChange={(e) => setBiography(e.target.value)}
+                  value={biography}
+                ></input>
+              </div>
+            </label>
+            <label>
+              Edit Profile Pic
+              <div>
+                <input
+                  type="text"
+                  name="profile_pic"
+                  onChange={(e) => setProfilePicUrl(e.target.value)}
+                ></input>
+              </div>
+            </label>
+            <button type="submit">Submit</button>
+            <button onClick={(e) => backToProfile(e)}>Cancel</button>
+          </form>
+        )}
         {/* <button onClick={e => deleteUser(e)}>Delete Account</button> */}
-        <button onClick={() => {
-          dispatch(deleteUserThunk(userId))
-          return history.push('/')
-        }}>Delete Account</button>
-    </>
-  );
+        <button onClick={(e) => deleteUser(e)}>Delete Account</button>
+      </>
+    );
+  }
 }
 export default EditUser;
