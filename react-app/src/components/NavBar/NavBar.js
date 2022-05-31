@@ -8,6 +8,7 @@ import { house, postIcon, exploreIcon, heartHomeIcon, filledHouseIcon, filledPos
 
 const NavBar = () => {
   const user = useSelector((state)=> state.session.user)
+  const profile = useSelector((state)=> state?.userReducer?.user?.profile_pic_url)
   // const userName = user.full_name.split(' ').join('')
   // console.log(userName)
   // console.log(user.id)
@@ -19,7 +20,7 @@ const NavBar = () => {
   const [heartIconColor, setHeartIconColor] = useState(heartHomeIcon)
 
   const logo = (<img src="https://fontmeme.com/permalink/220528/c175d4b5354eae87b98b5233d328cfd5.png" id='pixtagram-logo' alt='pixtagram' border='0'></img>)
-  const profilePicture = (<img to='/users/:id' src='https://i.pinimg.com/736x/a3/f4/7d/a3f47d7e95ae47fdae92fdf50d9a39a2.jpg' id='profile-pic-nav-bar' alt='profile-picture-icon'></img>)
+  const profilePicture = (<img to='/users/:id' src={`${profile}`} id='profile-pic-nav-bar' alt='profile-picture-icon'></img>)
   const removeIconColor = () => {
     setHouseColor(house)
     setPostIconColor(postIcon)

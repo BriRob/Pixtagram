@@ -8,7 +8,7 @@ import {
   deleteUserThunk
 } from "../../store/user";
 import "./EditUser.css";
-import { logout } from "../../store/session";
+import { login, logout } from "../../store/session";
 
 function EditUser() {
   const dispatch = useDispatch();
@@ -54,39 +54,16 @@ function EditUser() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const formData = new FormData();
-
-    // console.log(fullName)
-    // console.log(profilePicUrl)
-    // console.log(biography)
-    // formData.append("full_name", fullName);
-    // formData.append("profile_pic_url", profilePicUrl);
-    // formData.append("bio", biography);
-    // console.log(formData["full_name"])
-
-    // setImageLoading(true)
-    // const data = await dispatch(editUserThunk(userId, formData));
-
-
-
-
-
-
     const full_name = fullName;
     const bio = biography;
     const profile_pic_url = profilePicUrl;
     const form = { full_name, bio, profile_pic_url };
 
-    // console.log(form)
     const data = await dispatch(editUserThunk(userId, form));
 
-    console.log(form)
 
-
-    console.log("What is Data??--->", data);
     if (data.errors) {
       setErrors(data.errors);
-      console.log("THERE ARE ERRORS", data.errors[0]);
     } else {
       await dispatch(getAllUsersThunk());
       await dispatch(getUserThunk(userId));
