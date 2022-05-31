@@ -1,6 +1,6 @@
 # Pixtagram 
 
-Pixtagram is a pixel perfect clone of [Instagram](https://www.instagram.com/) where users can share posts with other users. They can show their support by liking and commenting other's posts.
+Pixtagram is a pixel perfect clone of dark mode [Instagram](https://www.instagram.com/) where users can share posts with other users. They can show their support by liking and commenting other's posts.
 
 Check out [Pixtagram](https://pixtagramapp.herokuapp.com/)
 
