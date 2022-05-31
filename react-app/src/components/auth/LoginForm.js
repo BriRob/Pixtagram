@@ -33,6 +33,18 @@ const LoginForm = () => {
     return <Redirect to='/' />;
   }
 
+  // Demo Login
+  const demoUser = async (e) => {
+    e.preventDefault();
+    const email = "demo@aa.io"
+    const password = "password"
+
+    const data = await dispatch(login(email, password));
+    if (data) {
+      setErrors(data);
+    }
+  }
+
   return (
     <>
       <div id='full-page-container'>
@@ -85,7 +97,7 @@ const LoginForm = () => {
                 <div className='l-line'></div>
               </div>
               <div className='l-demo-div'>
-                <button id='l-demo-button'>Log in as a Demo User</button>
+                <button id='l-demo-button' onClick={demoUser}>Log in as a Demo User</button>
               </div>
 
               <div id='b-line'></div>
