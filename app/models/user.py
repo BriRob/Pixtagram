@@ -19,6 +19,12 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
+    '''
+    cascading ex:
+    posts = db.relationship('Post', cascade = 'all, delete', back_populates = 'user')
+    '''
+
+
     @property
     def password(self):
         return self.hashed_password

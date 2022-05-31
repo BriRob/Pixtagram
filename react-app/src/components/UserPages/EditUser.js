@@ -53,7 +53,9 @@ function EditUser() {
     const bio = biography;
     const profile_pic_url = profilePicUrl;
     const form = { full_name, bio, profile_pic_url };
+    console.log(form)
     const data = await dispatch(editUserThunk(userId, form));
+
     console.log("What is Data??--->", data);
     if (data.errors) {
       setErrors(data.errors);
