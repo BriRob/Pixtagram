@@ -69,6 +69,8 @@ function EditUser() {
     }
   };
 
+  console.log("errors", errors)
+
   function backToProfile(e) {
     e.preventDefault();
     history.push(`/users/${userId}`);
@@ -134,9 +136,10 @@ function EditUser() {
               Edit Profile Pic
               <div>
                 <input
-                  type="text"
+                  type="file"
                   name="profile_pic"
                   onChange={(e) => setProfilePicUrl(e.target.value)}
+                  accept=".pdf, .jpg"
                 ></input>
               </div>
             </label>
