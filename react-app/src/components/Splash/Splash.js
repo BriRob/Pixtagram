@@ -51,6 +51,10 @@ function Splash() {
                     <div className="dotdotdot">{dotDotDotIcon}</div>
                   </div>
                   <img className="user-post" src={post.img_url}></img>
+                  <div className="opinionsBox">
+                        {post.caption}
+
+                  </div>
                 </div>
               </div>
             ))
