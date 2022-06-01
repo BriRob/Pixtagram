@@ -114,6 +114,7 @@ function EditUser() {
                   name="userName"
                   value={userName}
                   disabled={true}
+                  readOnly
                 ></input>
               </div>
             </label>

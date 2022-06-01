@@ -107,9 +107,12 @@ const NavBar = () => {
               autoCapitalize="none"
               className="search-bar"
               // color={searchField === 'Search' ? "grey" : "white"}
-              value={""}
-              placeholder="Search"
-              type="text"
+
+              value={''}
+              placeholder='Search'
+              type='text'
+              readOnly
+
             />
             <div className="_aaw8" role="button" tabIndex="0">
               <div className="_aaw9">{darkModeSearchIcon}</div>
