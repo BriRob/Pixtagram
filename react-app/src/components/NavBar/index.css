@@ -6,7 +6,7 @@
     grid-template-columns: 3;
     grid-template-areas: 'logo search icons';
     /* position: fixed; */
-    background-color: #979AAA;
+    background-color: rgb(0,0,0);
 }
 
 
@@ -17,7 +17,10 @@
 }
 
 .search-bar{
-    background-color: #efefef;
+    color: rgb(142,142,142);
+    background-color: rgb(38,38,38);
+    height: 50%;
+    width: 50%;
 }
 
 .icons{

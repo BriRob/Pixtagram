@@ -4,52 +4,64 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton'
 import './index.css'
-import { house, postIcon, exploreIcon, heartHomeIcon, filledHouseIcon, filledPostIcon, filledExploreIcon, filledHeartHomeIcon } from './Navicons';
+import {
+  house, postIcon, exploreIcon, heartHomeIcon,
+  darkModeHomeIcon, darkModeFilledInHomeIcon, darkModeExploreIcon, darkModeFilledInExploreIcon,
+  filledPostIcon, filledExploreIcon,
+  filledHeartHomeIcon,
+  darkModeFilledInPostIcon,
+  darkModeHeartHomeIcon,
+  darkModePostIcon,
+  darkModeFilledInHeartHomeIcon, darkModeSearchIcon
+} from './Navicons';
 
 const NavBar = () => {
-  const user = useSelector((state)=> state.session.user)
-  const profile = useSelector((state)=> state?.userReducer?.user?.profile_pic_url)
+  const user = useSelector((state) => state.session.user)
+  const profile = useSelector((state) => state?.userReducer?.user?.profile_pic_url)
   // const userName = user.full_name.split(' ').join('')
   // console.log(userName)
   // console.log(user.id)
 
-  const [searchField, setSearchField] = useState('Seach')
-  const [houseColor, setHouseColor] = useState(house)
-  const [postIconColor, setPostIconColor] = useState(postIcon)
-  const [exploreIconColor, setExploreIconColor] = useState(exploreIcon)
-  const [heartIconColor, setHeartIconColor] = useState(heartHomeIcon)
 
-  const logo = (<img src="https://fontmeme.com/permalink/220528/c175d4b5354eae87b98b5233d328cfd5.png" id='pixtagram-logo' alt='pixtagram' border='0'></img>)
+  //regular font link https://fontmeme.com/permalink/220528/c175d4b5354eae87b98b5233d328cfd5.png
+
+  // const [searchField, setSearchField] = useState(`Search`)
+  const [houseColor, setHouseColor] = useState(darkModeHomeIcon)
+  const [postIconColor, setPostIconColor] = useState(darkModePostIcon)
+  const [exploreIconColor, setExploreIconColor] = useState(darkModeExploreIcon)
+  const [heartIconColor, setHeartIconColor] = useState(darkModeHeartHomeIcon)
+
+  const logo = (<img src="https://fontmeme.com/permalink/220601/86a21de467499ff0a91e214d1a326624.png" id='pixtagram-logo' alt='pixtagram' border='0'></img>)
   const profilePicture = (<img to='/users/:id' src={`${profile}`} id='profile-pic-nav-bar' alt='profile-picture-icon'></img>)
   const removeIconColor = () => {
-    setHouseColor(house)
-    setPostIconColor(postIcon)
-    setExploreIconColor(exploreIcon)
-    setHeartIconColor(heartHomeIcon)
+    setHouseColor(darkModeHomeIcon)
+    setPostIconColor(darkModePostIcon)
+    setExploreIconColor(darkModeExploreIcon)
+    setHeartIconColor(darkModeHeartHomeIcon)
   }
 
   const fillInHouse = (e) => {
     e.stopPropagation()
     removeIconColor()
-    setHouseColor(filledHouseIcon)
+    setHouseColor(darkModeFilledInHomeIcon)
   }
 
   const fillInPost = (e) => {
     e.stopPropagation()
     removeIconColor()
-    setPostIconColor(filledPostIcon)
+    setPostIconColor(darkModeFilledInPostIcon)
   }
 
   const fillInExplore = (e) => {
     e.stopPropagation()
     removeIconColor()
-    setExploreIconColor(filledExploreIcon)
+    setExploreIconColor(darkModeFilledInExploreIcon)
   }
 
   const fillInNavHeart = (e) => {
     e.stopPropagation()
     removeIconColor()
-    setHeartIconColor(filledHeartHomeIcon)
+    setHeartIconColor(darkModeFilledInHeartHomeIcon)
   }
 
   const printThing = (e) => {
@@ -65,16 +77,19 @@ const NavBar = () => {
             <NavLink to='/' exact={true}>{logo}</NavLink>
           </div>
           <div>
-            <label>
-              <input
-                className='search-bar'
-                color={searchField === 'Search' ? "grey" : "white"}
-                value={searchField}
-                onChange={(e) => printThing(e)}
-                onMouseEnter={() => setSearchField("")}
-                onMouseLeave={() => setSearchField('Search')}
-              ></input>
-            </label>
+            <input
+              className='search-bar'
+              // color={searchField === 'Search' ? "grey" : "white"}
+              value=''
+              placeholder='Search'
+              type='text'
+            ></input>
+            <div className='_aaw8' role='button' tabIndex='0'>
+              <div className='__aaw9'>
+                <div className='search-icon'>{darkModeSearchIcon}</div>
+                <span className='search-text'></span>
+              </div>
+            </div>
           </div>
           <div className='icons'>
             <NavLink to='/' exact={true} id='house-icon-id' onClick={(e) => fillInHouse(e)}>{houseColor}</NavLink>
