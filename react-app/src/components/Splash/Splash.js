@@ -6,6 +6,7 @@ import "./Splash.css";
 import { getUserThunk } from "../../store/user";
 import { dotDotDotIcon } from "./SplashIcons";
 import { getAllPostsThunk } from "../../store/post";
+import LoadingSpinner from "../Spinner/Spinner";
 
 function Splash() {
   const dispatch = useDispatch();
@@ -59,7 +60,7 @@ function Splash() {
               </div>
             ))
           ) : (
-            <h1>Loading...</h1>
+            <LoadingSpinner />
           )}
         </div>
         {/* <button onClick={(e) => goToProfile(e)}>Go to profile</button> */}
