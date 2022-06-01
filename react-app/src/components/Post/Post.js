@@ -19,7 +19,10 @@ function Post() {
 
 
     return (
-        <h1 style={{"paddingTop": '300px'}}>{post.caption}</h1>
+        <>
+        {post && <h1 style={{"paddingTop": '300px'}}>{post.caption}</h1>}
+        </>
+
     )
 }
 
