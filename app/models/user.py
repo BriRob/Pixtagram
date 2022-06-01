@@ -45,4 +45,5 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'bio': self.bio,
             'verified': self.verified,
+            # 'post': [post.to_dict() for post in self.posts]
         }
