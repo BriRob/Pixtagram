@@ -1,89 +1,152 @@
-#nav-bar-container{
-
-    width: 100%;
-    height: 5%;
-    display: grid;
-    border-bottom: solid 1px gray;
-    grid-template-columns: 3;
-    grid-template-areas: 'logo search icons';
-
-    position: fixed;
-    /* position: fixed; */
-    background-color: rgb(0,0,0);
+.nav-bar {
+  width: 100%;
+  height: 60px;
+  border-bottom: solid 1px gray;
+  position: fixed;
+  background-color: rgb(0, 0, 0);
+  z-index: 50;
 }
 
-
-#pixtagram-logo{
-    height: 65%;
-    width: 35%;
-    grid-area: logo;
+#nav-bar-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.search-bar{
-    color: rgb(142,142,142);
-    background-color: rgb(38,38,38);
-    height: 50%;
-    width: 50%;
+#pixtagram-logo {
+  height: 65%;
+  width: 35%;
+  grid-area: logo;
 }
 
-.icons{
+.search-bar {
+  color: rgb(142, 142, 142);
+  background-color: rgb(38, 38, 38);
+  height: 50%;
+  width: 50%;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#profile-pic-nav-bar {
+  height: 50%;
+  width: 40px;
+  border-radius: 80%;
+  border: solid 1px black;
+  display: flex;
+  flex-direction: column;
+}
+
+._aawf_aawg {
+  align-items: center;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  height: 36px;
+  min-width: 125px;
+  position: relative;
+  border-radius: 8px;
+}
+
+.search-bar {
+  font-size: 16px;
+  border-radius: 8px;
+  /* background: rgb(var(--ig-highlight-background)); */
+}
+._aaw8 {
+  /* background: rgb(var(--ig-highlight-background)); */
+  display: flex;
+  flex-direction: column;
+  font-size: 16;
+  padding: 0 16px;
+}
+
+._aaw9 {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+._ab6- {
+  color: #8e8e8e;
+  fill: #8e8e8e;
+  height: 16;
+  width: 16;
+}
+
+.search-text {
+  display: inline-block;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+.profile-button {
+    border: 0;
+    background-color: transparent;
+}
+
+.profile-button > img {
+    margin: 0px 5px;
+    margin-left: 15px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-#profile-pic-nav-bar{
-    height: 50%;
-    width: 40px;
-    border-radius: 80%;
-    border: solid 1px black;
-    display: flex;
-    flex-direction: column;
+    justify-content: end;
+    border-radius: 30px;
+    width: 25px;
+    height: 25px;
+    border: 0;
+    color: white;
 }
 
 
-._aawf_aawg{
-    align-items: center;
-    display: flex;
-    flex: 0 1 auto;
-    flex-direction: column;
-    height: 36px;
-    min-width: 125px;
-    position: relative;
-    border-radius:  8px;
+.dropdownmenu {
+  top: 54px;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: 25%;
+  color: white;
+  background-color: black;
+  border-radius: 5px;
 }
 
-.search-bar{
-    font-size: 16px;
-    border-radius: 8px;
-    /* background: rgb(var(--ig-highlight-background)); */
-}
-._aaw8{
-    /* background: rgb(var(--ig-highlight-background)); */
-    display: flex;
-    flex-direction: column;
-    font-size: 16;
-    padding: 0 16px;
+.dropdownmenu > a {
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 5px;
+  transition: none;
 }
 
-._aaw9{
-    align-items: center;
-    display: flex;
-    flex-direction: row;
+.dropdownmenu > a:hover {
+  background-color: #8e8e8e27;
 }
 
-._ab6-{
-    color: #8e8e8e;
-    fill: #8e8e8e;
-    height: 16;
-    width: 16;
+.aboutus {
+  border-bottom: 0.5px solid white;
 }
 
-.search-text{
-    display: inline-block;
-    max-width: 140px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: bottom;
-    white-space: nowrap;
+.dropdownmenu > button {
+  font-size: 15px;
+  border: 0px;
+  background-color: black;
+  color: white;
+  text-align: start;
+  margin: 0;
+  padding: 10px 20px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdownmenu > button:hover {
+  background-color: #8e8e8e27;
 }
