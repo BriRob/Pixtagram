@@ -11,7 +11,7 @@
     flex-direction: column;
     position: relative;
     top: 40px;
-    z-index: -1;
+    z-index: 1;
     width: 50%;
     left: 25%;
 }
