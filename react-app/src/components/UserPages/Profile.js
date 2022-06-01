@@ -7,8 +7,8 @@ import './Profile.css'
 function User() {
   const dispatch = useDispatch();
   const history = useHistory()
-  const sessionUser = useSelector((state)=> state.session.user)
-  const user = useSelector((state)=> state.userReducer.user)
+  const sessionUser = useSelector((state) => state.session.user)
+  const user = useSelector((state) => state.userReducer.user)
   const [isLoaded, setIsLoaded] = useState(false)
   const { userId } = useParams();
 
@@ -17,14 +17,14 @@ function User() {
   console.log('This is USER ID', user?.id)
 
   useEffect(() => {
-    if (sessionUser){
-    dispatch(getUserThunk(userId))
-    .then(()=> setIsLoaded(true))
+    if (sessionUser) {
+      dispatch(getUserThunk(userId))
+        .then(() => setIsLoaded(true))
     }
   }, [dispatch]);
 
 
-  function toEdit(){
+  function toEdit() {
     history.push(`/users/${userId}/edit`)
   }
 
@@ -36,32 +36,41 @@ function User() {
   // <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img>
   return (
     <>
-    <div id="profile-container">
+      <div id="profile-container">
+        <div id='header-container'>
+          <div className='profile-pic'>
+            <img id='profile-pic-left' src={user.profile_pic_url} alt='profile-picture'></img>
+          </div>
 
-      <div id='header-container'>
-        <div className='profile-pic'>
-          <img id='profile-pic-left' src={user.profile_pic_url} alt='profile-picture'></img>
-        </div>
-
-        <div id='user-info-block'>
-                <strong>{user?.username}</strong>
-                {sessionUser.id == userId? <button onClick={e => toEdit()}>Edit Profile</button>: null}
+          <div id='user-info-block'>
+            <strong>{user?.username}</strong>
+            {sessionUser.id == userId ? <button
+            style={{
+              'color':'FAFAFA',
+              'background-color':'#121212',
+              'border':'1px solid rgb(54,54,54)'
+            }}
+            onClick={e => toEdit()}>Edit Profile</button> : null}
             <div className='posts-followers'>
               <span>83 posts</span>
               <span>381 followers</span>
               <span>342 following</span>
             </div>
+            <div id='user-full-name'>{`${user.full_name}`}</div>
             <div id='biography'>
-                <p>Bio</p> {user?.bio}
-
+              <span>{user?.bio}</span>
             </div>
-
-                <p>{user?.full_name}</p>
-
+          </div>
         </div>
-      </div>
-
-
+        <div id='profile-nav-bar'>
+        <span id='user-profile-nav-bar'>posts</span>
+        </div>
+        <div className='profile-posts'>
+          <img
+            style={{ 'height': '200px', 'width':'200px'}}
+            src={`${user.profile_pic_url}`}>
+          </img>
+        </div>
       </div>
     </>
   );
