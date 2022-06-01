@@ -1,0 +1,43 @@
+.home-page-body{
+    position: relative;
+    top: 100px;
+}
+
+
+.feed{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 40px;
+    z-index: -1;
+    width: 50%;
+    left: 25%;
+}
+
+.feed-test{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 40px;
+}
+
+.user-profile-info{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(0,0,0);
+    width: 96%;
+    position: relative;
+    left: 2%;
+}
+
+.dotDotDot{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pictures{
+    position: relative;
+    right: 6%;
+}
