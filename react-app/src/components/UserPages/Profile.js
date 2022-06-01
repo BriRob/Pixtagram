@@ -43,6 +43,7 @@ function User() {
           </div>
 
           <div id='user-info-block'>
+
             <strong>{user?.username}</strong>
             {sessionUser.id == userId ? <button
             style={{
@@ -51,6 +52,7 @@ function User() {
               'border':'1px solid rgb(54,54,54)'
             }}
             onClick={e => toEdit()}>Edit Profile</button> : null}
+
             <div className='posts-followers'>
               <span>83 posts</span>
               <span>381 followers</span>

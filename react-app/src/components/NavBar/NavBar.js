@@ -30,6 +30,7 @@ const NavBar = () => {
   const [postIconColor, setPostIconColor] = useState(darkModePostIcon)
   const [exploreIconColor, setExploreIconColor] = useState(darkModeExploreIcon)
   const [heartIconColor, setHeartIconColor] = useState(darkModeHeartHomeIcon)
+
   const [valueState, setValueState] = useState('')
   const logo = (<img src="https://fontmeme.com/permalink/220601/86a21de467499ff0a91e214d1a326624.png" id='pixtagram-logo' alt='pixtagram' border='0'></img>)
   const profilePicture = (<img to='/users/:id' src={`${profile}`} id='profile-pic-nav-bar' alt='profile-picture-icon'></img>)
@@ -91,6 +92,7 @@ const NavBar = () => {
                 {darkModeSearchIcon}
               </div>
               <span className='search-text'></span>
+
             </div>
           </div>
           <div className='icons'>
