@@ -12,6 +12,10 @@ function User() {
   const [isLoaded, setIsLoaded] = useState(false)
   const { userId } = useParams();
 
+  console.log('USERID --->', userId)
+  console.log("This is ueser from profile.js", user)
+  console.log('This is USER ID', user?.id)
+
   useEffect(() => {
     if (sessionUser){
     dispatch(getUserThunk(userId))
@@ -32,21 +36,33 @@ function User() {
   // <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img>
   return (
     <>
-      <ul>
-        <li>
-          <strong>{user?.full_name}</strong>
-        </li>
-        <li>
-          <strong>Username</strong> {user?.username}
-        </li>
-        {/* <li>
-          <strong>Email</strong> {user.email}
-        </li> */}
-        <li>
-          <strong>Bio</strong> {user?.bio}
-        </li>
-      </ul>
-      {sessionUser.id == userId? <button onClick={e => toEdit()}>Edit Profile</button>: null}
+    <div id="profile-container">
+
+      <div id='header-container'>
+        <div className='profile-pic'>
+          <img id='profile-pic-left' src={user.profile_pic_url} alt='profile-picture'></img>
+        </div>
+
+        <div id='user-info-block'>
+                <strong>{user?.username}</strong>
+                {sessionUser.id == userId? <button onClick={e => toEdit()}>Edit Profile</button>: null}
+            <div className='posts-followers'>
+              <span>83 posts</span>
+              <span>381 followers</span>
+              <span>342 following</span>
+            </div>
+            <div id='biography'>
+                <p>Bio</p> {user?.bio}
+
+            </div>
+
+                <p>{user?.full_name}</p>
+
+        </div>
+      </div>
+
+
+      </div>
     </>
   );
 }
