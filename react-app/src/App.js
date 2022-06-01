@@ -11,6 +11,7 @@ import EditUser from './components/UserPages/EditUser';
 import Splash from './components/Splash/Splash';
 import { authenticate } from './store/session';
 import { getAllUsersThunk } from './store/user';
+import Post from './components/Post/Post';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -56,6 +57,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <Splash />
+        </ProtectedRoute>
+        <ProtectedRoute path='/post/:id' exact={true}>
+          <Post />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
