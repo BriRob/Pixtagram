@@ -9,7 +9,7 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    profile_pic_url = db.Column(db.String, default="")
+    profile_pic_url = db.Column(db.String, default="https://pixtagrambucket.s3.amazonaws.com/empty_pixter.png")
     full_name = db.Column(db.String(255), nullable=False)
     username = db.Column(db.String(30), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
