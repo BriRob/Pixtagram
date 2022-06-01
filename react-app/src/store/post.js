@@ -14,7 +14,7 @@ const getOnePost = (post) => ({
 });
 
 const createPost = (post) => ({
-  type: GET_ALL_POSTS,
+  type: CREATE_POST,
   payload: post
 });
 
@@ -44,21 +44,29 @@ export const getOnePostThunk = (postId) => async (dispatch) => {
 export const createPostThunk = (userId, form) => async (dispatch) => {
 
   const { img_url, caption } = form
+  const formData = new FormData()
+
+  formData.append('img_url', img_url)
+  formData.append('caption', caption)
+
   const option = {
     method: "POST",
     // headers: {
-    //   "Content-Type": "application/json",
+    //   "Content-Type": "application/x-www-form-urlencoded",
     // },
-    // body: formData,
+    body: formData,
   };
-
-  const response = await fetch(`/api/posts/${userId}/new`);
+  // console.log('INSIDE CREATE POST THUNK \n\n');
+  const response = await fetch(`/api/posts/${userId}/new`, option);
+  // console.log('FETCH RESPONSE FROM CREATE POST', response);
   if (response.ok) {
       const post = await response.json();
-      console.log(post, "one post from the thunk!")
-      dispatch(getOnePost(post));
+      // console.log(post, "one post from the thunk!")
+      // dispatch(createPost(post));
+      dispatch(getOnePost(post))
+      return post
   }
-  return response
+  // return response
 };
 
 

@@ -12,6 +12,7 @@ const removeUser = () => ({
 })
 
 
+
 const initialState = { user: null };
 
 export const authenticate = () => async (dispatch) => {
@@ -29,6 +30,7 @@ export const authenticate = () => async (dispatch) => {
     dispatch(setUser(data));
   }
 }
+
 
 export const login = (email, password) => async (dispatch) => {
   const response = await fetch('/api/auth/login', {

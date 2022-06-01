@@ -12,11 +12,12 @@ function User() {
   const [isLoaded, setIsLoaded] = useState(false)
   const { userId } = useParams();
 
-  console.log('USERID --->', userId)
-  console.log("This is ueser from profile.js", user)
-  console.log('This is USER ID', user?.id)
-
+  // console.log('USERID --->', userId)
+  // console.log("This is ueser from profile.js", user)
+  // console.log('This is USER ID', user?.id)
+  console.log('IN PROFILE COMPONENT');
   useEffect(() => {
+    console.log('RERENDERING -----------------------');
     if (sessionUser) {
       dispatch(getUserThunk(userId))
         .then(() => setIsLoaded(true))
