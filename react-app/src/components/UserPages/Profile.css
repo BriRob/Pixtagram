@@ -73,3 +73,10 @@
     border: purple solid 1px;
     color: white;
 }
+
+#grid-logo{
+    position: relative;
+    top: 5px;
+    height: 20px;
+    width: 20px;
+}
