@@ -85,6 +85,7 @@ const NavBar = () => {
               value={''}
               placeholder='Search'
               type='text'
+              readOnly
 
             />
             <div className='_aaw8' role='button' tabIndex='0'>
