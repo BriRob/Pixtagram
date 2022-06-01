@@ -58,7 +58,7 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <Splash />
         </ProtectedRoute>
-        <ProtectedRoute path='/post/:id' exact={true}>
+        <ProtectedRoute path='/posts/:postId' exact={true}>
           <Post />
         </ProtectedRoute>
       </Switch>

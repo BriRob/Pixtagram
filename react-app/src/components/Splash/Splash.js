@@ -52,7 +52,7 @@ function Splash() {
                     ></img>
                     <div className="picture-info">
                         <NavLink style={{ color: "white", fontWeight: "bold" }} to={`/users/${post.user.id}`}>{post.user.username}</NavLink>
-                        <NavLink style={{ color: "white", fontWeight: "bold" }} to={`/post/${post.id}`}>Go to post</NavLink>
+                        <NavLink style={{ color: "white", fontWeight: "bold" }} to={`/posts/${post.id}`}>Go to post</NavLink>
                     </div>
                     <div className="dotdotdot">{dotDotDotIcon}</div>
                   </div>
