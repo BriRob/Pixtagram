@@ -2,6 +2,7 @@ from crypt import methods
 from app.api.auth_routes import logout
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, logout_user
+from app.forms.create_post_form import CreatePostForm
 from app.models import User, Post, db
 from app.awsS3 import upload_file_to_s3, allowed_file, get_unique_filename
 from app.forms.edit_user_form import EditUserForm
@@ -21,7 +22,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 #Get All Posts
 @post_routes.route('/')
-# @login_required
+@login_required
 def get_all_posts():
     posts = Post.query.all()
     return {'posts': [post.to_dict() for post in posts]}
@@ -36,11 +37,25 @@ def get_one_post(id):
     return post.to_dict()
 
 # Create a Post
-@post_routes.route('/new', methods=["GET","POST"])
+@post_routes.route('/<int:userId>/new', methods=["GET","POST"])
 @login_required
-def create_post():
-    pass
-'''
-ms/br - still need to make a form
+def create_post(userId):
+    # currUser = User.query.get(userId)
+    form = CreatePostForm()
 
-'''
+    if form.validate_on_submit():
+        # AWS needed - magic
+        # validate incoming url
+        # get new url from AWS
+
+        new_post = Post(
+            user_id=userId,
+            img_url=form.data["img_url"],
+            # img_url=url,
+            caption=form.data["caption"]
+        )
+
+        db.session.add(new_post)
+        db.session.commit()
+        return new_post.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
