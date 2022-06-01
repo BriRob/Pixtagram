@@ -21,9 +21,9 @@ class User(db.Model, UserMixin):
 
     '''
     cascading ex:
-    posts = db.relationship('Post', cascade = 'all, delete', back_populates = 'user')
     '''
 
+    posts = db.relationship('Post', cascade = 'all, delete', back_populates = 'user')
 
     @property
     def password(self):
