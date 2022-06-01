@@ -31,6 +31,7 @@ const NavBar = () => {
   const [exploreIconColor, setExploreIconColor] = useState(darkModeExploreIcon)
   const [heartIconColor, setHeartIconColor] = useState(darkModeHeartHomeIcon)
 
+  const [valueState, setValueState] = useState('')
   const logo = (<img src="https://fontmeme.com/permalink/220601/86a21de467499ff0a91e214d1a326624.png" id='pixtagram-logo' alt='pixtagram' border='0'></img>)
   const profilePicture = (<img to='/users/:id' src={`${profile}`} id='profile-pic-nav-bar' alt='profile-picture-icon'></img>)
   const removeIconColor = () => {
@@ -71,24 +72,27 @@ const NavBar = () => {
   return (
     <nav>
       <div>
-
         <div id='nav-bar-container'>
           <div>
             <NavLink to='/' exact={true}>{logo}</NavLink>
           </div>
-          <div>
+          <div className='_aawf_aawg'>
             <input
+              aria-label='Search input'
+              autoCapitalize='none'
               className='search-bar'
               // color={searchField === 'Search' ? "grey" : "white"}
-              value=''
+              value={''}
               placeholder='Search'
               type='text'
-            ></input>
+
+            />
             <div className='_aaw8' role='button' tabIndex='0'>
-              <div className='__aaw9'>
-                <div className='search-icon'>{darkModeSearchIcon}</div>
-                <span className='search-text'></span>
+              <div className='_aaw9'>
+                {darkModeSearchIcon}
               </div>
+              <span className='search-text'></span>
+
             </div>
           </div>
           <div className='icons'>
@@ -100,7 +104,7 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      <ul>
+      {/* <ul>
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
             Home
@@ -124,7 +128,7 @@ const NavBar = () => {
         <li>
           <LogoutButton />
         </li>
-      </ul>
+      </ul> */}
     </nav >
   );
 }
