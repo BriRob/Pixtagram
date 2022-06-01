@@ -43,23 +43,25 @@ function User() {
           </div>
 
           <div id='user-info-block'>
-            <strong>{user?.username}</strong>
-            {sessionUser.id == userId ? <button
-            style={{
-              'color':'FAFAFA',
-              'background-color':'#121212',
-              'border':'1px solid rgb(54,54,54)'
-            }}
-            onClick={e => toEdit()}>Edit Profile</button> : null}
+            <div id='username-and-edit-button'>
+              <p>{user?.username}</p>
+              {sessionUser.id == userId ? <button
+                className='profile-edit-button'
+                onClick={e => toEdit()}>Edit Profile</button> : null}
+            </div>
             <div className='posts-followers'>
               <span>83 posts</span>
               <span>381 followers</span>
               <span>342 following</span>
             </div>
-            <div id='user-full-name'>{`${user.full_name}`}</div>
-            <div id='biography'>
-              <span>{user?.bio}</span>
+
+            <div id='bio-container'>
+              <div id='user-full-name'>{`${user.full_name}`}</div>
+              <div id='biography'>
+                <span>{user?.bio}</span>
+              </div>
             </div>
+            
           </div>
         </div>
         <div id='profile-nav-bar'>
