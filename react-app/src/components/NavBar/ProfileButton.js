@@ -6,7 +6,7 @@ import * as sessionActions from "../../store/session";
 const ProfileButton = ({ user, profile }) => {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const modal = document.getElementsByClassName('profile-dropdown')
+
 
 
   const openMenu = () => {
