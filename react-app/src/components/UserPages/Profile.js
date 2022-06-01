@@ -48,7 +48,7 @@ function User() {
             {sessionUser.id == userId ? <button
             style={{
               'color':'FAFAFA',
-              'background-color':'#121212',
+              'backgroundColor':'#121212',
               'border':'1px solid rgb(54,54,54)'
             }}
             onClick={e => toEdit()}>Edit Profile</button> : null}
