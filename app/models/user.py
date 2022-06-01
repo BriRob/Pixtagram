@@ -9,15 +9,22 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    profile_pic_url = db.Column(db.String, default="")
+    profile_pic_url = db.Column(db.String, default="https://pixtagrambucket.s3.amazonaws.com/empty_pixter.png")
     full_name = db.Column(db.String(255), nullable=False)
     username = db.Column(db.String(30), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    bio = db.Column(db.Text)
+    bio = db.Column(db.Text, default='')
     verified = db.Column(db.Boolean, default=False)
     hashed_password = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
+
+    '''
+    cascading ex:
+    '''
+
+    posts = db.relationship('Post', cascade = 'all, delete', back_populates = 'user')
+    comments = db.relationship('Comment', back_populates = 'user')
 
     @property
     def password(self):
@@ -39,4 +46,5 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'bio': self.bio,
             'verified': self.verified,
+            # 'post': [post.to_dict() for post in self.posts]
         }

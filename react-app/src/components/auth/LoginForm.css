@@ -1,0 +1,214 @@
+/* ms-comment may-30 */
+
+#full-page-container {
+    /* border: white solid 5px; */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* this holds everything above the footer and centers it */
+#top-page-container {
+    /* position: absolute; */
+    /* border: greenyellow solid 4px; */
+    max-height: 90%;
+    width: 100vw;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#right-container {
+    /* border: royalblue solid 3px; */
+    height: 90vh;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#l-border-div{
+    width:301px;
+    height: 277px;
+    border: #363636 solid 1px;
+}
+
+/* Google font that says Pixtagram */
+#heading-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: olivedrab solid 3px; */
+    width: 300px;
+    height: 70px;
+    /* font-size: 50px; */
+    background-color: #000000;
+}
+
+#heading-text{
+    font-family: 'Oleo Script', cursive;
+    font-size: 40px;
+    color: white
+}
+
+/* inputs */
+.input-label {
+    display: none;
+}
+
+.l-input {
+    width: 250px;
+    height: 25px;
+    border-radius: 2px;
+    border: none;
+    margin: 5px;
+    background-color: #121212;
+    color: white;
+}
+
+#login-form-div {
+    height: 150px;
+    width: 300px;
+    /* border: orange solid 3px; */
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+#login-button {
+    border: none;
+    border-radius: 2px;
+    height: 25px;
+    background-color: #3795F6;
+    color: white;
+    width: 255px;
+    margin-left: 4px;
+    margin-top: 4px;
+}
+
+#errors {
+  color: rgb(196, 30, 30);
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.l-or-divider{
+    /* border: yellow solid 3px; */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    width: 300px;
+    background-color: #000000;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
+.l-line{
+    width: 100px;
+    height: 1px;
+    background-color: #8e8e8e;
+}
+
+.l-demo-div {
+    /* border: blue solid 3px; */
+    height: 40px;
+    width: 300px;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#l-demo-button{
+    width: 255px;
+    height: 30px;
+    font-size: 16px;
+    color: #f6f6f5;
+    font-weight: bold;
+    background-color: #000000;
+    border: none;
+}
+
+#b-line{
+    width: 300px;
+    height: 1px;
+    background-color: #4c516d;
+}
+
+#l-signup-div {
+
+    margin-top: 10px;
+    background-color: #000000;
+    border: #363636 solid 1px;
+    height: 50px;
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#l-text{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: white;
+}
+
+#s-link{
+    text-decoration: none;
+    color: #20619E;
+    font-weight: bold;
+}
+
+#footer {
+    /* position: absolute; */
+    /* border: brown solid 4px; */
+    margin-bottom: 5px;
+    height: 5%;
+    width: 60vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    flex-direction: row;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    color: #606060;
+}
+
+#creators{
+    /* border: pink solid 3px; */
+    margin-top: 5px;
+    height: 5%;
+    width: 600px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-direction: row;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    color: #606060;
+    text-decoration: none;
+}
+
+.c-name:visited{
+    text-decoration: none;
+}
+
+/* This container will hold the images left of the login form */
+
+.left-container {
+    border: goldenrod solid 3px;
+    width: 500px;
+    height: 80%;
+}
