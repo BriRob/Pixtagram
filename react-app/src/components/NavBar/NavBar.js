@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
+import CreatePost from "./CreatePost";
 import "./index.css";
 import {
   house,
@@ -28,6 +29,28 @@ const NavBar = () => {
   const profile = useSelector(
     (state) => state?.userReducer?.user?.profile_pic_url
   );
+
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    if (showModal) return;
+    setShowModal(true);
+  };
+
+  useEffect(() => {
+    if (!showModal) return;
+
+    const closeModal = () => {
+      setShowModal(false);
+    };
+    // const modal = document.getElementsByClassName('createPostModal')[0]
+    // // document.addEventListener("click", closeModal);
+    // modal.addEventListener('click', (e) => {
+    //   e.target.('showModal')
+    // })
+
+    return () => document.removeEventListener("click", closeModal);
+  }, [showModal]);
   // const userName = user.full_name.split(' ').join('')
   // console.log(userName)
   // console.log(user.id)
@@ -74,6 +97,10 @@ const NavBar = () => {
     e.stopPropagation();
     removeIconColor();
     setPostIconColor(darkModeFilledInPostIcon);
+    openModal()
+    // return (
+    //   <CreatePost boolean={true}/>
+    // )
   };
 
   const fillInExplore = (e) => {
@@ -108,11 +135,10 @@ const NavBar = () => {
               className="search-bar"
               // color={searchField === 'Search' ? "grey" : "white"}
 
-              value={''}
-              placeholder='Search'
-              type='text'
+              value={""}
+              placeholder="Search"
+              type="text"
               readOnly
-
             />
             <div className="_aaw8" role="button" tabIndex="0">
               <div className="_aaw9">{darkModeSearchIcon}</div>
@@ -152,9 +178,14 @@ const NavBar = () => {
             >
               {heartIconColor}
             </NavLink>
-            <ProfileButton user={user} profile={profile}/>
+            <ProfileButton user={user} profile={profile} />
           </div>
         </div>
+            <div>
+              {showModal && (
+                <CreatePost hideModal={() => setShowModal(false)}/>
+              )}
+            </div>
       </div>
       {/* <ul>
         <li>
