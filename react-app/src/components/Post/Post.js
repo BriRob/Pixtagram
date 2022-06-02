@@ -23,6 +23,7 @@ function Post() {
     //     const response = daysSincePost(post)
     //     setDate(response)
     // }
+    //posting
 
 
     function changeHeart(e) {
