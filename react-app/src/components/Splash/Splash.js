@@ -13,7 +13,7 @@ function Splash() {
   const history = useHistory();
   const id = useSelector((state) => state.session.user.id);
   const posts = useSelector((state) => state?.posts?.allPosts?.posts);
-//   console.log(posts);
+  //   console.log(posts);
 
   useEffect(() => {
     dispatch(getUserThunk(id)).then(() => dispatch(getAllPostsThunk()));
@@ -24,10 +24,10 @@ function Splash() {
   // }
 
   const sendToProfile = (e, id) => {
-      e.stopPropagation()
-      console.log('wtf')
-      history.push(`/users/${id}`)
-  }
+    e.stopPropagation();
+    console.log("wtf");
+    history.push(`/users/${id}`);
+  };
 
   if (!id) {
     return <Redirect to="/login" />;
@@ -40,25 +40,66 @@ function Splash() {
           {posts ? (
             posts?.map((post, idx) => (
               <div key={idx}>
-                <div className="post-card">
-                  <div className="user-profile-info">
-                    <img
-                      src={post.user.profile_pic_url}
+                <div className="post-card-feed">
+                  <div className="user-profile-info-feed">
+                    <NavLink to={`/users/${post.user.id}`}>
+                      <img
+                        src={post.user.profile_pic_url}
+                        style={{
+                          height: "40px",
+                          width: "40px",
+                          borderRadius: "50px",
+                        }}
+                        className="user-profile-pic-feed"
+                      ></img>
+                    </NavLink>
+                    <NavLink
                       style={{
-                        'height': "40px",
-                        'width': "40px",
-                        "borderRadius": "50px",
+                        color: "white",
+                        fontWeight: "bold",
+                        textDecoration: "none",
                       }}
-                    ></img>
-                    <div className="picture-info">
-                        <NavLink style={{ color: "white", fontWeight: "bold" }} to={`/users/${post.user.id}`}>{post.user.username}</NavLink>
-                        <NavLink style={{ color: "white", fontWeight: "bold" }} to={`/posts/${post.id}`}>Go to post</NavLink>
-                    </div>
+                      to={`/users/${post.user.id}`}
+                    >
+                      {post.user.username}
+                    </NavLink>
+
                     <div className="dotdotdot">{dotDotDotIcon}</div>
                   </div>
-                  <img className="user-post" src={post.img_url}></img>
-                  <div className="opinionsBox">
+                  <div className="feed-post-image">
+                    <NavLink
+                      style={{ color: "white", fontWeight: "bold" }}
+                      to={`/posts/${post.id}`}
+                    >
+                      <img className="user-post-image" src={post.img_url}></img>
+                    </NavLink>
+                  </div>
+                  <div className="bottom-post-feed">
+                    <div className="likes-post-feed">
+                      <p>Here go the likes</p>
+                    </div>
+                    <div className="opinionsBox">
+                      <div className="post-caption-feed">
+                        <img
+                          src={post.user.profile_pic_url}
+                          className="user-profile-pic-caption"
+                        ></img>
+                        <NavLink
+                          style={{
+                            color: "white",
+                            fontWeight: "bold",
+                            textDecoration: "none",
+                            marginRight: "15px",
+                          }}
+                          to={`/users/${post.user.id}`}
+                        >
+                          {post.user.username}
+                        </NavLink>
                         {post.caption}
+                      </div>
+                      <p>Here go the comments</p>
+                      <p>posted date</p>
+                    </div>
                   </div>
                 </div>
               </div>
