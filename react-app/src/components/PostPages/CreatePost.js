@@ -6,7 +6,7 @@ import * as sessionActions from "../../store/session";
 import "./modals.css";
 
 const CreatePost = ({ hideModal, changePostIcon }) => {
-  const history = useHistory()
+  const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const [imgUrl, setImgUrl] = useState("");
@@ -18,22 +18,26 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
     hideModal();
   };
 
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setImgUrl(file);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const img_url = imgUrl;
     const form = { img_url, caption };
     console.log("IMG AND CAPTION", img_url, caption);
     const post = await dispatch(createPostThunk(user.id, form));
-    hideModal()
-    changePostIcon()
-    console.log(post);
-    // if (data.errors) {
-    //   setErrors(data.errors);
-    // } else {
-    //   // await dispatch(getAllUsersThunk());
-    //   // await dispatch(getUserThunk(userId));
-    // }
-    history.push(`/posts/${post.id}`);
+
+    console.log("POST HERE \n\n", post);
+    if (post.errors) {
+      setErrors(post.errors);
+    } else {
+      hideModal();
+      changePostIcon();
+      history.push(`/posts/${post.id}`);
+    }
   };
 
   return (
@@ -47,12 +51,22 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
             <label>
               Photo
               <input
-                type="text"
+                type="file"
                 name="img_url"
-                onChange={(e) => setImgUrl(e.target.value)}
-                value={imgUrl}
+                // onChange={(e) => setImgUrl(e.target.value)}
+                onChange={updateImage}
+                // value={imgUrl}
+                accept="image/*"
+                // required
               ></input>
             </label>
+            <div>
+              {errors.map((error, ind) => (
+                <div id="errors" key={ind}>
+                  {error}
+                </div>
+              ))}
+            </div>
             <label>
               Caption
               <textarea
