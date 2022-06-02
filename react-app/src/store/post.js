@@ -35,8 +35,8 @@ export const getOnePostThunk = (postId) => async (dispatch) => {
       const post = await response.json();
       console.log(post, "one post from the thunk!")
       dispatch(getOnePost(post));
-  }
-  return response
+    }
+    return response
 };
 
 

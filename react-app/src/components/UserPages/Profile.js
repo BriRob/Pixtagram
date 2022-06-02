@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Profiler } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { getAllPostsThunk } from '../../store/post';
 import { getUserThunk } from '../../store/user';
 import LoadingSpinner from '../Spinner/Spinner';
@@ -113,11 +113,12 @@ function User() {
           {userPosts?.map(post =>
             <>
               <div>
-
+                <NavLink to={`/posts/${post.id}`}>
                 <img
                   style={{ 'height': '200px', 'width': '200px' }}
                   src={`${post?.img_url}`}>
                 </img>
+                    </NavLink>
               </div>
             </>
           )}
