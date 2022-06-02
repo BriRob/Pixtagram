@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getOnePostThunk } from "../../store/post";
+import { getOnePostThunk} from "../../store/post";
 import daysSincePost from "./helpers";
 import { likeHeart, likeHeartFilledIn, commentIcon } from "./postIcons";
 import "./post.css";
 import { dotDotDotIcon } from "../Splash/SplashIcons";
+import PostModal from "./PostModal";
 
 function Post() {
   const dispatch = useDispatch();
@@ -19,8 +20,10 @@ function Post() {
   
   const { postId } = useParams();
   // const [date, setDate] = useState("");
-  useEffect(async () => {
-
+  const userId = post?.user_id
+    // console.log('We need the user id', post?.user_id)
+  
+  useEffect(() => {
     dispatch(getOnePostThunk(postId)).then(() => setIsLoaded(true));
   }, [isLoaded]);
 
@@ -40,6 +43,7 @@ function Post() {
     setShowPostOptions(true);
   };
 
+
   if (!isLoaded) {
     return <h1>Loading...</h1>;
   } else {
@@ -49,9 +53,8 @@ function Post() {
           <>
             <div className="background">
               <div className="postOptionsModal">
-                <h1>HELLO</h1>
-                <button onClick={() => (history.push(`/posts/${postId}/edit`))}>Edit Post</button>
-                <button className="delPostBtn">Delete Post</button>
+                <button onClick={() => setShowPostOptions(false)}>X</button>
+                < PostModal postId={postId}/>
               </div>
             </div>
           </>

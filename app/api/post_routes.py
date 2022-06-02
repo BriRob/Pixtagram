@@ -111,3 +111,15 @@ def edit_post(postId):
     # print('END OF ROUTE')
     # print(form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# Delete one Post
+@post_routes.route('/<int:post_id>/delete', methods=['GET', 'DELETE'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.get(post_id)
+    db.session.delete(post)
+    db.session.commit()
+    # get_one_post(post_id)
+    return post.to_dict()
+    # return
