@@ -13,4 +13,4 @@ from wtforms.validators import DataRequired, ValidationError
 
 class CreatePostForm(FlaskForm):
     img_url = StringField("img_url", validators=[DataRequired(message='Cannot post without image.')])
-    caption = TextAreaField("caption")
+    caption = StringField("caption")

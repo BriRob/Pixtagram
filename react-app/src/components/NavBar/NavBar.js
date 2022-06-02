@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import CreatePost from "../PostPages/CreatePost";
@@ -23,8 +23,10 @@ import {
   darkModeSearchIcon,
 } from "./Navicons";
 import ProfileButton from "./ProfileButton";
+import { getUserThunk } from "../../store/user";
 
 const NavBar = () => {
+  const dispatch = useDispatch()
   const user = useSelector((state) => state.session.user);
   const profile = useSelector(
     (state) => state?.userReducer?.user?.profile_pic_url
@@ -38,6 +40,7 @@ const NavBar = () => {
   };
 
   useEffect(() => {
+    dispatch(getUserThunk(user.id))
     if (!showModal) return;
 
     const closeModal = () => {
@@ -178,12 +181,12 @@ const NavBar = () => {
             >
               {heartIconColor}
             </NavLink>
-            <ProfileButton user={user} profile={profile} />
+            <ProfileButton user={user} profile={profile}/>
           </div>
         </div>
             <div>
               {showModal && (
-                <CreatePost hideModal={() => setShowModal(false)}/>
+                <CreatePost hideModal={() => setShowModal(false)} changePostIcon={() => setPostIconColor(darkModePostIcon)}/>
               )}
             </div>
       </div>
