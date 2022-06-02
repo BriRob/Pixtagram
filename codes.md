@@ -113,3 +113,4 @@ IN CASE HEROKU DB DOESN'T WANT TO WORK
 
     heroku pg:psql -a pixtagramapp
     heroku logs -a pixtagramapp
+

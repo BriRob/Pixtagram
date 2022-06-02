@@ -8,6 +8,7 @@ import LoadingSpinner from '../Spinner/Spinner';
 import './Profile.css'
 import { postGridIcon } from './profileIcons';
 
+
 function User() {
   const dispatch = useDispatch();
   const history = useHistory()
@@ -74,7 +75,6 @@ function User() {
     )
   }
 
-
   return (
     <>
       <div id="profile-container">
@@ -104,7 +104,6 @@ function User() {
             </div>
           </div>
         </div>
-
         <div id='profile-nav-bar'>
           <div id='gallery-line'></div>
           <div style={{

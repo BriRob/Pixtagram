@@ -5,6 +5,7 @@ import { login } from '../../store/session';
 import './LoginForm.css'
 import pixta from '../../images/pixta.png'
 
+
 // ms-comment may-30
 
 const LoginForm = () => {
@@ -57,7 +58,6 @@ const LoginForm = () => {
 
           <div id='right-container'>
             <div id='l-border-div'>
-
               <div id='heading-div'>
                 <h1 id='heading-text'>Pixtagram</h1>
               </div>

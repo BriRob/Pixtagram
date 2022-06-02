@@ -3,7 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 /* containers the profile pic and the user info */
 #header-container{
     display: flex;
@@ -109,6 +108,7 @@
 
 #profile-pic-left{
     border-radius: 50%;
+
     height: 150px;
     width: 150px;
     /* border: #262626 solid 1px; */

@@ -44,7 +44,6 @@ function EditUser() {
         .then(() => setIsLoaded(true));
     } else {
       history.push(`/users/${userId}`);
-
       return () => controller.abort();
     }
 
@@ -74,6 +73,7 @@ function EditUser() {
   };
 
   console.log("errors", errors);
+
 
   function backToProfile(e) {
     e.preventDefault();

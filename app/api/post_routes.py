@@ -1,12 +1,15 @@
 from crypt import methods
+
 from wsgiref.handlers import format_date_time
 from app.api.auth_routes import logout
 from app.forms.create_post_form import CreatePostForm, EditPostForm
+
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, logout_user
 from app.models import User, Post, db
 from app.awsS3 import upload_file_to_s3, allowed_file, get_unique_filename
 from app.helpers import dates_converter, post_e
+
 
 post_routes = Blueprint('posts',__name__)
 
@@ -23,6 +26,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 #Get All Posts
 @post_routes.route('/')
+
 @login_required
 def get_all_posts():
     posts = Post.query.all()
@@ -128,3 +132,4 @@ def delete_post(post_id):
     # get_one_post(post_id)
     return post.to_dict()
     # return
+

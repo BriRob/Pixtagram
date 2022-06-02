@@ -8,6 +8,7 @@ import { dotDotDotIcon } from "./SplashIcons";
 import { getAllPostsThunk } from "../../store/post";
 import LoadingSpinner from "../Spinner/Spinner";
 import { NavLink } from "react-router-dom";
+
 function Splash() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -15,10 +16,10 @@ function Splash() {
   const posts = useSelector((state) => state?.posts?.allPosts?.posts);
   //   console.log(posts);
 
+
   useEffect(() => {
     dispatch(getUserThunk(id)).then(() => dispatch(getAllPostsThunk()));
   }, [dispatch]);
-
 
   const sendToProfile = (e, id) => {
     e.stopPropagation();
