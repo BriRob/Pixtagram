@@ -20,6 +20,7 @@ def dates_converter(date_string):
         date_list.append(created_date)
     return calculator(date_list, today_list)
 
+
 def calculator(post, today_list):
     yrs_since = today_list[0] - post[0] #
     months_since = today_list[1] - post[1] #

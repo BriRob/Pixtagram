@@ -67,7 +67,7 @@ function App() {
             <EditPost />
             {/* <EditUser users={users}/> */}
           </ProtectedRoute>
-          <Route>
+          <Route path='/'>
             <h1>Page Not Found</h1>
           </Route>
         </Switch>
