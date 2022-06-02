@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Profiler } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useHistory, useParams } from 'react-router-dom';
+import { NavLink, useHistory, useLocation, useParams } from 'react-router-dom';
 
 import { getAllPostsThunk } from '../../store/post';
 import { getUserThunk } from '../../store/user';
@@ -11,8 +11,9 @@ import { postGridIcon } from './profileIcons';
 function User() {
   const dispatch = useDispatch();
   const history = useHistory()
+  const location = useLocation()
   const sessionUser = useSelector((state) => state.session.user)
-  const user = useSelector((state) => state.userReducer.user)
+  const user = useSelector((state) => state?.userReducer?.user)
   const posts = useSelector((state) => state?.posts?.allPosts?.posts)
   const [isLoaded, setIsLoaded] = useState(false)
   const { userId } = useParams();
@@ -52,7 +53,7 @@ function User() {
       dispatch(getAllPostsThunk())
         .then(() => setIsLoaded(true))
     }
-  }, [dispatch]);
+  }, [location]);
 
 
   function toEdit() {
@@ -69,6 +70,7 @@ function User() {
       </>
     )
   }
+
 
   return (
     <>
@@ -115,15 +117,11 @@ function User() {
         <div id='gallery'>
           <div className='profile-posts'>
             {userPosts?.map((post) =>
-
-              <>
-                {/* maps over the posts. insta renders one div of three posts at a time. need to figure out to map an individual post instead of dupes */}
-                <div className='post'>
+                <div key={post.id} className='post'>
                   <NavLink to={`/posts/${post.id}`}>
                     <img className='one-post' src={`${post?.img_url}`}></img>
                   </NavLink>
                 </div>
-              </>
 
             )}
           </div>

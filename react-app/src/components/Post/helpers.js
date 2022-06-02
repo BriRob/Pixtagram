@@ -14,7 +14,8 @@ export default function daysSincePost(post) {
         'Dec': 12
 
     }
-    let postedDate = post.created_at.split(' ') //splits the postedDate into parts
+
+    let postedDate = post.created_at.split(' ') //splits the postedDate into parts [wed, 2022, jun 1 time gmt]
     let convertedMonth; // returns Jun
     for(let key in calendar){ //iterates calendar
         if(key === postedDate[2]){ //finds the converted month post was created

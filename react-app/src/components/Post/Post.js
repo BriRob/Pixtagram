@@ -16,16 +16,16 @@ function Post() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showPostOptions, setShowPostOptions] = useState(false);
   const { postId } = useParams();
-  const [date, setDate] = useState("");
-  useEffect(() => {
+  // const [date, setDate] = useState("");
+  useEffect(async () => {
     dispatch(getOnePostThunk(postId)).then(() => setIsLoaded(true));
   }, [isLoaded]);
 
   // if(isLoaded){
-  //     const response = daysSincePost(post)
-  //     setDate(response)
+  //   setDate(response)
   // }
   //posting
+    // const date = daysSincePost(post)
 
   function changeHeart(e) {
     e.preventDefault();
@@ -98,7 +98,7 @@ function Post() {
                 <div className="liked-by">
                   <span className="liked-by-line">{`Liked by Demo and 45 others`}</span>
                 </div>
-                <span>{`Posted Date${date}`}</span>
+                {/* <span>{`Posted Date${date}`}</span> */}
               </div>
               <div>
                 <textarea
