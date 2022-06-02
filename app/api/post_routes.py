@@ -73,7 +73,7 @@ def create_post(userId):
 
 
         print('CREATE HAS BEEN VALIDATED')
-        
+
         new_post = Post(
             user_id=userId,
             # img_url=form.data["img_url"],
@@ -84,6 +84,30 @@ def create_post(userId):
         db.session.add(new_post)
         db.session.commit()
         return new_post.to_dict()
+    # print('END OF ROUTE')
+    # print(form.errors)
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# edit post route, only editing the caption
+@post_routes.route('/<int:postId>/edit', methods=["GET","PUT"])
+@login_required
+def edit_post(postId):
+    print("IN EDIT POST ROUTE")
+
+    post = Post.query.get(postId)
+    form = CreatePostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        print('EDIT HAS BEEN VALIDATED')
+
+        post.caption = form.data["caption"]
+
+        db.session.add(post)
+        db.session.commit()
+        return post.to_dict()
+        # return {"user": user.to_dict()}   example from user_routes edit
     # print('END OF ROUTE')
     # print(form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
