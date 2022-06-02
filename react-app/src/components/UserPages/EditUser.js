@@ -8,7 +8,7 @@ import {
   deleteUserThunk
 } from "../../store/user";
 import "./EditUser.css";
-import { login, logout } from "../../store/session";
+import { authenticate, login, logout } from "../../store/session";
 
 function EditUser() {
   const dispatch = useDispatch();
@@ -38,6 +38,7 @@ function EditUser() {
     const controller = new AbortController();
     if (currentUser) {
       dispatch(getUserThunk(userId))
+        .then(() => dispatch(authenticate()))
         // .then(() => setFunc())
         .then(() => setIsLoaded(true));
     } else {

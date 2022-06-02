@@ -45,6 +45,7 @@ function User() {
   const userPosts = userPostsFinder(posts)
 
   useEffect(() => {
+    console.log('RERENDERING -----------------------');
     if (sessionUser) {
       dispatch(getUserThunk(userId))
       dispatch(getAllPostsThunk())
@@ -113,12 +114,16 @@ function User() {
           {userPosts?.map(post =>
             <>
               <div>
+
                 <NavLink to={`/posts/${post.id}`}>
+
                 <img
                   style={{ 'height': '200px', 'width': '200px' }}
                   src={`${post?.img_url}`}>
                 </img>
+
                     </NavLink>
+
               </div>
             </>
           )}

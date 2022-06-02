@@ -1,11 +1,11 @@
 from crypt import methods
 from app.api.auth_routes import logout
+from app.forms.create_post_form import CreatePostForm
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, logout_user
-from app.forms.create_post_form import CreatePostForm
 from app.models import User, Post, db
 from app.awsS3 import upload_file_to_s3, allowed_file, get_unique_filename
-from app.forms.edit_user_form import EditUserForm
+
 
 post_routes = Blueprint('posts',__name__)
 
@@ -31,31 +31,59 @@ def get_all_posts():
 
 # Get One Post
 @post_routes.route('/<int:id>', methods=['GET']) #alligator brackets pull params for'id'
-# @login_required
+@login_required
 def get_one_post(id):
     post = Post.query.get(id)
     return post.to_dict()
 
 # Create a Post
-@post_routes.route('/<int:userId>/new', methods=["GET","POST"])
+@post_routes.route('/<int:userId>/new', methods=["POST"])
 @login_required
 def create_post(userId):
     # currUser = User.query.get(userId)
+    # print('BEFORE CREATEPOST INSTIANZTS')
     form = CreatePostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    # print('INSIDE OF THE NEW POST ROUTE' )
+    # print('\n\n')
+
 
     if form.validate_on_submit():
         # AWS needed - magic
         # validate incoming url
         # get new url from AWS
+        if "img_url" in request.files:
 
+            image = request.files["img_url"]
+            print("image ======== \n\n", image)
+
+            if not allowed_file(image.filename):
+                return {"errors": "file type not permitted"}, 400
+
+            image.filename = get_unique_filename(image.filename)
+
+            upload = upload_file_to_s3(image)
+
+            if "url" not in upload:
+                return upload, 400
+
+            url = upload["url"]
+
+
+
+        print('CREATE HAS BEEN VALIDATED')
+        
         new_post = Post(
             user_id=userId,
-            img_url=form.data["img_url"],
-            # img_url=url,
+            # img_url=form.data["img_url"],
+            img_url=url,
             caption=form.data["caption"]
         )
 
         db.session.add(new_post)
         db.session.commit()
         return new_post.to_dict()
+    # print('END OF ROUTE')
+    # print(form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
