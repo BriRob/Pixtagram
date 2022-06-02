@@ -53,11 +53,31 @@ def create_post(userId):
         # AWS needed - magic
         # validate incoming url
         # get new url from AWS
+        if "img_url" in request.files:
+
+            image = request.files["img_url"]
+            print("image ======== \n\n", image)
+
+            if not allowed_file(image.filename):
+                return {"errors": "file type not permitted"}, 400
+
+            image.filename = get_unique_filename(image.filename)
+
+            upload = upload_file_to_s3(image)
+
+            if "url" not in upload:
+                return upload, 400
+
+            url = upload["url"]
+
+
+
         print('CREATE HAS BEEN VALIDATED')
+        
         new_post = Post(
             user_id=userId,
-            img_url=form.data["img_url"],
-            # img_url=url,
+            # img_url=form.data["img_url"],
+            img_url=url,
             caption=form.data["caption"]
         )
 
