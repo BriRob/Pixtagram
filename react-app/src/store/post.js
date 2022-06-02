@@ -1,6 +1,7 @@
 const GET_ALL_POSTS = "post/GET_ALL_POSTS";
 const GET_ONE_POST = "post/GET_ONE_POST";
 const CREATE_POST = "post/CREATE_POST";
+const EDIT_POST = "user/EDIT_POST";
 
 const getAllPosts = (posts) => ({
   type: GET_ALL_POSTS,
@@ -14,6 +15,11 @@ const getOnePost = (post) => ({
 
 const createPost = (post) => ({
   type: CREATE_POST,
+  payload: post,
+});
+
+const editPost = (post) => ({
+  type: EDIT_POST,
   payload: post,
 });
 
@@ -37,7 +43,7 @@ export const getOnePostThunk = (postId) => async (dispatch) => {
   return response;
 };
 
-// finish next
+// create post
 export const createPostThunk = (userId, form) => async (dispatch) => {
   const { img_url, caption } = form;
   const formData = new FormData();
@@ -69,9 +75,48 @@ export const createPostThunk = (userId, form) => async (dispatch) => {
       return ["An error occurred. Please try again."];
     }
   }
-  // return response;
   // return response
 };
+
+
+// Edit Post Thunk
+export const editPostThunk = (postId, form) => async (dispatch) => {
+
+  const { caption } = form
+  const formData = new FormData();
+
+  formData.append("caption", caption);
+  console.log("FORMDATA \n\n", formData["caption"])
+
+
+  const option = {
+    method: "PUT",
+    // headers: {
+    //   "Content-Type": "application/json",
+    // },
+    body: formData,
+  };
+
+  // console.log("option \n\n", option)
+  // console.log("option.body \n\n", option.body)
+
+  const response = await fetch(`/api/posts/${postId}/edit`, option);
+  if (response.ok) {
+    const post = await response.json();
+    // dispatch(editPost(user));
+    dispatch(getOnePost(post));
+    return post
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data;
+    } else {
+     return ['An error occurred. Please try again.']
+    }
+  }
+  return response;
+};
+
 
 const initialState = {};
 

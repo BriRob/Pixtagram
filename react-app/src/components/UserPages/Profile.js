@@ -116,13 +116,14 @@ function User() {
 
         <div id='gallery'>
           <div className='profile-posts'>
+
             {userPosts?.map((post) =>
                 <div key={post.id} className='post'>
+
                   <NavLink to={`/posts/${post.id}`}>
                     <img className='one-post' src={`${post?.img_url}`}></img>
                   </NavLink>
                 </div>
-
             )}
           </div>
         </div>

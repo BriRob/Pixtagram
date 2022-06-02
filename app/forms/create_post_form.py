@@ -1,16 +1,31 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError
-
+import re
 
 # will need error handling for text input that has more than one space and no other characters
 # def no_spaces_caption(form, field):
-#     # Checking if user exists
-#     email = field.data
-#     user = User.query.filter(User.email == email).first()
-#     if user:
+#    # if input given is ONLY spaces
+#   # .custom((value) => !/^ *$/.test(value))
+#   # .withMessage("Comment must contain characters"),
+
+#     caption = field.data
+#     # user = User.query.filter(User.email == email).first()
+#     if (re.match("/^ *$/", caption)):
+#         pass
+#     # if user:
 #         raise ValidationError('Email address is already in use.')
 
 class CreatePostForm(FlaskForm):
     img_url = StringField("img_url", validators=[DataRequired(message='Cannot post without image.')])
     caption = StringField("caption")
+
+class EditPostForm(FlaskForm):
+    caption = StringField("caption")
+    # caption = StringField("caption", validators=[no_spaces_caption])
+
+
+caption1 = "        "
+
+print(re.match("/^ *$/", caption1))
+# print(re.match("\\", "hello"))
