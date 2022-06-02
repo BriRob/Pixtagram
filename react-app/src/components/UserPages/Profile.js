@@ -114,16 +114,16 @@ function User() {
 
         <div id='gallery'>
           <div className='profile-posts'>
-            {userPosts?.map((post) =>
+            {userPosts?.map((post, idx) =>
 
-              <>
+              // <>
+                <div className='post' key={idx}>
                 {/* maps over the posts. insta renders one div of three posts at a time. need to figure out to map an individual post instead of dupes */}
-                <div className='post'>
                   <NavLink to={`/posts/${post.id}`}>
                     <img className='one-post' src={`${post?.img_url}`}></img>
                   </NavLink>
                 </div>
-              </>
+              // </>
 
             )}
           </div>

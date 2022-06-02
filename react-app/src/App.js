@@ -12,6 +12,7 @@ import Splash from "./components/Splash/Splash";
 import { authenticate } from "./store/session";
 import { getAllUsersThunk } from "./store/user";
 import Post from "./components/Post/Post";
+import EditPost from "./components/PostPages/EditPost";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -62,6 +63,13 @@ function App() {
           <ProtectedRoute path="/posts/:postId" exact={true}>
             <Post />
           </ProtectedRoute>
+          <ProtectedRoute path="/posts/:postId/edit" exact={true}>
+            <EditPost />
+            {/* <EditUser users={users}/> */}
+          </ProtectedRoute>
+          <Route>
+            <h1>Page Not Found</h1>
+          </Route>
         </Switch>
       </div>
     </BrowserRouter>
