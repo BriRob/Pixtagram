@@ -20,7 +20,7 @@ function User() {
   // console.log('USERID --->', userId)
   // console.log("This is ueser from profile.js", user)
   // console.log('This is USER ID', user?.id)
-  
+
   // console.log(posts, "this is postsArr")
 
   function postCounter(posts) {
@@ -47,7 +47,6 @@ function User() {
   const userPosts = userPostsFinder(posts)
 
   useEffect(() => {
-    console.log('RERENDERING -----------------------');
     if (sessionUser) {
       dispatch(getUserThunk(userId))
       dispatch(getAllPostsThunk())
@@ -71,30 +70,28 @@ function User() {
     )
   }
 
-  // <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img>
   return (
     <>
       <div id="profile-container">
         <div id='header-container'>
           <div className='profile-pic'>
-            <img id='profile-pic-left' src={user?.profile_pic_url} alt='profile-picture'></img>
+            <div id='profile-pic-border'>
+              <img id='profile-pic-left' src={user?.profile_pic_url} alt='profile-picture'></img>
+            </div>
           </div>
 
           <div id='user-info-block'>
-
-            <strong>{user?.username}</strong>
-            {sessionUser.id == userId ? <button
-              style={{
-                'color': 'FAFAFA',
-                'backgroundColor': '#121212',
-                'border': '1px solid rgb(54,54,54)'
-              }}
-              onClick={e => toEdit()}>Edit Profile</button> : null}
+            <div id='username-and-edit-button'>
+              <p id='username-font'>{user?.username}</p>
+              {sessionUser.id == userId ? <button
+                id="profile-edit-button"
+                onClick={e => toEdit()}>Edit Profile</button> : null}
+            </div>
 
             <div className='posts-followers'>
-              <span>{`${count} Posts`}</span>
-              <span>381 followers</span>
-              <span>342 following</span>
+              <span className='p-f'>{`${count} Posts`}</span>
+              <span className='p-f'>381 followers</span>
+              <span className='p-f'>342 following</span>
             </div>
             <div id='user-full-name'>{`${user?.full_name}`}</div>
             <div id='biography'>
@@ -102,30 +99,34 @@ function User() {
             </div>
           </div>
         </div>
-        <div style={{
-          display: 'flex', justifyContent: 'center',
-          fontSize: '30px', alignItems: 'center'
-        }}
-          id='profile-nav-bar'>
-          {postGridIcon}
-          <span
-            style={{ padding: '5px' }}
-            id='user-profile-nav-bar'>posts</span>
-        </div>
-        <div className='profile-posts'>
-          {userPosts?.map(post =>
-            <>
-              <div>
 
-                <NavLink to={`/posts/${post.id}`}>
-                <img
-                  style={{ 'height': '200px', 'width': '200px' }}
-                  src={`${post?.img_url}`}>
-                </img>
-                    </NavLink>
-              </div>
-            </>
-          )}
+        <div id='profile-nav-bar'>
+          <div id='gallery-line'></div>
+          <div style={{
+            display: 'flex', justifyContent: 'center',
+            fontSize: '30px', alignItems: 'center'
+          }}>
+            {postGridIcon}
+            <div
+              id='user-profile-nav-bar'>posts</div>
+          </div>
+        </div>
+
+        <div id='gallery'>
+          <div className='profile-posts'>
+            {userPosts?.map((post) =>
+
+              <>
+                {/* maps over the posts. insta renders one div of three posts at a time. need to figure out to map an individual post instead of dupes */}
+                <div className='post'>
+                  <NavLink to={`/posts/${post.id}`}>
+                    <img className='one-post' src={`${post?.img_url}`}></img>
+                  </NavLink>
+                </div>
+              </>
+
+            )}
+          </div>
         </div>
       </div>
     </>
