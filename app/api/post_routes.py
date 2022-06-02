@@ -27,8 +27,6 @@ def validation_errors_to_error_messages(validation_errors):
 def get_all_posts():
     posts = Post.query.all()
     return {'posts': [post.to_dict() for post in posts]}
-    # print(posts[2].to_dict())
-    # return '<h1>HELLO MAICA</h1>'
 
 # Get One Post
 @post_routes.route('/<int:id>', methods=['GET']) #alligator brackets pull params for'id'

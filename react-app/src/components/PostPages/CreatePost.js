@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory} from "react-router-dom";
 import { createPostThunk } from "../../store/post";
 import * as sessionActions from "../../store/session";
 import "./modals.css";
@@ -8,13 +8,13 @@ import "./modals.css";
 const CreatePost = ({ hideModal, changePostIcon }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+
   const user = useSelector((state) => state.session.user);
   const [imgUrl, setImgUrl] = useState("");
   const [caption, setCaption] = useState("");
   const [errors, setErrors] = useState([]);
 
   const closeModal = () => {
-    // setShowModal(false);
     hideModal();
     changePostIcon();
   };
@@ -35,10 +35,8 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
     if (post.errors) {
       setErrors(post.errors);
     } else {
-      // hideModal();
-      // changePostIcon();
       closeModal()
-      history.push(`/posts/${post.id}`);
+      window.location.reload()
     }
   };
 

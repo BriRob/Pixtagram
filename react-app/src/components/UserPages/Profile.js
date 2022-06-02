@@ -24,6 +24,9 @@ function User() {
 
   // console.log(posts, "this is postsArr")
 
+  // const posts = postsReg?.reverse()
+  // console.log(posts)
+
   function postCounter(posts) {
     let count = 0
     posts?.forEach(post => {
@@ -38,7 +41,7 @@ function User() {
     let arr = []
     posts?.forEach(post => {
       if (post.user_id == userId) {
-        arr.push(post);
+        arr.unshift(post);
       }
     })
     return arr

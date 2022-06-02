@@ -19,9 +19,6 @@ function Splash() {
     dispatch(getUserThunk(id)).then(() => dispatch(getAllPostsThunk()));
   }, [dispatch]);
 
-  // function goToProfile(){
-  //     history.push(`/users/${id}`)
-  // }
 
   const sendToProfile = (e, id) => {
     e.stopPropagation();
@@ -38,7 +35,7 @@ function Splash() {
         <div className="stories-container"></div>
         <div className="feed">
           {posts ? (
-            posts?.map((post, idx) => (
+            posts?.slice(0).reverse().map((post, idx) => (
               <div key={idx}>
                 <div className="post-card-feed">
                   <div className="user-profile-info-feed">
