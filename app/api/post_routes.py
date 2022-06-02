@@ -1,6 +1,6 @@
 from crypt import methods
 from app.api.auth_routes import logout
-from app.forms.create_post_form import CreatePostForm
+from app.forms.create_post_form import CreatePostForm, EditPostForm
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, logout_user
 from app.models import User, Post, db
@@ -96,7 +96,7 @@ def edit_post(postId):
     print("IN EDIT POST ROUTE")
 
     post = Post.query.get(postId)
-    form = CreatePostForm()
+    form = EditPostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():

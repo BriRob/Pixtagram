@@ -1,28 +1,31 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getOnePostThunk } from "../../store/post";
+import { editPostThunk, getOnePostThunk } from "../../store/post";
 
 function EditPost() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { postId } = useParams();
   // grab post from redux state
-  const currPost = useSelector((state) => state.posts.post);
+  const currPost = useSelector((state) => state?.posts?.post);
 
   const [caption, setCaption] = useState(currPost?.caption);
   const [errors, setErrors] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
     const controller = new AbortController();
 
+    console.log(currPost);
     if (currPost) {
-      await dispatch(getOnePostThunk(postId));
+      dispatch(getOnePostThunk(postId)).then(() => setIsLoaded(true));
       setIsLoaded(true);
+      console.log("if true", currPost)
     } else {
-      history.push(`/posts/${postId}`);
-      return () => controller.abort();
+        console.log("currPost is false", currPost)
+        history.push(`/posts/${postId}`);
+        return () => controller.abort();
     }
   }, [dispatch]);
 
@@ -31,14 +34,22 @@ function EditPost() {
     history.push(`/posts/${postId}`);
   };
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const form = { caption };
+
+    const data = await dispatch(editPostThunk(postId, form));
+
+    if (data.errors) {
+      console.log("EDIT POST DATA HAS ERRORS \n\n", data.errors);
+      setErrors(data.errors);
+    } else {
+      history.push(`/posts/${postId}`);
+    }
   };
 
-
-
+  console.log("is loaded!!!! ", isLoaded);
 
   if (!isLoaded) {
     return <h1>Loading...</h1>;
@@ -65,7 +76,9 @@ function EditPost() {
               ></textarea>
             </label>
             <button className="editSubmitPostBtn">Share</button>
-            <button className="editPostCancelBtn" onClick={handleCancel}>Cancel</button>
+            <button className="editPostCancelBtn" onClick={handleCancel}>
+              Cancel
+            </button>
           </form>
         </div>
       </div>

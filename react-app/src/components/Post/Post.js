@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getOnePostThunk } from "../../store/post";
 import daysSincePost from "./helpers";
 import { likeHeart, likeHeartFilledIn, commentIcon } from "./postIcons";
@@ -9,14 +9,18 @@ import { dotDotDotIcon } from "../Splash/SplashIcons";
 
 function Post() {
   const dispatch = useDispatch();
+  const history = useHistory()
   const post = useSelector((state) => state?.posts?.post);
   //DID YOU ENCOUNTER AN ERROR?! TRY NPM INSTALL MOMENT --SAVE
 
   const [likeStatus, setLikeStatus] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showPostOptions, setShowPostOptions] = useState(false);
-  const { postId } = useParams();
   const [date, setDate] = useState("");
+
+  const { postId } = useParams();
+
+
   useEffect(() => {
     dispatch(getOnePostThunk(postId)).then(() => setIsLoaded(true));
   }, [isLoaded]);
@@ -47,6 +51,8 @@ function Post() {
             <div className="background">
               <div className="postOptionsModal">
                 <h1>HELLO</h1>
+                <button onClick={() => (history.push(`/posts/${postId}/edit`))}>Edit Post</button>
+                <button className="delPostBtn">Delete Post</button>
               </div>
             </div>
           </>
@@ -118,7 +124,7 @@ function Post() {
                       console.log("clicking on myself???");
                     }
                   }}
-                  value={"text-area-box"}
+                  // value={"text-area-box"}
                   placeholder="Add a comment."
                 ></textarea>
                 <button disabled={true} className="post-comment-button">
