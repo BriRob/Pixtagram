@@ -68,6 +68,7 @@ function EditUser() {
     } else {
       await dispatch(getAllUsersThunk());
       await dispatch(getUserThunk(userId));
+      await dispatch(authenticate())
       history.push(`/users/${userId}`);
     }
   };
