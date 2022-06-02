@@ -1,0 +1,35 @@
+.edit-user-page {
+    border: grey 1px solid;
+    /* width: 400px;
+    height: 400px; */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 4% 0;
+}
+
+.edit-user-form {
+    border: red 1px solid;
+    width: 60%;
+    height: 400px;
+}
+
+.editUserActualForm input {
+    color: black
+}
+
+.editSubmitBtn, .editCancelBtn, .delAccBtn {
+    background-color: rgb(65, 147, 239);
+    width: 15%;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 0
+}
+
+.editCancelBtn {
+    background-color: rgb(129, 69, 69);
+}
+
+/* .delAccBtn {
+    background-color:;
+} */

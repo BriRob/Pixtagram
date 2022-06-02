@@ -16,6 +16,7 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
   const closeModal = () => {
     // setShowModal(false);
     hideModal();
+    changePostIcon();
   };
 
   const updateImage = (e) => {
@@ -34,8 +35,9 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
     if (post.errors) {
       setErrors(post.errors);
     } else {
-      hideModal();
-      changePostIcon();
+      // hideModal();
+      // changePostIcon();
+      closeModal()
       history.push(`/posts/${post.id}`);
     }
   };
