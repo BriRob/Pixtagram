@@ -6,6 +6,7 @@ import daysSincePost from "./helpers";
 import { likeHeart, likeHeartFilledIn, commentIcon } from "./postIcons";
 import "./post.css";
 import { dotDotDotIcon } from "../Splash/SplashIcons";
+import LoadingSpinner from "../Spinner/Spinner";
 import PostModal from "./PostModal";
 
 function Post() {
@@ -17,7 +18,7 @@ function Post() {
   const [likeStatus, setLikeStatus] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showPostOptions, setShowPostOptions] = useState(false);
-  
+
   const { postId } = useParams();
   // const [date, setDate] = useState("");
   const userId = post?.user_id
@@ -45,7 +46,13 @@ function Post() {
 
 
   if (!isLoaded) {
-    return <h1>Loading...</h1>;
+    return (
+      <>
+      <div style={{ 'position': 'relative', 'top': '400px', 'left': '55%' }}>
+        <LoadingSpinner />
+      </div>
+    </>
+    );
   } else {
     return (
       <>
@@ -83,6 +90,9 @@ function Post() {
                   ></img>
                   <span className="user-name">{post?.user.username}</span>
                   <p className="caption">{post?.caption}</p>
+                  <div className="days-since-caption">
+                  <span>{post?.days_since}</span>
+                  </div>
                 </div>
                 <div className="comment-section">
                   <p>Here go the comments</p>
@@ -106,7 +116,7 @@ function Post() {
                 <div className="liked-by">
                   <span className="liked-by-line">{`Liked by Demo and 45 others`}</span>
                 </div>
-                {/* <span>{`Posted Date${date}`}</span> */}
+                <span>{post?.days_since}</span>
               </div>
               <div>
                 <textarea
