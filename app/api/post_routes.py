@@ -1,11 +1,12 @@
 from crypt import methods
+from wsgiref.handlers import format_date_time
 from app.api.auth_routes import logout
 from app.forms.create_post_form import CreatePostForm, EditPostForm
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, logout_user
 from app.models import User, Post, db
 from app.awsS3 import upload_file_to_s3, allowed_file, get_unique_filename
-
+from app.helpers import dates_converter, post_e
 
 post_routes = Blueprint('posts',__name__)
 
@@ -33,8 +34,14 @@ def get_all_posts():
 @post_routes.route('/<int:id>', methods=['GET']) #alligator brackets pull params for'id'
 @login_required
 def get_one_post(id):
-    post = Post.query.get(id)
-    return post.to_dict()
+    query_post = Post.query.get(id)
+    query_dict = query_post.to_dict()
+    date_created = query_dict['created_at']
+    date_string = date_created.strftime("%Y,%-m,%-d")
+    post = dates_converter(date_string)
+    post_e()
+    query_dict['days_since'] = post
+    return query_dict
 
 # Create a Post
 @post_routes.route('/<int:userId>/new', methods=["POST"])
