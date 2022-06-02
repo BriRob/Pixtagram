@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import './LoginForm.css'
+import pixta from '../../images/pixta.png'
 
 // ms-comment may-30
 
@@ -51,12 +52,12 @@ const LoginForm = () => {
         <div id='top-page-container'>
 
           <div className='left-container'>
-            {/* Image of more pictures to come. Could be macbook with pixtagram loaded on it */}
+            <img id='image' src={pixta}></img>
           </div>
 
           <div id='right-container'>
             <div id='l-border-div'>
-              
+
               <div id='heading-div'>
                 <h1 id='heading-text'>Pixtagram</h1>
               </div>
