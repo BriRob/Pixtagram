@@ -1,0 +1,84 @@
+.singlePostPage {
+  padding-top: 50px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.postCard {
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  border: 0.5px solid rgba(128, 128, 128, 0.293);
+}
+
+.post-picture {
+    object-fit: cover;
+  width: 500px;
+  height: 500px;
+  border-right: 0.5px solid rgba(128, 128, 128, 0.293);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 15px 10px;
+  margin: 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.36);
+}
+
+.user-pic {
+  display: flex;
+  justify-content: end;
+  border-radius: 30px;
+  width: 25px;
+  height: 25px;
+  border: 0;
+  margin-right: 10px;
+}
+
+.postOptions {
+  position: relative;
+  left: 50%;
+}
+
+.user-caption {
+  padding: 15px 10px;
+  display: flex;
+  font-size: 13px;
+  align-items: center;
+}
+
+.caption {
+  margin-left: 15px;
+}
+
+.comments {
+  height: 55%;
+  overflow-y: auto;
+}
+
+.bottom-right {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(128, 128, 128, 0.36);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.36);
+  padding: 10px 5px;
+}
+
+.post-icons {
+  display: flex;
+  width: 30%;
+  justify-content: space-evenly;
+}
+
+.postOptionsModal {
+  position: absolute;
+  left: 40%;
+  top: 20%;
+  width: 300px;
+  height: 200px;
+  border: 5px solid red;
+}
