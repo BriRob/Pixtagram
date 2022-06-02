@@ -38,6 +38,16 @@ const NavBar = () => {
   console.log("location pathname \n\n", pathname)
 
 
+  function menuToggle(e, showModal){
+    e.preventDefault()
+    e.stopPropagation()
+    if(showModal){
+      setShowModal(false)
+    }else{
+      setShowModal(true)
+    }
+  }
+
 
   const openModal = () => {
     if (showModal) return;
@@ -46,11 +56,11 @@ const NavBar = () => {
 
   useEffect(() => {
     dispatch(getUserThunk(user.id));
-    if (!showModal) return;
+    // if (!showModal) return;
 
-    const closeModal = () => {
-      setShowModal(false);
-    };
+    // const closeModal = () => {
+    //   setShowModal(false);
+    // };
     // const modal = document.getElementsByClassName('createPostModal')[0]
     // // document.addEventListener("click", closeModal);
     // modal.addEventListener('click', (e) => {
@@ -61,8 +71,8 @@ const NavBar = () => {
       removeIconColor()
     }
 
-    return () => document.removeEventListener("click", closeModal);
-  }, [showModal]);
+    // return () => document.removeEventListener("click", showModal);
+  }, [dispatch]);
   // const userName = user.full_name.split(' ').join('')
   // console.log(userName)
   // console.log(user.id)
