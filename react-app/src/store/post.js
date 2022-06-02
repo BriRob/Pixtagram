@@ -2,6 +2,7 @@ const GET_ALL_POSTS = "post/GET_ALL_POSTS";
 const GET_ONE_POST = "post/GET_ONE_POST";
 const CREATE_POST = "post/CREATE_POST";
 const EDIT_POST = "user/EDIT_POST";
+const DELETE_POST = "post/DELETE_POST"
 
 const getAllPosts = (posts) => ({
   type: GET_ALL_POSTS,
@@ -20,6 +21,11 @@ const createPost = (post) => ({
 
 const editPost = (post) => ({
   type: EDIT_POST,
+  payload: post,
+});
+
+const deletePost = (post) => ({
+  type: DELETE_POST,
   payload: post,
 });
 
@@ -117,6 +123,19 @@ export const editPostThunk = (postId, form) => async (dispatch) => {
   return response;
 };
 
+// Delete Post Think
+export const deletePostThunk = (postId) => async (dispatch) => {
+  console.log('<--------- HELLO From DELETE POST THUNK -------->')
+  const response = await fetch(`/api/posts/${postId}/delete`, {
+    method: 'DELETE'
+  });
+  if (response.ok) {
+    const post = await response.json();
+    dispatch(deletePost(post))
+  }
+  return response;
+}
+
 
 const initialState = {};
 
@@ -131,6 +150,11 @@ export default function posts(state = initialState, action) {
       newState = { ...state };
       newState.post = action.payload;
       return newState;
+    case DELETE_POST:
+      newState = {...state}
+      console.log('HELLO FROM DELETE REDUCER')
+      delete newState.post
+      return newState
     default:
       return state;
   }
