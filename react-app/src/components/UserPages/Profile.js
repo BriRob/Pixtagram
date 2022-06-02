@@ -1,27 +1,63 @@
 import React, { useState, useEffect, Profiler } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { NavLink, useHistory, useLocation, useParams } from 'react-router-dom';
+
+import { getAllPostsThunk } from '../../store/post';
 import { getUserThunk } from '../../store/user';
+import LoadingSpinner from '../Spinner/Spinner';
 import './Profile.css'
+import { postGridIcon } from './profileIcons';
+
 
 function User() {
   const dispatch = useDispatch();
   const history = useHistory()
+  const location = useLocation()
   const sessionUser = useSelector((state) => state.session.user)
-  const user = useSelector((state) => state.userReducer.user)
+  const user = useSelector((state) => state?.userReducer?.user)
+  const posts = useSelector((state) => state?.posts?.allPosts?.posts)
   const [isLoaded, setIsLoaded] = useState(false)
   const { userId } = useParams();
 
-  console.log('USERID --->', userId)
-  console.log("This is ueser from profile.js", user)
-  console.log('This is USER ID', user?.id)
+  // console.log('USERID --->', userId)
+  // console.log("This is ueser from profile.js", user)
+  // console.log('This is USER ID', user?.id)
+
+  // console.log(posts, "this is postsArr")
+
+  // const posts = postsReg?.reverse()
+  // console.log(posts)
+
+  function postCounter(posts) {
+    let count = 0
+    posts?.forEach(post => {
+      if (post.user_id == userId) {
+        count += 1;
+      }
+    })
+    return count
+  }
+
+  function userPostsFinder(posts) {
+    let arr = []
+    posts?.forEach(post => {
+      if (post.user_id == userId) {
+        arr.unshift(post);
+      }
+    })
+    return arr
+  }
+
+  const count = postCounter(posts)
+  const userPosts = userPostsFinder(posts)
 
   useEffect(() => {
     if (sessionUser) {
       dispatch(getUserThunk(userId))
+      dispatch(getAllPostsThunk())
         .then(() => setIsLoaded(true))
     }
-  }, [dispatch]);
+  }, [location]);
 
 
   function toEdit() {
@@ -30,48 +66,68 @@ function User() {
 
 
   if (!isLoaded) {
-    return <h1>Loading...</h1>;
+    return (
+      <>
+        <div style={{ 'position': 'relative', 'top': '400px', 'left': '50%' }}>
+          <LoadingSpinner />
+        </div>
+      </>
+    )
   }
 
-  // <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img>
   return (
     <>
       <div id="profile-container">
         <div id='header-container'>
           <div className='profile-pic'>
-            <img id='profile-pic-left' src={user.profile_pic_url} alt='profile-picture'></img>
+            <div id='profile-pic-border'>
+              <img id='profile-pic-left' src={user?.profile_pic_url} alt='profile-picture'></img>
+            </div>
           </div>
 
           <div id='user-info-block'>
-
-            <strong>{user?.username}</strong>
-            {sessionUser.id == userId ? <button
-            style={{
-              'color':'FAFAFA',
-              'backgroundColor':'#121212',
-              'border':'1px solid rgb(54,54,54)'
-            }}
-            onClick={e => toEdit()}>Edit Profile</button> : null}
+            <div id='username-and-edit-button'>
+              <p id='username-font'>{user?.username}</p>
+              {sessionUser.id == userId ? <button
+                id="profile-edit-button"
+                onClick={e => toEdit()}>Edit Profile</button> : null}
+            </div>
 
             <div className='posts-followers'>
-              <span>83 posts</span>
-              <span>381 followers</span>
-              <span>342 following</span>
+              <span className='p-f'>{`${count} Posts`}</span>
+              <span className='p-f'>381 followers</span>
+              <span className='p-f'>342 following</span>
             </div>
-            <div id='user-full-name'>{`${user.full_name}`}</div>
+            <div id='user-full-name'>{`${user?.full_name}`}</div>
             <div id='biography'>
               <span>{user?.bio}</span>
             </div>
           </div>
         </div>
         <div id='profile-nav-bar'>
-        <span id='user-profile-nav-bar'>posts</span>
+          <div id='gallery-line'></div>
+          <div style={{
+            display: 'flex', justifyContent: 'center',
+            fontSize: '30px', alignItems: 'center'
+          }}>
+            {postGridIcon}
+            <div
+              id='user-profile-nav-bar'>posts</div>
+          </div>
         </div>
-        <div className='profile-posts'>
-          <img
-            style={{ 'height': '200px', 'width':'200px'}}
-            src={`${user.profile_pic_url}`}>
-          </img>
+
+        <div id='gallery'>
+          <div className='profile-posts'>
+
+            {userPosts?.map((post) =>
+                <div key={post.id} className='post'>
+
+                  <NavLink to={`/posts/${post.id}`}>
+                    <img className='one-post' src={`${post?.img_url}`}></img>
+                  </NavLink>
+                </div>
+            )}
+          </div>
         </div>
       </div>
     </>

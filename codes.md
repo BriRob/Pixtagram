@@ -103,3 +103,14 @@ step 3: Register the blueprint as part of app. Parameter 1 = file name, param 2 
 
 
 ***back_populates: connects one relaitonship to other tables
+
+
+
+IN CASE HEROKU DB DOESN'T WANT TO WORK
+    heroku run -a pixtagramapp flask db upgrade
+    heroku run -a pixtagramapp flask seed undo
+    heroku run -a pixtagramapp flask seed all
+
+    heroku pg:psql -a pixtagramapp
+    heroku logs -a pixtagramapp
+

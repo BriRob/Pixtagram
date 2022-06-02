@@ -5,10 +5,10 @@ import {
   editUserThunk,
   getAllUsersThunk,
   getUserThunk,
-  deleteUserThunk
+  deleteUserThunk,
 } from "../../store/user";
 import "./EditUser.css";
-import { login, logout } from "../../store/session";
+import { authenticate, login, logout } from "../../store/session";
 
 function EditUser() {
   const dispatch = useDispatch();
@@ -21,12 +21,13 @@ function EditUser() {
 
   const [fullName, setFullName] = useState(currentUser?.full_name);
   const [biography, setBiography] = useState(currentUser?.bio);
-  const [profilePicUrl, setProfilePicUrl] = useState(null);
+  const [profilePicUrl, setProfilePicUrl] = useState(
+    currentUser?.profile_pic_url
+  );
   const [isLoaded, setIsLoaded] = useState(false);
   const [userName, setUserName] = useState(currentUser?.username);
   const [errors, setErrors] = useState([]);
   const [imageLoading, setImageLoading] = useState(false);
-
 
   const setFunc = (currentUser) => {
     setBiography(currentUser?.bio);
@@ -38,12 +39,12 @@ function EditUser() {
     const controller = new AbortController();
     if (currentUser) {
       dispatch(getUserThunk(userId))
+        .then(() => dispatch(authenticate()))
         // .then(() => setFunc())
         .then(() => setIsLoaded(true));
     } else {
       history.push(`/users/${userId}`);
-
-      return () => controller.abort()
+      return () => controller.abort();
     }
 
     // if (!currentUser) {
@@ -61,17 +62,18 @@ function EditUser() {
 
     const data = await dispatch(editUserThunk(userId, form));
 
-
     if (data.errors) {
       setErrors(data.errors);
     } else {
       await dispatch(getAllUsersThunk());
       await dispatch(getUserThunk(userId));
+      await dispatch(authenticate())
       history.push(`/users/${userId}`);
     }
   };
 
-  console.log("errors", errors)
+  console.log("errors", errors);
+
 
   function backToProfile(e) {
     e.preventDefault();
@@ -81,32 +83,34 @@ function EditUser() {
   async function deleteUser(e) {
     e.preventDefault();
     e.stopPropagation();
-    dispatch(deleteUserThunk(userId))
-    dispatch(logout())
-    return history.push('/')
+    dispatch(deleteUserThunk(userId));
+    dispatch(logout());
+    return history.push("/");
   }
 
   const updateImage = (e) => {
     const file = e.target.files[0];
     setProfilePicUrl(file);
-  }
+  };
   // {/* <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img> */}
 
   if (!isLoaded) {
     return <h1>Loading...</h1>;
   } else {
     return (
-      <>
-        {currentUser.full_name && (
-          <form onSubmit={handleSubmit}>
-            {/* <div>
+      <div className="edit-user-page">
+        <div className="edit-user-form">
+          {/* <img src={profilePicUrl}></img> */}
+          <div>{userName}</div>
+          <form onSubmit={handleSubmit} className="editUserActualForm">
+            <div>
               {errors.map((error, ind) => (
                 <div id="errors" key={ind}>
                   {error}
                 </div>
               ))}
-            </div> */}
-            <label>
+            </div>
+            {/* <label>
               Username
               <div>
                 <input
@@ -117,49 +121,51 @@ function EditUser() {
                   readOnly
                 ></input>
               </div>
-            </label>
-            <label>
-              Fullname
-              <div>
-                <input
-                  type="text"
-                  name="full_name"
-                  onChange={(e) => setFullName(e.target.value)}
-                  value={fullName}
-                ></input>
-              </div>
-            </label>
-            <label>
-              Bio
-              <div>
-                <input
-                  type="text"
-                  name="biography"
-                  onChange={(e) => setBiography(e.target.value)}
-                  value={biography}
-                ></input>
-              </div>
-            </label>
-            <label>
-              Edit Profile Pic
-              <div>
-                <input
-                  type="file"
+            </label> */}
+            <div>
+              <label>Name</label>
+              {/* <div> */}
+              <input
+                className="editUserInput"
+                type="text"
+                name="full_name"
+                onChange={(e) => setFullName(e.target.value)}
+                value={fullName}
+              ></input>
+              {/* </div> */}
+            </div>
 
-                  name="profile_pic_url"
-                  onChange={updateImage}
-                  // onChange={(e) => setProfilePicUrl(e.target.value)}
-                  accept="image/*"
-                ></input>
-              </div>
-            </label>
-            <button type="submit">Submit</button>
-            <button onClick={(e) => backToProfile(e)}>Cancel</button>
+            <div>
+              <label>Bio</label>
+              {/* <div> */}
+              <input
+                className="editUserInput"
+                type="text"
+                name="biography"
+                onChange={(e) => setBiography(e.target.value)}
+                value={biography}
+              ></input>
+              {/* </div> */}
+            </div>
+            <div>
+              <label>Edit Profile Pic</label>
+              {/* <div> */}
+              <input
+                type="file"
+                name="profile_pic_url"
+                onChange={updateImage}
+                // onChange={(e) => setProfilePicUrl(e.target.value)}
+                accept="image/*"
+              ></input>
+              {/* </div> */}
+            </div>
+            <button className="editSubmitBtn" type="submit">Submit</button>
+            <button className="editCancelBtn" onClick={(e) => backToProfile(e)}>Cancel</button>
           </form>
-        )}
-        {/* <button onClick={e => deleteUser(e)}>Delete Account</button> */}
-        <button onClick={(e) => deleteUser(e)}>Delete Account</button>
-      </>
+          {/* <button onClick={e => deleteUser(e)}>Delete Account</button> */}
+          <button className="delAccBtn" onClick={(e) => deleteUser(e)}>Delete Account</button>
+        </div>
+      </div>
     );
   }
 }

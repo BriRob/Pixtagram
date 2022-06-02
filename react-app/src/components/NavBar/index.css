@@ -111,7 +111,7 @@
   width: 150px;
   display: flex;
   flex-direction: column;
-  position: fixed;
+  position: absolute;
   right: 25%;
   color: white;
   background-color: black;

@@ -208,7 +208,6 @@
 /* This container will hold the images left of the login form */
 
 .left-container {
-    border: goldenrod solid 3px;
-    width: 500px;
-    height: 80%;
+    /* border: goldenrod solid 3px; */
+    padding: 0px;
 }

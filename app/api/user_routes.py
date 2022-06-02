@@ -99,7 +99,9 @@ example delete query
 
 '''
 
-# Get individual user for profile page
+
+# Delete one User
+
 @user_routes.route('/<int:id>/delete', methods=['GET', 'DELETE']) #alligator brackets pull params for'id'
 @login_required
 def delete_user(id):
