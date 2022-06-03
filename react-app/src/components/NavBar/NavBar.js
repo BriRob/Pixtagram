@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
@@ -17,15 +16,14 @@ import {
 } from "./Navicons";
 import ProfileButton from "./ProfileButton";
 import { getUserThunk } from "../../store/user";
+
 import image from './svgexport-17.png'
 import SearchModal from "./SearchModal";
-
-
 
 const NavBar = () => {
   const dispatch = useDispatch();
   // const location = useLocation()
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
   const user = useSelector((state) => state.session.user);
   const profile = useSelector(
     (state) => state?.userReducer?.user?.profile_pic_url
@@ -93,6 +91,9 @@ const NavBar = () => {
 
 
 
+  const [valueState, setValueState] = useState("");
+
+
   const logo = (
     <img
       src="https://fontmeme.com/permalink/220601/86a21de467499ff0a91e214d1a326624.png"
@@ -147,6 +148,8 @@ const NavBar = () => {
 
 
 
+
+
   function toggleSearch(e){
     if(!showSearch){
       setShowSearch(true)
@@ -155,6 +158,7 @@ const NavBar = () => {
     }
     return;
   }
+
 
   return (
     <div className="nav-bar">
@@ -167,14 +171,16 @@ const NavBar = () => {
           </div>
           <div className="search-parent-container">
             <div className="search-bar">
+
               <form className="search-form"
               style={{'background': `url(${image}) no-repeat 13px` }}
               // onClick={e => searchToggle(e, showSearch)}
               >
                 <input
                   className="search-input"
-                  onChange={e => inputReader(e)}
+                  onChange={(e) => inputReader(e)}
                   placeholder="Search..."
+
                   type='search'
                   id="super-cool-search-box"
                   onClick={(e) => toggleSearch(e)}
@@ -187,7 +193,7 @@ const NavBar = () => {
           </div>
           <div className="icons">
             <NavLink
-              className='icon-links'
+              className="icon-links"
               to="/"
               exact={true}
               id="house-icon-id"
@@ -195,17 +201,11 @@ const NavBar = () => {
             >
               {houseColor}
             </NavLink>
-            <NavLink
-              className='icon-links'
-              to="/"
-              exact={true}
-              id="post-icon-id"
-              onClick={(e) => fillInPost(e)}
-            >
+            <div className="icon-links" onClick={(e) => fillInPost(e)}>
               {postIconColor}
-            </NavLink>
+            </div>
             <NavLink
-              className='icon-links'
+              className="icon-links"
               to="/"
               exact={true}
               id="explore-icon-id"
@@ -214,7 +214,7 @@ const NavBar = () => {
               {exploreIconColor}
             </NavLink>
             <NavLink
-              className='icon-links'
+              className="icon-links"
               to="/"
               exact={true}
               id="heart-icon-nav-id"

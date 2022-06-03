@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getOnePostThunk} from "../../store/post";
+import { getOnePostThunk } from "../../store/post";
 import daysSincePost from "./helpers";
 import { likeHeart, likeHeartFilledIn, commentIcon } from "./postIcons";
 import "./post.css";
@@ -9,26 +9,37 @@ import { dotDotDotIcon } from "../Splash/SplashIcons";
 import LoadingSpinner from "../Spinner/Spinner";
 import PostModal from "./PostModal";
 import Comments from "../Comments/Comments";
-import { getCommentsThunk } from "../../store/comment";
+import { createCommentThunk, getCommentsThunk } from "../../store/comment";
 
 function Post() {
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   const post = useSelector((state) => state?.posts?.post);
   //DID YOU ENCOUNTER AN ERROR?! TRY NPM INSTALL MOMENT --SAVE
+
+  // need userId for creating a comment
+  const currUser = useSelector((state) => state?.session?.user?.id);
+  // console.log("Maica USER ID", currUser);
+  const currPost = useSelector((state) => state?.posts?.post?.id);
+  // console.log("This is current post id", currPost);
 
   const [likeStatus, setLikeStatus] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showPostOptions, setShowPostOptions] = useState(false);
+  // useState to create a comment
+  const [text, setText] = useState("");
+  // useState to setErrors for making comments
+  const [errors, setErrors] = useState([]);
 
   const { postId } = useParams();
+  // console.log('Hey Maica --> POST ID', postId)
   // const [date, setDate] = useState("");
-  const userId = post?.user_id
-    // console.log('We need the user id', post?.user_id)
+  const userId = post?.user_id;
+  // console.log('We need the user id', post?.user_id)
 
   useEffect(() => {
     dispatch(getOnePostThunk(postId))
-    .then(() => dispatch(getCommentsThunk(postId)))
+      .then(() => dispatch(getCommentsThunk(postId)))
       .then(() => setIsLoaded(true));
   }, [isLoaded]);
 
@@ -36,7 +47,28 @@ function Post() {
   //   setDate(response)
   // }
   //posting
-    // const date = daysSincePost(post)
+  // const date = daysSincePost(post)
+
+  // handleSubmit for creating a comment
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const postId = currPost;
+    const userId = currUser;
+    const form = { text };
+    const comment = await dispatch(createCommentThunk(userId, postId, form));
+    console.log("COMMENT HERE \n\n", comment);
+    // history.push(`/`)
+    if (comment.errors) {
+      setErrors(comment.errors);
+    } else {
+      await dispatch(getCommentsThunk(postId));
+      setText("")
+      // console.log("TROUBLE");
+      // window.location.reload()
+    }
+  };
+
+  console.log("post comment errors", errors);
 
   function changeHeart(e) {
     e.preventDefault();
@@ -48,14 +80,13 @@ function Post() {
     setShowPostOptions(true);
   };
 
-
   if (!isLoaded) {
     return (
       <>
-      <div style={{ 'position': 'relative', 'top': '400px', 'left': '55%' }}>
-        <LoadingSpinner />
-      </div>
-    </>
+        <div style={{ position: "relative", top: "400px", left: "55%" }}>
+          <LoadingSpinner />
+        </div>
+      </>
     );
   } else {
     return (
@@ -65,7 +96,7 @@ function Post() {
             <div className="background">
               <div className="postOptionsModal">
                 <button onClick={() => setShowPostOptions(false)}>X</button>
-                < PostModal postId={postId}/>
+                <PostModal postId={postId} />
               </div>
             </div>
           </>
@@ -95,12 +126,12 @@ function Post() {
                   <span className="user-name">{post?.user.username}</span>
                   <p className="caption">{post?.caption}</p>
                   <div className="days-since-caption">
-                  <span>{post?.days_since}</span>
+                    <span>{post?.days_since}</span>
                   </div>
                 </div>
                 <div className="comment-section">
-                  <p>Here go the comments</p>
-                  <Comments postId={postId}/>
+                  {/* <p>Here go the comments</p> */}
+                  <Comments postId={postId} />
                 </div>
               </div>
               <div className="bottom-right">
@@ -124,29 +155,43 @@ function Post() {
                 <span>{post?.days_since}</span>
               </div>
               <div>
-                <textarea
-                  onBlur={(e) => {
-                    if (e.currentTarget === e.target) {
-                      console.log("unfocused input box");
-                    }
-                    if (!e.currentTarget.contains(e.relatedTarget)) {
-                      console.log("clicking somewhere else entirely");
-                    }
-                  }}
-                  onFocus={(e) => {
-                    if (e.currentTarget === e.target) {
-                      console.log("focusing on input box");
-                    }
-                    if (!e.currentTarget.contains(e.relatedTarget)) {
-                      console.log("clicking on myself???");
-                    }
-                  }}
-                  // value={"text-area-box"}
-                  placeholder="Add a comment."
-                ></textarea>
-                <button disabled={true} className="post-comment-button">
-                  Post
-                </button>
+                <div>
+                  {errors.map((error, ind) => (
+                    <div id="errors" key={ind}>
+                      {error}
+                    </div>
+                  ))}
+                </div>
+                <form onSubmit={handleSubmit} className="comment-form">
+                  <textarea
+                    onBlur={(e) => {
+                      if (e.currentTarget === e.target) {
+                        console.log("unfocused input box");
+                      }
+                      if (!e.currentTarget.contains(e.relatedTarget)) {
+                        console.log("clicking somewhere else entirely");
+                      }
+                    }}
+                    onFocus={(e) => {
+                      if (e.currentTarget === e.target) {
+                        console.log("focusing on input box");
+                      }
+                      if (!e.currentTarget.contains(e.relatedTarget)) {
+                        console.log("clicking on myself???");
+                      }
+                    }}
+                    // value={"text-area-box"}
+                    placeholder="Add a comment."
+                    // below for creating a comment
+                    type="text"
+                    name="text"
+                    onChange={(e) => setText(e.target.value)}
+                    value={text}
+                  ></textarea>
+                  {/* <button disabled={true} className="post-comment-button">
+                   */}
+                  <button className="post-comment-button"> Post </button>
+                </form>
               </div>
             </div>
           </div>
