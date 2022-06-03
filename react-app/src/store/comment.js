@@ -1,6 +1,7 @@
 // ms - should post be changed to comment? vvv
 const GET_ALL_COMMENTS = "post/GET_ALL_COMMENTS";
 const CREATE_COMMENT = "comment/CREATE_COMMENT";
+const DELETE_COMMENT = "comment/DELETE_COMMENT";
 
 const getComments = comments => ({
   type: GET_ALL_COMMENTS,
@@ -12,6 +13,12 @@ const createComment = comment => ({
   type: CREATE_COMMENT,
   payload: comment
 });
+
+// Delete a Comment
+const deleteComment = commentId => ({
+  type: DELETE_COMMENT,
+  payload: commentId
+})
 
 // Get the Comments for a post
 export const getCommentsThunk = postId => async dispatch => {
@@ -54,11 +61,22 @@ export const createCommentThunk = (userId, postId, form) => async (dispatch) => 
     } else {
       return ['An error occured while creating a comment. Please Try again.']
     }
-
-
-
 };
 
+
+// Delete a Comment
+export const deleteCommentThunk = (commentId) => async(dispatch) => {
+  console.log("Hello from DELETE THUNK")
+  const response = await fetch(`/api/comments/${commentId}/delete`, {
+    method: 'DELETE'
+  });
+  console.log("WHat is wrong with the response?", response)
+  if (response.ok) {
+    const comment = await response.json();
+    dispatch(deleteComment(comment))
+  }
+  return response;
+}
 
 const initialState = {};
 
@@ -73,6 +91,11 @@ export default function comments(state = initialState, action) {
     //   console.log("Hello from Reducer what is payload? *****", action.payload);
     //   newState = { ...state.comments, [action.payload.id]: action.payload };
     //   return newState;
+    case DELETE_COMMENT:
+      newState = {...state}
+      console.log('<-----Hello from delete comment reducer---->')
+      delete newState.comment
+      return newState
     default:
       return state;
   }
