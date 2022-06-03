@@ -30,7 +30,7 @@ export const getCommentsThunk = postId => async dispatch => {
 export const createCommentThunk = (userId, postId, form) => async (dispatch) => {
   const { text } = form
 
-  const response = await fetch(`/api/comments/${postId}/new`, {
+  const response = await fetch(`/api/comments/${postId}/${userId}/new`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -44,12 +44,12 @@ export const createCommentThunk = (userId, postId, form) => async (dispatch) => 
 
     if (response.ok) {
       const comment = await response.json();
-      dispatch(createComment(comment))
-      return null;
+      dispatch(getComments(comment))
+      return comment;
     } else if (response.status < 500) {
-      const comment = await response.json();
-      if (comment.errors) {
-        return comment.errors;
+      const data = await response.json();
+      if (data.errors) {
+        return data;
       }
     } else {
       return ['An error occured while creating a comment. Please Try again.']
@@ -69,10 +69,10 @@ export default function comments(state = initialState, action) {
       newState = { ...state, ...action.payload };
       //   newState["comments"] = action.payload.comments
       return newState;
-    case CREATE_COMMENT:
-      console.log("Hello from Reducer what is payload? *****", action.payload);
-      newState = { ...state.comments, [action.payload.id]: action.payload };
-      return newState;
+    // case CREATE_COMMENT:
+    //   console.log("Hello from Reducer what is payload? *****", action.payload);
+    //   newState = { ...state.comments, [action.payload.id]: action.payload };
+    //   return newState;
     default:
       return state;
   }

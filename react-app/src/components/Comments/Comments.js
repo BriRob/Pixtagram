@@ -8,33 +8,33 @@ function Comments({ postId }) {
   const dispatch = useDispatch();
   // get comments from state, useSelector
   const comments = useSelector((state) => state?.comments?.comments_list);
-  // console.log("comments from COMMENTS.JS \n\n", comments);
+  console.log("comments from COMMENTS.JS \n\n", comments);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
-  //   useEffect(async () => {
-  //     console.log("rendering in comments component \n\n");
-  //     if (!comments){
-  //         await dispatch(getCommentsThunk(postId));
-  //     }
-  //   }, [dispatch, comments]);
+  useEffect(async () => {
+    //   console.log("rendering in comments component \n\n");
+    //   if (!comments){
+    await dispatch(getCommentsThunk(postId));
+    //   }
+  }, [dispatch]);
 
   return (
     <>
-      {/* {comments ? ( */}
-      <div className="comments-components">
-        {/* <div>HELLO?!?!?!?!?</div>
+      {comments ? (
+        <div className="comments-components">
+          {/* <div>HELLO?!?!?!?!?</div>
         <div>comment</div> */}
-        {comments.map((comment, idx) => (
-          <div key={idx}>
-            <div>{comment.user.username}</div>
-            <div>{comment.text}</div>
-          </div>
-        ))}
-      </div>
-      {/* ) : (
+          {comments.map((comment, idx) => (
+            <div key={idx}>
+              <div>{comment.user.username}</div>
+              <div>{comment.text}</div>
+            </div>
+          ))}
+        </div>
+      ) : (
         <LoadingSpinner />
-      )} */}
+      )}
     </>
   );
 }
