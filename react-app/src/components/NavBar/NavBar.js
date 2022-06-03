@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
-// import LogoutButton from "../auth/LogoutButton";
-// import CreatePost from "../PostPages/CreatePost";
+import LogoutButton from "../auth/LogoutButton";
+import CreatePost from "../PostPages/CreatePost";
 import "./index.css";
 import {
   darkModeHomeIcon,
@@ -74,7 +74,6 @@ const NavBar = () => {
     setShowSearch(true);
   }
 
-
   const openModal = () => {
     if (showModal) return;
     setShowModal(true);
@@ -129,10 +128,6 @@ const NavBar = () => {
     removeIconColor();
     setPostIconColor(darkModeFilledInPostIcon);
     openModal();
-    // return (
-    //   <CreatePost boolean={true}/>
-    // )
-
   };
 
   const fillInExplore = (e) => {
@@ -180,7 +175,6 @@ const NavBar = () => {
               <form className="search-form"
               style={{'background': `url(${image}) no-repeat 13px` }}
               // onClick={e => searchToggle(e, showSearch)}
-
               >
                 <input
                   className="search-input"
@@ -194,7 +188,6 @@ const NavBar = () => {
                 >
                 </input>
                 {showSearch && (<SearchModal user={user} profile={profile}/>)}
-
               </form>
             </div>
           </div>
@@ -233,12 +226,12 @@ const NavBar = () => {
           </div>
         </div>
         <div>
-          {/* {showModal && (
+          {showModal && (
             <CreatePost
               hideModal={() => setShowModal(false)}
               changePostIcon={() => setPostIconColor(darkModePostIcon)}
             />
-          )} */}
+          )}
         </div>
       </div>
     </div>

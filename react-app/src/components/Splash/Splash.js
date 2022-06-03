@@ -94,7 +94,7 @@ function Splash() {
                           }}
                           to={`/users/${post.user.id}`}
                         >
-                          {post.user.username}
+                          {post.user.username}{post.user.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}
                         </NavLink>
                         {post.caption}
                       </div>
