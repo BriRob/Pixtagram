@@ -25,13 +25,13 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 # Get All Comments, for specific post, need postId from frontend, filter?
-@comment_routes.route('/<int:postId>/')
-@login_required
+@comment_routes.route('/<int:postId>/', methods=['GET'])
+# @login_required
 def get_post_comments(postId):
-    comments = Comment.query.filter(Comment.post_id == postId).all()
+    comments = Comment.query.filter(Comment.post_id == postId).order_by(Comment.id.asc()).all()
     # print("\n\n", comments)
     # print("one comment", comments[0])
-    return {"comments": [comment.to_dict() for comment in comments]}
+    return {"comments_list": [comment.to_dict() for comment in comments]}
 
 # Create a comment for one post, will need postId
 @comment_routes.route('/<int:postId>/new', methods=['POST'])
