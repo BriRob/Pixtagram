@@ -79,7 +79,7 @@ function User() {
 
           <div id="user-info-block">
             <div id="username-and-edit-button">
-              <p id="username-font">{`${user?.username}`}{verified?<CheckMark />:null}</p>
+              <p id="username-font">{`${user?.username}`}{verified?<CheckMark/>:null}</p>
               {sessionUser.id == userId ? (
                 <button id="profile-edit-button" onClick={(e) => toEdit()}>
                   Edit Profile
