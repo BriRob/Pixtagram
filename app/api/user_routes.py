@@ -110,3 +110,12 @@ def delete_user(id):
     db.session.commit()
     logout()
     return user.to_dict()
+
+
+#Get all users for Search feature
+
+@user_routes.route('/all', methods=['GET'])
+@login_required
+def get_all_users():
+    users = User.query.all()
+    return {'users': [user.to_dict() for user in users]}

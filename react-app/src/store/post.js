@@ -1,7 +1,7 @@
 const GET_ALL_POSTS = "post/GET_ALL_POSTS";
 const GET_ONE_POST = "post/GET_ONE_POST";
-const CREATE_POST = "post/CREATE_POST";
-const EDIT_POST = "user/EDIT_POST";
+// const CREATE_POST = "post/CREATE_POST";
+// const EDIT_POST = "user/EDIT_POST";
 const DELETE_POST = "post/DELETE_POST"
 
 const getAllPosts = (posts) => ({
@@ -14,15 +14,15 @@ const getOnePost = (post) => ({
   payload: post,
 });
 
-const createPost = (post) => ({
-  type: CREATE_POST,
-  payload: post,
-});
+// const createPost = (post) => ({
+//   type: CREATE_POST,
+//   payload: post,
+// });
 
-const editPost = (post) => ({
-  type: EDIT_POST,
-  payload: post,
-});
+// const editPost = (post) => ({
+//   type: EDIT_POST,
+//   payload: post,
+// });
 
 const deletePost = (post) => ({
   type: DELETE_POST,

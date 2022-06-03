@@ -28,7 +28,7 @@ def validation_errors_to_error_messages(validation_errors):
 @post_routes.route('/')
 @login_required
 def get_all_posts():
-    posts = Post.query.order_by(Post.created_at.desc()).all()
+    posts = Post.query.order_by(Post.created_at.asc()).all()
     returnedPosts = {'posts': [post.to_dict() for post in posts]}
     print('THIS IS THE RETURNED POSTS \n\n', returnedPosts)
     return {'posts': [post.to_dict() for post in posts]}
@@ -133,4 +133,3 @@ def delete_post(post_id):
     # get_one_post(post_id)
     return post.to_dict()
     # return
-

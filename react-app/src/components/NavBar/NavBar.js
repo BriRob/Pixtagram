@@ -1,30 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
-import LogoutButton from "../auth/LogoutButton";
-import CreatePost from "../PostPages/CreatePost";
+// import LogoutButton from "../auth/LogoutButton";
+// import CreatePost from "../PostPages/CreatePost";
 import "./index.css";
 import {
-  house,
-  postIcon,
-  exploreIcon,
-  heartHomeIcon,
   darkModeHomeIcon,
   darkModeFilledInHomeIcon,
   darkModeExploreIcon,
   darkModeFilledInExploreIcon,
-  filledPostIcon,
-  filledExploreIcon,
-  filledHeartHomeIcon,
   darkModeFilledInPostIcon,
   darkModeHeartHomeIcon,
   darkModePostIcon,
   darkModeFilledInHeartHomeIcon,
-  darkModeSearchIcon,
 } from "./Navicons";
 import ProfileButton from "./ProfileButton";
 import { getUserThunk } from "../../store/user";
-import image from "./svgexport-17.png";
+
+import image from './svgexport-17.png'
+import SearchModal from "./SearchModal";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -35,7 +29,51 @@ const NavBar = () => {
     (state) => state?.userReducer?.user?.profile_pic_url
   );
 
+
   const [showModal, setShowModal] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchInput, setSearchInput] = useState('')
+  const [houseColor, setHouseColor] = useState(darkModeHomeIcon);
+  const [postIconColor, setPostIconColor] = useState(darkModePostIcon);
+  const [exploreIconColor, setExploreIconColor] = useState(darkModeExploreIcon);
+  const [heartIconColor, setHeartIconColor] = useState(darkModeHeartHomeIcon);
+  // console.log("location pathname \n\n", pathname)
+  console.log(showSearch, 'This is search status')
+  function menuToggle(e, showModal) {
+    e.preventDefault()
+    e.stopPropagation()
+    if (showModal) {
+      setShowModal(false)
+    } else {
+      setShowModal(true)
+    }
+  }
+
+  function inputReader(e, val){
+    if (e.nativeEvent.data !== null){
+      let input = val + e.nativeEvent.data
+      setSearchInput(input)
+    }
+    console.log(searchInput)
+  }
+
+  function searchToggle(e, showSearch){
+    e.preventDefault()
+    e.stopPropagation()
+    if(showSearch){
+      console.log('am i here 1')
+      setShowSearch(false)
+    }else{
+      console.log('am i here 2')
+      setShowModal(true)
+    }
+  }
+
+  const openSearch = () => {
+    if (showSearch) return;
+    setShowSearch(true);
+  }
+
 
   const openModal = () => {
     if (showModal) return;
@@ -44,36 +82,18 @@ const NavBar = () => {
 
   useEffect(() => {
     dispatch(getUserThunk(user.id));
-    // if (!showModal) return;
-
-    // const closeModal = () => {
-    //   setShowModal(false);
-    // };
-    // const modal = document.getElementsByClassName('createPostModal')[0]
-    // // document.addEventListener("click", closeModal);
-    // modal.addEventListener('click', (e) => {
-    //   e.target.('showModal')
-    // })
     if (pathname !== "/") {
-      // setHouseColor(darkModeHomeIcon);
-      removeIconColor();
+      removeIconColor({
     }
+  }, [dispatch, searchInput]);
 
-    // return () => document.removeEventListener("click", showModal);
-  }, [dispatch]);
-  // const userName = user.full_name.split(' ').join('')
-  // console.log(userName)
-  // console.log(user.id)
 
   //regular font link https://fontmeme.com/permalink/220528/c175d4b5354eae87b98b5233d328cfd5.png
 
-  // const [searchField, setSearchField] = useState(`Search`)
-  const [houseColor, setHouseColor] = useState(darkModeHomeIcon);
-  const [postIconColor, setPostIconColor] = useState(darkModePostIcon);
-  const [exploreIconColor, setExploreIconColor] = useState(darkModeExploreIcon);
-  const [heartIconColor, setHeartIconColor] = useState(darkModeHeartHomeIcon);
+
 
   const [valueState, setValueState] = useState("");
+
 
   const logo = (
     <img
@@ -112,6 +132,7 @@ const NavBar = () => {
     // return (
     //   <CreatePost boolean={true}/>
     // )
+
   };
 
   const fillInExplore = (e) => {
@@ -126,15 +147,27 @@ const NavBar = () => {
     setHeartIconColor(darkModeFilledInHeartHomeIcon);
   };
 
-  const printThing = (e) => {
-    console.log(e.nativeEvent.data);
-  };
+// const closeSearch = (e) => {
+//   setShowSearch(false)
+// }
+
 
   const inputReader = (e) => {
     e.preventDefault();
     e.stopPropagation();
     console.log(e.nativeEvent.data);
   };
+
+
+  function toggleSearch(e){
+    if(!showSearch){
+      setShowSearch(true)
+    } else {
+      setShowSearch(false)
+    }
+    return;
+  }
+
 
   return (
     <div className="nav-bar">
@@ -147,16 +180,25 @@ const NavBar = () => {
           </div>
           <div className="search-parent-container">
             <div className="search-bar">
-              <form
-                className="search-form"
-                style={{ background: `url(${image}) no-repeat 13px` }}
+
+              <form className="search-form"
+              style={{'background': `url(${image}) no-repeat 13px` }}
+              // onClick={e => searchToggle(e, showSearch)}
+
               >
                 <input
                   className="search-input"
                   onChange={(e) => inputReader(e)}
                   placeholder="Search..."
-                  type="search"
-                ></input>
+
+                  type='search'
+                  id="super-cool-search-box"
+                  onClick={(e) => toggleSearch(e)}
+                  // onBlur={(e)=> closeSearch(e)}
+                >
+                </input>
+                {showSearch && (<SearchModal user={user} profile={profile}/>)}
+
               </form>
             </div>
           </div>
@@ -195,16 +237,16 @@ const NavBar = () => {
           </div>
         </div>
         <div>
-          {showModal && (
+          {/* {showModal && (
             <CreatePost
               hideModal={() => setShowModal(false)}
               changePostIcon={() => setPostIconColor(darkModePostIcon)}
             />
-          )}
+          )} */}
         </div>
       </div>
     </div>
   );
 };
 
-export default NavBar;
+export default NavBar
