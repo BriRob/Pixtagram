@@ -8,7 +8,7 @@ function Comments({ postId }) {
   const dispatch = useDispatch();
   // get comments from state, useSelector
   const comments = useSelector((state) => state?.comments?.comments_list);
-  console.log("comments from COMMENTS.JS \n\n", comments);
+  // console.log("comments from COMMENTS.JS \n\n", comments);
 
   const [isLoaded, setIsLoaded] = useState(false);
 

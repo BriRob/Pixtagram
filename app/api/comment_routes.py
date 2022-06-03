@@ -6,6 +6,7 @@ from app.api.auth_routes import logout
 
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, logout_user
+from app.forms.create_comment_form import CreateCommentForm
 from app.models import User, Post, db, Comment
 # from app.awsS3 import upload_file_to_s3, allowed_file, get_unique_filename
 from app.helpers import dates_converter, post_e
@@ -34,14 +35,37 @@ def get_post_comments(postId):
     return {"comments_list": [comment.to_dict() for comment in comments]}
 
 # Create a comment for one post, will need postId
-@comment_routes.route('/<int:postId>/new', methods=['POST'])
-@login_required
-def create_comment(postId):
-    pass
+@comment_routes.route('/<int:postId>/new', methods=['GET','POST'])
+# @login_required
+def create_comment(userId, postId):
+    print('HELLO FROM THE CREATE COMMENT ROUTE \n\n')
+
+    form = CreateCommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        # if 'text' in request.files:
+
+        new_comment = Comment(
+            user_id=userId,
+            post_id=postId,
+            text=form.data["text"],
+        )
+
+        db.session.add(new_comment)
+        db.session.commit()
+        return new_comment.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 
 # Delete comment, get one comment then delete it
 @comment_routes.route('/<int:commentId>/delete', methods=['DELETE'])
 @login_required
-def delete_comment(commentId):
-    pass
+def delete_comment(comment_id):
+    comment = Comment.query.get(comment_id)
+    db.session.delete(comment)
+    db.session.commit()
+    # After deleting get all the comments? - ms
+    get_post_comments()
+    return comment.to_dict()
