@@ -14,15 +14,23 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
   const [imgUrl, setImgUrl] = useState("");
   const [caption, setCaption] = useState("");
   const [errors, setErrors] = useState([]);
+  const [showUpload, setShowUpload] = useState(true);
+  const [previewUrl, setPreviewUrl] = useState("");
 
   const closeModal = () => {
     hideModal();
     changePostIcon();
   };
 
-  const updateImage = (e) => {
+  const updateImage = async (e) => {
     const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function (e) {
+      setPreviewUrl(reader.result);
+    };
     setImgUrl(file);
+    setShowUpload(false);
   };
 
   const handleSubmit = async (e) => {
@@ -36,7 +44,7 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
     } else {
       closeModal();
       window.location.reload();
-      history.push('/')
+      history.push("/");
     }
   };
 
@@ -44,20 +52,30 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
     <div>
       <div className="createPostModal">
         <div className="inner">
+          <div className="topCreatePostModal">
+            <p>Create new post</p>
+          </div>
           <form onSubmit={handleSubmit} className="createPostForm">
             <div className="left">
-              {postImageModalIcon}
-              Upload photos here
-              <label for="file-upload" className="custom-file-upload">
-                Select From Computer
-                <input
-                  id="file-upload"
-                  type="file"
-                  name="img_url"
-                  onChange={updateImage}
-                  accept="image/*"
-                ></input>
-              </label>
+              {showUpload && (
+                <>
+                  {postImageModalIcon}
+                  Upload photos here
+                  <label for="file-upload" className="custom-file-upload">
+                    Select From Computer
+                    <input
+                      id="file-upload"
+                      type="file"
+                      name="img_url"
+                      onChange={updateImage}
+                      accept="image/*"
+                    ></input>
+                  </label>
+                </>
+              )}
+              {!showUpload && (
+                <img src={previewUrl} className="previewImage"></img>
+              )}
             </div>
             <div>
               {errors.map((error, ind) => (

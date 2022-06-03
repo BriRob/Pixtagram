@@ -15,9 +15,10 @@
 
 .inner {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid grey;
+    border: 1px solid rgba(128, 128, 128, 0.308);
     border-radius: 5px;
     background-color: rgb(38, 38, 38);
     height: 700px;
@@ -30,6 +31,17 @@
 
 .createPostForm {
     display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.topCreatePostModal {
+    width: 100%;
+    height: 6%;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.357);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .outer {
@@ -44,8 +56,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 500px;
+    height: 100%;
     width: 500px;
+    border-right: 1px solid rgba(128, 128, 128, 0.295);
 }
 
 input[type="file"] {
@@ -65,4 +78,13 @@ input[type="file"] {
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.previewImage {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    display: flex;
+    background-color: black;
+    border-bottom-left-radius: 5px;
 }
