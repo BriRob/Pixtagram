@@ -8,6 +8,7 @@ function Comments({ postId }) {
   const dispatch = useDispatch();
   // get comments from state, useSelector
   const comments = useSelector((state) => state?.comments?.comments_list);
+  const currUser = useSelector((state) => state?.user?.id)
   console.log("comments from COMMENTS.JS \n\n", comments);
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -27,8 +28,10 @@ function Comments({ postId }) {
         <div>comment</div> */}
           {comments.map((comment, idx) => (
             <div key={idx}>
-              <div>{comment.user.username}</div>
+              <a href={`/users/${comment.user.id}`}>{comment.user.username}</a>
               <div>{comment.text}</div>
+
+              <div>...</div>
             </div>
           ))}
         </div>
