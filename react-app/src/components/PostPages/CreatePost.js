@@ -52,47 +52,60 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
     <div>
       <div className="createPostModal">
         <div className="inner">
-          <div className="topCreatePostModal">
-            <p>Create new post</p>
-          </div>
           <form onSubmit={handleSubmit} className="createPostForm">
-            <div className="left">
-              {showUpload && (
-                <>
-                  {postImageModalIcon}
-                  Upload photos here
-                  <label for="file-upload" className="custom-file-upload">
-                    Select From Computer
-                    <input
-                      id="file-upload"
-                      type="file"
-                      name="img_url"
-                      onChange={updateImage}
-                      accept="image/*"
-                    ></input>
-                  </label>
-                </>
-              )}
-              {!showUpload && (
-                <img src={previewUrl} className="previewImage"></img>
-              )}
+            <div className="topCreatePostModal">
+              <p>Create new post</p>
+              <div className="shareButtonDiv">
+                <button className="shareButton">Share</button>
+              </div>
             </div>
-            <div>
-              {errors.map((error, ind) => (
-                <div id="errors" key={ind}>
-                  {error}
+            <div className="lowerpartModal">
+              <div className="left">
+                {showUpload && (
+                  <>
+                    {postImageModalIcon}
+                    Upload photos here
+                    <label for="file-upload" className="custom-file-upload">
+                      Select From Computer
+                      <input
+                        id="file-upload"
+                        type="file"
+                        name="img_url"
+                        onChange={updateImage}
+                        accept="image/*"
+                      ></input>
+                    </label>
+                  </>
+                )}
+                {!showUpload && (
+                  <img src={previewUrl} className="previewImage"></img>
+                )}
+              </div>
+              <div>
+                {errors.map((error, ind) => (
+                  <div id="errors" key={ind}>
+                    {error}
+                  </div>
+                ))}
+              </div>
+              <div className="right">
+                <div className="userInfoNewPost">
+                  <img
+                    className="userInfoNewPostImg"
+                    src={user.profile_pic_url}
+                  />
+                  {user.username}
                 </div>
-              ))}
+                <label>
+                  <textarea
+                    name="caption"
+                    onChange={(e) => setCaption(e.target.value)}
+                    value={caption}
+                    placeholder='Write your caption...'
+                  ></textarea>
+                </label>
+              </div>
             </div>
-            <label>
-              Caption
-              <textarea
-                name="caption"
-                onChange={(e) => setCaption(e.target.value)}
-                value={caption}
-              ></textarea>
-            </label>
-            <button>Share</button>
           </form>
         </div>
         <div className="outer">
