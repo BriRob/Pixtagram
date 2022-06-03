@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCommentsThunk } from "../../store/comment";
 import LoadingSpinner from "../Spinner/Spinner";
 import "./comments.css";
-
+import checkmark from '../CheckMark/checkmark.png'
 function Comments({ postId }) {
   const dispatch = useDispatch();
   // get comments from state, useSelector
@@ -28,7 +28,7 @@ function Comments({ postId }) {
         <div>comment</div> */}
           {comments.map((comment, idx) => (
             <div key={idx}>
-              <a href={`/users/${comment.user.id}`}>{comment.user.username}</a>
+              <a href={`/users/${comment.user.id}`}>{comment.user.username}{comment.user.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}</a>
               <div>{comment.text}</div>
 
               <div>...</div>
