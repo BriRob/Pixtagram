@@ -14,6 +14,7 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
   const [caption, setCaption] = useState("");
   const [errors, setErrors] = useState([]);
 
+
   const closeModal = () => {
     hideModal();
     changePostIcon();
