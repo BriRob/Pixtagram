@@ -114,7 +114,7 @@ function Post() {
                   className="user-pic"
                   src={post?.user.profile_pic_url}
                 ></img>
-                <span className="user-name">{`${post?.user.username}`}{post.user.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}</span>
+                <span className="user-name">{`${post?.user?.username}`}{post?.user?.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}</span>
                 <div className="postOptions">
                   <span onClick={openPostOptions}>{dotDotDotIcon}</span>
                 </div>
@@ -125,7 +125,7 @@ function Post() {
                     className="user-pic"
                     src={post?.user.profile_pic_url}
                   ></img>
-                  <span className="user-name">{post?.user.username}{post.user.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}</span>
+                  <span className="user-name">{post?.user?.username}{post?.user?.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}</span>
                   <p className="caption">{post?.caption}</p>
                   <div className="days-since-caption">
                     <span>{post?.days_since}</span>
