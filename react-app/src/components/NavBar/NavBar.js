@@ -24,11 +24,12 @@ import {
 } from "./Navicons";
 import ProfileButton from "./ProfileButton";
 import { getUserThunk } from "../../store/user";
+import image from './svgexport-17.png'
 
 const NavBar = () => {
   const dispatch = useDispatch();
   // const location = useLocation()
-  const {pathname} = useLocation()
+  const { pathname } = useLocation()
   const user = useSelector((state) => state.session.user);
   const profile = useSelector(
     (state) => state?.userReducer?.user?.profile_pic_url
@@ -38,12 +39,12 @@ const NavBar = () => {
   console.log("location pathname \n\n", pathname)
 
 
-  function menuToggle(e, showModal){
+  function menuToggle(e, showModal) {
     e.preventDefault()
     e.stopPropagation()
-    if(showModal){
+    if (showModal) {
       setShowModal(false)
-    }else{
+    } else {
       setShowModal(true)
     }
   }
@@ -144,75 +145,84 @@ const NavBar = () => {
     console.log(e.nativeEvent.data);
   };
 
+  const inputReader = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    console.log(e.nativeEvent.data)
+  }
+
   return (
-
     <div className="nav-bar">
-      <div id="nav-bar-container">
-        <div>
-          <NavLink to="/" exact={true}>
-            {logo}
-          </NavLink>
-        </div>
-        <div className="_aawf_aawg">
-          <input
-            aria-label="Search input"
-            autoCapitalize="none"
-            className="search-bar"
-            // color={searchField === 'Search' ? "grey" : "white"}
-
-            value={""}
-            placeholder="Search"
-            type="text"
-            readOnly
-          />
-          <div className="_aaw8" role="button" tabIndex="0">
-            <div className="_aaw9">{darkModeSearchIcon}</div>
-            <span className="search-text"></span>
+      <div className="child-nav-bar-container">
+        <div id="nav-bar-container">
+          <div className="logo-container">
+            <NavLink to="/" exact={true}>
+              {logo}
+            </NavLink>
+          </div>
+          <div className="search-parent-container">
+            <div className="search-bar">
+              <form className="search-form"
+              style={{'background': `url(${image}) no-repeat 13px` }}
+              >
+                <input
+                  className="search-input"
+                  onChange={e => inputReader(e)}
+                  placeholder="Search..."
+                  type='search'
+                >
+                </input>
+              </form>
+            </div>
+          </div>
+          <div className="icons">
+            <NavLink
+              className='icon-links'
+              to="/"
+              exact={true}
+              id="house-icon-id"
+              onClick={(e) => fillInHouse(e)}
+            >
+              {houseColor}
+            </NavLink>
+            <NavLink
+              className='icon-links'
+              to="/"
+              exact={true}
+              id="post-icon-id"
+              onClick={(e) => fillInPost(e)}
+            >
+              {postIconColor}
+            </NavLink>
+            <NavLink
+              className='icon-links'
+              to="/"
+              exact={true}
+              id="explore-icon-id"
+              onClick={(e) => fillInExplore(e)}
+            >
+              {exploreIconColor}
+            </NavLink>
+            <NavLink
+              className='icon-links'
+              to="/"
+              exact={true}
+              id="heart-icon-nav-id"
+              onClick={(e) => fillInNavHeart(e)}
+            >
+              {heartIconColor}
+            </NavLink>
+            <ProfileButton user={user} profile={profile} />
           </div>
         </div>
-        <div className="icons">
-          <NavLink
-            to="/"
-            exact={true}
-            id="house-icon-id"
-            onClick={(e) => fillInHouse(e)}
-          >
-            {houseColor}
-          </NavLink>
-          <NavLink
-            to="/"
-            exact={true}
-            id="post-icon-id"
-            onClick={(e) => fillInPost(e)}
-          >
-            {postIconColor}
-          </NavLink>
-          <NavLink
-            to="/"
-            exact={true}
-            id="explore-icon-id"
-            onClick={(e) => fillInExplore(e)}
-          >
-            {exploreIconColor}
-          </NavLink>
-          <NavLink
-            to="/"
-            exact={true}
-            id="heart-icon-nav-id"
-            onClick={(e) => fillInNavHeart(e)}
-          >
-            {heartIconColor}
-          </NavLink>
-          <ProfileButton user={user} profile={profile} />
+        <div>
+          {showModal && (
+            <CreatePost
+              hideModal={() => setShowModal(false)}
+              changePostIcon={() => setPostIconColor(darkModePostIcon)}
+            />
+          )}
         </div>
-      </div>
-      <div>
-        {showModal && (
-          <CreatePost
-            hideModal={() => setShowModal(false)}
-            changePostIcon={() => setPostIconColor(darkModePostIcon)}
-          />
-        )}
       </div>
     </div>
   );
