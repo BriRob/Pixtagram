@@ -5,23 +5,18 @@ import LoadingSpinner from "../Spinner/Spinner";
 import { deleteCommentThunk } from "../../store/comment";
 import "./comments.css";
 import checkmark from '../CheckMark/checkmark.png'
+import { closeButton } from "../NavBar/Navicons";
+
+
 function Comments({ postId }) {
   const dispatch = useDispatch();
-  // get comments from state, useSelector
   const comments = useSelector((state) => state?.comments?.comments_list);
   const currUser = useSelector((state) => state?.session?.user?.id)
-  console.log("comments from COMMENTS.JS \n\n", comments);
-
-  console.log('This user is logged in', currUser)
-
-  console.log("How to get to comment id---> ***", comments[0]?.id)
 
   const [isLoaded, setIsLoaded] = useState(false)
 
   const deleteComment = async (e, commentId) => {
     console.log("What is the thunk getting?", commentId)
-    // // console.log(commentId)
-    // console.log('current comment++++++', comments?.comment?.id)
     await dispatch(deleteCommentThunk(commentId)).then(() => dispatch(getCommentsThunk(postId)))
   }
 
@@ -34,25 +29,33 @@ function Comments({ postId }) {
 
   return (
     <>
-      {comments ? (
-        <div className="comments-components">
-          {/* <div>HELLO?!?!?!?!?</div>
-        <div>comment</div> */}
-          {comments.map((comment, idx) => (
-            <div key={idx}>
-              <a href={`/users/${comment.user.id}`}>{comment.user.username}{comment.user.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}</a>
-              <div>{comment.text}</div>
-              {currUser == comment.user.id && (
-                <button
-                  id={`delete`}
-                  onClick={(e) => deleteComment(e, comment?.id)}
-                >x</button>)}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <LoadingSpinner />
-      )}
+      <div className='page-container'>
+        {comments ? (
+          <div className="comments-components">
+            {comments.map((comment, idx) => (
+              <>
+                  <div className='comments-container' key={idx}>
+                    <div id='profile-pic-holder'>
+                      <img id='profile-pic' src={comment.user.profile_pic_url}></img>
+                    </div>
+                    <div className="username-comment-container">
+                      <div id='comment'><a id='username' href={`/users/${comment.user.id}`}>{comment.user.username}{comment.user.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}</a> {comment.text}</div>
+                    </div>
+                    <div>
+                      {currUser == comment.user.id && (
+                        <div
+                          className='delete'
+                          onClick={(e) => deleteComment(e, comment?.id)}
+                        >{closeButton}</div>)}
+                    </div>
+                  </div>
+              </>
+            ))}
+          </div>
+        ) : (
+          <LoadingSpinner />
+        )}
+      </div>
     </>
   );
 }
