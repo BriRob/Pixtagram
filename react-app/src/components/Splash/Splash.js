@@ -31,7 +31,7 @@ function Splash() {
   }
   return (
     <>
-      <div className="home-page-body">
+      {/* <div className="home-page-body"> */}
         <div className="stories-container"></div>
         <div className="feed">
           {posts ? (
@@ -107,7 +107,7 @@ function Splash() {
           )}
         </div>
         {/* <button onClick={(e) => goToProfile(e)}>Go to profile</button> */}
-      </div>
+      {/* </div> */}
     </>
   );
 }
