@@ -42,11 +42,11 @@ function Comments({ postId }) {
             <div key={idx}>
               <a href={`/users/${comment.user.id}`}>{comment.user.username}{comment.user.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}</a>
               <div>{comment.text}</div>
-              {currUser == comment.user.id ?
+              {currUser == comment.user.id && (
                 <button
                   id={`delete`}
                   onClick={(e) => deleteComment(e, comment?.id)}
-                >x</button> : <p>Loading..</p>}
+                >x</button>)}
             </div>
           ))}
         </div>
