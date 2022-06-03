@@ -32,6 +32,8 @@ const ProfileButton = () => {
     dispatch(sessionActions.authenticate())
     dispatch(getUserThunk(user.id))
 
+
+
     const closeMenu = () => {
       setShowMenu(false);
     };
@@ -40,6 +42,7 @@ const ProfileButton = () => {
 
     return () => document.removeEventListener("click", closeMenu);
   }, [dispatch]);
+
 
   const logout = (e) => {
     e.preventDefault();
@@ -59,10 +62,13 @@ const ProfileButton = () => {
           <NavLink to={`/users/${user.id}/edit`}>Settings</NavLink>
           <NavLink to={`/aboutus`} className='aboutus'>About Us</NavLink>
           <button onClick={logout}>Log Out</button>
+
         </div>
       )}
     </div>
   );
 };
 
+
 export default ProfileButton;
+

@@ -8,6 +8,7 @@ import { dotDotDotIcon } from "./SplashIcons";
 import { getAllPostsThunk } from "../../store/post";
 import LoadingSpinner from "../Spinner/Spinner";
 import { NavLink } from "react-router-dom";
+
 function Splash() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -18,7 +19,6 @@ function Splash() {
   useEffect(() => {
     dispatch(getUserThunk(id)).then(() => dispatch(getAllPostsThunk()));
   }, [dispatch]);
-
 
   const sendToProfile = (e, id) => {
     e.stopPropagation();
@@ -31,36 +31,37 @@ function Splash() {
   }
   return (
     <>
-      <div className="home-page-body">
+      {/* <div className="home-page-body"> */}
         <div className="stories-container"></div>
         <div className="feed">
           {posts ? (
-            posts?.slice(0).reverse().map((post, idx) => (
+            posts?.map((post, idx) => (
               <div key={idx}>
                 <div className="post-card-feed">
                   <div className="user-profile-info-feed">
-                    <NavLink to={`/users/${post.user.id}`}>
-                      <img
-                        src={post.user.profile_pic_url}
+                    <div className="user-profile-info">
+                      <NavLink to={`/users/${post.user.id}`}>
+                        <img
+                          src={post.user.profile_pic_url}
+                          style={{
+                            height: "40px",
+                            width: "40px",
+                            borderRadius: "50px",
+                          }}
+                          className="user-profile-pic-feed"
+                        ></img>
+                      </NavLink>
+                      <NavLink
                         style={{
-                          height: "40px",
-                          width: "40px",
-                          borderRadius: "50px",
+                          color: "white",
+                          fontWeight: "bold",
+                          textDecoration: "none",
                         }}
-                        className="user-profile-pic-feed"
-                      ></img>
-                    </NavLink>
-                    <NavLink
-                      style={{
-                        color: "white",
-                        fontWeight: "bold",
-                        textDecoration: "none",
-                      }}
-                      to={`/users/${post.user.id}`}
-                    >
-                      {post.user.username}
-                    </NavLink>
-
+                        to={`/users/${post.user.id}`}
+                      >
+                        {post.user.username}
+                      </NavLink>
+                    </div>
                     <div className="dotdotdot">{dotDotDotIcon}</div>
                   </div>
                   <div className="feed-post-image">
@@ -106,7 +107,7 @@ function Splash() {
           )}
         </div>
         {/* <button onClick={(e) => goToProfile(e)}>Go to profile</button> */}
-      </div>
+      {/* </div> */}
     </>
   );
 }

@@ -19,15 +19,6 @@
   padding: 40px;
 }
 
-.user-profile-info {
-  display: flex;
-  justify-content: center;
-  background-color: rgb(0, 0, 0);
-  width: 96%;
-  position: relative;
-  left: 2%;
-}
-
 .dotDotDot {
   display: flex;
   justify-content: flex-end;
@@ -49,14 +40,21 @@
   border: 1px solid rgba(128, 128, 128, 0.302);
   border-radius: 5px;
   margin-bottom: 15px;
+  background-color: black;
 }
 
 .user-profile-info-feed {
   display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid rgba(128, 128, 128, 0.129);
   padding: 10px 5px;
   align-items: center;
   width: 100%;
+}
+
+.user-profile-info {
+  display: flex;
+  align-items: center;
 }
 
 .user-profile-pic-feed {
@@ -89,9 +87,4 @@
   width: 25px;
   border-radius: 50px;
   margin: 0px 10px;
-}
-
-.dotdotdot {
-    display: flex;
-    justify-content: end;
 }

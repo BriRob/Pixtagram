@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom';
 import { signUp, login } from '../../store/session';
 import './SignUpForm.css'
+import logo from '../../images/logo.png'
 
 // ms-comment may-30
 
@@ -75,8 +76,8 @@ const SignUpForm = () => {
           <div id='s-border'>
 
               <div className='top-logo-container'>
-                <h1 id='heading'>Pixtagram</h1>
-                <p id='text'>Signup to see photos and videos from your friends.</p>
+                <img id='s-logo' src={logo}></img>
+                <p id='text'>Signup to see photos and gifs from your friends.</p>
                 <button className='s-button' onClick={demoUser}>Log in as Demo</button>
               </div>
 
@@ -143,6 +144,9 @@ const SignUpForm = () => {
                       placeholder='Confirm Password'
                     ></input>
                   </div>
+                  <div id='disclaimer'>
+                    <p className='disc-text'>By signing up, you agree to our Terms, Data Policy, and Cookies Policy.</p>
+                  </div>
                   <button type='submit' className='s-button'>Sign Up</button>
                     <div>
                       {errors.map((error, ind) => (
@@ -159,7 +163,29 @@ const SignUpForm = () => {
             <p id='s-text'>Have an account? <a id='login-link' href='/login'>Log in</a></p>
           </div>
         </div>
+
+
+        <div  id='footer'>
+          <p className='c-name'>Python</p>
+          <p className='c-name'>Javascript</p>
+          <p className='c-name'>HTML</p>
+          <p className='c-name'>CSS</p>
+          <p className='c-name'>React</p>
+          <p className='c-name'>Redux</p>
+          <p className='c-name'>Flask</p>
+          <p className='c-name'>SQLAlchemy</p>
+          <p className='c-name'>Docker</p>
         </div>
+
+        <div id='creators'>
+          <p className='c-name'>© 2022 Pixtagram</p>
+            <p className='c-name'>Agustin Zucca</p>
+            <p className='c-name'>Anthony Bronca</p>
+            <p className='c-name'>Briana Robinson</p>
+            <p className='c-name'>Maica Santos</p>
+        </div>
+      </div>
+
 
 
     </>

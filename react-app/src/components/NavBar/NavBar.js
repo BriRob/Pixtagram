@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
@@ -87,9 +88,7 @@ const NavBar = () => {
   const [heartIconColor, setHeartIconColor] = useState(darkModeHeartHomeIcon);
 
   const [valueState, setValueState] = useState("");
-
-
-
+  
   const logo = (
     <img
       src="https://fontmeme.com/permalink/220601/86a21de467499ff0a91e214d1a326624.png"
@@ -127,6 +126,7 @@ const NavBar = () => {
     // return (
     //   <CreatePost boolean={true}/>
     // )
+
   };
 
   const fillInExplore = (e) => {
@@ -144,6 +144,7 @@ const NavBar = () => {
   const printThing = (e) => {
     console.log(e.nativeEvent.data);
   };
+
 
   const inputReader = (e) => {
     e.preventDefault()

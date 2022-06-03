@@ -3,7 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 /* containers the profile pic and the user info */
 #header-container{
     display: flex;
@@ -109,6 +108,7 @@
 
 #profile-pic-left{
     border-radius: 50%;
+
     height: 150px;
     width: 150px;
     /* border: #262626 solid 1px; */
@@ -139,15 +139,30 @@
 
 #user-profile-nav-bar {
     font-size: 20px;
-    padding: 5px;
+}
+
+#postGridIcon {
+    width: 20%;
+    margin-right: 5px;
+}
+
+.postsIconLabel {
+    width: 100px;
+    display: flex;
+    margin-top: 5px;
 }
 
 #grid-logo{
+    height: 100%;
+    width: 100%;
+}
+
+/* #grid-logo{
     position: relative;
     top: 5px;
     height: 20px;
     width: 20px;
-}
+} */
 
 #gallery {
     padding-top: 30px;
@@ -171,9 +186,11 @@
 .one-post{
     height: 293px;
     width: 293px;
-    opacity: 100%;
+    object-fit: contain;
+    background-color: black;
+    /* opacity: 100%; */
 }
 
 .one-post:hover{
-    opacity: 50%;
+    opacity: .5;
 }
