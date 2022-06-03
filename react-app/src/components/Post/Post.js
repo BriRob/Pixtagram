@@ -19,9 +19,9 @@ function Post() {
 
   // need userId for creating a comment
   const currUser = useSelector((state) => state?.session?.user?.id);
-  console.log("Maica USER ID", currUser);
+  // console.log("Maica USER ID", currUser);
   const currPost = useSelector((state) => state?.posts?.post?.id);
-  console.log("This is current post id", currPost);
+  // console.log("This is current post id", currPost);
 
   const [likeStatus, setLikeStatus] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
