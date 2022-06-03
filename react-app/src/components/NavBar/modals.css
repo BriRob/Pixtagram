@@ -28,3 +28,12 @@
 /* .createPostForm > textarea {
     color: black;
 } */
+
+.search-modal-parent{
+    width: 100px;
+    height: 400px;
+}
+
+.search-field-box{
+    color: red;
+}

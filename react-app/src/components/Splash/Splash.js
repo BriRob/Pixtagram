@@ -8,7 +8,8 @@ import { dotDotDotIcon } from "./SplashIcons";
 import { getAllPostsThunk } from "../../store/post";
 import LoadingSpinner from "../Spinner/Spinner";
 import { NavLink } from "react-router-dom";
-
+import CheckMark from "../CheckMark/CheckMark";
+import checkmark from '../CheckMark/checkmark.png'
 function Splash() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -60,6 +61,8 @@ function Splash() {
                         to={`/users/${post.user.id}`}
                       >
                         {post.user.username}
+                        {post.user.verified?<img style={{'height': '15px'}}
+                        src={checkmark}></img>:null}
                       </NavLink>
                     </div>
                     <div className="dotdotdot">{dotDotDotIcon}</div>
