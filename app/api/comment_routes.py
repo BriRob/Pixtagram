@@ -35,11 +35,11 @@ def get_post_comments(postId):
     return {"comments_list": [comment.to_dict() for comment in comments]}
 
 # Create a comment for one post, will need postId
-@comment_routes.route('/<int:postId>/new', methods=['GET','POST'])
+@comment_routes.route('/<int:postId>/<int:userId>/new', methods=['GET','POST'])
 # @login_required
-def create_comment(userId, postId):
+def create_comment(postId, userId):
     print('HELLO FROM THE CREATE COMMENT ROUTE \n\n')
-
+    # print("request \n\n", request.data)
     form = CreateCommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
