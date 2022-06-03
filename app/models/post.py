@@ -33,6 +33,7 @@ class Post(db.Model):
             'user': self.user.to_dict(),
             'img_url': self.img_url,
             # 'post': [post.to_dict() for post in self.posts],
+            'post_likes': [user.to_dict() for user in self.post_likes],
             'caption': self.caption,
             'created_at': self.created_at
         }

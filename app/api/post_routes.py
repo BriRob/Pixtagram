@@ -133,3 +133,28 @@ def delete_post(post_id):
     # get_one_post(post_id)
     return post.to_dict()
     # return
+
+
+# add like to post, PUT
+@post_routes.route('/<int:post_id>/<int:user_id>', methods=['PUT'])
+@login_required
+def like_post(post_id, user_id):
+    post = Post.query.get(post_id)
+    user = User.query.get(user_id)
+
+    post.post_likes.append(user)
+    db.session.commit()
+    return post.to_dict()
+
+
+@post_routes.route('/<int:post_id>/<int:user_id>/remove', methods=['PUT'])
+@login_required
+def remove_like(post_id, user_id):
+    post = Post.query.get(post_id)
+    user = User.query.get(user_id)
+
+    # print("post likes before!!!! \n\n", post.post_likes)
+    post.post_likes.remove(user)
+    # print("post likes after!!!! \n\n", post.post_likes)
+
+    return post.to_dict()
