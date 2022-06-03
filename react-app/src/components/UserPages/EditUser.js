@@ -44,7 +44,6 @@ function EditUser() {
         .then(() => setIsLoaded(true));
     } else {
       history.push(`/users/${userId}`);
-
       return () => controller.abort();
     }
 
@@ -68,11 +67,13 @@ function EditUser() {
     } else {
       await dispatch(getAllUsersThunk());
       await dispatch(getUserThunk(userId));
+      await dispatch(authenticate())
       history.push(`/users/${userId}`);
     }
   };
 
   console.log("errors", errors);
+
 
   function backToProfile(e) {
     e.preventDefault();

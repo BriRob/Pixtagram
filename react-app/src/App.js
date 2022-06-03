@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -67,7 +68,7 @@ function App() {
             <EditPost />
             {/* <EditUser users={users}/> */}
           </ProtectedRoute>
-          <Route>
+          <Route path='/'>
             <h1>Page Not Found</h1>
           </Route>
         </Switch>

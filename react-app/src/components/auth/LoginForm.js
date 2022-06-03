@@ -6,7 +6,6 @@ import './LoginForm.css'
 import pixta from '../../images/pixta.png'
 import logo from '../../images/logo.png'
 
-
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
@@ -57,7 +56,6 @@ const LoginForm = () => {
 
           <div id='right-container'>
             <div id='l-border-div'>
-
               <div id='heading-div'>
                 <img id='s-logo' src={logo}></img>
               </div>
