@@ -83,7 +83,7 @@ const NavBar = () => {
   useEffect(() => {
     dispatch(getUserThunk(user.id));
     if (pathname !== "/") {
-      removeIconColor({
+      removeIconColor()
     }
   }, [dispatch, searchInput]);
 
@@ -152,11 +152,7 @@ const NavBar = () => {
 // }
 
 
-  const inputReader = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    console.log(e.nativeEvent.data);
-  };
+
 
 
   function toggleSearch(e){
