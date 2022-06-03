@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
-// import LogoutButton from "../auth/LogoutButton";
-// import CreatePost from "../PostPages/CreatePost";
+import LogoutButton from "../auth/LogoutButton";
+import CreatePost from "../PostPages/CreatePost";
 import "./index.css";
 import {
   darkModeHomeIcon,
@@ -19,6 +19,7 @@ import { getUserThunk } from "../../store/user";
 
 import image from './svgexport-17.png'
 import SearchModal from "./SearchModal";
+
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const NavBar = () => {
   const [heartIconColor, setHeartIconColor] = useState(darkModeHeartHomeIcon);
   // console.log("location pathname \n\n", pathname)
   console.log(showSearch, 'This is search status')
+
   function menuToggle(e, showModal) {
     e.preventDefault()
     e.stopPropagation()
@@ -50,6 +52,8 @@ const NavBar = () => {
   }
 
   function inputReader(e, val){
+    e.preventDefault()
+    e.stopPropagation()
     if (e.nativeEvent.data !== null){
       let input = val + e.nativeEvent.data
       setSearchInput(input)
@@ -233,12 +237,12 @@ const NavBar = () => {
           </div>
         </div>
         <div>
-          {/* {showModal && (
+          {showModal && (
             <CreatePost
               hideModal={() => setShowModal(false)}
               changePostIcon={() => setPostIconColor(darkModePostIcon)}
             />
-          )} */}
+          )}
         </div>
       </div>
     </div>

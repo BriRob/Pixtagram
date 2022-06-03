@@ -1,10 +1,10 @@
-from app.models import db, User
+from app.models import db, User, Post
 
 
 # Adds a demo user, you can add other users here if you want
 
 
-def seed_users():
+def seeder():
     demo = User(
         full_name='Pixta Demo', username='Demo', email='demo@aa.io', password='password')
     marnie = User(
@@ -26,7 +26,6 @@ def seed_users():
     chere = User(
         profile_pic_url='', full_name='Chere-Anne Luscina', username='coco_cherry', email='chere@chere.io', bio="making my way downtown walking fast faces past and I'm home bound", verified=False, password='CaptainAmerica')
 
-    
 
     db.session.add(demo)
     db.session.add(marnie)
@@ -39,6 +38,25 @@ def seed_users():
     db.session.add(stee)
     db.session.add(chere)
 
+    post_1 = Post(
+        user_id=1, img_url='https://pixtagrambucket.s3.amazonaws.com/Chris_chuckie.png', caption='Hello?!?!'
+    )
+    post_2 = Post(
+        user_id=1, img_url='https://pixtagrambucket.s3.amazonaws.com/Meme-dev.png', caption='test'
+    )
+    post_3 = Post(
+        user_id=2, img_url='https://pixtagrambucket.s3.amazonaws.com/meme_anotha.png', caption='test',
+    )
+
+
+    db.session.add(post_1)
+    db.session.add(post_2)
+    db.session.add(post_3)
+
+    demo.user_likes.extend([post_1, post_2, post_3])
+    marnie.user_likes.extend([post_2, post_3])
+    beyonce.user_likes.extend([post_3])
+
     db.session.commit()
 
 
@@ -47,6 +65,7 @@ def seed_users():
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
-def undo_users():
+def undo_seeder():
+    db.session.execute('TRUNCATE posts RESTART IDENTITY CASCADE;')
     db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
     db.session.commit()
