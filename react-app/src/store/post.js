@@ -152,7 +152,7 @@ export default function posts(state = initialState, action) {
       return newState;
     case DELETE_POST:
       newState = {...state}
-      console.log('HELLO FROM DELETE REDUCER')
+      // console.log('HELLO FROM DELETE REDUCER')
       delete newState.post
       return newState
     default:
