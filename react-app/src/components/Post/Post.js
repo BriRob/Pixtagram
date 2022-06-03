@@ -8,6 +8,8 @@ import "./post.css";
 import { dotDotDotIcon } from "../Splash/SplashIcons";
 import LoadingSpinner from "../Spinner/Spinner";
 import PostModal from "./PostModal";
+import Comments from "../Comments/Comments";
+import { getCommentsThunk } from "../../store/comment";
 
 function Post() {
   const dispatch = useDispatch();
@@ -23,9 +25,11 @@ function Post() {
   // const [date, setDate] = useState("");
   const userId = post?.user_id
     // console.log('We need the user id', post?.user_id)
-  
+
   useEffect(() => {
-    dispatch(getOnePostThunk(postId)).then(() => setIsLoaded(true));
+    dispatch(getOnePostThunk(postId))
+    .then(() => dispatch(getCommentsThunk(postId)))
+      .then(() => setIsLoaded(true));
   }, [isLoaded]);
 
   // if(isLoaded){
@@ -96,6 +100,7 @@ function Post() {
                 </div>
                 <div className="comment-section">
                   <p>Here go the comments</p>
+                  <Comments postId={postId}/>
                 </div>
               </div>
               <div className="bottom-right">
