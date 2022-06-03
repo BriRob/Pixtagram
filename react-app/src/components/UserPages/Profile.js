@@ -7,6 +7,7 @@ import { getUserThunk } from "../../store/user";
 import LoadingSpinner from "../Spinner/Spinner";
 import "./Profile.css";
 import { postGridIcon } from "./profileIcons";
+import CheckMark from "../CheckMark/CheckMark";
 
 function User() {
   const dispatch = useDispatch();
@@ -17,16 +18,7 @@ function User() {
   const posts = useSelector((state) => state?.posts?.allPosts?.posts);
   const [isLoaded, setIsLoaded] = useState(false);
   const { userId } = useParams();
-
-  // console.log('USERID --->', userId)
-  // console.log("This is ueser from profile.js", user)
-  // console.log('This is USER ID', user?.id)
-
-  // console.log(posts, "this is postsArr")
-
-  // const posts = postsReg?.reverse()
-  // console.log(posts)
-
+  const verified = user?.verified
   function postCounter(posts) {
     let count = 0;
     posts?.forEach((post) => {
@@ -87,7 +79,7 @@ function User() {
 
           <div id="user-info-block">
             <div id="username-and-edit-button">
-              <p id="username-font">{user?.username}</p>
+              <p id="username-font">{`${user?.username}`}{verified?<CheckMark />:null}</p>
               {sessionUser.id == userId ? (
                 <button id="profile-edit-button" onClick={(e) => toEdit()}>
                   Edit Profile
