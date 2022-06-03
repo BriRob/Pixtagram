@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { createPostThunk } from "../../store/post";
 import * as sessionActions from "../../store/session";
 import { closeButton, postImageModalIcon } from "../NavBar/Navicons";
@@ -9,6 +9,7 @@ import "./modals.css";
 const CreatePost = ({ hideModal, changePostIcon }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   const user = useSelector((state) => state.session.user);
   const [imgUrl, setImgUrl] = useState("");
@@ -16,7 +17,6 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
   const [errors, setErrors] = useState([]);
   const [showUpload, setShowUpload] = useState(true);
   const [previewUrl, setPreviewUrl] = useState("");
-
 
   const closeModal = () => {
     hideModal();
@@ -44,8 +44,11 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
       setErrors(post.errors);
     } else {
       closeModal();
-      window.location.reload();
-      history.push("/");
+      if (pathname === "/") {
+        window.location.reload();
+      } else {
+        history.push("/");
+      }
     }
   };
 
@@ -66,7 +69,7 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
                   <>
                     {postImageModalIcon}
                     Upload photos here
-                    <label for="file-upload" className="custom-file-upload">
+                    <label htmlFor="file-upload" className="custom-file-upload">
                       Select From Computer
                       <input
                         id="file-upload"
@@ -102,7 +105,7 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
                     name="caption"
                     onChange={(e) => setCaption(e.target.value)}
                     value={caption}
-                    placeholder='Write your caption...'
+                    placeholder="Write your caption..."
                   ></textarea>
                 </label>
               </div>

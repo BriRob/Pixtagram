@@ -147,7 +147,7 @@ function EditUser() {
               {/* </div> */}
             </div>
             <div>
-              <label for="editProfileUpload" className="custom-file-upload">
+              <label htmlFor="editProfileUpload" className="custom-file-upload">
                 Edit Profile Picture
                 <input
                   type="file"
