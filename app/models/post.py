@@ -1,6 +1,7 @@
 import datetime
 from sqlalchemy import ForeignKey
 from .db import db
+from .likes import likes
 
 
 class Post(db.Model):
@@ -23,7 +24,7 @@ class Post(db.Model):
     '''
     user = db.relationship('User', back_populates = 'posts')
     comments = db.relationship('Comment', back_populates = 'posts', cascade='all, delete')
-
+    post_likes = db.relationship('User', secondary=likes, back_populates='user_likes')
 
     def to_dict(self):
         return {

@@ -20,6 +20,7 @@ import { getUserThunk } from "../../store/user";
 import image from './svgexport-17.png'
 import SearchModal from "./SearchModal";
 
+
 const NavBar = () => {
   const dispatch = useDispatch();
   // const location = useLocation()
@@ -39,6 +40,7 @@ const NavBar = () => {
   const [heartIconColor, setHeartIconColor] = useState(darkModeHeartHomeIcon);
   // console.log("location pathname \n\n", pathname)
   console.log(showSearch, 'This is search status')
+
   function menuToggle(e, showModal) {
     e.preventDefault()
     e.stopPropagation()
@@ -50,6 +52,8 @@ const NavBar = () => {
   }
 
   function inputReader(e, val){
+    e.preventDefault()
+    e.stopPropagation()
     if (e.nativeEvent.data !== null){
       let input = val + e.nativeEvent.data
       setSearchInput(input)
