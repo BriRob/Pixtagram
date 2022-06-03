@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
@@ -17,15 +16,14 @@ import {
 } from "./Navicons";
 import ProfileButton from "./ProfileButton";
 import { getUserThunk } from "../../store/user";
+
 import image from './svgexport-17.png'
 import SearchModal from "./SearchModal";
-
-
 
 const NavBar = () => {
   const dispatch = useDispatch();
   // const location = useLocation()
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
   const user = useSelector((state) => state.session.user);
   const profile = useSelector(
     (state) => state?.userReducer?.user?.profile_pic_url
@@ -76,6 +74,7 @@ const NavBar = () => {
     setShowSearch(true);
   }
 
+
   const openModal = () => {
     if (showModal) return;
     setShowModal(true);
@@ -84,13 +83,16 @@ const NavBar = () => {
   useEffect(() => {
     dispatch(getUserThunk(user.id));
     if (pathname !== "/") {
-      removeIconColor()
+      removeIconColor({
     }
   }, [dispatch, searchInput]);
 
 
   //regular font link https://fontmeme.com/permalink/220528/c175d4b5354eae87b98b5233d328cfd5.png
 
+
+
+  const [valueState, setValueState] = useState("");
 
 
   const logo = (
@@ -127,6 +129,10 @@ const NavBar = () => {
     removeIconColor();
     setPostIconColor(darkModeFilledInPostIcon);
     openModal();
+    // return (
+    //   <CreatePost boolean={true}/>
+    // )
+
   };
 
   const fillInExplore = (e) => {
@@ -146,6 +152,12 @@ const NavBar = () => {
 // }
 
 
+  const inputReader = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log(e.nativeEvent.data);
+  };
+
 
   function toggleSearch(e){
     if(!showSearch){
@@ -155,6 +167,7 @@ const NavBar = () => {
     }
     return;
   }
+
 
   return (
     <div className="nav-bar">
@@ -167,14 +180,17 @@ const NavBar = () => {
           </div>
           <div className="search-parent-container">
             <div className="search-bar">
+
               <form className="search-form"
               style={{'background': `url(${image}) no-repeat 13px` }}
               // onClick={e => searchToggle(e, showSearch)}
+
               >
                 <input
                   className="search-input"
-                  onChange={e => inputReader(e)}
+                  onChange={(e) => inputReader(e)}
                   placeholder="Search..."
+
                   type='search'
                   id="super-cool-search-box"
                   onClick={(e) => toggleSearch(e)}
@@ -182,12 +198,13 @@ const NavBar = () => {
                 >
                 </input>
                 {showSearch && (<SearchModal user={user} profile={profile}/>)}
+
               </form>
             </div>
           </div>
           <div className="icons">
             <NavLink
-              className='icon-links'
+              className="icon-links"
               to="/"
               exact={true}
               id="house-icon-id"
@@ -195,17 +212,11 @@ const NavBar = () => {
             >
               {houseColor}
             </NavLink>
-            <NavLink
-              className='icon-links'
-              to="/"
-              exact={true}
-              id="post-icon-id"
-              onClick={(e) => fillInPost(e)}
-            >
+            <div className="icon-links" onClick={(e) => fillInPost(e)}>
               {postIconColor}
-            </NavLink>
+            </div>
             <NavLink
-              className='icon-links'
+              className="icon-links"
               to="/"
               exact={true}
               id="explore-icon-id"
@@ -214,7 +225,7 @@ const NavBar = () => {
               {exploreIconColor}
             </NavLink>
             <NavLink
-              className='icon-links'
+              className="icon-links"
               to="/"
               exact={true}
               id="heart-icon-nav-id"

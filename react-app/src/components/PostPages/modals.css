@@ -1,30 +1,144 @@
 .createPostModal {
-
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0px;
-    z-index: 50;
-    background-color: rgba(0, 0, 0, 0.637);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.637);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
 }
 
 .inner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 5px solid purple;
-    border-radius: 3%;
-    background-color: rgb(38, 38, 38);
-    height: 400px;
-    width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(128, 128, 128, 0.308);
+  border-radius: 5px;
+  background-color: rgb(38, 38, 38);
+  height: 700px;
+  width: 800px;
+  animation: popup 0.3s forwards;
 }
 
-.createPostForm input, .createPostForm textarea{
-    color: black;
+@keyframes popup {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
-/* .createPostForm > textarea {
-    color: black;
-} */
+
+.createPostForm input,
+.createPostForm textarea {
+  color: black;
+}
+
+.lowerpartModal {
+    display: flex;
+    flex-direction: row;
+    height: 655px;
+}
+
+.createPostForm {
+  width: 100%;
+  height: 100%;
+}
+
+.topCreatePostModal {
+  width: 100%;
+  height: 6%;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.357);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shareButtonDiv {
+    position: absolute;
+    right: 3%;
+}
+
+.shareButton {
+    background-color: transparent;
+    border: 0;
+    color: rgb(0, 147, 242);
+    cursor: pointer;
+}
+
+.outer {
+  position: absolute;
+  top: 6%;
+  right: 2%;
+  cursor: pointer;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 500px;
+  border-right: 1px solid rgba(128, 128, 128, 0.295);
+}
+
+input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.custom-file-upload {
+  background-color: rgb(0, 147, 242);
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.previewImage {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  display: flex;
+  background-color: black;
+  border-bottom-left-radius: 5px;
+}
+.right {
+  height: 50%;
+}
+
+.userInfoNewPost {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+}
+
+.right > label > textarea {
+  background-color: transparent;
+  margin-left: 11px;
+  color: white;
+  outline: none;
+  border: 0;
+  resize: none;
+}
+
+.userInfoNewPostImg {
+  border-radius: 30px;
+  width: 25px;
+  height: 25px;
+  border: 0;
+  margin-right: 10px;
+}
