@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory} from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { createPostThunk } from "../../store/post";
 import * as sessionActions from "../../store/session";
+import { closeButton, postImageModalIcon } from "../NavBar/Navicons";
 import "./modals.css";
 
 const CreatePost = ({ hideModal, changePostIcon }) => {
@@ -28,38 +29,36 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
     e.preventDefault();
     const img_url = imgUrl;
     const form = { img_url, caption };
-    console.log("IMG AND CAPTION", img_url, caption);
     const post = await dispatch(createPostThunk(user.id, form));
 
-    console.log("POST HERE \n\n", post);
     if (post.errors) {
       setErrors(post.errors);
     } else {
-      closeModal()
-      window.location.reload()
+      closeModal();
+      window.location.reload();
+      history.push('/')
     }
   };
 
   return (
     <div>
       <div className="createPostModal">
-        <div className="outer">
-          <h1 onClick={closeModal}>X</h1>
-        </div>
         <div className="inner">
           <form onSubmit={handleSubmit} className="createPostForm">
-            <label>
-              Photo
-              <input
-                type="file"
-                name="img_url"
-                // onChange={(e) => setImgUrl(e.target.value)}
-                onChange={updateImage}
-                // value={imgUrl}
-                accept="image/*"
-                // required
-              ></input>
-            </label>
+            <div className="left">
+              {postImageModalIcon}
+              Upload photos here
+              <label for="file-upload" className="custom-file-upload">
+                Select From Computer
+                <input
+                  id="file-upload"
+                  type="file"
+                  name="img_url"
+                  onChange={updateImage}
+                  accept="image/*"
+                ></input>
+              </label>
+            </div>
             <div>
               {errors.map((error, ind) => (
                 <div id="errors" key={ind}>
@@ -77,6 +76,9 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
             </label>
             <button>Share</button>
           </form>
+        </div>
+        <div className="outer">
+          <h1 onClick={closeModal}>{closeButton}</h1>
         </div>
       </div>
     </div>

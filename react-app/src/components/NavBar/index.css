@@ -59,6 +59,7 @@
 
 .icon-links {
   padding: 10%;
+  cursor: pointer;
 }
 
 /* #profile-pic-nav-bar {
