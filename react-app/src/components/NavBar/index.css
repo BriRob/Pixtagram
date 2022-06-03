@@ -143,6 +143,7 @@ width: 30%;
   color: white;
   background-color: black;
   border-radius: 5px;
+  left: 110%;
 }
 
 .dropdownmenu > a {
@@ -206,4 +207,28 @@ width: 30%;
   justify-content: center;
   position: relative;
   top: 40%;
+}
+
+::-webkit-input-placeholder{
+  color: white;
+}
+
+:-moz-placeholder{
+  color: white
+}
+
+::-moz-placeholder{
+  color: white;
+}
+
+:-ms-input-placeholder {
+  color: white;
+}
+
+::-ms-input-placeholder {
+  color: white;
+}
+
+::placeholder{
+  color: white;
 }
