@@ -141,3 +141,34 @@
   justify-content: center;
   padding: 10px 0px;
 }
+
+
+#comment-form{
+  padding-top: 5px;
+  /* border: pink solid 1px; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="text"]::placeholder {
+
+  padding-top: 107px;
+}
+
+::-webkit-input-placeholder {
+  text-align: start;
+
+}
+
+:-moz-placeholder {
+  text-align: start;
+}
+
+#post-comment-button{
+  color: #3795F6;
+  font-weight: bold;
+  background-color: black;
+  border: none;
+}

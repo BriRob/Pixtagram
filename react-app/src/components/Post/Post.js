@@ -182,7 +182,7 @@ function Post() {
                     </div>
                   ))}
                 </div>
-                <form onSubmit={handleSubmit} className="comment-form">
+                <form onSubmit={handleSubmit} id="comment-form">
                   <textarea
                     onBlur={(e) => {
                       if (e.currentTarget === e.target) {
@@ -201,16 +201,18 @@ function Post() {
                       }
                     }}
                     // value={"text-area-box"}
-                    placeholder="Add a comment."
+                    placeholder="Add a comment..."
                     // below for creating a comment
                     type="text"
                     name="text"
                     onChange={(e) => setText(e.target.value)}
                     value={text}
+                    rows="3"
+                    cols="27"
                   ></textarea>
                   {/* <button disabled={true} className="post-comment-button">
                    */}
-                  <button className="post-comment-button"> Post </button>
+                  <button id="post-comment-button"> Post </button>
                 </form>
               </div>
             </div>
