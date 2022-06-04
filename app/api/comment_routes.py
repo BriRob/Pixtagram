@@ -60,12 +60,13 @@ def create_comment(postId, userId):
 
 
 # Delete comment, get one comment then delete it
-@comment_routes.route('/<int:commentId>/delete', methods=['DELETE'])
+@comment_routes.route('/<int:comment_id>/delete', methods=['DELETE'])
 @login_required
 def delete_comment(comment_id):
     comment = Comment.query.get(comment_id)
+    post_id = comment.post_id
     db.session.delete(comment)
     db.session.commit()
     # After deleting get all the comments? - ms
-    get_post_comments()
+    get_post_comments(post_id)
     return comment.to_dict()

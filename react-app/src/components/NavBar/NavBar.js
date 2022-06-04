@@ -55,6 +55,7 @@ const NavBar = () => {
   }
 
   console.log(showSearch, 'This is search status')
+
   function menuToggle(e, showModal) {
     e.preventDefault()
     e.stopPropagation()
@@ -65,8 +66,11 @@ const NavBar = () => {
     }
   }
 
-  function inputReader(e, val) {
-    if (e.nativeEvent.data !== null) {
+
+  function inputReader(e, val){
+    e.preventDefault()
+    e.stopPropagation()
+    if (e.nativeEvent.data !== null){
       let input = val + e.nativeEvent.data
       setSearchInput(input)
     }
@@ -153,7 +157,6 @@ const NavBar = () => {
     removeIconColor();
     setHeartIconColor(darkModeFilledInHeartHomeIcon);
   };
-
 
   function toggleSearch(e) {
     if (!showSearch) {

@@ -43,7 +43,6 @@ export const getOnePostThunk = (postId) => async (dispatch) => {
   const response = await fetch(`/api/posts/${postId}`);
   if (response.ok) {
     const post = await response.json();
-    console.log(post, "one post from the thunk!");
     dispatch(getOnePost(post));
   }
   return response;
@@ -152,7 +151,7 @@ export default function posts(state = initialState, action) {
       return newState;
     case DELETE_POST:
       newState = {...state}
-      console.log('HELLO FROM DELETE REDUCER')
+      // console.log('HELLO FROM DELETE REDUCER')
       delete newState.post
       return newState
     default:
