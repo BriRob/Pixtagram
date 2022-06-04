@@ -40,9 +40,9 @@ function Post() {
   // console.log('We need the user id', post?.user_id)
 
   useEffect(() => {
-    if (currUser == userId) {
-      setOwner(true);
-    }
+    // if (currUser == userId) {
+    //   setOwner(true);
+    // }
     dispatch(getOnePostThunk(postId))
       .then(() => dispatch(getCommentsThunk(postId)))
       .then(() => setIsLoaded(true));
@@ -139,7 +139,7 @@ function Post() {
                     <img style={{ height: "15px" }} src={checkmark} />
                   ) : null}
                 </span>
-                {owner && (
+                {currUser == userId && (
                   <div className="postOptions">
                     <span onClick={openPostOptions}>{dotDotDotIcon}</span>
                   </div>
