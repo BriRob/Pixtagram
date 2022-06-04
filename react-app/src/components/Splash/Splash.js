@@ -65,7 +65,7 @@ function Splash() {
                         src={checkmark}></img>:null}
                       </NavLink>
                     </div>
-                    <div className="dotdotdot">{dotDotDotIcon}</div>
+                    {id == post.user.id && <div className="dotdotdot">{dotDotDotIcon}</div>}
                   </div>
                   <div className="feed-post-image">
                     <NavLink

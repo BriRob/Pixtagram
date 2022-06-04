@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
-import * as sessionActions from "../../store/session";
-import { getUserThunk } from "../../store/user";
+// import * as sessionActions from "../../store/session";
+// import { getUserThunk } from "../../store/user";
 import './index.css'
 import LoadingSpinner from "../Spinner/Spinner";
 import { findUsersThunk } from "../../store/search";

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +11,7 @@ import User from "./components/UserPages/Profile";
 import EditUser from "./components/UserPages/EditUser";
 import Splash from "./components/Splash/Splash";
 import { authenticate } from "./store/session";
-import { getAllUsersThunk } from "./store/user";
+// import { getAllUsersThunk } from "./store/user";
 import Post from "./components/Post/Post";
 import EditPost from "./components/PostPages/EditPost";
 import SearchBar from "./components/test/SearchBar";
@@ -36,8 +37,6 @@ function App() {
   if (!loaded) {
     return null;
   }
-
-  const NotFound = () => <h1>Page Not Found</h1>;
 
   return (
     <BrowserRouter>
@@ -70,16 +69,12 @@ function App() {
             <EditPost />
             {/* <EditUser users={users}/> */}
           </ProtectedRoute>
-          {/* <Route path={'/test'}>
+          <Route path={'/test'}>
           <SearchBar />
-          </Route> */}
-          {/* <Route path="/">
+          </Route>
+          <Route path='/'>
             <h1>Page Not Found</h1>
-          </Route> */}
-          {/* <Route path='/posts/*'>
-            <h1>Page Not Found</h1>
-          </Route> */}
-          <Route component={NotFound}></Route>
+          </Route>
         </Switch>
       </div>
     </BrowserRouter>

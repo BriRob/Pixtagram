@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
-import LogoutButton from "../auth/LogoutButton";
+// import LogoutButton from "../auth/LogoutButton";
 import CreatePost from "../PostPages/CreatePost";
 import "./index.css";
 import {
@@ -15,17 +15,17 @@ import {
   darkModeFilledInHeartHomeIcon,
 } from "./Navicons";
 import ProfileButton from "./ProfileButton";
-import { getUserThunk } from "../../store/user";
+// import { getUserThunk } from "../../store/user";
 import image from './svgexport-17.png'
-import SearchModal from "./SearchModal";
+// import SearchModal from "./SearchModal";
 import SearchBar from "../test/SearchBar";
 
 
 const NavBar = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const location = useLocation()
   const { pathname } = useLocation();
-  const user = useSelector((state) => state.session.user);
+  // const user = useSelector((state) => state.session.user);
   // const profile = useSelector(
   //   (state) => state?.userReducer?.user?.profile_pic_url
   // );
@@ -41,58 +41,58 @@ const NavBar = () => {
   const [myOptions, setMyOptions] = useState([])
   // console.log("location pathname \n\n", pathname)
 
-  const getDataFromApi = () => {
-    console.log('Options fetched from api')
-    fetch('/api/users/all').then((response) => {return response.json()
-    }).then((res) => {
-        console.log(res.users)
-        for (let i = 0; i < res.users.length; i++) {
-          let user = res.users[i]
-          myOptions.push(user)
-        }
-        setMyOptions(myOptions)
-      })
-  }
+  // const getDataFromApi = () => {
+  //   console.log('Options fetched from api')
+  //   fetch('/api/users/all').then((response) => {return response.json()
+  //   }).then((res) => {
+  //       console.log(res.users)
+  //       for (let i = 0; i < res.users.length; i++) {
+  //         let user = res.users[i]
+  //         myOptions.push(user)
+  //       }
+  //       setMyOptions(myOptions)
+  //     })
+  // }
 
   console.log(showSearch, 'This is search status')
 
-  function menuToggle(e, showModal) {
-    e.preventDefault()
-    e.stopPropagation()
-    if (showModal) {
-      setShowModal(false)
-    } else {
-      setShowModal(true)
-    }
-  }
+  // function menuToggle(e, showModal) {
+  //   e.preventDefault()
+  //   e.stopPropagation()
+  //   if (showModal) {
+  //     setShowModal(false)
+  //   } else {
+  //     setShowModal(true)
+  //   }
+  // }
 
 
-  function inputReader(e, val){
-    e.preventDefault()
-    e.stopPropagation()
-    if (e.nativeEvent.data !== null){
-      let input = val + e.nativeEvent.data
-      setSearchInput(input)
-    }
-    console.log(searchInput)
-  }
+  // function inputReader(e, val){
+  //   e.preventDefault()
+  //   e.stopPropagation()
+  //   if (e.nativeEvent.data !== null){
+  //     let input = val + e.nativeEvent.data
+  //     setSearchInput(input)
+  //   }
+  //   console.log(searchInput)
+  // }
 
-  function searchToggle(e, showSearch) {
-    e.preventDefault()
-    e.stopPropagation()
-    if (showSearch) {
-      console.log('am i here 1')
-      setShowSearch(false)
-    } else {
-      console.log('am i here 2')
-      setShowModal(true)
-    }
-  }
+  // function searchToggle(e, showSearch) {
+  //   e.preventDefault()
+  //   e.stopPropagation()
+  //   if (showSearch) {
+  //     console.log('am i here 1')
+  //     setShowSearch(false)
+  //   } else {
+  //     console.log('am i here 2')
+  //     setShowModal(true)
+  //   }
+  // }
 
-  const openSearch = () => {
-    if (showSearch) return;
-    setShowSearch(true);
-  }
+  // const openSearch = () => {
+  //   if (showSearch) return;
+  //   setShowSearch(true);
+  // }
 
   const openModal = () => {
     if (showModal) return;
@@ -158,14 +158,14 @@ const NavBar = () => {
     setHeartIconColor(darkModeFilledInHeartHomeIcon);
   };
 
-  function toggleSearch(e) {
-    if (!showSearch) {
-      setShowSearch(true)
-    } else {
-      setShowSearch(false)
-    }
-    return;
-  }
+  // function toggleSearch(e) {
+  //   if (!showSearch) {
+  //     setShowSearch(true)
+  //   } else {
+  //     setShowSearch(false)
+  //   }
+  //   return;
+  // }
 
 
   return (
