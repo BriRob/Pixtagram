@@ -10,6 +10,11 @@ import LoadingSpinner from "../Spinner/Spinner";
 import { NavLink } from "react-router-dom";
 import CheckMark from "../CheckMark/CheckMark";
 import checkmark from '../CheckMark/checkmark.png'
+import { getCommentsThunk } from "../../store/comment";
+import SplashComments from "./SplashComments";
+
+
+
 function Splash() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -18,7 +23,8 @@ function Splash() {
   //   console.log(posts);
 
   useEffect(() => {
-    dispatch(getUserThunk(id)).then(() => dispatch(getAllPostsThunk()));
+    dispatch(getUserThunk(id))
+    .then(() => dispatch(getAllPostsThunk()))
   }, [dispatch]);
 
   const sendToProfile = (e, id) => {
@@ -98,8 +104,15 @@ function Splash() {
                         </NavLink>
                         {post.caption}
                       </div>
-                      <p>Here go the comments</p>
-                      <p>posted date</p>
+
+
+                      <div id='splash-comment-container'>
+
+                        <SplashComments postId={post?.id}/>
+
+                      </div>
+
+
                     </div>
                   </div>
                 </div>

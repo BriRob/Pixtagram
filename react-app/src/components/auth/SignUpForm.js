@@ -15,6 +15,7 @@ const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
@@ -149,7 +150,21 @@ const SignUpForm = () => {
                   <div id='disclaimer'>
                     <p className='disc-text'>By signing up, you agree to our Terms, Data Policy, and Cookies Policy.</p>
                   </div>
-                  <button type='submit' className='s-button'>Sign Up</button>
+                  {/* <div>
+                      {errors.map((error, ind) => (
+                        <div id='errors' key={ind}>{error}</div>
+                      ))}
+                  </div> */}
+                  <button
+                    disabled={
+                      !full_name ||
+                      !username ||
+                      !email ||
+                      !password ||
+                      !repeatPassword
+                    }
+                    type='submit'
+                    className='s-button'>Sign Up</button>
                     <div>
                       {errors.map((error, ind) => (
                         <div id='errors' key={ind}>{error}</div>
