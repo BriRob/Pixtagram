@@ -100,13 +100,13 @@
     font-weight: bold;
 }
 
-textarea{
+.comment-form > textarea {
     resize: none;
     background-color: black;
     border-top: 5px;
 }
 
-input:focus, textarea {
+.comment-form:focus, textarea {
     outline: none !important;
     border: none;
 }
