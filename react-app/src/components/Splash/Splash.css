@@ -36,11 +36,12 @@
 
 .post-card-feed {
   width: 500px;
-  height: 600px;
+  height: 820px;
   border: 1px solid rgba(128, 128, 128, 0.302);
   border-radius: 5px;
   margin-bottom: 15px;
   background-color: black;
+  overflow: auto;
 }
 
 .user-profile-info-feed {
@@ -59,6 +60,7 @@
 
 .user-profile-pic-feed {
   margin: 0px 10px;
+  /* padding-right: 13px; */
 }
 
 .feed-post-image {
@@ -86,5 +88,9 @@
   height: 25px;
   width: 25px;
   border-radius: 50px;
-  margin: 0px 10px;
+  margin: 0px 12px;
+}
+
+.bottom-post-feed{
+  /* height: ; */
 }
