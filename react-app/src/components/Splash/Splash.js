@@ -25,6 +25,7 @@ function Splash() {
   useEffect(() => {
     dispatch(getUserThunk(id))
     .then(() => dispatch(getAllPostsThunk()))
+    // .then(() => dispatch(getCommentsThunk()))
   }, [dispatch]);
 
   const sendToProfile = (e, id) => {
@@ -105,13 +106,9 @@ function Splash() {
                         {post.caption}
                       </div>
 
-
                       <div id='splash-comment-container'>
-
-                        <SplashComments postId={post?.id}/>
-
+                        <SplashComments post={post}/>
                       </div>
-
 
                     </div>
                   </div>

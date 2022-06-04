@@ -6,25 +6,62 @@ import { deleteCommentThunk } from "../../store/comment";
 import checkmark from '../CheckMark/checkmark.png'
 import { closeButton } from "../NavBar/Navicons";
 import { NavLink, useHistory } from "react-router-dom";
+import { getAllPostsThunk } from "../../store/post"
+
 
 import './SplashComments.css';
 
-function SplashComments({ postId }) {
-    // console.log('You need this post id \n\n', postId)
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const comments = useSelector((state) => state?.comments?.comments_list);
-    console.log('Need one comment please', comments)
+
+function SplashComments({ post }) {
+  // console.log('one post MAICA \n\n', post)
+  const postId = post.id
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const [text, setText] = useState("");
+  const [errors, setErrors] = useState([]);
+  const [showMore, setShowMore] = useState(false)
+
+  //Need comments specific to the post or postId
+  // console.log('CURRENT POST \n\n', currPost)
+  // const commentsM = currPost.comments
+  // console.log('Are these the comments you seek?? \n\n', commentsM)
+
+  const commentsFromPostState = useSelector((state) => state?.posts?.allPosts?.posts?.[post]?.comments)
+
+  // console.log(`What are comments?? for This post:${post} FROM THE POST\n\n`, commentsFromPostState)
+
+  // useEffect(() => {
+    //   dispatch
+    // })
+    // useEffect(() => {
+    //   // dispatch(getOnePostThunk(postId))
+      // dispatch(getCommentsThunk(post))
+    //   // then(() => dispatch(getCommentsThunk(post)))
+    //   // .then(() => dispatch(getOneCommentThunk()))
+    //   // .then(() => dispatch(getOnePostThunk(postId)))
+    // }, [dispatch]);
+
+
+  // useEffect(() => {
+  //   dispatch
+  // })
+
+  // console.log('You need post comments \n\n', post)
+
+
+    const comments = post.comments
+    // console.log(`THESE ARE COMMENTS for POST ${post.id} \n\n`, comments)
+    // const comments = useSelector((state) => state?.comments?.comments_list);
+    // console.log('Need one comment please', comments)
 
     // console.log('WHat is in comments?\n\n', comments)
-    // const currUser = useSelector((state) => state?.session?.user?.id)
-    const currUser = useSelector((state) => state?.session?.user?.id);
+    const currUser = useSelector((state) => state?.session?.user?.id)
+    // const currUser = useSelector((state) => state?.session?.user?.id);
     // // console.log("Maica USER ID", currUser);
     // const currPost = useSelector((state) => state?.posts?.post?.id)
 
-    const [text, setText] = useState("");
-    const [errors, setErrors] = useState([]);
-    const [showMore, setShowMore] = useState(false)
+
 
     // need to grab comment text somehow
     // const textC = comments[0]?.text
@@ -45,49 +82,59 @@ function SplashComments({ postId }) {
         const userId = currUser;
         // console.log('USERID -MS \n\n', userId)
         const form = { text };
+
         const comment = await dispatch(createCommentThunk(userId, postId, form))
-          // .then(() => getOneCommentThunk(commentId))
         setText('')
         if (comment.errors) {
           setErrors(comment.errors);
         } else {
-          await dispatch(getCommentsThunk(postId));
+          await dispatch(getAllPostsThunk());
         }
       };
 
-      useEffect(async () => {
-        await dispatch(getCommentsThunk(postId))
-            // .then(() => dispatch(getOneCommentThunk()))
-      }, [dispatch]);
-
-    //   console.log("Hello from splash compo\n\n", comments)
+      let comment;
+      // {console.log("MAICA THIS IS THE LENGTH OF A COMMENT \n\n", comment[0])}
 
       return (
           <>
             { comments && (
                 <>
+                    { comment=comments[1].length }
+                    {/* {console.log("MAICA THIS IS THE LENGTH OF A COMMENT \n\n", comment1[0])} */}
                     <div id='s-parent'>
-                        <div id='s-comment-container'>
-                                    {/* <div id='s-pic-container'>
-                                        <img id='s-pic' src={comments[0].user.profile_pic_url}/>
-                                    </div> */}
-                            <div>
-                              <p id='s-username'>{comments[0]?.user?.username}</p>
-                            </div>
-                            <div id='s-com-div'>
-                              <p id='s-comment'>{comments[0]?.text}</p>
-                            </div>
-                        </div>
-                        <div>
-                      {/* {currUser == comment.user.id && (
-                        <div
-                          className='delete'
-                          onClick={(e) => deleteComment(e, comment[0]?.id)}
-                        >{closeButton}</div>)} */}
-                        </div>
-                        <div id='s-nav'>
-                           <NavLink id='navlink' to={`/posts/${postId}`}>View all {comments?.length} comments</NavLink>
-                        </div>
+                      {/* Only render the following if there are comments*/}
+                      {comments.length > 0 && (
+                        <>
+                          <div id='s-comment-container'>
+                                {/* First Comment */}
+                              <div id='username-comment'>
+                                <p id='s-username'>{comments[0]?.user?.username} </p><p id='s-comment'>
+                                  {/* { showMore ? {comments[0]?.text}.length : {comments[0]?.text}.substring(0, 10)}} */}
+                                  {comments[0]?.text}
+                                </p>
+
+                              </div>
+
+                                {/* If post has more than one comment render this */}
+                              { comments.length > 1 && (
+                                  <>
+                                    {comments.length > 2 && (
+                                    <div id='s-nav'>
+                                      <NavLink id='navlink' to={`/posts/${postId}`}>View all {comments?.length} comments</NavLink>
+                                    </div>
+                                    )}
+
+                                  <div id='username-comment'>
+                                    <p id='s-username'>{comments[comments.length-1]?.user?.username}</p><p
+                                      id='s-comment'>
+                                      {comments[comments.length-1]?.text}
+                                    </p>
+                                  </div>
+                                  </>
+                              )}
+                          </div>
+                        </>
+                      )}
                         <div id='s-line'></div>
                         <div id='s-comment-form'>
                             <form
@@ -95,17 +142,32 @@ function SplashComments({ postId }) {
                                 onSubmit={handleSubmit}
                             >
                                 <input
+                                    id='s-input'
                                     placeholder="Add a comment.."
                                     onChange={(e) => setText(e.target.value)}
                                     type='text'
                                     name='text'
                                     value={text}
+                                    // maxLength={5}
                                 ></input>
                                 <button
                                     id='post-button'
-                                    disabled={!text}
+                                    disabled={!text || text.length > 140 }
                                 >Post</button>
                             </form>
+
+                            {/* ERRORS RENDERING HERE!!!!!!!!! */}
+                            { errors && (
+                              <>
+                              <div id='errors-render'>
+                                {errors.map((error, ind) => (
+                              <div id="errors" key={ind}>
+                                  {error}
+                              </div>
+                                ))}
+                              </div>
+                              </>
+                            )}
 
                         </div>
                     </div>

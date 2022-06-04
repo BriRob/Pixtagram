@@ -1,13 +1,13 @@
 // ms - should post be changed to comment? vvv
-const GET_ALL_COMMENTS = "post/GET_ALL_COMMENTS";
+const GET_ALL_COMMENTS = "comment/GET_ALL_COMMENTS";
 const CREATE_COMMENT = "comment/CREATE_COMMENT";
 const DELETE_COMMENT = "comment/DELETE_COMMENT";
 const GET_ONE_COMMENT = "comment/GET_ONE_COMMENT";
 
-const getOneComment = comment => ({
-  type: GET_ONE_COMMENT,
-  payload: comment
-})
+// const getOneComment = comment => ({
+//   type: GET_ONE_COMMENT,
+//   payload: comment
+// })
 
 const getComments = comments => ({
   type: GET_ALL_COMMENTS,
@@ -27,15 +27,15 @@ const deleteComment = commentId => ({
 })
 
 //Get a single comment
-export const getOneCommentThunk = commentId => async (dispatch) => {
-  console.log("Hi from the single comment thunk \n\n")
-  const response = await fetch(`/api/comments/${commentId}/single-comment`)
-  if (response.ok){
-    const comment = await response.json();
-    dispatch(getOneComment(comment))
-  }
-  return response;
-}
+// export const getOneCommentThunk = commentId => async (dispatch) => {
+//   console.log("Hi from the single comment thunk \n\n")
+//   const response = await fetch(`/api/comments/${commentId}/single-comment`)
+//   if (response.ok){
+//     const comment = await response.json();
+//     dispatch(getOneComment(comment))
+//   }
+//   return response;
+// }
 
 // Get the Comments for a post
 export const getCommentsThunk = postId => async dispatch => {
@@ -68,7 +68,7 @@ export const createCommentThunk = (userId, postId, form) => async (dispatch) => 
 
     if (response.ok) {
       const comment = await response.json();
-      dispatch(createComment(comment))
+      dispatch(getComments(comment))
       return comment;
     } else if (response.status < 500) {
       const data = await response.json();

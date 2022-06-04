@@ -51,11 +51,12 @@ input {
 #s-comment-container{
     /* position: absolute; */
     /* border: pink solid 1px; */
-    height: 35px;
+    /* height: 35px; */
     width: 500px;
     display: flex;
-    /* justify-content: flex-start; */
-    align-items: center;
+    justify-content: flex-start;
+    /* align-items: center; */
+    flex-direction: column;
     /* white-space: wrap; */
     margin-left: 10px;
     margin-right: 10px;
@@ -63,30 +64,19 @@ input {
 
 #s-comment{
     /* border: green solid 1px; */
-    /* margin-left: 12px; */
-    /* display: flex; */
     display: inline-block;
+    width: 416px;
+    overflow-y: auto;
+    margin-left: 10px;
+    display: flex;
     justify-content: flex-start;
-    width: 418px;
-    white-space: inherit;
+    /* display: inline-block;
+    /* width: 418px; */
+    /* white-space: inherit; */
     font-size: 14px;
     overflow-wrap: break-word;
+    word-break: break-word;
 
-}
-
-#s-username {
-    margin-left: 10px;
-    font-weight: bold;
-    font-size: .90rem;
-    padding-left: 6px;
-}
-
-#s-line{
-    position: absolute;
-    margin-top: 18px;
-    background-color: #181818;
-    width: 470px;
-    height: 1px;
 }
 
 #s-parent{
@@ -96,10 +86,23 @@ input {
     flex-direction: column;
 }
 
-#s-comment-form{
-    margin-top: 20px;
-    /* border: green solid 1px; */
+#s-username {
+    padding-left: 16px;
+    font-weight: bold;
+    font-size: .90rem;
 }
+
+
+
+#s-line{
+    margin-top: 10px;
+    background-color: #181818;
+    width: 470px;
+    height: 1px;
+}
+
+    /* position: absolute; */
+
 
 #s-nav{
     font-size: 13px;
@@ -112,16 +115,20 @@ input {
 #navlink{
     color: #7E7E7E;
     text-decoration: none;
+    padding-left: 14px;
+    font-size: .9rem;
 }
 
 #s-com-div{
     /* border: green solid 1px; */
     /* width: 200px; */
     /* height: 100px; */
-    margin-left: 12px;
-    display: inline-block;
+    /* margin-left: 12px; */
+    display: flex;
     justify-content: flex-start;
-    width: 710px;
+    align-items: center;
+
+    width: 500px;
     white-space: inherit;
     font-size: 14px;
     height: 35px;
@@ -129,4 +136,30 @@ input {
     overflow: scroll;
     padding-top: 10px;
 
+}
+
+/* holds username and comment */
+#username-comment{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+#s-comment-form{
+    /* border: #3795f6 solid 1px; */
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#errors-render {
+    /* margin-top: 2px; */
+    padding-top: 8px;
+    /* padding-bottom: 10px; */
+
+}
+
+#s-input:focus{
+    outline: none;
 }
