@@ -33,7 +33,7 @@ export const getAllPostsThunk = () => async (dispatch) => {
   const response = await fetch("/api/posts/");
   if (response.ok) {
     const posts = await response.json();
-    console.log(posts, "posts from the thunk!");
+    // console.log(posts, "posts from the thunk!");
     dispatch(getAllPosts(posts));
   }
   return response;
@@ -128,7 +128,7 @@ export const editPostThunk = (postId, form) => async (dispatch) => {
 
 // Delete Post Think
 export const deletePostThunk = (postId) => async (dispatch) => {
-  console.log('<--------- HELLO From DELETE POST THUNK -------->')
+  // console.log('<--------- HELLO From DELETE POST THUNK -------->')
   const response = await fetch(`/api/posts/${postId}/delete`, {
     method: 'DELETE'
   });

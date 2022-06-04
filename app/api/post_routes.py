@@ -111,7 +111,7 @@ def edit_post(postId):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        print('EDIT HAS BEEN VALIDATED')
+        # print('EDIT HAS BEEN VALIDATED')
 
         post.caption = form.data["caption"]
 
