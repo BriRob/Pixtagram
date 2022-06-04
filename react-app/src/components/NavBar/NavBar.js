@@ -205,7 +205,7 @@ const NavBar = () => {
             </div>
             <NavLink
               className="icon-links"
-              to="/"
+              to="/explore-page"
               exact={true}
               id="explore-icon-id"
               onClick={(e) => fillInExplore(e)}

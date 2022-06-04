@@ -119,3 +119,13 @@ def delete_user(id):
 def get_all_users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
+
+@user_routes.route('/admins', methods=['GET'])
+@login_required
+def get_all_admins():
+    users = User.query.all()
+    admins = {}
+    for user in users:
+        if user.verified == True and user.email !='leah@leah.io' and user.email != 'bey@aa.io':
+            admins[f"{user.full_name}"] = user.to_dict()
+    return admins
