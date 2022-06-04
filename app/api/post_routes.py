@@ -18,6 +18,7 @@ def validation_errors_to_error_messages(validation_errors):
     Simple function that turns the WTForms validation errors into a simple list
     """
     errorMessages = []
+    # print("HERE ARE ERROR MESSAGES \n\n", errorMessages)
     for field in validation_errors:
         for error in validation_errors[field]:
             errorMessages.append(f'{error}')
@@ -66,10 +67,10 @@ def create_post(userId):
         if "img_url" in request.files:
 
             image = request.files["img_url"]
-            print("image ======== \n\n", image)
+            # print("image ======== \n\n", image)
 
             if not allowed_file(image.filename):
-                return {"errors": "file type not permitted"}, 400
+                return {"errors": ["file type not permitted"]}, 400
 
             image.filename = get_unique_filename(image.filename)
 
@@ -82,7 +83,7 @@ def create_post(userId):
 
 
 
-        print('CREATE HAS BEEN VALIDATED')
+        # print('CREATE HAS BEEN VALIDATED')
 
         new_post = Post(
             user_id=userId,
