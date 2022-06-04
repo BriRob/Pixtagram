@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import './explore.css'
 import { getAllAdminsThunk } from '../../store/admins'
 import LoadingSpinner from '../Spinner/Spinner';
+import CheckMark from '../CheckMark/CheckMark';
 
 
 function Explore() {
@@ -28,13 +29,18 @@ function Explore() {
                     <div className='profile-cards'>
                         {admins ? admins.map((admin) => (
                             <div className='square'>
-                            <div key={admin.id}>
-                            <h2 className='username-header'>{admin.full_name}</h2>
-                            <img className='admin-profile' src={admin.profile_pic_url} alt='admin profile picture'></img>
-                            <div className='info-card'>
-                                <span className='admin-bio'>{admin.bio}</span>
-                            </div>
-                            </div>
+                                <div className='card-box' key={admin.id}>
+                                    <div className='header-name'>
+                                        <h2 className='username-header'>{admin.full_name} <CheckMark /></h2>
+                                    </div>
+
+                                    <div className='rotating-border rotating-border--rainbow'>
+                                        <img className='admin-profile' src={admin.profile_pic_url} alt='admin profile picture'></img>
+                                    </div>
+                                    <div className='info-card'>
+                                        <span className='admin-bio'>{admin.bio}</span>
+                                    </div>
+                                </div>
                             </div>
                         )) : <LoadingSpinner />}
                     </div>

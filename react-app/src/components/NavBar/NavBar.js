@@ -20,7 +20,6 @@ import image from './svgexport-17.png'
 // import SearchModal from "./SearchModal";
 import SearchBar from "../test/SearchBar";
 
-
 const NavBar = () => {
   const dispatch = useDispatch();
   const location = useLocation()
@@ -221,7 +220,7 @@ const NavBar = () => {
             >
               {heartIconColor}
             </NavLink>
-            <ProfileButton />
+            <ProfileButton/>
           </div>
         </div>
         <div>

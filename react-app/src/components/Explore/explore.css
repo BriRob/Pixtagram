@@ -16,6 +16,8 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    left: 2%;
+    width: 225px;
 }
 
 .admin-profile{
@@ -24,6 +26,8 @@
     border-radius: 50%;
     display: flex;
     justify-content: center;
+    position: relative;
+    left: 10%;
 }
 .square{
     display: flex;
@@ -33,13 +37,36 @@
 }
 
 .info-card{
-    height: 40px;
-    border-color: red;
-    background-color: rebeccapurple;
+    height: 44px;
 }
 
 .admin-bio{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 10%;
+}
+
+.card-box{
+    width: 36%;
+}
+
+.header-name{
+    display: flex;
+    justify-content: center;
+}
+
+
+.rotating-border{
+
+}
+.rotating-border::before{
+
+}
+
+.rotating-border::after{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
 }
