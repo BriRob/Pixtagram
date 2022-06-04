@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 // import LogoutButton from "../auth/LogoutButton";
 import CreatePost from "../PostPages/CreatePost";
@@ -22,8 +22,8 @@ import SearchBar from "../test/SearchBar";
 
 
 const NavBar = () => {
-  // const dispatch = useDispatch();
-  // const location = useLocation()
+  const dispatch = useDispatch();
+  const location = useLocation()
   const { pathname } = useLocation();
   const user = useSelector((state) => state.session.user);
   // const profile = useSelector(
