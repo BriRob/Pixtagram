@@ -7,7 +7,6 @@ import "./comments.css";
 import checkmark from '../CheckMark/checkmark.png'
 import { closeButton } from "../NavBar/Navicons";
 
-
 function Comments({ postId }) {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state?.comments?.comments_list);
