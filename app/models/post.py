@@ -35,5 +35,6 @@ class Post(db.Model):
             # 'post': [post.to_dict() for post in self.posts],
             'post_likes': [user.to_dict() for user in self.post_likes],
             'caption': self.caption,
-            'created_at': self.created_at
+            'created_at': self.created_at,
+            'comments': [comment.to_dict() for comment in self.comments]
         }
