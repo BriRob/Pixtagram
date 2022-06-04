@@ -145,3 +145,8 @@
     cursor: pointer;
 }
 
+.maxCharacters {
+    margin-top: 2px;
+    font-size: 13px;
+}
+

@@ -8,7 +8,7 @@ function EditPost() {
   const history = useHistory();
   const { postId } = useParams();
   // grab post from redux state
-  const user = useSelector((state) => state?.session?.user)
+  const user = useSelector((state) => state?.session?.user);
   const currPost = useSelector((state) => state?.posts?.post);
 
   const [caption, setCaption] = useState(currPost?.caption);
@@ -88,40 +88,47 @@ function EditPost() {
       //     </div>
       //   </div>
       // </div>
-      <div className="inner">
-        <form onSubmit={handleSubmit} className="createPostForm">
-          <div className="topCreatePostModal">
-            <p>Edit post</p>
-            <div className="shareButtonDiv">
-              <button className="shareButton">Share</button>
-            </div>
-          </div>
-          <div className="lowerpartModal">
-            <div className="leftEdit">
-              <img className="post-picture" src={currPost.img_url}></img>
-            </div>
-            <div>
-              <div className="rightCreate">
-                <div className="userInfoNewPost">
-                  <img
-                    className="userInfoNewPostImg"
-                    src={user.profile_pic_url}
-                  />
-                  {user.username}
-                </div>
-
-                <label>
-                  <textarea
-                    name="caption"
-                    onChange={(e) => setCaption(e.target.value)}
-                    value={caption}
-                    placeholder="Write your caption..."
-                  ></textarea>
-                </label>
+      <div className="outerClass">
+        <div className="inner">
+          <form onSubmit={handleSubmit} className="createPostForm">
+            <div className="topCreatePostModal">
+              <p>Edit post</p>
+              <div className="shareButtonDiv">
+                <button className="shareButton">Share</button>
               </div>
             </div>
-          </div>
-        </form>
+            <div className="lowerpartModal">
+              <div className="leftEdit">
+                <img className="post-picture" src={currPost.img_url}></img>
+              </div>
+              <div className="rightEdit">
+                <div className="rightCreate">
+                  <div className="userInfoNewPost">
+                    <img
+                      className="userInfoNewPostImg"
+                      src={user.profile_pic_url}
+                    />
+                    {user.username}
+                  </div>
+
+                  <label>
+                    <textarea
+                      name="caption"
+                      onChange={(e) => setCaption(e.target.value)}
+                      value={caption}
+                      placeholder="Write your caption..."
+                    ></textarea>
+                  </label>
+                </div>
+                <div
+                  className="cancelEdit"
+                >
+                  <div onClick={() => history.push(`/posts/${currPost.id}`)} className="cancelEditBtn">Cancel</div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

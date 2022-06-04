@@ -189,6 +189,9 @@ function EditUser() {
                       onChange={(e) => setFullName(e.target.value)}
                       value={fullName}
                     ></input>
+                    <div>
+                      <p className="maxCharacters">Maxixum 50 characters</p>
+                    </div>
                   </div>
                 </div>
 
@@ -202,6 +205,9 @@ function EditUser() {
                       onChange={(e) => setBiography(e.target.value)}
                       value={biography}
                     ></textarea>
+                    <div>
+                      <p className="maxCharacters">Maximum 150 characters</p>
+                    </div>
                   </div>
                 </div>
                 <div className="buttonContainer">
