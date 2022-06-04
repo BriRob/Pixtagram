@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,6 +37,8 @@ function App() {
     return null;
   }
 
+  const NotFound = () => <h1>Page Not Found</h1>;
+
   return (
     <BrowserRouter>
       {session && <NavBar />}
@@ -69,12 +70,16 @@ function App() {
             <EditPost />
             {/* <EditUser users={users}/> */}
           </ProtectedRoute>
-          <Route path={'/test'}>
+          {/* <Route path={'/test'}>
           <SearchBar />
-          </Route>
-          <Route path='/'>
+          </Route> */}
+          {/* <Route path="/">
             <h1>Page Not Found</h1>
-          </Route>
+          </Route> */}
+          {/* <Route path='/posts/*'>
+            <h1>Page Not Found</h1>
+          </Route> */}
+          <Route component={NotFound}></Route>
         </Switch>
       </div>
     </BrowserRouter>
