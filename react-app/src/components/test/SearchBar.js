@@ -28,11 +28,11 @@ function SearchBar() {
             <Autocomplete
                 id="users-search"
                 getOptionLabel={(jsonResults) => `${jsonResults.username}`}
-                options={jsonResults.length === 0 ? null : jsonResults}
-                isOptionEqualToValue={(option, value) => option.username === value.username}
+                options={jsonResults.length === 0 ? [] : jsonResults}
+                // isOptionEqualToValue={(option, value) => option.username === value.username}
                 noOptionsText={'NO PEOPLE FOUND'}
                 style={{ width: 350, margin: 20 }}
-                shouldItemRender={(option, value) => option.username.toLowercase().indexOf(value.toLowercase()) > -1}
+                // shouldItemRender={(option, value) => option.username.toLowercase().indexOf(value.toLowercase()) > -1}
                 renderOption={(option) => (
                     <div onClick={() => { history.push(`/users/${option.id}`) }}>
                         <React.Fragment >
