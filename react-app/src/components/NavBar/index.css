@@ -143,6 +143,7 @@ width: 30%;
   color: white;
   background-color: black;
   border-radius: 5px;
+  left: 110%
 }
 
 .dropdownmenu > a {

@@ -10,8 +10,8 @@ import LoadingSpinner from "../Spinner/Spinner";
 import PostModal from "./PostModal";
 import Comments from "../Comments/Comments";
 import { createCommentThunk, getCommentsThunk } from "../../store/comment";
-import checkmark from '../CheckMark/checkmark.png'
-
+import checkmark from "../CheckMark/checkmark.png";
+import { closeButton } from "../NavBar/Navicons";
 
 function Post() {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ function Post() {
   // console.log("Maica USER ID", currUser);
   const currPost = useSelector((state) => state?.posts?.post?.id);
   // console.log("This is current post id", currPost);
-
+  const [owner, setOwner] = useState(false);
   const [likeStatus, setLikeStatus] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showPostOptions, setShowPostOptions] = useState(false);
@@ -40,6 +40,9 @@ function Post() {
   // console.log('We need the user id', post?.user_id)
 
   useEffect(() => {
+    if (currUser == userId) {
+      setOwner(true);
+    }
     dispatch(getOnePostThunk(postId))
       .then(() => dispatch(getCommentsThunk(postId)))
       .then(() => setIsLoaded(true));
@@ -64,7 +67,7 @@ function Post() {
       setErrors(comment.errors);
     } else {
       await dispatch(getCommentsThunk(postId));
-      setText("")
+      setText("");
       // console.log("TROUBLE");
       // window.location.reload()
     }
@@ -97,8 +100,13 @@ function Post() {
           <>
             <div className="background">
               <div className="postOptionsModal">
-                <button onClick={() => setShowPostOptions(false)}>X</button>
-                <PostModal postId={postId} />
+                <div
+                  onClick={() => setShowPostOptions(false)}
+                  className="postOptionsModalBckg"
+                ></div>
+                <div className="actualModalComponent">
+                  <PostModal postId={postId} />
+                </div>
               </div>
             </div>
           </>
@@ -114,10 +122,17 @@ function Post() {
                   className="user-pic"
                   src={post?.user.profile_pic_url}
                 ></img>
-                <span className="user-name">{`${post?.user?.username}`}{post?.user?.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}</span>
-                <div className="postOptions">
-                  <span onClick={openPostOptions}>{dotDotDotIcon}</span>
-                </div>
+                <span className="user-name">
+                  {`${post?.user?.username}`}
+                  {post?.user?.verified ? (
+                    <img style={{ height: "15px" }} src={checkmark} />
+                  ) : null}
+                </span>
+                {owner && (
+                  <div className="postOptions">
+                    <span onClick={openPostOptions}>{dotDotDotIcon}</span>
+                  </div>
+                )}
               </div>
               <div className="comments">
                 <div className="user-caption">
@@ -125,11 +140,13 @@ function Post() {
                     className="user-pic"
                     src={post?.user.profile_pic_url}
                   ></img>
-                  <span className="user-name">{post?.user?.username}{post?.user?.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}</span>
+                  <span className="user-name">
+                    {post?.user?.username}
+                    {post?.user?.verified ? (
+                      <img style={{ height: "15px" }} src={checkmark} />
+                    ) : null}
+                  </span>
                   <p className="caption">{post?.caption}</p>
-                  <div className="days-since-caption">
-                    <span>{post?.days_since}</span>
-                  </div>
                 </div>
                 <div className="comment-section">
                   {/* <p>Here go the comments</p> */}
