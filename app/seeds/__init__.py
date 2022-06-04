@@ -27,4 +27,3 @@ def undo():
     # Add other undo functions here
     # undo_posts()
     undo_comments()
-

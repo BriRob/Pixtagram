@@ -21,7 +21,6 @@ import SearchModal from "./SearchModal";
 import SearchBar from "../test/SearchBar";
 
 
-
 const NavBar = () => {
   const dispatch = useDispatch();
   // const location = useLocation()
@@ -111,10 +110,6 @@ const NavBar = () => {
   //regular font link https://fontmeme.com/permalink/220528/c175d4b5354eae87b98b5233d328cfd5.png
 
 
-
-  const [valueState, setValueState] = useState("");
-
-
   const logo = (
     <img
       src="https://fontmeme.com/permalink/220601/86a21de467499ff0a91e214d1a326624.png"
@@ -123,14 +118,14 @@ const NavBar = () => {
       border="0"
     ></img>
   );
-  const profilePicture = (
-    <img
-      to="/users/:id"
-      src={`${profile}`}
-      id="profile-pic-nav-bar"
-      alt="profile-picture-icon"
-    ></img>
-  );
+  // const profilePicture = (
+  //   <img
+  //     to="/users/:id"
+  //     src={`${profile}`}
+  //     id="profile-pic-nav-bar"
+  //     alt="profile-picture-icon"
+  //   ></img>
+  // );
   const removeIconColor = () => {
     setHouseColor(darkModeHomeIcon);
     setPostIconColor(darkModePostIcon);
@@ -163,14 +158,6 @@ const NavBar = () => {
     setHeartIconColor(darkModeFilledInHeartHomeIcon);
   };
 
-  // const closeSearch = (e) => {
-  //   setShowSearch(false)
-  // }
-
-
-
-
-
   function toggleSearch(e) {
     if (!showSearch) {
       setShowSearch(true)
@@ -192,37 +179,15 @@ const NavBar = () => {
           </div>
           <div className="search-parent-container">
             <div className="search-bar">
-
-              <form className="search-form"
+              <div  style={{ 'background': `url(${image}) no-repeat 13px` }} className="search-form">
+              {/* <form className="search-form"
                 style={{ 'background': `url(${image}) no-repeat 13px` }}
-                preventDefault={true}
-              // onClick={e => searchToggle(e, showSearch)}
-              >
-                {/* <Autocomplete
-                // style={{color: 'white'}}
-                disablePortal
-                freeSolo
-                autoComplete
-                autoHighlight
-                options={myOptions}
-                clearOnEscape
-                openOnFocus
-                value={myOptions}
-                renderInput={(params) => ( */}
+                // onClick={e => searchToggle(e, showSearch)}
+                > LEAVE THIS COMMENT HERE FOR SPRINT WEEK :D */}
                 <SearchBar />
-                  {/* <TextField
-                  // variant='outlined'
-                  onChange={getDataFromApi}
-                  onClick={(e) => toggleSearch(e)}
-                  className="search-input"
-                  id="super-cool-search-box"
-                  inputProps={{style: {color: 'white', background: 'transparent', padding: '9.5px 14px'}}}
-                  placeholder='Search...'></TextField> */}
-                {/* )} */}
-                {/* /> */}
-
                 {showSearch && (<SearchModal user={user} profile={profile} />)}
-              </form>
+              {/* </form> */}
+                </div>
             </div>
           </div>
           <div className="icons">
