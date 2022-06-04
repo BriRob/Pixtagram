@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { deletePostThunk } from "../../store/post";
-
+import './post.css'
 function PostModal({postId}) {
   const dispatch = useDispatch();
   const history = useHistory()
@@ -19,10 +19,9 @@ function PostModal({postId}) {
 
     return (
         <>
-            <div>
-                <h1>HEllo!!</h1>
-                <button onClick={() => (history.push(`/posts/${postId}/edit`))}>Edit Post</button>
-                <button className="delPostBtn" onClick={deletePost}>Delete Post</button>
+            <div className="editPostModal">
+                <div className="delPostBtn" onClick={deletePost}>Delete</div>
+                <div onClick={() => (history.push(`/posts/${postId}/edit`))} className='editPostButton'>Edit</div>
             </div>
         </>
     )
