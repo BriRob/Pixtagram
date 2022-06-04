@@ -13,8 +13,7 @@ import { authenticate } from "./store/session";
 import { getAllUsersThunk } from "./store/user";
 import Post from "./components/Post/Post";
 import EditPost from "./components/PostPages/EditPost";
-import SearchBar from "./components/test/SearchBar";
-
+import Explore from "./components/Explore/Explore";
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -70,6 +69,7 @@ function App() {
             <EditPost />
             {/* <EditUser users={users}/> */}
           </ProtectedRoute>
+
           {/* <Route path={'/test'}>
           <SearchBar />
           </Route> */}

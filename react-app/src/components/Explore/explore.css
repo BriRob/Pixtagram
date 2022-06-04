@@ -1,0 +1,46 @@
+
+.page-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-cards{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 50vw;
+}
+
+.username-header{
+    font-size: 25px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.admin-profile{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+}
+.square{
+    display: flex;
+    width: 50vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-card{
+    height: 40px;
+    border-color: red;
+    background-color: rebeccapurple;
+}
+
+.admin-bio{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
