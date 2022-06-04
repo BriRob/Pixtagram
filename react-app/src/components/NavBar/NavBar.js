@@ -26,9 +26,9 @@ const NavBar = () => {
   // const location = useLocation()
   const { pathname } = useLocation();
   const user = useSelector((state) => state.session.user);
-  const profile = useSelector(
-    (state) => state?.userReducer?.user?.profile_pic_url
-  );
+  // const profile = useSelector(
+  //   (state) => state?.userReducer?.user?.profile_pic_url
+  // );
 
 
   const [showModal, setShowModal] = useState(false);
@@ -100,11 +100,11 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    dispatch(getUserThunk(user.id));
+    // dispatch(getUserThunk(user.id));
     if (pathname !== "/") {
       removeIconColor()
     }
-  }, [dispatch, searchInput]);
+  }, [searchInput]);
 
 
   //regular font link https://fontmeme.com/permalink/220528/c175d4b5354eae87b98b5233d328cfd5.png
@@ -185,7 +185,7 @@ const NavBar = () => {
                 // onClick={e => searchToggle(e, showSearch)}
                 > LEAVE THIS COMMENT HERE FOR SPRINT WEEK :D */}
                 <SearchBar />
-                {showSearch && (<SearchModal user={user} profile={profile} />)}
+                {/* {showSearch && (<SearchModal user={user} profile={profile} />)} */}
               {/* </form> */}
                 </div>
             </div>
@@ -221,7 +221,7 @@ const NavBar = () => {
             >
               {heartIconColor}
             </NavLink>
-            <ProfileButton user={user} profile={profile} />
+            <ProfileButton />
           </div>
         </div>
         <div>

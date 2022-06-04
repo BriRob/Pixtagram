@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import { getOnePostThunk } from "../../store/post";
 import daysSincePost from "./helpers";
 import { likeHeart, likeHeartFilledIn, commentIcon } from "./postIcons";
@@ -64,6 +64,8 @@ function Post() {
     console.log("COMMENT HERE \n\n", comment);
     // history.push(`/`)
     if (comment.errors) {
+    // console.log("COMMENT ERRORS \n\n", comment.errors);
+
       setErrors(comment.errors);
     } else {
       await dispatch(getCommentsThunk(postId));
@@ -73,7 +75,7 @@ function Post() {
     }
   };
 
-  console.log("post comment errors", errors);
+  // console.log("post comment errors", errors);
 
   function changeHeart(e) {
     e.preventDefault();
@@ -105,7 +107,13 @@ function Post() {
                   className="postOptionsModalBckg"
                 ></div>
                 <div className="actualModalComponent">
-                  <PostModal postId={postId} />
+                  <PostModal postId={postId} show={showPostOptions} />
+                  <div
+                    className="cancelPostButton"
+                    onClick={() => setShowPostOptions(false)}
+                  >
+                    Cancel
+                  </div>
                 </div>
               </div>
             </div>
@@ -118,10 +126,12 @@ function Post() {
             </div>
             <div className="right">
               <div className="user-info">
-                <img
-                  className="user-pic"
-                  src={post?.user.profile_pic_url}
-                ></img>
+                <NavLink to={`/users/${post?.user.id}`}>
+                  <img
+                    className="user-pic"
+                    src={post?.user.profile_pic_url}
+                  ></img>
+                </NavLink>
 
                 <span className="user-name">
                   {`${post?.user?.username}`}

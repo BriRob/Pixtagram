@@ -41,6 +41,7 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
     const post = await dispatch(createPostThunk(user.id, form));
 
     if (post.errors) {
+      // console.log("CREATE POST HAS ERRORS", post.errors)
       setErrors(post.errors);
     } else {
       closeModal();
@@ -50,7 +51,11 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
         history.push("/");
       }
     }
+
+    // console.log("POST \n\n", post)
   };
+
+  // console.log("Errors from CREATE POST \n\n", errors)
 
   return (
     <div>
@@ -92,7 +97,7 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
                   </div>
                 ))}
               </div>
-              <div className="right">
+              <div className="rightCreate">
                 <div className="userInfoNewPost">
                   <img
                     className="userInfoNewPostImg"
