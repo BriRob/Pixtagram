@@ -7,8 +7,7 @@ import './index.css'
 import LoadingSpinner from "../Spinner/Spinner";
 import { findUsersThunk } from "../../store/search";
 
-
-function SearchModal() {
+function SearchModal({myOptions}) {
 
     const dispatch = useDispatch();
     const history = useHistory()
@@ -43,7 +42,7 @@ function SearchModal() {
             {!isLoaded &&<h4 className="recent">Recent</h4>}
             {!isLoaded &&<span className="no-searches">No recent searches.</span>}
             {!isLoaded && <button onClick={e => findUsers(e)} className="no-searches">Click me to run the back end :D</button>}
-            {isLoaded ? users.map(user => <>
+            {myOptions? myOptions.map(user => <>
                 <ul key={`${user.id}`}>
                     <NavLink style={{'textDecoration':'none'}}to={`/users/${user.id}`}>{`${user.full_name}`}</NavLink>
                 </ul>

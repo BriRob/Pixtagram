@@ -16,9 +16,10 @@ import {
 } from "./Navicons";
 import ProfileButton from "./ProfileButton";
 import { getUserThunk } from "../../store/user";
-
 import image from './svgexport-17.png'
 import SearchModal from "./SearchModal";
+import SearchBar from "../test/SearchBar";
+
 
 
 const NavBar = () => {
@@ -38,7 +39,22 @@ const NavBar = () => {
   const [postIconColor, setPostIconColor] = useState(darkModePostIcon);
   const [exploreIconColor, setExploreIconColor] = useState(darkModeExploreIcon);
   const [heartIconColor, setHeartIconColor] = useState(darkModeHeartHomeIcon);
+  const [myOptions, setMyOptions] = useState([])
   // console.log("location pathname \n\n", pathname)
+
+  const getDataFromApi = () => {
+    console.log('Options fetched from api')
+    fetch('/api/users/all').then((response) => {return response.json()
+    }).then((res) => {
+        console.log(res.users)
+        for (let i = 0; i < res.users.length; i++) {
+          let user = res.users[i]
+          myOptions.push(user)
+        }
+        setMyOptions(myOptions)
+      })
+  }
+
   console.log(showSearch, 'This is search status')
 
   function menuToggle(e, showModal) {
@@ -51,6 +67,7 @@ const NavBar = () => {
     }
   }
 
+
   function inputReader(e, val){
     e.preventDefault()
     e.stopPropagation()
@@ -61,13 +78,13 @@ const NavBar = () => {
     console.log(searchInput)
   }
 
-  function searchToggle(e, showSearch){
+  function searchToggle(e, showSearch) {
     e.preventDefault()
     e.stopPropagation()
-    if(showSearch){
+    if (showSearch) {
       console.log('am i here 1')
       setShowSearch(false)
-    }else{
+    } else {
       console.log('am i here 2')
       setShowModal(true)
     }
@@ -146,16 +163,16 @@ const NavBar = () => {
     setHeartIconColor(darkModeFilledInHeartHomeIcon);
   };
 
-// const closeSearch = (e) => {
-//   setShowSearch(false)
-// }
+  // const closeSearch = (e) => {
+  //   setShowSearch(false)
+  // }
 
 
 
 
 
-  function toggleSearch(e){
-    if(!showSearch){
+  function toggleSearch(e) {
+    if (!showSearch) {
       setShowSearch(true)
     } else {
       setShowSearch(false)
@@ -177,21 +194,34 @@ const NavBar = () => {
             <div className="search-bar">
 
               <form className="search-form"
-              style={{'background': `url(${image}) no-repeat 13px` }}
+                style={{ 'background': `url(${image}) no-repeat 13px` }}
+                preventDefault={true}
               // onClick={e => searchToggle(e, showSearch)}
               >
-                <input
-                  className="search-input"
-                  onChange={(e) => inputReader(e)}
-                  placeholder="Search..."
-
-                  type='search'
-                  id="super-cool-search-box"
+                {/* <Autocomplete
+                // style={{color: 'white'}}
+                disablePortal
+                freeSolo
+                autoComplete
+                autoHighlight
+                options={myOptions}
+                clearOnEscape
+                openOnFocus
+                value={myOptions}
+                renderInput={(params) => ( */}
+                <SearchBar />
+                  {/* <TextField
+                  // variant='outlined'
+                  onChange={getDataFromApi}
                   onClick={(e) => toggleSearch(e)}
-                  // onBlur={(e)=> closeSearch(e)}
-                >
-                </input>
-                {showSearch && (<SearchModal user={user} profile={profile}/>)}
+                  className="search-input"
+                  id="super-cool-search-box"
+                  inputProps={{style: {color: 'white', background: 'transparent', padding: '9.5px 14px'}}}
+                  placeholder='Search...'></TextField> */}
+                {/* )} */}
+                {/* /> */}
+
+                {showSearch && (<SearchModal user={user} profile={profile} />)}
               </form>
             </div>
           </div>
