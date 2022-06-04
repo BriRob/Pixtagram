@@ -67,8 +67,8 @@ input.nosubmit {
 #users-search{
   color: white;
   position: relative;
-  bottom: 15px;
-  left: 15px;
+  bottom: 12px;
+  left: 12%;
   width: 50px;
 }
 .MuiAutocomplete-popper{
@@ -78,10 +78,15 @@ input.nosubmit {
 .MuiAutocomplete-listbox{
   background: rgb(0,0,0);
 }
+
+
+.MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete-inputRoot {
+  padding-right: 15px;
+}
 /* .MuiAutocomplete-option[data-focus='true']{
   background-color: blue;
 } */
 
-/* .MuiSvgIcon-root{
+.MuiSvgIcon-root{
   visibility: hidden;
-} */
+}
