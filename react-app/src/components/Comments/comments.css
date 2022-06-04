@@ -102,14 +102,14 @@
   font-weight: bold;
 }
 
-textarea {
-  resize: none;
-  background-color: black;
-  border-top: 5px;
+#comment-form > textarea {
+    resize: none;
+    background-color: black;
+    border-top: 5px;
 }
 
-input:focus,
-textarea {
-  outline: none !important;
-  border: none;
+#comment-form:focus, textarea {
+    outline: none !important;
+    border: none;
+
 }

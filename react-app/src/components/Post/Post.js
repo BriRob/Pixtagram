@@ -194,6 +194,7 @@ function Post() {
                 </div>
                 <form onSubmit={handleSubmit} id="comment-form">
                   <textarea
+                    className="comment-form"
                     onBlur={(e) => {
                       if (e.currentTarget === e.target) {
                         console.log("unfocused input box");

@@ -25,7 +25,7 @@ const NavBar = () => {
   // const dispatch = useDispatch();
   // const location = useLocation()
   const { pathname } = useLocation();
-  // const user = useSelector((state) => state.session.user);
+  const user = useSelector((state) => state.session.user);
   // const profile = useSelector(
   //   (state) => state?.userReducer?.user?.profile_pic_url
   // );
