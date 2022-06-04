@@ -18,6 +18,7 @@ function User() {
   const posts = useSelector((state) => state?.posts?.allPosts?.posts);
   const [isLoaded, setIsLoaded] = useState(false);
   const { userId } = useParams();
+  console.log('USEEEEERRRRR', user)
   const verified = user?.verified
   function postCounter(posts) {
     let count = 0;
