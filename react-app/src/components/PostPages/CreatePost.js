@@ -91,28 +91,32 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
                 )}
               </div>
               <div>
-                {errors.map((error, ind) => (
-                  <div id="errors" key={ind}>
-                    {error}
+                <div className="rightCreate">
+                  <div className="userInfoNewPost">
+                    <img
+                      className="userInfoNewPostImg"
+                      src={user.profile_pic_url}
+                    />
+                    {user.username}
                   </div>
-                ))}
-              </div>
-              <div className="rightCreate">
-                <div className="userInfoNewPost">
-                  <img
-                    className="userInfoNewPostImg"
-                    src={user.profile_pic_url}
-                  />
-                  {user.username}
+
+
+                  <label>
+                    <textarea
+                      name="caption"
+                      onChange={(e) => setCaption(e.target.value)}
+                      value={caption}
+                      placeholder="Write your caption..."
+                    ></textarea>
+                  </label>
                 </div>
-                <label>
-                  <textarea
-                    name="caption"
-                    onChange={(e) => setCaption(e.target.value)}
-                    value={caption}
-                    placeholder="Write your caption..."
-                  ></textarea>
-                </label>
+                <div className="createErrors">
+                  {errors.map((error, ind) => (
+                    <div id="errors" key={ind}>
+                      {error}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </form>

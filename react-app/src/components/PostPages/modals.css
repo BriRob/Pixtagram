@@ -135,6 +135,14 @@ input[type="file"] {
   resize: none;
   width: 300px;
   height: 200px;
+
+}
+
+.rightCreate {
+  border-bottom: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+
 }
 
 .userInfoNewPostImg {
@@ -143,4 +151,9 @@ input[type="file"] {
   height: 25px;
   border: 0;
   margin-right: 10px;
+}
+
+.createErrors {
+  padding: 10px;
+  font-size: 20px;
 }

@@ -27,7 +27,8 @@ function EditUser() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [userName, setUserName] = useState(currentUser?.username);
   const [errors, setErrors] = useState([]);
-  const [imageLoading, setImageLoading] = useState(false);
+  const [preImg, setPreImg] = useState(currentUser?.profile_pic_url);
+  const [showPostOptions, setShowPostOptions] = useState(false);
 
   const setFunc = (currentUser) => {
     setBiography(currentUser?.bio);
@@ -72,8 +73,6 @@ function EditUser() {
     }
   };
 
-  console.log("errors", errors);
-
   function backToProfile(e) {
     e.preventDefault();
     history.push(`/users/${userId}`);
@@ -89,6 +88,11 @@ function EditUser() {
 
   const updateImage = (e) => {
     const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function (e) {
+      setPreImg(reader.result);
+    };
     setProfilePicUrl(file);
   };
   // {/* <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img> */}
@@ -97,81 +101,132 @@ function EditUser() {
     return <h1>Loading...</h1>;
   } else {
     return (
-      <div className="edit-user-page">
-        <div className="edit-user-form">
-          {/* <img src={profilePicUrl}></img> */}
-          <div>{userName}</div>
-          <form onSubmit={handleSubmit} className="editUserActualForm">
-            <div>
-              {errors.map((error, ind) => (
-                <div id="errors" key={ind}>
-                  {error}
+      <>
+        {showPostOptions && (
+          <>
+            <div className="background">
+              <div className="postOptionsModal">
+                <div
+                  onClick={() => setShowPostOptions(false)}
+                  className="postOptionsModalBckg"
+                ></div>
+                <div className="actualModalComponent">
+                  <div className="editPostModal">
+                    <div className="deletePostConfirmText">
+                      <h3>Delete user</h3>
+                      <p className="confirmdeltext">
+                        Are you sure you want to delete your user?
+                      </p>
+                    </div>
+                    <div className="delPostBtnFinal" onClick={e => deleteUser(e)}>
+                      Delete
+                    </div>
+                    {/* <div className="cancelPostButton" onClick={(e) => setDelModal(false)}>
+            Cancel
+          </div> */}
+                  </div>
+                  <div
+                    className="cancelPostButton"
+                    onClick={() => setShowPostOptions(false)}
+                  >
+                    Cancel
+                  </div>
                 </div>
-              ))}
-            </div>
-            {/* <label>
-              Username
-              <div>
-                <input
-                  type="text"
-                  name="userName"
-                  value={userName}
-                  disabled={true}
-                  readOnly
-                ></input>
               </div>
-            </label> */}
-            <div>
-              <label>Name</label>
-              {/* <div> */}
-              <input
-                className="editUserInput"
-                type="text"
-                name="full_name"
-                onChange={(e) => setFullName(e.target.value)}
-                value={fullName}
-              ></input>
-              {/* </div> */}
             </div>
+          </>
+        )}
 
-            <div>
-              <label>Bio</label>
-              {/* <div> */}
-              <input
-                className="editUserInput"
-                type="text"
-                name="biography"
-                onChange={(e) => setBiography(e.target.value)}
-                value={biography}
-              ></input>
-              {/* </div> */}
+        <div className="bigEditUserPage">
+          <div className="edit-user-page">
+            <div className="leftEditUser">
+              <div className="editUserLeftText">
+                <p>Edit User</p>
+              </div>
             </div>
-            <div>
-              <label htmlFor="editProfileUpload" className="custom-file-upload">
-                Edit Profile Picture
-                <input
-                  type="file"
-                  id="editProfileUpload"
-                  name="profile_pic_url"
-                  onChange={updateImage}
-                  // onChange={(e) => setProfilePicUrl(e.target.value)}
-                  accept="image/*"
-                ></input>
-              </label>
+            <div className="edit-user-form">
+              {/* <img src={profilePicUrl}></img> */}
+              <div className="top-edit">
+                <div className="top-edit-part">
+                  <img className="user-pic-edit" src={preImg} />
+                  <div>
+                    {userName}
+                    <div>
+                      <label
+                        htmlFor="editProfileUpload"
+                        className="editProfileUpload"
+                      >
+                        Change Profile Picture
+                        <input
+                          type="file"
+                          id="editProfileUpload"
+                          name="profile_pic_url"
+                          onChange={updateImage}
+                          // onChange={(e) => setProfilePicUrl(e.target.value)}
+                          accept="image/*"
+                        ></input>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <form onSubmit={handleSubmit} className="editUserActualForm">
+                <div>
+                  {errors.map((error, ind) => (
+                    <div id="errors" key={ind}>
+                      {error}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="editUserInputs">
+                  <label className="editLabels">Name</label>
+                  <div className="editUserInputContainer">
+                    <input
+                      className="editUserInput"
+                      type="textarea"
+                      name="full_name"
+                      onChange={(e) => setFullName(e.target.value)}
+                      value={fullName}
+                    ></input>
+                  </div>
+                </div>
+
+                <div className="editUserInputs">
+                  <label className="editLabels">Bio</label>
+                  <div className="editUserInputContainer">
+                    <textarea
+                      className="editUserInputBio"
+                      type="text"
+                      name="biography"
+                      onChange={(e) => setBiography(e.target.value)}
+                      value={biography}
+                    ></textarea>
+                  </div>
+                </div>
+                <div className="buttonContainer">
+                  <button
+                    className="editSubmitBtn"
+                    type="submit"
+                    onClick={(e) => handleSubmit(e)}
+                  >
+                    Submit
+                  </button>
+                  <button
+                    className="editCancelBtn"
+                    onClick={(e) => backToProfile(e)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
             </div>
-            <button className="editSubmitBtn" type="submit">
-              Submit
+            <button className="delAccBtn" onClick={(e) => setShowPostOptions(true)}>
+              Delete Account
             </button>
-            <button className="editCancelBtn" onClick={(e) => backToProfile(e)}>
-              Cancel
-            </button>
-          </form>
-          {/* <button onClick={e => deleteUser(e)}>Delete Account</button> */}
-          <button className="delAccBtn" onClick={(e) => deleteUser(e)}>
-            Delete Account
-          </button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }
