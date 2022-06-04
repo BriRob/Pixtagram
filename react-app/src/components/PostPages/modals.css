@@ -135,12 +135,14 @@ input[type="file"] {
   resize: none;
   width: 300px;
   height: 200px;
+
 }
 
 .rightCreate {
   border-bottom: 1px solid grey;
   display: flex;
   flex-direction: column;
+
 }
 
 .userInfoNewPostImg {

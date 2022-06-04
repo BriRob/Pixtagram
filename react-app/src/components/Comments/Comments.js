@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCommentsThunk } from "../../store/comment";
 import LoadingSpinner from "../Spinner/Spinner";
@@ -12,7 +12,7 @@ function Comments({ postId }) {
   const comments = useSelector((state) => state?.comments?.comments_list);
   const currUser = useSelector((state) => state?.session?.user?.id)
 
-  const [isLoaded, setIsLoaded] = useState(false)
+  // const [isLoaded, setIsLoaded] = useState(false)
 
   const deleteComment = async (e, commentId) => {
     console.log("What is the thunk getting?", commentId)
@@ -32,23 +32,21 @@ function Comments({ postId }) {
         {comments ? (
           <div className="comments-components">
             {comments.map((comment, idx) => (
-              <>
                   <div className='comments-container' key={idx}>
                     <div id='profile-pic-holder'>
-                      <img id='profile-pic' src={comment.user.profile_pic_url}></img>
+                      <img id='profile-pic' src={comment.user.profile_pic_url} alt="profile-pic"></img>
                     </div>
                     <div className="username-comment-container">
-                      <div id='comment'><a id='username' href={`/users/${comment.user.id}`}>{comment.user.username}{comment.user.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}</a> {comment.text}</div>
+                      <div id='comment'><a id='username' href={`/users/${comment.user.id}`}>{comment.user.username}{comment.user.verified? <img style={{'height':'15px'}} src={checkmark} alt="checkmark"/>: null}</a> {comment.text}</div>
                     </div>
                     <div>
-                      {currUser == comment.user.id && (
+                      {currUser === comment.user.id && (
                         <div
                           className='delete'
                           onClick={(e) => deleteComment(e, comment?.id)}
                         >{closeButton}</div>)}
                     </div>
                   </div>
-              </>
             ))}
           </div>
         ) : (

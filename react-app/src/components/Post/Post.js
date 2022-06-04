@@ -40,9 +40,9 @@ function Post() {
   // console.log('We need the user id', post?.user_id)
 
   useEffect(() => {
-    if (currUser == userId) {
-      setOwner(true);
-    }
+    // if (currUser == userId) {
+    //   setOwner(true);
+    // }
     dispatch(getOnePostThunk(postId))
       .then(() => dispatch(getCommentsThunk(postId)))
       .then(() => setIsLoaded(true));
@@ -64,6 +64,8 @@ function Post() {
     console.log("COMMENT HERE \n\n", comment);
     // history.push(`/`)
     if (comment.errors) {
+    // console.log("COMMENT ERRORS \n\n", comment.errors);
+
       setErrors(comment.errors);
     } else {
       await dispatch(getCommentsThunk(postId));
@@ -73,7 +75,7 @@ function Post() {
     }
   };
 
-  console.log("post comment errors", errors);
+  // console.log("post comment errors", errors);
 
   function changeHeart(e) {
     e.preventDefault();
@@ -137,7 +139,7 @@ function Post() {
                     <img style={{ height: "15px" }} src={checkmark} />
                   ) : null}
                 </span>
-                {owner && (
+                {currUser == userId && (
                   <div className="postOptions">
                     <span onClick={openPostOptions}>{dotDotDotIcon}</span>
                   </div>

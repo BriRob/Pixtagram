@@ -26,6 +26,8 @@ const SignUpForm = () => {
         console.log('FROM SIGNUP--DATA', data)
         setErrors(data)
       }
+    } else {
+      setErrors(["Password does not match Confirmed Password"])
     }
   };
 
@@ -140,7 +142,7 @@ const SignUpForm = () => {
                       name='repeat_password'
                       onChange={updateRepeatPassword}
                       value={repeatPassword}
-                      // required={true}
+                      required={true}
                       placeholder='Confirm Password'
                     ></input>
                   </div>

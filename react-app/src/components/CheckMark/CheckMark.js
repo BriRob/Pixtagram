@@ -7,7 +7,7 @@ function CheckMark(){
     console.log(id)
     return (
         <>
-        <img className='check-mark' src={checkmark}></img>
+        <img className='check-mark' src={checkmark} alt="verified-check-mark"></img>
         </>
     )
 }
