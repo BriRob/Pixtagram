@@ -47,11 +47,65 @@ def seeder():
     post_3 = Post(
         user_id=2, img_url='https://pixtagrambucket.s3.amazonaws.com/meme_anotha.png', caption='test',
     )
+    post_4 = Post(
+        user_id=2, img_url='https://pixtagrambucket.s3.amazonaws.com/code_view_seeder.jpeg', caption='My view everyday! 😍'
+    )
+    post_5 = Post(
+        user_id=3, img_url='https://pixtagrambucket.s3.amazonaws.com/bey_seeder2.jpeg'
+    )
+    post_6 = Post(
+        user_id=3, img_url='https://pixtagrambucket.s3.amazonaws.com/bey_seeder3.jpeg'
+    )
+    post_7 = Post(
+        user_id=3, img_url='https://pixtagrambucket.s3.amazonaws.com/bey_seeder.jpeg'
+    )
+    post_8 = Post(
+        user_id=4, img_url='https://pixtagrambucket.s3.amazonaws.com/wow_coffee.jpeg', caption='Story of my life!'
+    )
+    post_9 = Post(
+        user_id=4, img_url='https://pixtagrambucket.s3.amazonaws.com/milk_seeder.jpeg', caption='The best milk'
+    )
+    post_10 = Post(
+        user_id=5, img_url='https://pixtagrambucket.s3.amazonaws.com/scuba_seeder.jpeg', caption='What a time to be alive!'
+    )
+    post_11 = Post(
+        user_id=5, img_url='https://pixtagrambucket.s3.amazonaws.com/doggy_seeder.jpeg'
+    )
+    post_12 = Post(
+        user_id=2, img_url='https://pixtagrambucket.s3.amazonaws.com/disney_seeder.jpeg', caption='My 50th time at Disney!!'
+    )
+    # post_13 = Post(
+    #     user_id=6, img_url='', caption='test'
+    # )
+    # post_14 = Post(
+    #     user_id=6, img_url='', caption='test'
+    # )
+    # post_14 = Post(
+    #     user_id=7, img_url='', caption='test'
+    # )
+    # post_15 = Post(
+    #     user_id=7, img_url='', caption='test'
+    # )
+    # post_16 = Post(
+    #     user_id=8, img_url='', caption='test'
+    # )
+    # post_17 = Post(
+    #     user_id=9, img_url='', caption='test'
+    # )
 
 
     db.session.add(post_1)
     db.session.add(post_2)
     db.session.add(post_3)
+    db.session.add(post_4)
+    db.session.add(post_5)
+    db.session.add(post_6)
+    db.session.add(post_7)
+    db.session.add(post_8)
+    db.session.add(post_9)
+    db.session.add(post_10)
+    db.session.add(post_11)
+    db.session.add(post_12)
 
     demo.user_likes.extend([post_1, post_2, post_3])
     marnie.user_likes.extend([post_2, post_3])
