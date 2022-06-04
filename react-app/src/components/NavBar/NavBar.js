@@ -22,8 +22,8 @@ import SearchBar from "../test/SearchBar";
 
 
 const NavBar = () => {
-  // const dispatch = useDispatch();
-  // const location = useLocation()
+  const dispatch = useDispatch();
+  const location = useLocation()
   const { pathname } = useLocation();
   const user = useSelector((state) => state.session.user);
   // const profile = useSelector(
