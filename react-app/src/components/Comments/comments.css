@@ -84,3 +84,29 @@
     font-size: 14px;
     grid-area: username;
 }
+
+
+.comment-form {
+    border-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.post-comment-button {
+    color: white;
+    background-color: black;
+    border: none;
+    font-weight: bold;
+}
+
+textarea{
+    resize: none;
+    background-color: black;
+    border-top: 5px;
+}
+
+input:focus, textarea {
+    outline: none !important;
+    border: none;
+}
