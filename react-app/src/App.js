@@ -15,6 +15,8 @@ import { authenticate } from "./store/session";
 import Post from "./components/Post/Post";
 import EditPost from "./components/PostPages/EditPost";
 import Explore from "./components/Explore/Explore";
+
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
