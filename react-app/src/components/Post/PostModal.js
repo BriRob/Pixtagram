@@ -14,7 +14,7 @@ function PostModal({postId}) {
 
   const deletePost = async (e) => {
     await dispatch(deletePostThunk(postId))
-    history.push(`/users/${userId}`)
+    history.push(`/`)
   }
 
     return (

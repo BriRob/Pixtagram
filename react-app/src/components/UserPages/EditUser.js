@@ -67,13 +67,12 @@ function EditUser() {
     } else {
       await dispatch(getAllUsersThunk());
       await dispatch(getUserThunk(userId));
-      await dispatch(authenticate())
+      await dispatch(authenticate());
       history.push(`/users/${userId}`);
     }
   };
 
   console.log("errors", errors);
-
 
   function backToProfile(e) {
     e.preventDefault();
@@ -148,22 +147,29 @@ function EditUser() {
               {/* </div> */}
             </div>
             <div>
-              <label>Edit Profile Pic</label>
-              {/* <div> */}
-              <input
-                type="file"
-                name="profile_pic_url"
-                onChange={updateImage}
-                // onChange={(e) => setProfilePicUrl(e.target.value)}
-                accept="image/*"
-              ></input>
-              {/* </div> */}
+              <label htmlFor="editProfileUpload" className="custom-file-upload">
+                Edit Profile Picture
+                <input
+                  type="file"
+                  id="editProfileUpload"
+                  name="profile_pic_url"
+                  onChange={updateImage}
+                  // onChange={(e) => setProfilePicUrl(e.target.value)}
+                  accept="image/*"
+                ></input>
+              </label>
             </div>
-            <button className="editSubmitBtn" type="submit">Submit</button>
-            <button className="editCancelBtn" onClick={(e) => backToProfile(e)}>Cancel</button>
+            <button className="editSubmitBtn" type="submit">
+              Submit
+            </button>
+            <button className="editCancelBtn" onClick={(e) => backToProfile(e)}>
+              Cancel
+            </button>
           </form>
           {/* <button onClick={e => deleteUser(e)}>Delete Account</button> */}
-          <button className="delAccBtn" onClick={(e) => deleteUser(e)}>Delete Account</button>
+          <button className="delAccBtn" onClick={(e) => deleteUser(e)}>
+            Delete Account
+          </button>
         </div>
       </div>
     );
