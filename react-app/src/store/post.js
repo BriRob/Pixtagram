@@ -33,7 +33,7 @@ export const getAllPostsThunk = () => async (dispatch) => {
   const response = await fetch("/api/posts/");
   if (response.ok) {
     const posts = await response.json();
-    console.log(posts, "posts from the thunk!");
+    // console.log(posts, "posts from the thunk!");
     dispatch(getAllPosts(posts));
   }
   return response;
@@ -73,8 +73,12 @@ export const createPostThunk = (userId, form) => async (dispatch) => {
     dispatch(getOnePost(post));
     return post
   } else if (response.status < 500) {
+    // console.log("THUNK RESPONSE IS NOT OK but less than 500")
     const data = await response.json();
+    // console.log("DATA FROM CREATE THUNK", data)
     if (data.errors) {
+      // console.log("DATA.ERRORS IS TRUE", data.errors)
+      // console.log("data in thunk with errors", data)
       return data;
     } else {
       return ["An error occurred. Please try again."];
@@ -91,7 +95,7 @@ export const editPostThunk = (postId, form) => async (dispatch) => {
   const formData = new FormData();
 
   formData.append("caption", caption);
-  console.log("FORMDATA \n\n", formData["caption"])
+  // console.log("FORMDATA \n\n", formData["caption"])
 
 
   const option = {
@@ -124,7 +128,7 @@ export const editPostThunk = (postId, form) => async (dispatch) => {
 
 // Delete Post Think
 export const deletePostThunk = (postId) => async (dispatch) => {
-  console.log('<--------- HELLO From DELETE POST THUNK -------->')
+  // console.log('<--------- HELLO From DELETE POST THUNK -------->')
   const response = await fetch(`/api/posts/${postId}/delete`, {
     method: 'DELETE'
   });

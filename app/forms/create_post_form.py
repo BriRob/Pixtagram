@@ -17,15 +17,9 @@ import re
 #         raise ValidationError('Email address is already in use.')
 
 class CreatePostForm(FlaskForm):
-    img_url = StringField("img_url", validators=[DataRequired(message='Cannot post without image.')])
-    caption = StringField("caption")
+    img_url = StringField("img_url", validators=[DataRequired(message='Cannot share post without image')])
+    caption = TextAreaField("caption")
 
 class EditPostForm(FlaskForm):
     caption = StringField("caption")
     # caption = StringField("caption", validators=[no_spaces_caption])
-
-
-caption1 = "        "
-
-print(re.match("/^ *$/", caption1))
-# print(re.match("\\", "hello"))

@@ -58,7 +58,7 @@ def edit_user(id):
             image = request.files["profile_pic_url"]
             print("image ======== \n\n", image)
             if not allowed_file(image.filename):
-                return {"errors": "file type not permitted"}, 400
+                return {"errors": ["Image file type not permitted"]}, 400
 
             image.filename = get_unique_filename(image.filename)
 

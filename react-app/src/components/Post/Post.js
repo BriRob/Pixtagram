@@ -64,6 +64,8 @@ function Post() {
     console.log("COMMENT HERE \n\n", comment);
     // history.push(`/`)
     if (comment.errors) {
+    // console.log("COMMENT ERRORS \n\n", comment.errors);
+
       setErrors(comment.errors);
     } else {
       await dispatch(getCommentsThunk(postId));
@@ -73,7 +75,7 @@ function Post() {
     }
   };
 
-  console.log("post comment errors", errors);
+  // console.log("post comment errors", errors);
 
   function changeHeart(e) {
     e.preventDefault();
