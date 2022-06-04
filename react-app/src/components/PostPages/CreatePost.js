@@ -92,7 +92,7 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
                   </div>
                 ))}
               </div>
-              <div className="right">
+              <div className="rightCreate">
                 <div className="userInfoNewPost">
                   <img
                     className="userInfoNewPostImg"

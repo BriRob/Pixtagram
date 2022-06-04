@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import { getOnePostThunk } from "../../store/post";
 import daysSincePost from "./helpers";
 import { likeHeart, likeHeartFilledIn, commentIcon } from "./postIcons";
@@ -105,7 +105,13 @@ function Post() {
                   className="postOptionsModalBckg"
                 ></div>
                 <div className="actualModalComponent">
-                  <PostModal postId={postId} />
+                  <PostModal postId={postId} show={showPostOptions} />
+                  <div
+                    className="cancelPostButton"
+                    onClick={() => setShowPostOptions(false)}
+                  >
+                    Cancel
+                  </div>
                 </div>
               </div>
             </div>
@@ -118,10 +124,12 @@ function Post() {
             </div>
             <div className="right">
               <div className="user-info">
-                <img
-                  className="user-pic"
-                  src={post?.user.profile_pic_url}
-                ></img>
+                <NavLink to={`/users/${post?.user.id}`}>
+                  <img
+                    className="user-pic"
+                    src={post?.user.profile_pic_url}
+                  ></img>
+                </NavLink>
 
                 <span className="user-name">
                   {`${post?.user?.username}`}

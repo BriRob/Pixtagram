@@ -9,9 +9,9 @@ const ProfileButton = () => {
   const dispatch = useDispatch();
   const history = useHistory()
   const user = useSelector((state) => state.session.user);
-  const profile = useSelector(
-    (state) => state?.userReducer?.user?.profile_pic_url
-  );
+  // const profile = useSelector(
+  //   (state) => state?.userReducer?.user?.profile_pic_url
+  // );
   const [showMenu, setShowMenu] = useState(false);
 
 
@@ -30,7 +30,7 @@ const ProfileButton = () => {
 
   useEffect(() => {
     dispatch(sessionActions.authenticate())
-    dispatch(getUserThunk(user.id))
+    // dispatch(getUserThunk(user.id))
 
 
 
