@@ -4,7 +4,10 @@ import { useHistory } from 'react-router-dom';
 import './explore.css'
 import { getAllAdminsThunk } from '../../store/admins'
 import LoadingSpinner from '../Spinner/Spinner';
+
+
 import CheckMark from '../CheckMark/CheckMark';
+
 
 
 function Explore() {
@@ -41,6 +44,13 @@ function Explore() {
                                         <span className='admin-bio'>{admin.bio}</span>
                                     </div>
                                 </div>
+                            <div key={admin.id}>
+                            <h2 className='username-header'>{admin.full_name}</h2>
+                            <img className='admin-profile' src={admin.profile_pic_url} alt='admin profile picture'></img>
+                            <div className='info-card'>
+                                <span className='admin-bio'>{admin.bio}</span>
+                            </div>
+                            </div>
                             </div>
                         )) : <LoadingSpinner />}
                     </div>
