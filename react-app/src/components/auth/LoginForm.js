@@ -80,11 +80,12 @@ const LoginForm = () => {
                       name='password'
                       type='password'
                       placeholder='Password'
-                      value={password} 
+                      value={password}
                       onChange={updatePassword}
+
                     />
                   </div>
-                  <button id='login-button' type='submit'>Log In</button>
+                  <button disabled={!password || !email} id='login-button' type='submit'>Log In</button>
                       <div>
                         {errors.map((error, ind) => (
                           <div id='errors' key={ind}>{error}</div>

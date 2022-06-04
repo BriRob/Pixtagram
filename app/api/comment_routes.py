@@ -23,13 +23,21 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{error}')
     return errorMessages
 
+@comment_routes.route('/<int:commentId>/single-comment')
+# @login_required
+def get_splash_comments(commentId):
+    comment=Comment.query.get(commentId)
+    # query_dict = query_comment.to_dict()
 
+    # print("THIS IS THE ROUTE FOR GETTING ALL COMMENTS \n\n", comment)
+    return comment.to_dict()
+    # pass
 
 # Get All Comments, for specific post, need postId from frontend, filter?
 @comment_routes.route('/<int:postId>')
 @login_required
 def get_post_comments(postId):
-    comments = Comment.query.filter(Comment.post_id == postId).order_by(Comment.id.asc()).all()
+    comments = Comment.query.filter(Comment.post_id == postId).order_by(Comment.id.desc()).all()
     # print("\n\n", comments)
     # print("one comment", comments[0])
     return {"comments_list": [comment.to_dict() for comment in comments]}

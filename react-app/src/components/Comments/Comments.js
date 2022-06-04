@@ -20,8 +20,6 @@ function Comments({ postId }) {
   }
 
   useEffect(async () => {
-    //   console.log("rendering in comments component \n\n");
-    //   if (!comments){
     await dispatch(getCommentsThunk(postId));
     //   }
   }, [dispatch]);

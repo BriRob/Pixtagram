@@ -2,6 +2,12 @@
 const GET_ALL_COMMENTS = "post/GET_ALL_COMMENTS";
 const CREATE_COMMENT = "comment/CREATE_COMMENT";
 const DELETE_COMMENT = "comment/DELETE_COMMENT";
+const GET_ONE_COMMENT = "comment/GET_ONE_COMMENT";
+
+const getOneComment = comment => ({
+  type: GET_ONE_COMMENT,
+  payload: comment
+})
 
 const getComments = comments => ({
   type: GET_ALL_COMMENTS,
@@ -19,6 +25,17 @@ const deleteComment = commentId => ({
   type: DELETE_COMMENT,
   payload: commentId
 })
+
+//Get a single comment
+export const getOneCommentThunk = commentId => async (dispatch) => {
+  console.log("Hi from the single comment thunk \n\n")
+  const response = await fetch(`/api/comments/${commentId}/single-comment`)
+  if (response.ok){
+    const comment = await response.json();
+    dispatch(getOneComment(comment))
+  }
+  return response;
+}
 
 // Get the Comments for a post
 export const getCommentsThunk = postId => async dispatch => {
@@ -51,7 +68,7 @@ export const createCommentThunk = (userId, postId, form) => async (dispatch) => 
 
     if (response.ok) {
       const comment = await response.json();
-      dispatch(getComments(comment))
+      dispatch(createComment(comment))
       return comment;
     } else if (response.status < 500) {
       const data = await response.json();
@@ -59,7 +76,7 @@ export const createCommentThunk = (userId, postId, form) => async (dispatch) => 
         return data;
       }
     } else {
-      return ['An error occured while creating a comment. Please Try again.']
+      return ['An error occurred while creating a comment. Please Try again.']
     }
 };
 
@@ -87,15 +104,20 @@ export default function comments(state = initialState, action) {
       newState = { ...state, ...action.payload };
       //   newState["comments"] = action.payload.comments
       return newState;
-    // case CREATE_COMMENT:
-    //   console.log("Hello from Reducer what is payload? *****", action.payload);
-    //   newState = { ...state.comments, [action.payload.id]: action.payload };
-    //   return newState;
+    case CREATE_COMMENT:
+      let comment;
+      console.log("Hello from Reducer what is payload? *****", action.payload.id);
+      newState = { ...state.comments, [action.payload.id]: action.payload };
+      return newState;
     case DELETE_COMMENT:
       newState = {...state}
-      console.log('<-----Hello from delete comment reducer---->')
+      // console.log('<-----Hello from delete comment reducer---->')
       delete newState.comment
       return newState
+    // case GET_ONE_COMMENT:
+    //   // console.log('HELLO FROM ONE COMMENT REDUCER \n\n')
+    //   newState = {...state};
+    //   return newState.comment = action.payload
     default:
       return state;
   }

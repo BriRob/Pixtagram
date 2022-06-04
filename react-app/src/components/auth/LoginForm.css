@@ -103,6 +103,11 @@ placeholder{
     font-weight: bold;
 }
 
+#login-button:disabled,
+#login-button[disabled] {
+    background-color: #072641;
+}
+
 #errors {
   color: rgb(196, 30, 30);
   text-align: center;
@@ -132,6 +137,7 @@ placeholder{
 
 .l-demo-div {
     /* border: blue solid 3px; */
+    padding-top: 10px;
     height: 40px;
     width: 350px;
     background-color: #000000;
@@ -144,10 +150,16 @@ placeholder{
     width: 255px;
     height: 30px;
     font-size: 16px;
-    color: #f6f6f5;
     font-weight: bold;
     background-color: #000000;
     border: none;
+    color: #a7a7a7;
+    transition: color .6s;
+    cursor: pointer;
+}
+
+#l-demo-button:hover{
+    color: whitesmoke;
 }
 
 #b-line{
