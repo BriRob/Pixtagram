@@ -37,6 +37,7 @@ const NavBar = () => {
   const [postIconColor, setPostIconColor] = useState(darkModePostIcon);
   const [exploreIconColor, setExploreIconColor] = useState(darkModeExploreIcon);
   const [heartIconColor, setHeartIconColor] = useState(darkModeHeartHomeIcon);
+  const [profileStatus, setProfileStatus] = useState(false)
   const [myOptions, setMyOptions] = useState([])
   // console.log("location pathname \n\n", pathname)
 
@@ -136,12 +137,14 @@ const NavBar = () => {
     e.stopPropagation();
     removeIconColor();
     setHouseColor(darkModeFilledInHomeIcon);
+    setProfileStatus(false)
   };
 
   const fillInPost = (e) => {
     e.stopPropagation();
     removeIconColor();
     setPostIconColor(darkModeFilledInPostIcon);
+    setProfileStatus(false)
     openModal();
   };
 
@@ -149,12 +152,14 @@ const NavBar = () => {
     e.stopPropagation();
     removeIconColor();
     setExploreIconColor(darkModeFilledInExploreIcon);
+    setProfileStatus(false)
   };
 
   const fillInNavHeart = (e) => {
     e.stopPropagation();
     removeIconColor();
     setHeartIconColor(darkModeFilledInHeartHomeIcon);
+    setProfileStatus(false)
   };
 
   // function toggleSearch(e) {
@@ -220,7 +225,8 @@ const NavBar = () => {
             >
               {heartIconColor}
             </NavLink>
-            <ProfileButton/>
+
+            <ProfileButton profileStatus={profileStatus}/>
           </div>
         </div>
         <div>

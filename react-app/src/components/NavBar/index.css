@@ -232,3 +232,13 @@ width: 30%;
 ::placeholder{
   color: white;
 }
+
+.dropdownIcon {
+  margin-right: 5px;
+  margin-top: 3px;
+}
+
+.dropdownOptions {
+  display: flex;
+  align-items: center;
+}
