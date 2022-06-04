@@ -1,7 +1,7 @@
 .singlePostPage {
   padding-top: 50px;
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
 }
@@ -12,7 +12,8 @@
   flex-direction: row;
   height: fit-content;
   border: 0.5px solid rgba(128, 128, 128, 0.293);
-  width: 750px;
+  width: 800px;
+  height: 600px;
 }
 
 .right {
@@ -46,7 +47,8 @@
 
 .postOptions {
   position: relative;
-  left: 40%;
+  left: 63%;
+  cursor: pointer;
 }
 
 .user-caption {

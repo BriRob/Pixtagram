@@ -37,7 +37,7 @@ function Comments({ postId }) {
                     <div className="username-comment-container">
                       <div id='comment'><a id='username' href={`/users/${comment.user.id}`}>{comment.user.username}{comment.user.verified? <img style={{'height':'15px'}} src={checkmark} alt="checkmark"/>: null}</a> {comment.text}</div>
                     </div>
-                    <div>
+                    <div className="deleteCommentButton">
                       {currUser === comment.user.id && (
                         <div
                           className='delete'

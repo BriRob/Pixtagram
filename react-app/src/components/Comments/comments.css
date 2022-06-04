@@ -25,6 +25,11 @@
   /* align-items: ; */
 }
 
+.deleteCommentButton {
+  position: relative;
+  left: 5%;
+}
+
 
 #profile-pic-holder {
     width: 25px;
