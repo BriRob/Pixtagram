@@ -69,9 +69,9 @@ function App() {
             {/* <EditUser users={users}/> */}
           </ProtectedRoute>
 
-          {/* <Route path={'/test'}>
+         {/* <Route path={'/test'}>
           <SearchBar />
-          </Route>
+          </Route> */}
           <Route path='/'>
             <h1>Page Not Found</h1>
           </Route>
