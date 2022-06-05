@@ -6,6 +6,7 @@ import './LoginForm.css'
 import pixta from '../../images/splash.png'
 import logo from '../../images/logo.png'
 
+
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');

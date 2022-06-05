@@ -7,6 +7,7 @@ import { profileDropDown, settingsDropDown } from "./Navicons";
 
 const ProfileButton = ({status}) => {
 
+
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   // const profile = useSelector(
@@ -47,11 +48,13 @@ const ProfileButton = ({status}) => {
   //   // return document.removeEventListener("click", closeMenu);
   // }, [dispatch]);
 
+
   const logoutFunc = async (e) => {
     e.preventDefault();
     e.stopPropagation();
     await dispatch(sessionActions.logout());
   };
+
 
   return (
     <div>
@@ -74,4 +77,6 @@ const ProfileButton = ({status}) => {
   );
 };
 
+
 export default ProfileButton;
+

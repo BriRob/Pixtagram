@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { Link, NavLink, useHistory, useParams } from "react-router-dom";
 import { getOnePostThunk } from "../../store/post";
@@ -113,6 +114,7 @@ function Post() {
           <LoadingSpinner />
         </div>
       </>
+
     );
   } else {
     return (

@@ -15,6 +15,7 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
   const [imgUrl, setImgUrl] = useState("");
   const [caption, setCaption] = useState("");
   const [errors, setErrors] = useState([]);
+
   const [showUpload, setShowUpload] = useState(true);
   const [previewUrl, setPreviewUrl] = useState("");
 

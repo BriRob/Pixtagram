@@ -49,6 +49,7 @@ def get_one_post(id):
 
 # Create a Post
 @post_routes.route('/<int:userId>/new', methods=["POST"])
+
 @login_required
 def create_post(userId):
     # currUser = User.query.get(userId)
@@ -82,7 +83,6 @@ def create_post(userId):
             url = upload["url"]
 
 
-
         # print('CREATE HAS BEEN VALIDATED')
 
         new_post = Post(
@@ -95,6 +95,7 @@ def create_post(userId):
         db.session.add(new_post)
         db.session.commit()
         return new_post.to_dict()
+      
     # print('END OF ROUTE')
     # print(form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -160,3 +161,4 @@ def remove_like(post_id, user_id):
     # print("post likes after!!!! \n\n", post.post_likes)
 
     return post.to_dict()
+

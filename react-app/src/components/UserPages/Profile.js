@@ -40,6 +40,7 @@ function User() {
     return arr;
   }
 
+
   const count = postCounter(posts);
   const userPosts = userPostsFinder(posts);
 

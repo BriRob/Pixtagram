@@ -23,3 +23,4 @@ class CreatePostForm(FlaskForm):
 class EditPostForm(FlaskForm):
     caption = StringField("caption")
     # caption = StringField("caption", validators=[no_spaces_caption])
+

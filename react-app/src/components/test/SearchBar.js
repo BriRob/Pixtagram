@@ -19,9 +19,6 @@ function SearchBar() {
 
     console.log(jsonResults, "this is jsonresults")
 
-
-
-
     return (
         <>
 

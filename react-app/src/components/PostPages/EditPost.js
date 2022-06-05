@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { editPostThunk, getOnePostThunk } from "../../store/post";
 import "./modals.css";
+
 function EditPost() {
   const dispatch = useDispatch();
   const history = useHistory();

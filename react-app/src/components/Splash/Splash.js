@@ -278,6 +278,7 @@ function Splash() {
         ) : (
           <LoadingSpinner />
         )}
+
       </div>
       {/* <button onClick={(e) => goToProfile(e)}>Go to profile</button> */}
       {/* </div> */}

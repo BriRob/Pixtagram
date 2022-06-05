@@ -110,6 +110,7 @@ export const createPostThunk = (userId, form) => async (dispatch) => {
     if (data.errors) {
       // console.log("DATA.ERRORS IS TRUE", data.errors)
       // console.log("data in thunk with errors", data)
+
       return data;
     } else {
       return ["An error occurred. Please try again."];
@@ -127,6 +128,7 @@ export const editPostThunk = (postId, form) => async (dispatch) => {
 
   formData.append("caption", caption);
   // console.log("FORMDATA \n\n", formData["caption"])
+
 
 
   const option = {
@@ -159,6 +161,7 @@ export const editPostThunk = (postId, form) => async (dispatch) => {
 
 // Delete Post Think
 export const deletePostThunk = (postId) => async (dispatch) => {
+
   // console.log('<--------- HELLO From DELETE POST THUNK -------->')
   const response = await fetch(`/api/posts/${postId}/delete`, {
     method: 'DELETE'
