@@ -1,0 +1,49 @@
+.p-container{
+    z-index: -10;
+    padding-top: 100px;
+    display: flex;
+    /* justify-content: space-evenly; */
+    align-items: center;
+    /* border: white solid 1px; */
+    width: 100vw;
+    flex-direction: column;
+    height: 30vh;
+}
+
+#p-sorry{
+    padding-bottom: 15px;
+    font-size: 22px;
+}
+
+#p-text{
+    /* padding-top: 4%; */
+    font-size: 16px;
+}
+
+#p-pixta-link{
+    padding-left: 4px;
+    /* below is the original ig color */
+    /* color: #E0F1FF; */
+    color: #cee6f9;
+    text-decoration: none;
+}
+
+.gif{
+    padding-top: 25%;
+    /* border: purple solid 1px; */
+    height: 30vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#e-egg{
+    height:100%;
+    width: 100%;
+}
+
+#gif-container{
+    height: 200px;
+    width: 200px;
+}
