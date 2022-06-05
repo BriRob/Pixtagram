@@ -1,5 +1,5 @@
 .singlePostPage {
-  padding-top: 50px;
+  padding-top: 100px;
   width: 100vw;
   height: 90vh;
   display: flex;
@@ -193,7 +193,7 @@
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
   width: 100%;
-  color: rgb(125, 17, 17);
+  color: rgb(255, 0, 0);
   display: flex;
   justify-content: center;
   justify-content: center;
@@ -265,7 +265,7 @@ align-items: center;
   padding-top: 3px;
 }
 
-#footer{
+/*#footer {
   position:absolute;
   border: pink solid 1px;
   display: flex;
@@ -273,7 +273,7 @@ align-items: center;
   justify-content: center;
   width: 100%;
   /* height: 30%; */
-
+/* 
 }
 
 #footer-line{
@@ -281,9 +281,9 @@ align-items: center;
   background-color: #072641;
   width: 800px;
   /* margin-left: 20%; */
-}
+/* }
 
 #parent{
   height: 100vh;
   width: 100vw;
-}
+} */ 

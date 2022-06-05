@@ -93,6 +93,10 @@ input {
     cursor: pointer;
 }
 
+.s-username {
+    text-decoration: none;
+}
+
 #s-username:hover {
     text-decoration: underline;
     /* width: 105%; */

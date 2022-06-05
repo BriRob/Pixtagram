@@ -9,12 +9,12 @@ import { addLikeThunk, getAllPostsThunk } from "../../store/post";
 import LoadingSpinner from "../Spinner/Spinner";
 import { NavLink } from "react-router-dom";
 import CheckMark from "../CheckMark/CheckMark";
-import checkmark from '../CheckMark/checkmark.png'
+import checkmark from "../CheckMark/checkmark.png";
 import { getCommentsThunk } from "../../store/comment";
 import SplashComments from "./SplashComments";
 import { likeHeartIcon, likeFilledHeartIcon } from "./SplashIcons";
 import { likeHeartFilledIn } from "../Post/postIcons";
-
+import PostModal from "../Post/PostModal";
 
 function Splash() {
   const dispatch = useDispatch();
@@ -23,11 +23,12 @@ function Splash() {
   const posts = useSelector((state) => state?.posts?.allPosts?.posts);
   //   console.log(posts);
 
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [showPostOptions, setShowPostOptions] = useState(false);
+  const [currPost, setCurrPost] = useState()
 
   useEffect(() => {
-    dispatch(getUserThunk(id))
-    .then(() => dispatch(getAllPostsThunk()))
+    dispatch(getUserThunk(id)).then(() => dispatch(getAllPostsThunk()));
     // .then(() => dispatch(getCommentsThunk()))
   }, [dispatch]);
 
@@ -41,17 +42,46 @@ function Splash() {
     return <Redirect to="/login" />;
   }
 
-  function likeAPost(e, postId, userId){
-    e.stopPropagation();
-    dispatch(addLikeThunk(postId, userId))
-    console.log(postId, "this is postId")
-    console.log(userId, "this is the current person signed in")
-  }
 
+  const openPostOptions = (e, postId) => {
+    setCurrPost(postId)
+    setShowPostOptions(true);
+  };
+
+  function likeAPost(e, postId, userId) {
+    e.stopPropagation();
+    dispatch(addLikeThunk(postId, userId));
+    console.log(postId, "this is postId");
+    console.log(userId, "this is the current person signed in");
+  }
 
   return (
     <>
       {/* <div className="home-page-body"> */}
+        {showPostOptions && (
+          <>
+            <div className="backgroundFeed">
+              <div className="postOptionsModalFeed">
+                <div
+                  onClick={() => setShowPostOptions(false)}
+                  className="postOptionsModalBckgFeed"
+                ></div>
+                <div className="actualModalComponentFeed">
+                  <PostModal
+                    postId={currPost}
+                    show={showPostOptions}
+                  />
+                  <div
+                    className="cancelPostButtonFeed"
+                    onClick={() => setShowPostOptions(false)}
+                  >
+                    Cancel
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       <div className="stories-container"></div>
       <div className="feed">
         {posts ? (
@@ -80,11 +110,22 @@ function Splash() {
                       to={`/users/${post.user.id}`}
                     >
                       {post.user.username}
-                      {post.user.verified ? <img style={{ 'height': '15px' }}
-                        src={checkmark}></img> : null}
+                      {post.user.verified ? (
+                        <img style={{ height: "15px" }} src={checkmark}></img>
+                      ) : null}
                     </NavLink>
                   </div>
-                  {id == post.user.id && <div className="dotdotdot">{dotDotDotIcon}</div>}
+
+                  {id === post.user.id && (
+                    <>
+                      <div
+                        className="dotdotdot"
+                        onClick={(e) => openPostOptions(e, post.id)}
+                      >
+                        {dotDotDotIcon}
+                      </div>
+                    </>
+                  )}
                 </div>
                 <div className="feed-post-image">
                   <NavLink
@@ -94,19 +135,29 @@ function Splash() {
                     <img className="user-post-image" src={post.img_url}></img>
                   </NavLink>
                 </div>
+
                 <div className="bottom-post-feed">
                   <div className="likes-post-feed">
-                    <div className="heart-icon" style={{'width': '30px'}} onClick={e=> likeAPost(e, post.id, id)}>
-                    {post.post_likes[0] === undefined? likeHeartIcon: post.post_likes.includes(id)? likeHeartFilledIn: likeHeartFilledIn}
+                    <div
+                      className="heart-icon"
+                      style={{ width: "30px" }}
+                      onClick={(e) => likeAPost(e, post.id, id)}
+                    >
+                      {post.post_likes[0] === undefined
+                        ? likeHeartIcon
+                        : post.post_likes.includes(id)
+                        ? likeHeartFilledIn
+                        : likeHeartFilledIn}
                     </div>
                   </div>
                   <div className="opinionsBox">
                     <div className="post-caption-feed">
-                      <img
-                        src={post.user.profile_pic_url}
-                        className="user-profile-pic-caption"
-                      ></img>
+                      {/* <img
+                          src={post.user.profile_pic_url}
+                          className="user-profile-pic-caption"
+                        ></img> */}
                       <NavLink
+                        id="id-nav"
                         style={{
                           color: "white",
                           fontWeight: "bold",
@@ -115,52 +166,17 @@ function Splash() {
                         }}
                         to={`/users/${post.user.id}`}
                       >
-                        {post.user.username}{post.user.verified ? <img style={{ 'height': '15px' }} src={checkmark} /> : null}
+                        {post.user.username}
+                        {post.user.verified ? (
+                          <img style={{ height: "15px" }} src={checkmark} />
+                        ) : null}
                       </NavLink>
                       {post.caption}
                     </div>
-                    {id == post.user.id && <div className="dotdotdot">{dotDotDotIcon}</div>}
-                  </div>
-                  <div className="feed-post-image">
-                    <NavLink
-                      style={{ color: "white", fontWeight: "bold" }}
-                      to={`/posts/${post.id}`}
-                    >
-                      <img className="user-post-image" src={post.img_url}></img>
-                    </NavLink>
-                  </div>
-                  <div className="bottom-post-feed">
-                    <div className="likes-post-feed">
-                      <p>Here go the likes</p>
+
+                    <div id="splash-comment-container">
+                      <SplashComments post={post} />
                     </div>
-                    <div className="opinionsBox">
-                      <div className="post-caption-feed">
-                        {/* <img
-                          src={post.user.profile_pic_url}
-                          className="user-profile-pic-caption"
-                        ></img> */}
-                        <NavLink
-                          id='id-nav'
-                          style={{
-                            color: "white",
-                            fontWeight: "bold",
-                            textDecoration: "none",
-                            marginRight: "15px",
-                          }}
-                          to={`/users/${post.user.id}`}
-                        >
-                          {post.user.username}{post.user.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}
-                        </NavLink>
-                        {post.caption}
-                      </div>
-
-                      <div id='splash-comment-container'>
-                        <SplashComments post={post}/>
-                      </div>
-
-                    </div>
-
-
                   </div>
                 </div>
               </div>

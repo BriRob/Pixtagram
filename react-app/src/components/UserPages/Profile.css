@@ -17,7 +17,7 @@
 }
 
 #profile-container {
-    padding-top: 20px;
+    padding-top: 100px;
     margin-top: 2px;
     /* border: orange solid 1px; */
     height: 100vh;
@@ -107,6 +107,7 @@
 }
 
 #profile-pic-left{
+    object-fit: cover;
     border-radius: 50%;
 
     height: 150px;

@@ -16,31 +16,31 @@ import {
 } from "./Navicons";
 import ProfileButton from "./ProfileButton";
 // import { getUserThunk } from "../../store/user";
-import image from './svgexport-17.png'
+import image from "./svgexport-17.png";
 // import SearchModal from "./SearchModal";
 import SearchBar from "../test/SearchBar";
 
 const NavBar = () => {
   const dispatch = useDispatch();
-  const location = useLocation()
+  const location = useLocation();
   const { pathname } = useLocation();
   const user = useSelector((state) => state.session.user);
   // const profile = useSelector(
   //   (state) => state?.userReducer?.user?.profile_pic_url
   // );
 
-
   const [showModal, setShowModal] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  const [searchInput, setSearchInput] = useState('')
-  const [houseColor, setHouseColor] = useState(darkModeHomeIcon);
+  const [searchInput, setSearchInput] = useState("");
+  const [houseColor, setHouseColor] = useState(darkModeFilledInHomeIcon);
   const [postIconColor, setPostIconColor] = useState(darkModePostIcon);
   const [exploreIconColor, setExploreIconColor] = useState(darkModeExploreIcon);
   const [heartIconColor, setHeartIconColor] = useState(darkModeHeartHomeIcon);
-  const [profileStatus, setProfileStatus] = useState(false)
-  const [myOptions, setMyOptions] = useState([])
+  const [profileStatus, setProfileStatus] = useState(false);
+  const [myOptions, setMyOptions] = useState([]);
   // console.log("location pathname \n\n", pathname)
-
+  console.log('THIS IS THE STATUS FROM NAVBAR', profileStatus)
+  console.log('RERENDERING FROM NAVBAR', profileStatus)
   // const getDataFromApi = () => {
   //   console.log('Options fetched from api')
   //   fetch('/api/users/all').then((response) => {return response.json()
@@ -54,7 +54,7 @@ const NavBar = () => {
   //     })
   // }
 
-  console.log(showSearch, 'This is search status')
+  // console.log(showSearch, 'This is search status')
 
   // function menuToggle(e, showModal) {
   //   e.preventDefault()
@@ -65,7 +65,6 @@ const NavBar = () => {
   //     setShowModal(true)
   //   }
   // }
-
 
   // function inputReader(e, val){
   //   e.preventDefault()
@@ -94,21 +93,23 @@ const NavBar = () => {
   //   setShowSearch(true);
   // }
 
+  const openProfileDropdown = () => {
+    setProfileStatus(true)
+  }
+
   const openModal = () => {
-    if (showModal) return;
+    // if (showModal) return;
     setShowModal(true);
   };
 
-  useEffect(() => {
-    // dispatch(getUserThunk(user.id));
-    if (pathname !== "/") {
-      removeIconColor()
-    }
-  }, [searchInput]);
-
+  // useEffect(() => {
+  //   // dispatch(getUserThunk(user.id));
+  //   if (pathname !== "/") {
+  //     removeIconColor();
+  //   }
+  // }, [searchInput]);
 
   //regular font link https://fontmeme.com/permalink/220528/c175d4b5354eae87b98b5233d328cfd5.png
-
 
   const logo = (
     <img
@@ -137,14 +138,15 @@ const NavBar = () => {
     e.stopPropagation();
     removeIconColor();
     setHouseColor(darkModeFilledInHomeIcon);
-    setProfileStatus(false)
+    setProfileStatus(false);
   };
+  console.log("THIS IS THE PROFILESTATUS", profileStatus);
 
   const fillInPost = (e) => {
     e.stopPropagation();
     removeIconColor();
     setPostIconColor(darkModeFilledInPostIcon);
-    setProfileStatus(false)
+    setProfileStatus(false);
     openModal();
   };
 
@@ -152,14 +154,14 @@ const NavBar = () => {
     e.stopPropagation();
     removeIconColor();
     setExploreIconColor(darkModeFilledInExploreIcon);
-    setProfileStatus(false)
+    setProfileStatus(false);
   };
 
   const fillInNavHeart = (e) => {
     e.stopPropagation();
     removeIconColor();
     setHeartIconColor(darkModeFilledInHeartHomeIcon);
-    setProfileStatus(false)
+    setProfileStatus(false);
   };
 
   // function toggleSearch(e) {
@@ -170,7 +172,6 @@ const NavBar = () => {
   //   }
   //   return;
   // }
-
 
   return (
     <div className="nav-bar">
@@ -183,15 +184,18 @@ const NavBar = () => {
           </div>
           <div className="search-parent-container">
             <div className="search-bar">
-              <div  style={{ 'background': `url(${image}) no-repeat 13px` }} className="search-form">
-              {/* <form className="search-form"
+              <div
+                style={{ background: `url(${image}) no-repeat 13px` }}
+                className="search-form"
+              >
+                {/* <form className="search-form"
                 style={{ 'background': `url(${image}) no-repeat 13px` }}
                 // onClick={e => searchToggle(e, showSearch)}
                 > LEAVE THIS COMMENT HERE FOR SPRINT WEEK :D */}
                 <SearchBar />
                 {/* {showSearch && (<SearchModal user={user} profile={profile} />)} */}
-              {/* </form> */}
-                </div>
+                {/* </form> */}
+              </div>
             </div>
           </div>
           <div className="icons">
@@ -225,8 +229,18 @@ const NavBar = () => {
             >
               {heartIconColor}
             </NavLink>
-
-            <ProfileButton profileStatus={profileStatus}/>
+            <button className="profile-button" onClick={() => openProfileDropdown()}>
+              <img src={user.profile_pic_url}></img>
+            </button>
+            {profileStatus && (
+              <>
+                <div
+                  className="outerDropDown"
+                  onClick={() => setProfileStatus(false)}
+                ></div>
+                <ProfileButton status={() => setProfileStatus(false)} />
+              </>
+            )}
           </div>
         </div>
         <div>
@@ -242,4 +256,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar
+export default NavBar;
