@@ -82,7 +82,7 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
                         type="file"
                         name="img_url"
                         onChange={updateImage}
-                        accept="image/*"
+                        accept=".jpg, .jpeg, .png, .gif"
                       ></input>
                     </label>
                   </>
