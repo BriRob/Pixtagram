@@ -90,6 +90,14 @@ input {
     padding-left: 16px;
     font-weight: bold;
     font-size: .90rem;
+    cursor: pointer;
+}
+
+#s-username:hover {
+    text-decoration: underline;
+    /* width: 105%; */
+    cursor: pointer;
+
 }
 
 
@@ -105,7 +113,10 @@ input {
 
 
 #s-nav{
-    font-size: 13px;
+    margin-top: 5px;
+    padding-top: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
     color:#181818;
     border: blue;
     width: 470px;

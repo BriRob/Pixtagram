@@ -99,22 +99,12 @@ function SplashComments({ post }) {
           <>
             { comments && (
                 <>
-                    { comment=comments[1].length }
-                    {/* {console.log("MAICA THIS IS THE LENGTH OF A COMMENT \n\n", comment1[0])} */}
                     <div id='s-parent'>
                       {/* Only render the following if there are comments*/}
                       {comments.length > 0 && (
                         <>
                           <div id='s-comment-container'>
                                 {/* First Comment */}
-                              <div id='username-comment'>
-                                <p id='s-username'>{comments[0]?.user?.username} </p><p id='s-comment'>
-                                  {/* { showMore ? {comments[0]?.text}.length : {comments[0]?.text}.substring(0, 10)}} */}
-                                  {comments[0]?.text}
-                                </p>
-
-                              </div>
-
                                 {/* If post has more than one comment render this */}
                               { comments.length > 1 && (
                                   <>
@@ -125,11 +115,18 @@ function SplashComments({ post }) {
                                     )}
 
                                   <div id='username-comment'>
+                                  <p id='s-username'>{comments[0]?.user?.username} </p><p id='s-comment'>
+                                    {/* { showMore ? {comments[0]?.text}.length : {comments[0]?.text}.substring(0, 10)}} */}
+                                    {comments[0]?.text}
+                                  </p>
+                                  </div>
+                                  <div id='username-comment'>
                                     <p id='s-username'>{comments[comments.length-1]?.user?.username}</p><p
-                                      id='s-comment'>
+                                        id='s-comment'>
                                       {comments[comments.length-1]?.text}
                                     </p>
-                                  </div>
+
+                              </div>
                                   </>
                               )}
                           </div>

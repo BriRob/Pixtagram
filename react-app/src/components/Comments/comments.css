@@ -3,26 +3,16 @@
   /* border: 1px solid lavender; */
   height: 240px;
   width: 220px;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 /* holds the username AND comment AND profile pic AND button*/
 .comments-container {
-  /* border: pink solid 2px;
-    overflow: auto;
-    margin-bottom: 35px;
-    /* overflow-x: hidden; */
-  /*overflow-y: scroll; */
-  /* display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas:
-        "profilepic username comment comment comment" */
-
-  padding: 15px 10px;
+  /* border: pink solid 2px; */
+  padding: 10px 10px;
   display: flex;
-  font-size: 13px;
-  /* align-items: ; */
+  font-size: 14px;
+  width: 200px;
 }
 
 .deleteCommentButton {
@@ -32,21 +22,17 @@
 
 
 #profile-pic-holder {
-    width: 25px;
-    height: 25px;
-    margin-right: 8px;
+    width: 28px;
+    height: 28px;
+    margin-right: 10px;
 }
 
 #profile-pic {
-    /* border-radius: 50%;
-    height: 100%;
-    width: 100%;
-    grid-area: profilepic; */
     display: flex;
     justify-content: end;
     border-radius: 30px;
-    width: 25px;
-    height: 25px;
+    width: 28px;
+    height: 28px;
     border: 0;
     margin-right: 10px;
 }
@@ -54,24 +40,21 @@
 /* holds the comment text*/
 #comment {
     display: block;
-    /* line-height: px; */
     overflow-wrap: anywhere;
     white-space: normal;
-    letter-spacing: 0.1rem;
     grid-area: comment;
+    width: 185px;
 }
 
 .username-comment-container {
     overflow-wrap: break-word;
+    padding-left: 8%;
 }
 
 .delete {
   background-color: none;
   cursor: pointer;
-  /* color: black;
-    height: 10px;
-    width: 10px;
-    grid-area: delete; */
+
   visibility: hidden;
   /* opacity: 0; */
 }
@@ -83,7 +66,7 @@
 /* .delete:hover {
   /* opacity: 1; */
   /* visibility: visible; */
-/* } */ 
+/* } */
 
 #username {
   font-weight: bold;

@@ -88,11 +88,12 @@ function Splash() {
                     </div>
                     <div className="opinionsBox">
                       <div className="post-caption-feed">
-                        <img
+                        {/* <img
                           src={post.user.profile_pic_url}
                           className="user-profile-pic-caption"
-                        ></img>
+                        ></img> */}
                         <NavLink
+                          id='id-nav'
                           style={{
                             color: "white",
                             fontWeight: "bold",
