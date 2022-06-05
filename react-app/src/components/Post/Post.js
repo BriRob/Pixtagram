@@ -48,15 +48,13 @@ function Post() {
     // if (currUser == userId) {
     //   setOwner(true);
     // }
-    
-    let response = await dispatch(getOnePostThunk(postId))
-    
-    if (response.id === undefined) {
-      history.push('/page-not-found')
-    }
-    dispatch(getCommentsThunk(postId))
-    .then(() => setIsLoaded(true));
 
+    let response = await dispatch(getOnePostThunk(postId));
+
+    if (response.id === undefined) {
+      history.push("/page-not-found");
+    }
+    dispatch(getCommentsThunk(postId)).then(() => setIsLoaded(true));
   }, [isLoaded]);
 
   // if(isLoaded){
@@ -234,7 +232,8 @@ function Post() {
                       // onClick={(e) => console.log(e.target, "e.target", e.relatedTarget.addEventListener('text-area-box'), "e.related")}
                       className="comment-icon-post"
                     >
-                      {commentIcon}
+                      <label for='for-input-focus' >{commentIcon}</label>
+                      
                     </div>
                   </div>
                   <div className="liked-by">
@@ -277,6 +276,7 @@ function Post() {
                       <form onSubmit={handleSubmit} id="comment-form">
                         <textarea
                           className="comment-form"
+                          id="for-input-focus"
                           onBlur={(e) => {
                             if (e.currentTarget === e.target) {
                               console.log("unfocused input box");
@@ -312,46 +312,6 @@ function Post() {
                       </form>
                     </div>
                   </div>
-                </div>
-
-                <div id="form-container">
-                  <form onSubmit={handleSubmit} id="comment-form">
-                    <textarea
-                      id="focus-input"
-                      className="comment-form"
-                      onBlur={(e) => {
-                        if (e.currentTarget === e.target) {
-                          console.log("unfocused input box");
-                        }
-                        if (!e.currentTarget.contains(e.relatedTarget)) {
-                          console.log("clicking somewhere else entirely");
-                        }
-                      }}
-                      onFocus={(e) => {
-                        if (e.currentTarget === e.target) {
-                          console.log("focusing on input box");
-                        }
-                        if (!e.currentTarget.contains(e.relatedTarget)) {
-                          console.log("clicking on myself???");
-                        }
-                      }}
-                      // value={"text-area-box"}
-                      placeholder="Add a comment..."
-                      // below for creating a comment
-                      type="text"
-                      name="text"
-                      onChange={(e) => setText(e.target.value)}
-                      value={text}
-                      rows="2"
-                      cols="28"
-                    ></textarea>
-                    {/* <button disabled={true} className="post-comment-button">
-                     */}
-                    <button disabled={!text} id="post-comment-button">
-                      {" "}
-                      Post{" "}
-                    </button>
-                  </form>
                 </div>
               </div>
             </div>
