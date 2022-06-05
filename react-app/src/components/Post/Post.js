@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import { NavLink, useHistory, useParams } from "react-router-dom";
+import { Link, NavLink, useHistory, useParams } from "react-router-dom";
 import { getOnePostThunk } from "../../store/post";
 import daysSincePost from "./helpers";
 import { likeHeart, likeHeartFilledIn, commentIcon } from "./postIcons";
@@ -36,7 +36,7 @@ function Post() {
   const [errors, setErrors] = useState([]);
 
   const [showLikes, setShowLikes] = useState(false);
-  const [postForViewLikes, setPostForViewLikes] = useState()
+  const [postForViewLikes, setPostForViewLikes] = useState();
 
   const { postId } = useParams();
   // console.log('Hey Maica --> POST ID', postId)
@@ -99,7 +99,7 @@ function Post() {
 
   const openPeopleLikes = (post) => {
     setShowLikes(true);
-    setPostForViewLikes(post)
+    setPostForViewLikes(post);
   };
 
   if (!isLoaded) {
@@ -161,9 +161,9 @@ function Post() {
           <div className="singlePostPage">
             <div className="postCard">
               <div className="left">
-                <a onClick={toProfile}>
+                <Link onClick={toProfile}>
                   <img className="post-picture" src={post?.img_url}></img>
-                </a>
+                </Link>
               </div>
               <div className="right">
                 <div className="user-info">
@@ -237,10 +237,18 @@ function Post() {
                       <div className="liked-by-line">Be the first to like</div>
                     )}
                     {Object.keys(post.post_likes).length === 1 && (
-                      <div className="liked-by-line" onClick={() => openPeopleLikes(post)}>1 like</div>
+                      <div
+                        className="liked-by-line"
+                        onClick={() => openPeopleLikes(post)}
+                      >
+                        1 like
+                      </div>
                     )}
                     {Object.keys(post.post_likes).length > 1 && (
-                      <div className="liked-by-line" onClick={() => openPeopleLikes(post)}>
+                      <div
+                        className="liked-by-line"
+                        onClick={() => openPeopleLikes(post)}
+                      >
                         {Object.keys(post.post_likes).length} likes
                       </div>
                     )}
@@ -298,10 +306,9 @@ function Post() {
                       </form>
                     </div>
                   </div>
+                </div>
 
-                )}
-                <div id='form-container'>
-
+                <div id="form-container">
                   <form onSubmit={handleSubmit} id="comment-form">
                     <textarea
                       id="focus-input"
@@ -333,8 +340,11 @@ function Post() {
                       cols="28"
                     ></textarea>
                     {/* <button disabled={true} className="post-comment-button">
-                    */}
-                    <button disabled={!text} id="post-comment-button"> Post </button>
+                     */}
+                    <button disabled={!text} id="post-comment-button">
+                      {" "}
+                      Post{" "}
+                    </button>
                   </form>
                 </div>
               </div>
