@@ -60,6 +60,7 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
   return (
     <div>
       <div className="createPostModal">
+        <div className="createPostBckg" onClick={() => closeModal()}></div>
         <div className="inner">
           <form onSubmit={handleSubmit} className="createPostForm">
             <div className="topCreatePostModal">

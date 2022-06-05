@@ -19,34 +19,43 @@ function EditUser() {
   // const users = useSelector((state) => state.userReducer.users);
   const { userId } = useParams();
 
-  const [fullName, setFullName] = useState(currentUser?.full_name);
-  const [biography, setBiography] = useState(currentUser?.bio);
+  const [fullName, setFullName] = useState(sessionUser?.full_name);
+  const [biography, setBiography] = useState(sessionUser?.bio);
   const [profilePicUrl, setProfilePicUrl] = useState(
-    currentUser?.profile_pic_url
+    sessionUser?.profile_pic_url
   );
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userName, setUserName] = useState(currentUser?.username);
+  const [userName, setUserName] = useState(sessionUser?.username);
   const [errors, setErrors] = useState([]);
-  const [preImg, setPreImg] = useState(currentUser?.profile_pic_url);
+  const [preImg, setPreImg] = useState(sessionUser?.profile_pic_url);
   const [showPostOptions, setShowPostOptions] = useState(false);
 
-  const setFunc = (currentUser) => {
-    setBiography(currentUser?.bio);
-    setProfilePicUrl();
-    setFullName(currentUser?.full_name);
-  };
+  // const setFunc = (currentUser) => {
+  //   setBiography(currentUser?.bio);
+  //   setProfilePicUrl();
+  //   setFullName(currentUser?.full_name);
+  // };
+
+  // console.log("******************CURRSUSER", currentUser);
 
   useEffect(() => {
-    const controller = new AbortController();
+    // const controller = new AbortController();
+
+    dispatch(getUserThunk(userId));
+
     if (currentUser) {
-      dispatch(getUserThunk(userId))
-        .then(() => dispatch(authenticate()))
-        // .then(() => setFunc())
-        .then(() => setIsLoaded(true));
-    } else {
-      history.push(`/users/${userId}`);
-      return () => controller.abort();
+      setIsLoaded(true);
     }
+    // if (currentUser?.id == sessionUser?.id) {
+    //   // dispatch(getUserThunk(userId))
+    //   //   .then(() => dispatch(authenticate()))
+    //   //   // .then(() => setFunc())
+    //   //   .then(() => setIsLoaded(true));
+    //   setIsLoaded(true);
+    // } else {
+    //   history.push(`/users/${userId}`);
+    //   return () => controller.abort();
+    // }
 
     // if (!currentUser) {
     //   history.push(`/users/${userId}`);
@@ -97,44 +106,45 @@ function EditUser() {
   };
   // {/* <img src='https://pixtagrambucket.s3.amazonaws.com/pixta_test.png'></img> */}
 
-  if (!isLoaded) {
+  if (!isLoaded && currentUser === undefined) {
     return <h1>Loading...</h1>;
   } else {
     return (
       <>
         {showPostOptions && (
-          <>
-            <div className="background">
-              <div className="postOptionsModal">
-                <div
-                  onClick={() => setShowPostOptions(false)}
-                  className="postOptionsModalBckg"
-                ></div>
-                <div className="actualModalComponent">
-                  <div className="editPostModal">
-                    <div className="deletePostConfirmText">
-                      <h3>Delete user</h3>
-                      <p className="confirmdeltext">
-                        Are you sure you want to delete your user?
-                      </p>
-                    </div>
-                    <div className="delPostBtnFinal" onClick={e => deleteUser(e)}>
-                      Delete
-                    </div>
-                    {/* <div className="cancelPostButton" onClick={(e) => setDelModal(false)}>
-            Cancel
-          </div> */}
+          <div className="background">
+            <div className="postOptionsModal">
+              <div
+                onClick={() => setShowPostOptions(false)}
+                className="postOptionsModalBckg"
+              ></div>
+              <div className="actualModalComponent">
+                <div className="editPostModal">
+                  <div className="deletePostConfirmText">
+                    <h3>Delete user</h3>
+                    <p className="confirmdeltext">
+                      Are you sure you want to delete your user?
+                    </p>
                   </div>
                   <div
-                    className="cancelPostButton"
-                    onClick={() => setShowPostOptions(false)}
+                    className="delPostBtnFinal"
+                    onClick={(e) => deleteUser(e)}
                   >
-                    Cancel
+                    Delete
                   </div>
+                  {/* <div className="cancelPostButton" onClick={(e) => setDelModal(false)}>
+            Cancel
+          </div> */}
+                </div>
+                <div
+                  className="cancelPostButton"
+                  onClick={() => setShowPostOptions(false)}
+                >
+                  Cancel
                 </div>
               </div>
             </div>
-          </>
+          </div>
         )}
 
         <div className="bigEditUserPage">
@@ -227,7 +237,10 @@ function EditUser() {
                 </div>
               </form>
             </div>
-            <button className="delAccBtn" onClick={(e) => setShowPostOptions(true)}>
+            <button
+              className="delAccBtn"
+              onClick={(e) => setShowPostOptions(true)}
+            >
               Delete Account
             </button>
           </div>
