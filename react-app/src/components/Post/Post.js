@@ -75,6 +75,11 @@ function Post() {
     }
   };
 
+  //
+  const toProfile = (e) => {
+    history.push(`/users/users/${post?.user?.id}`)
+  }
+
   // console.log("post comment errors", errors);
 
   function changeHeart(e) {
@@ -119,10 +124,11 @@ function Post() {
             </div>
           </>
         )}
+        <div id='parent'>
         <div className="singlePostPage">
           <div className="postCard">
             <div className="left">
-              <img className="post-picture" src={post?.img_url}></img>
+              <a onClick={toProfile}><img className="post-picture" src={post?.img_url}></img></a>
             </div>
             <div className="right">
               <div className="user-info">
@@ -133,12 +139,12 @@ function Post() {
                   ></img>
                 </NavLink>
 
-                <span className="user-name">
+                <a id='hide-me' href={`/users/${post?.user?.id}`}><span className="user-name">
                   {`${post?.user?.username}`}
                   {post?.user?.verified ? (
                     <img style={{ height: "15px" }} src={checkmark} />
                   ) : null}
-                </span>
+                </span></a>
                 {currUser == userId && (
                   <div className="postOptions">
                     <span onClick={openPostOptions}>{dotDotDotIcon}</span>
@@ -165,6 +171,12 @@ function Post() {
                 </div>
               </div>
               <div className="bottom-right">
+                <div>
+
+                </div>
+                {/* p-line crates the lines */}
+                <div className="p-line"></div>
+
                 <div className="post-icons">
                   <div
                     style={{ cursor: "pointer" }}
@@ -182,52 +194,64 @@ function Post() {
                 <div className="liked-by">
                   <span className="liked-by-line">{`Liked by Demo and 45 others`}</span>
                 </div>
-                <span>{post?.days_since}</span>
-              </div>
+                <span id='date'>{post?.days_since}</span>
+
+                <div className="p-line"></div>
+
               <div>
-                <div>
-                  {errors.map((error, ind) => (
-                    <div id="errors" key={ind}>
-                      {error}
-                    </div>
-                  ))}
+                {text.length > 140 && (
+                  <div>
+                    {errors.map((error, ind) => (
+                      <div id="errors" key={ind}>
+                        {error}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <div id='form-container'>
+
+                  <form onSubmit={handleSubmit} id="comment-form">
+                    <textarea
+                      className="comment-form"
+                      onBlur={(e) => {
+                        if (e.currentTarget === e.target) {
+                          console.log("unfocused input box");
+                        }
+                        if (!e.currentTarget.contains(e.relatedTarget)) {
+                          console.log("clicking somewhere else entirely");
+                        }
+                      }}
+                      onFocus={(e) => {
+                        if (e.currentTarget === e.target) {
+                          console.log("focusing on input box");
+                        }
+                        if (!e.currentTarget.contains(e.relatedTarget)) {
+                          console.log("clicking on myself???");
+                        }
+                      }}
+                      // value={"text-area-box"}
+                      placeholder="Add a comment..."
+                      // below for creating a comment
+                      type="text"
+                      name="text"
+                      onChange={(e) => setText(e.target.value)}
+                      value={text}
+                      rows="2"
+                      cols="28"
+                    ></textarea>
+                    {/* <button disabled={true} className="post-comment-button">
+                    */}
+                    <button disabled={!text} id="post-comment-button"> Post </button>
+                  </form>
                 </div>
-                <form onSubmit={handleSubmit} id="comment-form">
-                  <textarea
-                    className="comment-form"
-                    onBlur={(e) => {
-                      if (e.currentTarget === e.target) {
-                        console.log("unfocused input box");
-                      }
-                      if (!e.currentTarget.contains(e.relatedTarget)) {
-                        console.log("clicking somewhere else entirely");
-                      }
-                    }}
-                    onFocus={(e) => {
-                      if (e.currentTarget === e.target) {
-                        console.log("focusing on input box");
-                      }
-                      if (!e.currentTarget.contains(e.relatedTarget)) {
-                        console.log("clicking on myself???");
-                      }
-                    }}
-                    // value={"text-area-box"}
-                    placeholder="Add a comment..."
-                    // below for creating a comment
-                    type="text"
-                    name="text"
-                    onChange={(e) => setText(e.target.value)}
-                    value={text}
-                    rows="3"
-                    cols="27"
-                  ></textarea>
-                  {/* <button disabled={true} className="post-comment-button">
-                   */}
-                  <button id="post-comment-button"> Post </button>
-                </form>
+              </div>
               </div>
             </div>
           </div>
+        </div>
+           {/* <div id='footer'>
+            <div id='footer-line'></div>
+           </div> */}
         </div>
       </>
     );
