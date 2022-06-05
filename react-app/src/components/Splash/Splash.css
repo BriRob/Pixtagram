@@ -78,8 +78,18 @@
   object-fit: contain;
 }
 
-.likes-post-feed, .feedHowManyLikes {
-  padding: 10px 10px;
+.likes-post-feed {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+}
+
+.feedHowManyLikes {
+  padding-left: 10px;
+  cursor: pointer;
+  width: fit-content;
+
 }
 
 .post-caption-feed {
@@ -156,6 +166,3 @@
   padding: 10px 0px;
 }
 
-.feedHowManyLikes {
-
-}

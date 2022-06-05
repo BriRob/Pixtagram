@@ -13,6 +13,7 @@ import { createCommentThunk, getCommentsThunk } from "../../store/comment";
 import checkmark from "../CheckMark/checkmark.png";
 import { closeButton } from "../NavBar/Navicons";
 import PostLikes from "./PostLikes";
+import LikesModal from "./LikesModal";
 
 function Post() {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ function Post() {
   const [text, setText] = useState("");
   // useState to setErrors for making comments
   const [errors, setErrors] = useState([]);
+
+  const [showLikes, setShowLikes] = useState(false);
+  const [postForViewLikes, setPostForViewLikes] = useState()
 
   const { postId } = useParams();
   // console.log('Hey Maica --> POST ID', postId)
@@ -93,6 +97,11 @@ function Post() {
     setShowPostOptions(true);
   };
 
+  const openPeopleLikes = (post) => {
+    setShowLikes(true);
+    setPostForViewLikes(post)
+  };
+
   if (!isLoaded) {
     return (
       <>
@@ -125,6 +134,29 @@ function Post() {
             </div>
           </>
         )}
+
+        {showLikes && (
+          <>
+            <div className="backgroundFeed">
+              <div className="postOptionsModalFeed">
+                <div
+                  onClick={() => setShowLikes(false)}
+                  className="postOptionsModalBckgFeed"
+                ></div>
+                <div className="actualModalComponentFeed">
+                  <LikesModal views={postForViewLikes} show={showLikes} />
+                  <div
+                    className="cancelPostButtonFeed"
+                    onClick={() => setShowLikes(false)}
+                  >
+                    Close
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
         <div id="parent">
           <div className="singlePostPage">
             <div className="postCard">
@@ -202,17 +234,13 @@ function Post() {
                   <div className="liked-by">
                     {/* <span className="liked-by-line">{`Liked by Demo and 45 others`}</span> */}
                     {Object.keys(post.post_likes).length === 0 && (
-                      <div className="liked-by-line">
-                        Be the first to like
-                      </div>
+                      <div className="liked-by-line">Be the first to like</div>
                     )}
                     {Object.keys(post.post_likes).length === 1 && (
-                      <div className="liked-by-line">
-                        1 like
-                      </div>
+                      <div className="liked-by-line" onClick={() => openPeopleLikes(post)}>1 like</div>
                     )}
                     {Object.keys(post.post_likes).length > 1 && (
-                      <div className="liked-by-line">
+                      <div className="liked-by-line" onClick={() => openPeopleLikes(post)}>
                         {Object.keys(post.post_likes).length} likes
                       </div>
                     )}

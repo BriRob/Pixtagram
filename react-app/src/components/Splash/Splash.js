@@ -16,6 +16,7 @@ import { likeHeartIcon, likeFilledHeartIcon } from "./SplashIcons";
 import { likeHeartFilledIn } from "../Post/postIcons";
 import PostModal from "../Post/PostModal";
 import Likes from "./Likes";
+import LikesModal from "../Post/LikesModal";
 
 function Splash() {
   const dispatch = useDispatch();
@@ -24,10 +25,13 @@ function Splash() {
   const posts = useSelector((state) => state?.posts?.allPosts?.posts);
   //   console.log(posts);
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
   const [showPostOptions, setShowPostOptions] = useState(false);
+  const [showLikes, setShowLikes] = useState(false);
   const [currPost, setCurrPost] = useState()
-  const [heartState, setHeartState] = useState(likeHeartIcon)
+
+  const [postForViewLikes, setPostForViewLikes] = useState()
+  // const [heartState, setHeartState] = useState(likeHeartIcon)
 
   useEffect(() => {
     dispatch(getUserThunk(id)).then(() => dispatch(getAllPostsThunk()));
@@ -36,7 +40,7 @@ function Splash() {
 
   const sendToProfile = (e, id) => {
     e.stopPropagation();
-    console.log("wtf");
+    // console.log("wtf");
     history.push(`/users/${id}`);
   };
 
@@ -44,6 +48,12 @@ function Splash() {
     return <Redirect to="/login" />;
   }
 
+
+  const openPeopleLikes = (postId, post) => {
+    setCurrPost(postId)
+    setShowLikes(true);
+    setPostForViewLikes(post)
+  };
 
   const openPostOptions = (e, postId) => {
     setCurrPost(postId)
@@ -105,6 +115,32 @@ function Splash() {
             </div>
           </>
         )}
+        
+        {showLikes && (
+          <>
+            <div className="backgroundFeed">
+              <div className="postOptionsModalFeed">
+                <div
+                  onClick={() => setShowLikes(false)}
+                  className="postOptionsModalBckgFeed"
+                ></div>
+                <div className="actualModalComponentFeed">
+                  <LikesModal
+                    views={postForViewLikes}
+                    show={showLikes}
+                  />
+                  <div
+                    className="cancelPostButtonFeed"
+                    onClick={() => setShowLikes(false)}
+                  >
+                    Close
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
       <div className="stories-container"></div>
       <div className="feed">
         {posts ? (
@@ -167,12 +203,14 @@ function Splash() {
                     )} */}
                     {Object.keys(post.post_likes).length === 1 && (
 
-                    <div className="feedHowManyLikes">1 like</div>
+                    <div className="feedHowManyLikes" onClick={() => openPeopleLikes(post.id, post)}>1 like</div>
                     )}
                     {Object.keys(post.post_likes).length > 1 && (
-                    <div className="feedHowManyLikes">{Object.keys(post.post_likes).length} likes</div>
+                    <div className="feedHowManyLikes" onClick={() => openPeopleLikes(post.id, post)}>{Object.keys(post.post_likes).length} likes</div>
                     )}
                   </div>
+
+
                   {/* <div className="likes-post-feed"> */}
                     {/* <div
                       className="heart-icon"

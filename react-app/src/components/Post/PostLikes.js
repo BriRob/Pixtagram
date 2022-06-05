@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   addLikeThunk,
+  getAllPostsThunk,
   getOnePostThunk,
   removeLikeThunk,
 } from "../../store/post";
@@ -28,6 +29,7 @@ function PostLikes({ post, sessionId }) {
     setHeartState(likeHeartFilledIn);
     await dispatch(addLikeThunk(postId, userId));
     await dispatch(getOnePostThunk(postId));
+    await dispatch(getAllPostsThunk(postId));
     console.log(postId, "this is postId");
     console.log(userId, "this is the current person signed in");
   }
@@ -37,6 +39,8 @@ function PostLikes({ post, sessionId }) {
     setHeartState(likeHeartIcon);
     await dispatch(removeLikeThunk(postId, userId));
     await dispatch(getOnePostThunk(postId));
+    await dispatch(getAllPostsThunk(postId));
+
   }
 
   const likeOrRemoveLike = (e, postId, userId) => {
@@ -52,7 +56,7 @@ function PostLikes({ post, sessionId }) {
   };
 
   return (
-    <div className="likes-post-feed">
+    <div className="likes-post">
       <div
         className="heart-icon"
         style={{ width: "30px", cursor: "pointer" }}
