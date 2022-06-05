@@ -5,7 +5,7 @@ import LoginForm from "../auth/LoginForm";
 import "./Splash.css";
 import { getUserThunk } from "../../store/user";
 import { dotDotDotIcon } from "./SplashIcons";
-import { addLikeThunk, getAllPostsThunk } from "../../store/post";
+import { addLikeThunk, getAllPostsThunk, removeLikeThunk } from "../../store/post";
 import LoadingSpinner from "../Spinner/Spinner";
 import { NavLink } from "react-router-dom";
 import CheckMark from "../CheckMark/CheckMark";
@@ -15,6 +15,7 @@ import SplashComments from "./SplashComments";
 import { likeHeartIcon, likeFilledHeartIcon } from "./SplashIcons";
 import { likeHeartFilledIn } from "../Post/postIcons";
 import PostModal from "../Post/PostModal";
+import Likes from "./Likes";
 
 function Splash() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function Splash() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showPostOptions, setShowPostOptions] = useState(false);
   const [currPost, setCurrPost] = useState()
+  const [heartState, setHeartState] = useState(likeHeartIcon)
 
   useEffect(() => {
     dispatch(getUserThunk(id)).then(() => dispatch(getAllPostsThunk()));
@@ -48,12 +50,33 @@ function Splash() {
     setShowPostOptions(true);
   };
 
-  function likeAPost(e, postId, userId) {
+  async function likeAPost(e, postId, userId) {
     e.stopPropagation();
-    dispatch(addLikeThunk(postId, userId));
+    setHeartState(likeHeartFilledIn)
+    await dispatch(addLikeThunk(postId, userId));
+    await dispatch(getAllPostsThunk())
     console.log(postId, "this is postId");
     console.log(userId, "this is the current person signed in");
   }
+
+  async function removeLike(e, postId, userId) {
+    e.stopPropagation();
+    setHeartState(likeHeartIcon)
+    await dispatch(removeLikeThunk(postId, userId))
+    await dispatch(getAllPostsThunk())
+  }
+
+const likeOrRemoveLike = (e, postId, userId) => {
+  console.log(heartState === likeHeartIcon)
+  console.log("filled in", heartState === likeHeartFilledIn)
+  if (heartState === likeHeartIcon) {
+    console.log("heart is not filled in!")
+
+    return likeAPost(e, postId, userId)
+  } else if (heartState === likeHeartFilledIn) {
+    return removeLike(e, postId, userId)
+  }
+}
 
   return (
     <>
@@ -137,8 +160,11 @@ function Splash() {
                 </div>
 
                 <div className="bottom-post-feed">
-                  <div className="likes-post-feed">
-                    <div
+                  <div>
+                    <Likes post={post} sessionId={id}/>
+                  </div>
+                  {/* <div className="likes-post-feed"> */}
+                    {/* <div
                       className="heart-icon"
                       style={{ width: "30px" }}
                       onClick={(e) => likeAPost(e, post.id, id)}
@@ -148,8 +174,27 @@ function Splash() {
                         : post.post_likes.includes(id)
                         ? likeHeartFilledIn
                         : likeHeartFilledIn}
-                    </div>
-                  </div>
+                    </div> */}
+                    {/* <div
+                      className="heart-icon"
+                      style={{ width: "30px" }}
+                      // onClick={(e) => likeAPost(e, post.id, id)}
+                      onClick={(e) => likeOrRemoveLike(e, post.id, id)}
+                    > */}
+                      {/* {Object.keys(post.post_likes).includes(id) ? likeHeartFilledIn : likeHeartIcon }
+                      {heartState} */}
+
+                      {/* {Object.keys(post.post_likes).length === 0
+                        ? likeHeartIcon
+                        : Object.keys(post.post_likes).includes(id)
+                        ? likeHeartFilledIn
+                        : likeHeartFilledIn} */}
+                    {/* </div> */}
+                  {/* </div> */}
+                  {}
+                  {/* <div>{post.post_likes.length} likes</div> */}
+                  <div>{Object.keys(post.post_likes).length} likes</div>
+
                   <div className="opinionsBox">
                     <div className="post-caption-feed">
                       {/* <img

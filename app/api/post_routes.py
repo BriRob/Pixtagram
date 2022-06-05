@@ -156,6 +156,7 @@ def remove_like(post_id, user_id):
 
     # print("post likes before!!!! \n\n", post.post_likes)
     post.post_likes.remove(user)
+    db.session.commit()
     # print("post likes after!!!! \n\n", post.post_likes)
 
     return post.to_dict()
