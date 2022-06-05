@@ -1,14 +1,14 @@
-import React from 'react'
-import './animatedbg.css'
+// import React from 'react'
+// import './animatedbg.css'
 
 
-function AnimatedBackground() {
-    return (
-        <>
-            <div class="rotating-border rotating-border--google"></div>
-        </>
+// function AnimatedBackground() {
+//     return (
+//         <>
+//             <div class="rotating-border rotating-border--google"></div>
+//         </>
 
-    )
-}
+//     )
+// }
 
-export default AnimatedBackground
+// export default AnimatedBackground

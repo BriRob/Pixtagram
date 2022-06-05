@@ -20,7 +20,7 @@ def seeder():
     briana = User(
         profile_pic_url='https://pixtagrambucket.s3.amazonaws.com/bri_profile_seeder.jpeg', full_name='Briana Robinson', username='brianaR', email='briana@bri.io', bio='ATLien that loves music and french fries', verified=True, password='pixtagrambri')
     leah = User(
-        profile_pic_url='https://pixtagrambucket.s3.amazonaws.com/leah_profile_pic_seeder.png', full_name='Leah Stern', username='leahS', email='leah@leah.io', bio='Python enthusiast and Mod Lead extraordinaire', verified=True, password='LeahIsTheBest')
+        profile_pic_url='https://pixtagrambucket.s3.amazonaws.com/leah_profile_pic_seeder.png', full_name='Leah Stern', username='leah_s', email='leah@leah.io', bio='Python enthusiast and Mod Lead extraordinaire', verified=True, password='LeahIsTheBest')
     stee = User(
         profile_pic_url='https://pixtagrambucket.s3.amazonaws.com/stee_profile_seeder.jpeg', full_name='Stee', username='stee301', email='stee@stee.io', bio='DIT traveling everywhere, Where should I go next?', verified=False, password='stee301')
     chere = User(
@@ -107,6 +107,10 @@ def seeder():
     post_23 = Post(
         user_id=10, img_url='https://pixtagrambucket.s3.amazonaws.com/coco_cherry_seeder_post2.png', caption='Only blues, greens, and a little yellow'
     )
+    post_24 = Post(
+        user_id=6, img_url='https://pixtagrambucket.s3.amazonaws.com/giphy.gif', caption='Did you mean: recursion'
+    )
+
 
 
     db.session.add(post_1)
@@ -132,14 +136,15 @@ def seeder():
     db.session.add(post_21)
     db.session.add(post_22)
     db.session.add(post_23)
+    db.session.add(post_24)
 
-    demo.user_likes.extend([post_1, post_2, post_3, post_5, post_6, post_7])
-    marnie.user_likes.extend([post_2, post_3, post_5, post_6, post_7])
+    demo.user_likes.extend([post_1, post_2, post_3, post_5, post_6, post_7, post_24])
+    marnie.user_likes.extend([post_2, post_3, post_5, post_6, post_7, post_24])
     beyonce.user_likes.extend([post_3])
-    maica.user_likes.extend([post_22, post_23, post_15, post_10, post_18, post_5, post_6, post_7])
-    anthony.user_likes.extend([post_7, post_14, post_18, post_5, post_6])
+    maica.user_likes.extend([post_22, post_23, post_15, post_10, post_18, post_5, post_6, post_7, post_24])
+    anthony.user_likes.extend([post_7, post_14, post_18, post_5, post_6, post_24])
     agustin.user_likes.extend([post_22, post_23, post_18, post_19, post_5, post_6, post_7])
-    briana.user_likes.extend([post_20, post_21, post_18, post_19, post_9, post_5, post_6, post_7])
+    briana.user_likes.extend([post_20, post_21, post_18, post_19, post_9, post_5, post_6, post_7, post_24])
     leah.user_likes.extend([post_22, post_23, post_9, post_11, post_5, post_6, post_7])
     stee.user_likes.extend([post_15, post_16, post_17, post_13, post_5, post_6])
     chere.user_likes.extend([post_8, post_9, post_10, post_11, post_5, post_6,])
