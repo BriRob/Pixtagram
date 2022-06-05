@@ -15,12 +15,12 @@ function Comments({ postId }) {
   // const [isLoaded, setIsLoaded] = useState(false)
 
   const deleteComment = async (e, commentId) => {
-    console.log("What is the thunk getting?", commentId)
+    // console.log("What is the thunk getting?", commentId)
     await dispatch(deleteCommentThunk(commentId)).then(() => dispatch(getCommentsThunk(postId)))
   }
 
-  useEffect(async () => {
-    await dispatch(getCommentsThunk(postId));
+  useEffect(() => {
+    dispatch(getCommentsThunk(postId));
     //   }
   }, [dispatch]);
 

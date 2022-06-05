@@ -29,32 +29,36 @@
     justify-content: center;
     position: relative;
     left: 10%;
+    bottom:187px;
+    cursor: pointer;
 
 }
 .square{
     display: flex;
     width: 50vw;
+    height: 270px;
     justify-content: center;
     align-items: center;
 }
 
 .info-card{
     height: 40px;
-    border-color: red;
-    background-color: rebeccapurple;
 }
 
 .admin-bio{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
     justify-content: center;
     padding-top: 10%;
+    position: relative;
+    bottom: 189px;
 }
 
 .card-box{
     width: 36%;
+    height: 200px;
+    cursor: pointer;
 }
 
 .header-name{
@@ -63,7 +67,7 @@
 }
 
 
-.rotating-border{
+/* .rotating-border{
 
 }
 .rotating-border::before{
@@ -75,4 +79,10 @@ padding: 0;
 margin: 0;
 box-sizing: border-box;
 
+} */
+
+.loading{
+    position: relative;
+    left: 50vw;
+    top: 25vw;
 }

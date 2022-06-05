@@ -15,7 +15,7 @@ import { authenticate } from "./store/session";
 import Post from "./components/Post/Post";
 import EditPost from "./components/PostPages/EditPost";
 import Explore from "./components/Explore/Explore";
-
+import AnimatedBackground from "./components/AnimatedBackground/AnimatedBackground";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -73,6 +73,9 @@ function App() {
           <ProtectedRoute path='/explore-page' exact={true}>
             <Explore />
           </ProtectedRoute>
+          <Route path='/test'>
+            <AnimatedBackground />
+          </Route>
           <Route path='/'>
             <h1>Page Not Found</h1>
           </Route>

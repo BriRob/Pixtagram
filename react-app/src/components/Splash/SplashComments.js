@@ -14,7 +14,7 @@ function SplashComments({ postId }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const comments = useSelector((state) => state?.comments?.comments_list);
-    console.log('Need one comment please', comments)
+    // console.log('Need one comment please', comments)
 
     // console.log('WHat is in comments?\n\n', comments)
     // const currUser = useSelector((state) => state?.session?.user?.id)

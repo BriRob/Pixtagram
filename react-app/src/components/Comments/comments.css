@@ -43,7 +43,7 @@
     width: 100%;
     grid-area: profilepic; */
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     border-radius: 30px;
     width: 25px;
     height: 25px;
@@ -83,7 +83,7 @@
 /* .delete:hover {
   /* opacity: 1; */
   /* visibility: visible; */
-/* } */ 
+/* } */
 
 #username {
   font-weight: bold;
