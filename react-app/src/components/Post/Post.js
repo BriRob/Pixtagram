@@ -44,13 +44,19 @@ function Post() {
   const userId = post?.user_id;
   // console.log('We need the user id', post?.user_id)
 
-  useEffect(() => {
+  useEffect(async () => {
     // if (currUser == userId) {
     //   setOwner(true);
     // }
-    dispatch(getOnePostThunk(postId))
-      .then(() => dispatch(getCommentsThunk(postId)))
-      .then(() => setIsLoaded(true));
+    
+    let response = await dispatch(getOnePostThunk(postId))
+    
+    if (response.id === undefined) {
+      history.push('/page-not-found')
+    }
+    dispatch(getCommentsThunk(postId))
+    .then(() => setIsLoaded(true));
+
   }, [isLoaded]);
 
   // if(isLoaded){

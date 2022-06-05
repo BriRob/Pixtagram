@@ -53,6 +53,7 @@ export const getOnePostThunk = (postId) => async (dispatch) => {
   if (response.ok) {
     const post = await response.json();
     dispatch(getOnePost(post));
+    return post
   }
   return response;
 };
