@@ -80,7 +80,7 @@
 
 .user-pic-edit {
     display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   border-radius: 30px;
   width: 35px;
   height: 35px;
@@ -92,7 +92,7 @@
     width: 40%;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     position: relative;
     right: 1%;
 }
@@ -149,4 +149,3 @@
     margin-top: 2px;
     font-size: 13px;
 }
-

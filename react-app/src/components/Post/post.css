@@ -39,7 +39,7 @@
 
 .user-pic {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   border-radius: 30px;
   width: 28px;
   height: 28px;

@@ -4,6 +4,8 @@ const GET_ONE_POST = "post/GET_ONE_POST";
 // const EDIT_POST = "user/EDIT_POST";
 const DELETE_POST = "post/DELETE_POST"
 
+const ADD_LIKE = 'post/ADD_LIKE'
+
 const getAllPosts = (posts) => ({
   type: GET_ALL_POSTS,
   payload: posts,
@@ -13,6 +15,13 @@ const getOnePost = (post) => ({
   type: GET_ONE_POST,
   payload: post,
 });
+
+const addLike = (post) => {
+  return {
+    type: ADD_LIKE,
+    payload: post
+  }
+}
 
 // const createPost = (post) => ({
 //   type: CREATE_POST,
@@ -47,6 +56,17 @@ export const getOnePostThunk = (postId) => async (dispatch) => {
   }
   return response;
 };
+
+export const addLikeThunk = (post_id, user_id) => async (dispatch) => {
+  const options = {
+    method: 'PUT',
+  }
+  const response = await fetch(`/api/posts/${post_id}/${user_id}`, options)
+  const post = await response.json()
+  console.log(post)
+  dispatch(addLike(post))
+}
+
 
 // create post
 export const createPostThunk = (userId, form) => async (dispatch) => {
@@ -120,7 +140,7 @@ export const editPostThunk = (postId, form) => async (dispatch) => {
     if (data.errors) {
       return data;
     } else {
-     return ['An error occurred. Please try again.']
+      return ['An error occurred. Please try again.']
     }
   }
   return response;
@@ -154,10 +174,27 @@ export default function posts(state = initialState, action) {
       newState.post = action.payload;
       return newState;
     case DELETE_POST:
-      newState = {...state}
+      newState = { ...state }
       // console.log('HELLO FROM DELETE REDUCER')
       delete newState.post
       return newState
+    // case ADD_LIKE:
+    //   newState = { ...state }
+    //   const upatedLike = action.payload.post_likes //array of likes
+    //   const incomingPostId = action.payload.id
+    //   const posts = newState.allPosts.posts
+    //   // const oldPost = posts.filter(post => {
+    //   //   if (post.id === incomingPostId) {
+    //   //     return post
+    //   //   }
+    //   // })
+
+    //   posts.forEach(post =>{
+    //     if(post.id === incomingPostId){
+    //       post.post_likes = upatedLike
+    //     }
+    //   })
+    //   return newState
     default:
       return state;
   }

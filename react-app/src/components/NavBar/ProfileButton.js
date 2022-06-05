@@ -67,7 +67,7 @@ const ProfileButton = ({ profileStatus }) => {
           <NavLink to={`/explore-page`} className="aboutus dropdownOptions'">
             About Us
           </NavLink>
-          <button onClick={logout}>Log Out</button>
+          <button className='log-out-button' onClick={logout}>Log Out</button>
         </div>
       )}
     </div>

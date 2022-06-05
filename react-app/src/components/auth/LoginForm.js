@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import './LoginForm.css'
-import pixta from '../../images/pixta.png'
+import pixta from '../../images/splash.png'
 import logo from '../../images/logo.png'
 
 const LoginForm = () => {
