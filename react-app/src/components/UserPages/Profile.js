@@ -48,6 +48,9 @@ function User() {
       dispatch(getUserThunk(userId));
       dispatch(getAllPostsThunk()).then(() => setIsLoaded(true));
     }
+    if(user === undefined){
+      history.push('/page-not-found')
+    }
   }, [location]);
 
   function toEdit() {
