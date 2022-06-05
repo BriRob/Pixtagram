@@ -188,16 +188,16 @@ function Post() {
                     // onClick={(e) => console.log(e.target, "e.target", e.relatedTarget.addEventListener('text-area-box'), "e.related")}
                     className="comment-icon-post"
                   >
-                    {commentIcon}
+                    <label for='focus-input' style={{'padding-left': '5px'}}>
+                      {commentIcon}
+                      </label>
                   </div>
                 </div>
                 <div className="liked-by">
                   <span className="liked-by-line">{`Liked by Demo and 45 others`}</span>
                 </div>
                 <span id='date'>{post?.days_since}</span>
-
                 <div className="p-line"></div>
-
               <div>
                 {text.length > 140 && (
                   <div>
@@ -212,6 +212,7 @@ function Post() {
 
                   <form onSubmit={handleSubmit} id="comment-form">
                     <textarea
+                      id="focus-input"
                       className="comment-form"
                       onBlur={(e) => {
                         if (e.currentTarget === e.target) {

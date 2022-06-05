@@ -42,7 +42,7 @@ function Explore() {
                                     <div className='header-name'>
                                         <h2 className='username-header'>{admin.full_name} <CheckMark /></h2>
                                     </div>
-                                    {isLoaded? <AnimatedBackground/>: null}
+                                    {/* {isLoaded? <AnimatedBackground/>: null} */}
                                         <img className='admin-profile' src={admin.profile_pic_url} alt='admin profile picture'></img>
                                     <div className='info-card'>
                                         <span className='admin-bio'>{admin.bio}</span>
