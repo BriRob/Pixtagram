@@ -12,6 +12,8 @@ import Comments from "../Comments/Comments";
 import { createCommentThunk, getCommentsThunk } from "../../store/comment";
 import checkmark from "../CheckMark/checkmark.png";
 import { closeButton } from "../NavBar/Navicons";
+import PostLikes from "./PostLikes";
+import LikesModal from "./LikesModal";
 
 function Post() {
   const dispatch = useDispatch();
@@ -32,6 +34,9 @@ function Post() {
   const [text, setText] = useState("");
   // useState to setErrors for making comments
   const [errors, setErrors] = useState([]);
+
+  const [showLikes, setShowLikes] = useState(false);
+  const [postForViewLikes, setPostForViewLikes] = useState()
 
   const { postId } = useParams();
   // console.log('Hey Maica --> POST ID', postId)
@@ -64,7 +69,7 @@ function Post() {
     console.log("COMMENT HERE \n\n", comment);
     // history.push(`/`)
     if (comment.errors) {
-    // console.log("COMMENT ERRORS \n\n", comment.errors);
+      // console.log("COMMENT ERRORS \n\n", comment.errors);
 
       setErrors(comment.errors);
     } else {
@@ -77,8 +82,8 @@ function Post() {
 
   //
   const toProfile = (e) => {
-    history.push(`/users/users/${post?.user?.id}`)
-  }
+    history.push(`/users/users/${post?.user?.id}`);
+  };
 
   // console.log("post comment errors", errors);
 
@@ -90,6 +95,11 @@ function Post() {
 
   const openPostOptions = () => {
     setShowPostOptions(true);
+  };
+
+  const openPeopleLikes = (post) => {
+    setShowLikes(true);
+    setPostForViewLikes(post)
   };
 
   if (!isLoaded) {
@@ -124,89 +134,171 @@ function Post() {
             </div>
           </>
         )}
-        <div id='parent'>
-        <div className="singlePostPage">
-          <div className="postCard">
-            <div className="left">
-              <a onClick={toProfile}><img className="post-picture" src={post?.img_url}></img></a>
-            </div>
-            <div className="right">
-              <div className="user-info">
-                <NavLink to={`/users/${post?.user.id}`}>
-                  <img
-                    className="user-pic"
-                    src={post?.user.profile_pic_url}
-                  ></img>
-                </NavLink>
 
-                <a id='hide-me' href={`/users/${post?.user?.id}`}><span className="user-name">
-                  {`${post?.user?.username}`}
-                  {post?.user?.verified ? (
-                    <img style={{ height: "15px" }} src={checkmark} />
-                  ) : null}
-                </span></a>
-                {currUser == userId && (
-                  <div className="postOptions">
-                    <span onClick={openPostOptions}>{dotDotDotIcon}</span>
-                  </div>
-                )}
-              </div>
-              <div className="comments">
-                <div className="user-caption">
-                  <img
-                    className="user-pic"
-                    src={post?.user.profile_pic_url}
-                  ></img>
-                  <span className="user-name">
-                    {post?.user?.username}
-                    {post?.user?.verified ? (
-                      <img style={{ height: "15px" }} src={checkmark} />
-                    ) : null}
-                  </span>
-                  <p className="caption">{post?.caption}</p>
-                </div>
-                <div className="comment-section">
-                  {/* <p>Here go the comments</p> */}
-                  <Comments postId={postId} />
-                </div>
-              </div>
-              <div className="bottom-right">
-                <div>
-
-                </div>
-                {/* p-line crates the lines */}
-                <div className="p-line"></div>
-
-                <div className="post-icons">
+        {showLikes && (
+          <>
+            <div className="backgroundFeed">
+              <div className="postOptionsModalFeed">
+                <div
+                  onClick={() => setShowLikes(false)}
+                  className="postOptionsModalBckgFeed"
+                ></div>
+                <div className="actualModalComponentFeed">
+                  <LikesModal views={postForViewLikes} show={showLikes} />
                   <div
+                    className="cancelPostButtonFeed"
+                    onClick={() => setShowLikes(false)}
+                  >
+                    Close
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
+        <div id="parent">
+          <div className="singlePostPage">
+            <div className="postCard">
+              <div className="left">
+                <a onClick={toProfile}>
+                  <img className="post-picture" src={post?.img_url}></img>
+                </a>
+              </div>
+              <div className="right">
+                <div className="user-info">
+                  <NavLink to={`/users/${post?.user.id}`}>
+                    <img
+                      className="user-pic"
+                      src={post?.user.profile_pic_url}
+                    ></img>
+                  </NavLink>
+
+                  <a id="hide-me" href={`/users/${post?.user?.id}`}>
+                    <span className="user-name">
+                      {`${post?.user?.username}`}
+                      {post?.user?.verified ? (
+                        <img style={{ height: "15px" }} src={checkmark} />
+                      ) : null}
+                    </span>
+                  </a>
+                  {currUser == userId && (
+                    <div className="postOptions">
+                      <span onClick={openPostOptions}>{dotDotDotIcon}</span>
+                    </div>
+                  )}
+                </div>
+                <div className="comments">
+                  <div className="user-caption">
+                    <img
+                      className="user-pic"
+                      src={post?.user.profile_pic_url}
+                    ></img>
+                    <span className="user-name">
+                      {post?.user?.username}
+                      {post?.user?.verified ? (
+                        <img style={{ height: "15px" }} src={checkmark} />
+                      ) : null}
+                    </span>
+                    <p className="caption">{post?.caption}</p>
+                  </div>
+                  <div className="comment-section">
+                    {/* <p>Here go the comments</p> */}
+                    <Comments postId={postId} />
+                  </div>
+                </div>
+                <div className="bottom-right">
+                  <div></div>
+                  {/* p-line crates the lines */}
+                  <div className="p-line"></div>
+
+                  <div className="post-icons">
+                    {/* <div
                     style={{ cursor: "pointer" }}
                     onClick={(e) => changeHeart(e)}
                   >
                     {likeStatus === false ? likeHeart : likeHeartFilledIn}
-                  </div>
-                  <div
-                    // onClick={(e) => console.log(e.target, "e.target", e.relatedTarget.addEventListener('text-area-box'), "e.related")}
-                    className="comment-icon-post"
-                  >
-                    <label for='focus-input' style={{'padding-left': '5px'}}>
+                  </div> */}
+
+                    <div>
+                      <PostLikes post={post} sessionId={currUser} />
+                    </div>
+
+                    <div
+                      // onClick={(e) => console.log(e.target, "e.target", e.relatedTarget.addEventListener('text-area-box'), "e.related")}
+                      className="comment-icon-post"
+                    >
                       {commentIcon}
-                      </label>
+                    </div>
                   </div>
-                </div>
-                <div className="liked-by">
-                  <span className="liked-by-line">{`Liked by Demo and 45 others`}</span>
-                </div>
-                <span id='date'>{post?.days_since}</span>
-                <div className="p-line"></div>
-              <div>
-                {text.length > 140 && (
-                  <div>
-                    {errors.map((error, ind) => (
-                      <div id="errors" key={ind}>
-                        {error}
+                  <div className="liked-by">
+                    {/* <span className="liked-by-line">{`Liked by Demo and 45 others`}</span> */}
+                    {Object.keys(post.post_likes).length === 0 && (
+                      <div className="liked-by-line">Be the first to like</div>
+                    )}
+                    {Object.keys(post.post_likes).length === 1 && (
+                      <div className="liked-by-line" onClick={() => openPeopleLikes(post)}>1 like</div>
+                    )}
+                    {Object.keys(post.post_likes).length > 1 && (
+                      <div className="liked-by-line" onClick={() => openPeopleLikes(post)}>
+                        {Object.keys(post.post_likes).length} likes
                       </div>
-                    ))}
+                    )}
                   </div>
+                  <span id="date">{post?.days_since}</span>
+
+                  <div className="p-line"></div>
+
+                  <div>
+                    {text.length > 140 && (
+                      <div>
+                        {errors.map((error, ind) => (
+                          <div id="errors" key={ind}>
+                            {error}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    <div id="form-container">
+                      <form onSubmit={handleSubmit} id="comment-form">
+                        <textarea
+                          className="comment-form"
+                          onBlur={(e) => {
+                            if (e.currentTarget === e.target) {
+                              console.log("unfocused input box");
+                            }
+                            if (!e.currentTarget.contains(e.relatedTarget)) {
+                              console.log("clicking somewhere else entirely");
+                            }
+                          }}
+                          onFocus={(e) => {
+                            if (e.currentTarget === e.target) {
+                              console.log("focusing on input box");
+                            }
+                            if (!e.currentTarget.contains(e.relatedTarget)) {
+                              console.log("clicking on myself???");
+                            }
+                          }}
+                          // value={"text-area-box"}
+                          placeholder="Add a comment..."
+                          // below for creating a comment
+                          type="text"
+                          name="text"
+                          onChange={(e) => setText(e.target.value)}
+                          value={text}
+                          rows="2"
+                          cols="28"
+                        ></textarea>
+                        {/* <button disabled={true} className="post-comment-button">
+                         */}
+                        <button disabled={!text} id="post-comment-button">
+                          {" "}
+                          Post{" "}
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+
                 )}
                 <div id='form-container'>
 
@@ -246,11 +338,9 @@ function Post() {
                   </form>
                 </div>
               </div>
-              </div>
             </div>
           </div>
-        </div>
-           {/* <div id='footer'>
+          {/* <div id='footer'>
             <div id='footer-line'></div>
            </div> */}
         </div>
