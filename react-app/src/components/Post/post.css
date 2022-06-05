@@ -18,6 +18,7 @@
 
 .right {
   width: 100%;
+  height: 100%;
 }
 .post-picture {
   object-fit: contain;
@@ -29,6 +30,7 @@
 .user-info {
   display: flex;
   align-items: center;
+  height: 10%;
   padding: 15px 10px;
   margin: 0;
   width: 100%;
@@ -39,8 +41,8 @@
   display: flex;
   justify-content: flex-end;
   border-radius: 30px;
-  width: 25px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
   border: 0;
   margin-right: 10px;
 }
@@ -67,17 +69,48 @@
 }
 
 .bottom-right {
+  /* position: relative; */
+  /* border: greenyellow solid 1px; */
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(128, 128, 128, 0.36);
-  border-bottom: 1px solid rgba(128, 128, 128, 0.36);
-  padding: 10px 5px;
+  align-items: flex-start;
+  justify-content: space-around;
+  /* border-top: 1px solid rgba(128, 128, 128, 0.36); */
+  /* border-bottom: 1px solid rgba(128, 128, 128, 0.36); */
+  /* padding: 10px 5px; */
+  width: 100%;
+  /* padding-left: 10%; */
+  padding-right: 10%;
+  height: 35%;
+}
+
+.liked-by{
+  margin-left: 3%;
+  width: 100%;
+  font-size: 14px;
+}
+
+.liked-by-line{
+  margin-left: 3%;
+  width: 300px;
+}
+
+.p-line{
+  width: 260px;
+  background-color: rgba(128, 128, 128, 0.36);
+  height: 1px;
+  margin-left: 7%;
 }
 
 .post-icons {
   display: flex;
   width: 30%;
   justify-content: space-evenly;
+  margin-left: 3%;
+}
+
+#date{
+  margin-left: 7%;
 }
 
 .postOptionsModalBckg {
@@ -87,6 +120,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 3;
 }
 
 .actualModalComponent {
@@ -159,11 +193,16 @@
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
   width: 100%;
-  color: red;
+  color: rgb(125, 17, 17);
   display: flex;
   justify-content: center;
   justify-content: center;
   padding: 10px 0px;
+}
+
+#form-container {
+  /* border: red solid 1px; */
+  width: 100%;
 }
 
 
@@ -172,8 +211,10 @@
   /* border: pink solid 1px; */
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  margin-left: 3%;
+  padding-left: 10px;
 }
 
 input[type="text"]::placeholder {
@@ -192,10 +233,18 @@ input[type="text"]::placeholder {
 
 #post-comment-button{
   color: #3795F6;
+  /* color: pink; */
   font-weight: bold;
   background-color: black;
   border: none;
+  padding-bottom: 9px;
 }
+
+#post-comment-button:disabled,
+#post-comment-button[disabled] {
+  color: #072641;
+}
+
 
 .deletePostConfirmText {
   padding: 25px 0px;
@@ -206,4 +255,35 @@ align-items: center;
 
 .confirmdeltext {
   font-size: 13px;
+}
+
+#hide-me{
+  text-decoration: none;
+}
+
+::placeholder {
+  padding-top: 3px;
+}
+
+#footer{
+  position:absolute;
+  border: pink solid 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* height: 30%; */
+
+}
+
+#footer-line{
+  height: 1px;
+  background-color: #072641;
+  width: 800px;
+  /* margin-left: 20%; */
+}
+
+#parent{
+  height: 100vh;
+  width: 100vw;
 }

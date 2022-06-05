@@ -33,8 +33,9 @@
 }
 
 #pixtagram-logo {
+  padding-top: 10px;
   height: 65%;
-  width: 35%;
+  width: 40%;
   grid-area: logo;
 }
 

@@ -36,12 +36,13 @@
 
 .post-card-feed {
   width: 500px;
-  height: 820px;
+  /* removed height to dynamically change with comment length and errors validation -ms  */
+  /* height: 820px; */
   border: 1px solid rgba(128, 128, 128, 0.302);
   border-radius: 5px;
   margin-bottom: 15px;
   background-color: black;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 .user-profile-info-feed {
@@ -71,7 +72,7 @@
 
 .user-post-image {
   width: 100%;
-  height: 100%;
+  height: 400px;
   object-fit: contain;
 }
 
@@ -80,6 +81,8 @@
 }
 
 .post-caption-feed {
+  padding-top: 5px;
+  padding-bottom: 5px;
   display: flex;
   align-items: center;
 }
@@ -93,4 +96,14 @@
 
 .bottom-post-feed{
   /* height: ; */
+}
+
+#id-nav {
+padding-left: 14px;
+}
+
+#id-nav:hover {
+
+  text-decoration: underline;
+
 }

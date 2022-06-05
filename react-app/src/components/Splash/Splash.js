@@ -27,9 +27,9 @@ function Splash() {
 
   useEffect(() => {
     dispatch(getUserThunk(id))
-      .then(() => dispatch(getAllPostsThunk()))
-      .then(() => setIsLoaded(true))
-  }, [isLoaded]);
+    .then(() => dispatch(getAllPostsThunk()))
+    // .then(() => dispatch(getCommentsThunk()))
+  }, [dispatch]);
 
   const sendToProfile = (e, id) => {
     e.stopPropagation();
@@ -119,11 +119,44 @@ function Splash() {
                       </NavLink>
                       {post.caption}
                     </div>
+                    {id == post.user.id && <div className="dotdotdot">{dotDotDotIcon}</div>}
+                  </div>
+                  <div className="feed-post-image">
+                    <NavLink
+                      style={{ color: "white", fontWeight: "bold" }}
+                      to={`/posts/${post.id}`}
+                    >
+                      <img className="user-post-image" src={post.img_url}></img>
+                    </NavLink>
+                  </div>
+                  <div className="bottom-post-feed">
+                    <div className="likes-post-feed">
+                      <p>Here go the likes</p>
+                    </div>
+                    <div className="opinionsBox">
+                      <div className="post-caption-feed">
+                        {/* <img
+                          src={post.user.profile_pic_url}
+                          className="user-profile-pic-caption"
+                        ></img> */}
+                        <NavLink
+                          id='id-nav'
+                          style={{
+                            color: "white",
+                            fontWeight: "bold",
+                            textDecoration: "none",
+                            marginRight: "15px",
+                          }}
+                          to={`/users/${post.user.id}`}
+                        >
+                          {post.user.username}{post.user.verified? <img style={{'height':'15px'}} src={checkmark}/>: null}
+                        </NavLink>
+                        {post.caption}
+                      </div>
 
-
-                    <div id='splash-comment-container'>
-
-                      <SplashComments postId={post?.id} />
+                      <div id='splash-comment-container'>
+                        <SplashComments post={post}/>
+                      </div>
 
                     </div>
 

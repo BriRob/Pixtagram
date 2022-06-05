@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { getUserThunk } from "../../store/user";
 import { profileDropDown, settingsDropDown } from "./Navicons";
 
 const ProfileButton = ({ profileStatus }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const user = useSelector((state) => state.session.user);
   // const profile = useSelector(
   //   (state) => state?.userReducer?.user?.profile_pic_url

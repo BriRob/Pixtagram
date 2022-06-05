@@ -31,7 +31,7 @@ def validation_errors_to_error_messages(validation_errors):
 def get_all_posts():
     posts = Post.query.order_by(Post.id.desc()).all()
     returnedPosts = {'posts': [post.to_dict() for post in posts]}
-    print('THIS IS THE RETURNED POSTS \n\n', returnedPosts)
+    # print('THIS IS THE RETURNED POSTS \n\n', returnedPosts)
     return {'posts': [post.to_dict() for post in posts]}
 
 # Get One Post
