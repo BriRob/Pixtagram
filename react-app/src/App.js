@@ -79,6 +79,9 @@ function App() {
         <Route path="/test">
           <AnimatedBackground />
         </Route>
+        <Route path="/page-not-found">
+          <h1>Page Not Found</h1>
+        </Route>
         {/* </div> */}
         <Route path="/">
           <h1>Page Not Found</h1>

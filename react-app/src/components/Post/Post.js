@@ -298,6 +298,44 @@ function Post() {
                       </form>
                     </div>
                   </div>
+
+                )}
+                <div id='form-container'>
+
+                  <form onSubmit={handleSubmit} id="comment-form">
+                    <textarea
+                      id="focus-input"
+                      className="comment-form"
+                      onBlur={(e) => {
+                        if (e.currentTarget === e.target) {
+                          console.log("unfocused input box");
+                        }
+                        if (!e.currentTarget.contains(e.relatedTarget)) {
+                          console.log("clicking somewhere else entirely");
+                        }
+                      }}
+                      onFocus={(e) => {
+                        if (e.currentTarget === e.target) {
+                          console.log("focusing on input box");
+                        }
+                        if (!e.currentTarget.contains(e.relatedTarget)) {
+                          console.log("clicking on myself???");
+                        }
+                      }}
+                      // value={"text-area-box"}
+                      placeholder="Add a comment..."
+                      // below for creating a comment
+                      type="text"
+                      name="text"
+                      onChange={(e) => setText(e.target.value)}
+                      value={text}
+                      rows="2"
+                      cols="28"
+                    ></textarea>
+                    {/* <button disabled={true} className="post-comment-button">
+                    */}
+                    <button disabled={!text} id="post-comment-button"> Post </button>
+                  </form>
                 </div>
               </div>
             </div>

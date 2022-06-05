@@ -220,7 +220,7 @@ const NavBar = () => {
             >
               {exploreIconColor}
             </NavLink>
-            <NavLink
+            {/* <NavLink
               className="icon-links"
               to="/"
               exact={true}
@@ -228,7 +228,7 @@ const NavBar = () => {
               onClick={(e) => fillInNavHeart(e)}
             >
               {heartIconColor}
-            </NavLink>
+            </NavLink> */}
             <button className="profile-button" onClick={() => openProfileDropdown()}>
               <img src={user.profile_pic_url}></img>
             </button>
