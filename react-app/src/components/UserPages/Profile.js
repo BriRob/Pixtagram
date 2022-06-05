@@ -12,14 +12,14 @@ import CheckMark from "../CheckMark/CheckMark";
 function User() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation();
+  const {pathname} = useLocation();
   const sessionUser = useSelector((state) => state.session.user);
   const user = useSelector((state) => state?.userReducer?.user);
   const posts = useSelector((state) => state?.posts?.allPosts?.posts);
   const [isLoaded, setIsLoaded] = useState(false);
   const { userId } = useParams();
   // console.log('USEEEEERRRRR', user)
-  const verified = user?.verified
+  const verified = user?.verified;
   function postCounter(posts) {
     let count = 0;
     posts?.forEach((post) => {
@@ -43,15 +43,25 @@ function User() {
   const count = postCounter(posts);
   const userPosts = userPostsFinder(posts);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (sessionUser) {
-      dispatch(getUserThunk(userId));
+      let response = await dispatch(getUserThunk(userId))
+
+      if (response.id === undefined) {
+        history.push("/page-not-found");
+      }
+
+      // // .then(() => {
+      //     if (pathname !== `/users/${userId}`) {
+      //       // history.push("/page-not-found");
+      //     }
+      };
       dispatch(getAllPostsThunk()).then(() => setIsLoaded(true));
     }
-    if(user === undefined){
-      history.push('/page-not-found')
-    }
-  }, [location]);
+    // if(user === undefined){
+    //   history.push('/page-not-found')
+    // }
+  , [dispatch]);
 
   function toEdit() {
     history.push(`/users/${userId}/edit`);
@@ -83,7 +93,10 @@ function User() {
 
           <div id="user-info-block">
             <div id="username-and-edit-button">
-              <p id="username-font">{`${user?.username}`}{verified?<CheckMark />:null}</p>
+              <p id="username-font">
+                {`${user?.username}`}
+                {verified ? <CheckMark /> : null}
+              </p>
               {sessionUser.id == userId ? (
                 <button id="profile-edit-button" onClick={(e) => toEdit()}>
                   Edit Profile
@@ -105,7 +118,7 @@ function User() {
         <div id="profile-nav-bar">
           <div id="gallery-line"></div>
           <div className="postsIconLabel">
-            <div id='postGridIcon'>{postGridIcon}</div>
+            <div id="postGridIcon">{postGridIcon}</div>
             <div id="user-profile-nav-bar">Posts</div>
           </div>
         </div>
