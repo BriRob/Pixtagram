@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,9 +10,12 @@ import User from "./components/UserPages/Profile";
 import EditUser from "./components/UserPages/EditUser";
 import Splash from "./components/Splash/Splash";
 import { authenticate } from "./store/session";
-import { getAllUsersThunk } from "./store/user";
+// import { getAllUsersThunk } from "./store/user";
 import Post from "./components/Post/Post";
 import EditPost from "./components/PostPages/EditPost";
+import Explore from "./components/Explore/Explore";
+import AnimatedBackground from "./components/AnimatedBackground/AnimatedBackground";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -24,6 +26,10 @@ function App() {
   // console.log("SESSION FROM APP.JS",session)
 
   // console.log(users)
+
+  const pageNotFound = () => {
+    return <h1>Page Not Found</h1>;
+  };
 
   useEffect(() => {
     (async () => {
@@ -40,39 +46,55 @@ function App() {
   return (
     <BrowserRouter>
       {session && <NavBar />}
-      <div className="under-nav">
-        <Switch>
-          <Route path="/login" exact={true}>
-            <LoginForm />
-          </Route>
-          <ProtectedRoute path="/users/:userId/edit" exact={true}>
-            <EditUser />
-            {/* <EditUser users={users}/> */}
-          </ProtectedRoute>
-          <Route path="/sign-up" exact={true}>
-            <SignUpForm />
-          </Route>
-          <ProtectedRoute path="/users" exact={true}>
-            <UsersList />
-          </ProtectedRoute>
-          <ProtectedRoute path="/users/:userId" exact={true}>
-            <User />
-          </ProtectedRoute>
-          <ProtectedRoute path="/" exact={true}>
-            <Splash />
-          </ProtectedRoute>
-          <ProtectedRoute path="/posts/:postId" exact={true}>
-            <Post />
-          </ProtectedRoute>
-          <ProtectedRoute path="/posts/:postId/edit" exact={true}>
-            <EditPost />
-            {/* <EditUser users={users}/> */}
-          </ProtectedRoute>
-          <Route path='/'>
-            <h1>Page Not Found</h1>
-          </Route>
-        </Switch>
-      </div>
+
+      <Switch>
+        <Route path="/login" exact={true}>
+          <LoginForm />
+        </Route>
+        {/* <div className="under-nav"> */}
+        <ProtectedRoute path="/users/:userId/edit" exact={true} >
+          <EditUser />
+          {/* <EditUser users={users}/> */}
+        </ProtectedRoute>
+        <Route path="/sign-up" exact={true}>
+          <SignUpForm />
+        </Route>
+        <ProtectedRoute path="/users" exact={true}>
+          <UsersList />
+        </ProtectedRoute>
+        <ProtectedRoute path="/users/:userId" exact={true}>
+          <User />
+        </ProtectedRoute>
+        <ProtectedRoute path="/" exact={true}>
+          <Splash />
+        </ProtectedRoute>
+        <ProtectedRoute path="/posts/:postId" exact={true}>
+          <Post />
+        </ProtectedRoute>
+        <ProtectedRoute path="/posts/:postId/edit" exact={true}>
+          <EditPost />
+          {/* <EditUser users={users}/> */}
+        </ProtectedRoute>
+        <ProtectedRoute path="/explore-page" exact={true}>
+          <Explore />
+        </ProtectedRoute>
+        <Route path="/test">
+          {/* <AnimatedBackground /> */}
+        </Route>
+
+          <PageNotFound />
+
+//         <Route path="/page-not-found">
+//           <h1>Page Not Found</h1>
+//         </Route>
+//         {/* </div> */}
+
+        <Route path="/">
+          <PageNotFound />
+//           <h1>Page Not Found</h1>
+        </Route>
+        <PageNotFound />
+      </Switch>
     </BrowserRouter>
   );
 }

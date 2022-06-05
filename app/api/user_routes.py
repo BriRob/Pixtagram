@@ -58,7 +58,7 @@ def edit_user(id):
             image = request.files["profile_pic_url"]
             print("image ======== \n\n", image)
             if not allowed_file(image.filename):
-                return {"errors": "file type not permitted"}, 400
+                return {"errors": ["Image file type not permitted"]}, 400
 
             image.filename = get_unique_filename(image.filename)
 
@@ -110,3 +110,22 @@ def delete_user(id):
     db.session.commit()
     logout()
     return user.to_dict()
+
+
+#Get all users for Search feature
+
+@user_routes.route('/all', methods=['GET'])
+@login_required
+def get_all_users():
+    users = User.query.all()
+    return {'users': [user.to_dict() for user in users]}
+
+@user_routes.route('/admins', methods=['GET'])
+@login_required
+def get_all_admins():
+    users = User.query.all()
+    admins = {}
+    for user in users:
+        if user.verified == True and user.email !='leah@leah.io' and user.email != 'bey@aa.io':
+            admins[f"{user.full_name}"] = user.to_dict()
+    return admins

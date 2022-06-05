@@ -1,0 +1,89 @@
+
+.page-container{
+    display: flex;
+    align-items: center;
+}
+
+.profile-cards{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 50vw;
+    padding-top: 60px;
+}
+
+.username-header{
+    font-size: 25px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 2%;
+    width: 225px;
+
+}
+
+.admin-profile{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    left: 10%;
+    bottom:187px;
+    cursor: pointer;
+
+}
+.square{
+    display: flex;
+    width: 50vw;
+    height: 270px;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-card{
+    height: 40px;
+}
+
+.admin-bio{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 10%;
+    position: relative;
+    bottom: 189px;
+}
+
+.card-box{
+    width: 36%;
+    height: 200px;
+    cursor: pointer;
+}
+
+.header-name{
+    display: flex;
+    justify-content: center;
+}
+
+
+/* .rotating-border{
+
+}
+.rotating-border::before{
+
+}
+
+.rotating-border::after{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+
+} */
+
+/* .loading{
+    position: relative;
+    left: 50vw;
+    top: 25vw;
+} */

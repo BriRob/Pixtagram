@@ -42,6 +42,7 @@ export const getUserThunk = (userId) => async (dispatch) => {
   if (response.ok) {
     const user = await response.json();
     dispatch(getUser(user));
+    return user
   }
   return response;
 };

@@ -1,7 +1,8 @@
 .singlePostPage {
-  padding-top: 50px;
+  padding-top: 100px;
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
+
   display: flex;
   justify-content: center;
 }
@@ -12,10 +13,16 @@
   flex-direction: row;
   height: fit-content;
   border: 0.5px solid rgba(128, 128, 128, 0.293);
+  width: 800px;
+  height: 600px;
 }
 
+.right {
+  width: 100%;
+  height: 100%;
+}
 .post-picture {
-    object-fit: cover;
+  object-fit: contain;
   width: 500px;
   height: 500px;
   border-right: 0.5px solid rgba(128, 128, 128, 0.293);
@@ -24,31 +31,34 @@
 .user-info {
   display: flex;
   align-items: center;
+  height: 10%;
   padding: 15px 10px;
   margin: 0;
+  width: 100%;
+
   border-bottom: 1px solid rgba(128, 128, 128, 0.36);
 }
 
 .user-pic {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   border-radius: 30px;
-  width: 25px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
   border: 0;
   margin-right: 10px;
 }
 
 .postOptions {
   position: relative;
-  left: 50%;
+  left: 63%;
+  cursor: pointer;
 }
 
 .user-caption {
   padding: 15px 10px;
   display: flex;
   font-size: 13px;
-  align-items: center;
 }
 
 .caption {
@@ -61,24 +71,229 @@
 }
 
 .bottom-right {
+  /* position: relative; */
+  /* border: greenyellow solid 1px; */
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(128, 128, 128, 0.36);
-  border-bottom: 1px solid rgba(128, 128, 128, 0.36);
-  padding: 10px 5px;
+  align-items: flex-start;
+  justify-content: space-around;
+  /* border-top: 1px solid rgba(128, 128, 128, 0.36); */
+  /* border-bottom: 1px solid rgba(128, 128, 128, 0.36); */
+  /* padding: 10px 5px; */
+  width: 100%;
+  /* padding-left: 10%; */
+  padding-right: 10%;
+  height: 35%;
+}
+
+.liked-by{
+  margin-left: 3%;
+  width: 100%;
+  font-size: 14px;
+}
+
+.liked-by-line{
+  margin-left: 3%;
+  width: 300px;
+  cursor: pointer;
+}
+
+.p-line{
+  width: 260px;
+  background-color: rgba(128, 128, 128, 0.36);
+  height: 1px;
+  margin-left: 7%;
 }
 
 .post-icons {
   display: flex;
   width: 30%;
   justify-content: space-evenly;
+  margin-left: 3%;
 }
 
-.postOptionsModal {
+#date{
+  margin-left: 7%;
+}
+
+.postOptionsModalBckg {
+  background-color: rgba(0, 0, 0, 0.504);
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.actualModalComponent {
   position: absolute;
+  background-color: rgb(29, 29, 29);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   left: 40%;
   top: 20%;
   width: 300px;
-  height: 200px;
-  border: 5px solid red;
+  height: fit-content;
+  border: 1px solid rgba(128, 128, 128, 0.346);
+  border-radius: 5px;
+  z-index: 40;
+  animation: grow 0.3s forwards;
 }
+
+.editPostModal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+.editPostButton {
+  cursor: pointer;
+  border-bottom: 1px solid grey;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+  padding: 10px 0px;
+}
+
+.cancelPostButton {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+  padding: 10px 0px;
+}
+
+.delPostBtn {
+  cursor: pointer;
+  border-bottom: 1px solid grey;
+  width: 100%;
+  color: red;
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+  padding: 10px 0px;
+}
+
+.delPostBtnFinal {
+  cursor: pointer;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  width: 100%;
+  color: rgb(255, 0, 0);
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+  padding: 10px 0px;
+}
+
+#form-container {
+  /* border: red solid 1px; */
+  width: 100%;
+}
+
+
+#comment-form{
+  padding-top: 5px;
+  /* border: pink solid 1px; */
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 3%;
+  padding-left: 10px;
+}
+
+input[type="text"]::placeholder {
+
+  padding-top: 107px;
+}
+
+::-webkit-input-placeholder {
+  text-align: start;
+
+}
+
+:-moz-placeholder {
+  text-align: start;
+}
+
+#post-comment-button{
+  color: #3795F6;
+  /* color: pink; */
+  font-weight: bold;
+  background-color: black;
+  border: none;
+  padding-bottom: 9px;
+}
+
+#post-comment-button:disabled,
+#post-comment-button[disabled] {
+  color: #072641;
+}
+
+
+.deletePostConfirmText {
+  padding: 25px 0px;
+  display: flex;
+  flex-direction: column;
+align-items: center;
+}
+
+.confirmdeltext {
+  font-size: 13px;
+}
+
+#hide-me{
+  text-decoration: none;
+}
+
+::placeholder {
+  padding-top: 3px;
+}
+
+/*#footer {
+  position:absolute;
+  border: pink solid 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* height: 30%; */
+/*
+}
+
+#footer-line{
+  height: 1px;
+  background-color: #072641;
+  width: 800px;
+  /* margin-left: 20%; */
+/* }
+
+#parent{
+  height: 100vh;
+  width: 100vw;
+} */
+
+/* #for-input-focus */
+
+.comment-icon-post {
+  padding-left: 5px;
+}
+

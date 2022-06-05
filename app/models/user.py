@@ -1,6 +1,7 @@
 from email.policy import default
 import datetime
 from .db import db
+from .likes import likes
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -25,7 +26,7 @@ class User(db.Model, UserMixin):
 
     posts = db.relationship('Post', cascade = 'all, delete', back_populates = 'user')
     comments = db.relationship('Comment', back_populates = 'user', cascade='all, delete')
-
+    user_likes = db.relationship('Post', secondary=likes, back_populates='post_likes')
 
     @property
     def password(self):

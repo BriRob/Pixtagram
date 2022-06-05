@@ -18,6 +18,7 @@ def validation_errors_to_error_messages(validation_errors):
     Simple function that turns the WTForms validation errors into a simple list
     """
     errorMessages = []
+    # print("HERE ARE ERROR MESSAGES \n\n", errorMessages)
     for field in validation_errors:
         for error in validation_errors[field]:
             errorMessages.append(f'{error}')
@@ -26,10 +27,11 @@ def validation_errors_to_error_messages(validation_errors):
 
 #Get All Posts
 @post_routes.route('/')
-
 @login_required
 def get_all_posts():
-    posts = Post.query.all()
+    posts = Post.query.order_by(Post.id.desc()).all()
+    returnedPosts = {'posts': [post.to_dict() for post in posts]}
+    # print('THIS IS THE RETURNED POSTS \n\n', returnedPosts)
     return {'posts': [post.to_dict() for post in posts]}
 
 # Get One Post
@@ -47,6 +49,7 @@ def get_one_post(id):
 
 # Create a Post
 @post_routes.route('/<int:userId>/new', methods=["POST"])
+
 @login_required
 def create_post(userId):
     # currUser = User.query.get(userId)
@@ -65,10 +68,10 @@ def create_post(userId):
         if "img_url" in request.files:
 
             image = request.files["img_url"]
-            print("image ======== \n\n", image)
+            # print("image ======== \n\n", image)
 
             if not allowed_file(image.filename):
-                return {"errors": "file type not permitted"}, 400
+                return {"errors": ["Image file type not permitted"]}, 400
 
             image.filename = get_unique_filename(image.filename)
 
@@ -80,8 +83,7 @@ def create_post(userId):
             url = upload["url"]
 
 
-
-        print('CREATE HAS BEEN VALIDATED')
+        # print('CREATE HAS BEEN VALIDATED')
 
         new_post = Post(
             user_id=userId,
@@ -93,6 +95,7 @@ def create_post(userId):
         db.session.add(new_post)
         db.session.commit()
         return new_post.to_dict()
+      
     # print('END OF ROUTE')
     # print(form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -109,7 +112,7 @@ def edit_post(postId):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        print('EDIT HAS BEEN VALIDATED')
+        # print('EDIT HAS BEEN VALIDATED')
 
         post.caption = form.data["caption"]
 
@@ -132,4 +135,30 @@ def delete_post(post_id):
     # get_one_post(post_id)
     return post.to_dict()
     # return
+
+
+# add like to post, PUT
+@post_routes.route('/<int:post_id>/<int:user_id>', methods=['PUT'])
+@login_required
+def like_post(post_id, user_id):
+    post = Post.query.get(post_id)
+    user = User.query.get(user_id)
+
+    post.post_likes.append(user)
+    db.session.commit()
+    return post.to_dict()
+
+
+@post_routes.route('/<int:post_id>/<int:user_id>/remove', methods=['PUT'])
+@login_required
+def remove_like(post_id, user_id):
+    post = Post.query.get(post_id)
+    user = User.query.get(user_id)
+
+    # print("post likes before!!!! \n\n", post.post_likes)
+    post.post_likes.remove(user)
+    db.session.commit()
+    # print("post likes after!!!! \n\n", post.post_likes)
+
+    return post.to_dict()
 

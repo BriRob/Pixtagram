@@ -1,0 +1,102 @@
+/* parent container of comment elements*/
+.comments-components {
+  /* border: 1px solid lavender; */
+  height: 240px;
+  width: 220px;
+  font-size: 14px;
+}
+
+/* holds the username AND comment AND profile pic AND button*/
+.comments-container {
+  /* border: pink solid 2px; */
+  padding: 10px 10px;
+  display: flex;
+  font-size: 14px;
+  width: 200px;
+}
+
+.deleteCommentButton {
+  position: relative;
+  left: 5%;
+}
+
+
+#profile-pic-holder {
+    width: 28px;
+    height: 28px;
+    margin-right: 10px;
+}
+
+#profile-pic {
+    display: flex;
+    justify-content: flex-end;
+    border-radius: 30px;
+    width: 28px;
+    height: 28px;
+    border: 0;
+    margin-right: 10px;
+}
+
+/* holds the comment text*/
+#comment {
+    display: block;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    grid-area: comment;
+    width: 185px;
+}
+
+.username-comment-container {
+    overflow-wrap: break-word;
+}
+
+.delete {
+  background-color: none;
+  cursor: pointer;
+
+  visibility: hidden;
+  /* opacity: 0; */
+}
+
+.comments-container:hover .delete {
+  visibility: visible;
+}
+
+/* .delete:hover {
+  /* opacity: 1; */
+  /* visibility: visible; */
+/* } */
+
+#username {
+  font-weight: bold;
+  margin-right: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  grid-area: username;
+}
+
+.comment-form {
+  border-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.post-comment-button {
+  color: white;
+  background-color: black;
+  border: none;
+  font-weight: bold;
+}
+
+#comment-form > textarea {
+    resize: none;
+    background-color: black;
+    border-top: 5px;
+}
+
+#comment-form:focus, textarea {
+    outline: none !important;
+    border: none;
+
+}

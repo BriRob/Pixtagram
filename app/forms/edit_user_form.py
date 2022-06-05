@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.validators import DataRequired, ValidationError
+from wtforms.validators import DataRequired, ValidationError, Length
 # from app.models import User
 
-
+v = []
 # def user_exists(form, field):
 #     # Checking if user exists
 #     email = field.data
@@ -20,17 +20,18 @@ from wtforms.validators import DataRequired, ValidationError
 #         raise ValidationError('Username is already in use.')
 
 
-def full_name_exists(form, field):
+def length_check(form, field):
     # Checking for full name, it cannot be blank
-    full_name = field.data
-    if full_name == None or full_name == '': #None is the Py version of null
-        #str.find(" ") to find to try and find spaces.
-        raise ValidationError('Full name cannot be empty')
-
+    input = field.data
+    if (field.label.text == "Full Name"):
+        if len(input) > 50:
+            raise ValidationError(f'{field.label.text} must be less than 50 characters')
+    if (field.label.text == "Bio"):
+        if len(input) > 150:
+            raise ValidationError(f'{field.label.text} must be less than 150 characters')
 
 
 class EditUserForm(FlaskForm): # flask form auto does (Req.body)
     profile_pic_url = StringField("profile_pic_url")
-    full_name = StringField("full_name", validators=[DataRequired(message='Full name must not be empty')]) #pass in msg = ''
-    bio = StringField("bio")
-    #test
+    full_name = StringField("Full Name", validators=[DataRequired(message='Full name must not be empty'), length_check]) #pass in msg = ''
+    bio = StringField("Bio", validators=[length_check])

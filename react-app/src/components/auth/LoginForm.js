@@ -3,10 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import './LoginForm.css'
-import pixta from '../../images/pixta.png'
+import pixta from '../../images/splash.png'
+import logo from '../../images/logo.png'
 
-
-// ms-comment may-30
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -59,7 +58,7 @@ const LoginForm = () => {
           <div id='right-container'>
             <div id='l-border-div'>
               <div id='heading-div'>
-                <h1 id='heading-text'>Pixtagram</h1>
+                <img id='s-logo' src={logo}></img>
               </div>
 
               <div id='login-form-div'>
@@ -84,9 +83,10 @@ const LoginForm = () => {
                       placeholder='Password'
                       value={password}
                       onChange={updatePassword}
+
                     />
                   </div>
-                  <button id='login-button' type='submit'>Login</button>
+                  <button disabled={!password || !email} id='login-button' type='submit'>Log In</button>
                       <div>
                         {errors.map((error, ind) => (
                           <div id='errors' key={ind}>{error}</div>
@@ -105,23 +105,26 @@ const LoginForm = () => {
 
             </div>
 
-              <div id='l-signup-div'>
-                <p id='l-text'>Don't have an account? <a id='s-link' href='/sign-up'>Sign Up</a></p>
-              </div>
+            <div id='l-signup-div'>
+              <p id='l-text'>Don't have an account? <a id='s-link' href='/sign-up'>Sign Up</a></p>
+            </div>
           </div>
         </div>
 
-        <div id='footer'>
-          <p>Python</p>
-          <p>Javascript</p>
-          <p>React</p>
-          <p>Redux</p>
-          <p>Flask</p>
-          <p>SQLAlchemy</p>
+        <div  id='footer'>
+          <p className='c-name'>Python</p>
+          <p className='c-name'>Javascript</p>
+          <p className='c-name'>HTML</p>
+          <p className='c-name'>CSS</p>
+          <p className='c-name'>React</p>
+          <p className='c-name'>Redux</p>
+          <p className='c-name'>Flask</p>
+          <p className='c-name'>SQLAlchemy</p>
+          <p className='c-name'>Docker</p>
         </div>
 
         <div id='creators'>
-          <p>© 2022 Pixtagram</p>
+          <p className='c-name'>© 2022 Pixtagram</p>
             <p className='c-name'>Agustin Zucca</p>
             <p className='c-name'>Anthony Bronca</p>
             <p className='c-name'>Briana Robinson</p>

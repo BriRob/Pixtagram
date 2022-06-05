@@ -4,19 +4,38 @@
   border-bottom: solid 1px gray;
   position: fixed;
   background-color: rgb(0, 0, 0);
-  z-index: 50;
+  z-index: 500;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.child-nav-bar-container{
+  height: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  box-sizing: border-box;
+  max-width: calc(935px + 30px);
+  padding-right: 20px;
+  padding-left: 20px;
+  width: 100%;
 }
 
 #nav-bar-container {
   height: 100%;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+
 }
 
 #pixtagram-logo {
+  padding-top: 10px;
   height: 65%;
-  width: 35%;
+  width: 40%;
   grid-area: logo;
 }
 
@@ -25,84 +44,95 @@
   background-color: rgb(38, 38, 38);
   height: 50%;
   width: 50%;
+  display: flex;
+  position: relative;
+  right: 40%;
 }
 
 .icons {
+  width: 20%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
+  right: 10%;
 }
 
-#profile-pic-nav-bar {
+.icon-links {
+  padding: 10%;
+  cursor: pointer;
+}
+
+/* #profile-pic-nav-bar {
   height: 50%;
   width: 40px;
   border-radius: 80%;
   border: solid 1px black;
   display: flex;
   flex-direction: column;
-}
+} */
 
-._aawf_aawg {
-  align-items: center;
-  display: flex;
-  flex: 0 1 auto;
-  flex-direction: column;
-  height: 36px;
-  min-width: 125px;
+/* #profile-button-nav{
   position: relative;
-  border-radius: 8px;
-}
+  top: 100px;
+} */
 
+.search-parent-container{
+height: 63%;
+width: 30%;
+
+}
 .search-bar {
   font-size: 16px;
   border-radius: 8px;
+  height: 100%;
+  width: 100%;
   /* background: rgb(var(--ig-highlight-background)); */
 }
-._aaw8 {
-  /* background: rgb(var(--ig-highlight-background)); */
-  display: flex;
-  flex-direction: column;
-  font-size: 16;
-  padding: 0 16px;
+
+.search-form{
+  width: 100%;
+  border-radius: 10px;
 }
 
-._aaw9 {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
+.search-input{
+  height: 100%;
+  width: 88%;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  background: transparent;
+  position: relative;
+  left: 30px;
+  border-color: transparent;
+
 }
 
-._ab6- {
-  color: #8e8e8e;
-  fill: #8e8e8e;
-  height: 16;
-  width: 16;
+.search-input:focus{
+  outline: none;
 }
 
-.search-text {
-  display: inline-block;
-  max-width: 140px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  vertical-align: bottom;
-  white-space: nowrap;
-}
+
 
 .profile-button {
     border: 0;
     background-color: transparent;
+    display: flex;
+    justify-content: center;
 }
 
 .profile-button > img {
     margin: 0px 5px;
     margin-left: 15px;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     border-radius: 30px;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     border: 0;
     color: white;
+    position: relative;
+    top: 15px;
 }
 
 
@@ -116,6 +146,7 @@
   color: white;
   background-color: black;
   border-radius: 5px;
+  left: 110%;
 }
 
 .dropdownmenu > a {
@@ -149,4 +180,77 @@
 
 .dropdownmenu > button:hover {
   background-color: #8e8e8e27;
+}
+
+.search-field-box{
+  background-color: black;
+  height: 250px;
+  width: 100%;
+  border-radius: 4px;
+  border-bottom: solid .6px;
+  border-color: rgb(40,40,40);
+  border-top:  solid .6px;
+  border-color: rgb(40,40,40);
+}
+
+.recent{
+  font-size: 14px;
+  font-weight: semi-bold;
+  color:rgb(210,210,210);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding: 12px;
+}
+
+.no-searches{
+  text-align: center;
+  color: rgb(140,140,140);
+  font-size: 12px;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 40%;
+}
+
+::-webkit-input-placeholder{
+  color: white;
+}
+
+:-moz-placeholder{
+  color: white
+}
+
+::-moz-placeholder{
+  color: white;
+}
+
+:-ms-input-placeholder {
+  color: white;
+}
+
+::-ms-input-placeholder {
+  color: white;
+}
+
+::placeholder{
+  color: white;
+}
+
+.dropdownIcon {
+  margin-right: 5px;
+  margin-top: 3px;
+}
+
+.dropdownOptions {
+  display: flex;
+  align-items: center;
+}
+
+.outerDropDown {
+  margin-top: 4.5%;
+  height: 90vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  position: fixed;
 }

@@ -1,35 +1,153 @@
 .edit-user-page {
     border: grey 1px solid;
-    /* width: 400px;
-    height: 400px; */
-    height: 100vh;
+    width: 800px;
+    height: 385px;
     display: flex;
-    justify-content: center;
-    padding: 4% 0;
+    flex-direction: row;
+    border-radius: 5px;
+margin-top: 100px;
 }
 
 .edit-user-form {
-    border: red 1px solid;
-    width: 60%;
-    height: 400px;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bigEditUserPage {
+    display: flex;
+    justify-content: center;
+
 }
 
-.editUserActualForm input {
-    color: black
+.leftEditUser {
+    height: 100%;
+    width: 20%;
+    border-right: 1px solid grey;
 }
 
-.editSubmitBtn, .editCancelBtn, .delAccBtn {
+
+.editUserActualForm {
+    width: 100%;
+}
+
+.editUserLeftText {
+    padding: 15px 15px;
+    height: 50px;
+    border-left: 3px solid white;
+    cursor: pointer;
+}
+
+.editSubmitBtn {
     background-color: rgb(65, 147, 239);
     width: 15%;
     border: none;
     border-radius: 5px;
-    padding: 3px 0
+    padding: 3px 0;
+    margin-right: 20px;
+    transition: .5s;
+    cursor: pointer;
 }
+
+.editSubmitBtn:hover {
+    background-color: rgb(2, 109, 249);
+}
+
 
 .editCancelBtn {
-    background-color: rgb(129, 69, 69);
+    background-color: grey;
+    width: 12%;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 0;
+    margin-right: 20px;
+    transition: .5s;
+    cursor: pointer;
 }
 
-/* .delAccBtn {
-    background-color:;
-} */
+.top-edit-part {
+    display: flex;
+    align-items: center;
+    margin: 15px;
+}
+
+.editProfileUpload {
+    color: rgb(65, 147, 239);
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.user-pic-edit {
+    display: flex;
+  justify-content: flex-end;
+  border-radius: 30px;
+  width: 35px;
+  height: 35px;
+  border: 0;
+  margin-right: 30px;
+}
+
+.editLabels {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    right: 1%;
+}
+
+.editUserInputContainer {
+    width: 60%;
+    position: relative;
+    left: 3%;
+}
+
+.editUserInputs {
+    width: 100%;
+    display: flex;
+    padding: 20px;
+}
+
+.editUserInput {
+    background-color: transparent;
+    border: .5px solid grey;
+    padding: 10px 5px;
+    border-radius: 3px;
+    width: 200px;
+}
+
+.editUserInputBio {
+    background-color: transparent;
+    border: .5px solid grey;
+    padding: 10px 5px;
+    border-radius: 3px;
+    width: 200px;
+    height: 100px;
+    resize: none;
+}
+
+.buttonContainer {
+    width: 100%;
+    position: relative;
+    left: 43.5%;
+}
+
+.delAccBtn {
+    height: 40px;
+    width: 100px;
+    background-color: red;
+    padding: 3px 8px;
+    border: 0;
+    border-radius: 5px;
+    position: relative;
+    top: 80%;
+    right: 3%;
+    cursor: pointer;
+}
+
+.maxCharacters {
+    margin-top: 2px;
+    font-size: 13px;
+}

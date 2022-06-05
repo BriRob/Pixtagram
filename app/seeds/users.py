@@ -2,6 +2,8 @@ from app.models import db, User
 
 
 # Adds a demo user, you can add other users here if you want
+
+
 def seed_users():
     demo = User(
         full_name='Pixta Demo', username='Demo', email='demo@aa.io', password='password')
@@ -23,6 +25,8 @@ def seed_users():
         profile_pic_url='', full_name='Stee', username='stee301', email='stee@stee.io', bio='DIT traveling everywhere, Where should I go next?', verified=False, password='stee301')
     chere = User(
         profile_pic_url='', full_name='Chere-Anne Luscina', username='coco_cherry', email='chere@chere.io', bio="making my way downtown walking fast faces past and I'm home bound", verified=False, password='CaptainAmerica')
+
+    
 
     db.session.add(demo)
     db.session.add(marnie)

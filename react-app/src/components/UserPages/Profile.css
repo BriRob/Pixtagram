@@ -17,7 +17,7 @@
 }
 
 #profile-container {
-    padding-top: 20px;
+    padding-top: 100px;
     margin-top: 2px;
     /* border: orange solid 1px; */
     height: 100vh;
@@ -29,10 +29,10 @@
     flex-direction: column; */
 }
 
-#profile-pic-border{
+/* #profile-pic-border{
     border:1px solid rgb(143, 143, 143);
     border-radius: 50%;
-}
+} */
 
 .profile-pic{
     /* border: red solid 1px; */
@@ -107,6 +107,7 @@
 }
 
 #profile-pic-left{
+    object-fit: cover;
     border-radius: 50%;
 
     height: 150px;
@@ -139,15 +140,31 @@
 
 #user-profile-nav-bar {
     font-size: 20px;
-    padding: 5px;
+}
+
+#postGridIcon {
+    width: 20%;
+    margin-right: 5px;
+}
+
+.postsIconLabel {
+    width: 100px;
+    display: flex;
+    margin-top: 5px;
 }
 
 #grid-logo{
+    height: 100%;
+    width: 100%;
+}
+
+/* #grid-logo{
     position: relative;
     top: 5px;
     height: 20px;
     width: 20px;
-}
+} */
+
 
 #gallery {
     padding-top: 30px;
@@ -171,9 +188,11 @@
 .one-post{
     height: 293px;
     width: 293px;
-    opacity: 100%;
+    object-fit: contain;
+    background-color: black;
+    /* opacity: 100%; */
 }
 
 .one-post:hover{
-    opacity: 50%;
+    opacity: .5;
 }

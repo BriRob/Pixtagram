@@ -1,4 +1,3 @@
-/* ms-comment may-30 */
 
 .signup-label {
   display: none;
@@ -6,13 +5,19 @@
 
 #signup-holder {
   /* border: red solid 3px; */
-  height: 650px;
-  width: 375px;
+  height: 800px;
+  width: 500px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
 
+}
+
+#s-logo{
+  /* border: red solid 1px; */
+  height: 60px;
+  width: 200px;
 }
 
 /* holds top-logo-container, or divider, and signup-form  */
@@ -26,11 +31,13 @@
 
 #s-border{
   border: #363636 solid 1px;
-  width: 300px;
-  height: 561px;
+  width: 383px;
+  height: 637px;
 }
 
 #signup-container {
+  position: absolute;
+  top: 0;
   font-family: Neue Arial, Helvetica, sans-serif;
   width: 100%;
   height: 100vh;
@@ -42,7 +49,7 @@
 }
 
 .top-logo-container {
-  width: 300px;
+  width: 380px;
   height: 200px;
   /* border: green solid 2px; */
   display: flex;
@@ -54,13 +61,15 @@
 }
 
 .signup-form-container {
+  /* margin-top: 6px; */
   /* border: pink solid 2px; */
-  height: 350px;
-  width: 300px;
+  height: 420px;
+  width: 380px;
   display: flex;
   justify-content: center;
   align-items: space-evenly;
   flex-direction: column;
+  background-color: #000000;
 }
 
 #errors {
@@ -83,7 +92,7 @@
   background-color: #000000;
   height: 50px;
   border: #363636 solid 1px;
-  width: 300px;
+  width: 380px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,25 +100,52 @@
 }
 
 .s-input {
-  width: 260px;
+  width: 330px;
   height: 30px;
   border: none;
-  border-radius: 3px;
+  border-radius: 2px;
   background-color: #121212;
+  border: #585858 solid 1px;
+}
+
+#disclaimer {
+  /* border: yellow solid 3px; */
+  width: 300px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.disc-text {
+  /* position: relative; */
+  color: #8E8E8E;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 0px;
+  margin-bottom: 5px;
+  /* padding-top: 30px; */
 }
 
 .s-button {
   background-color: #3795F6;
   color: white;
-  width: 260px;
+  width: 330px;
   height: 30px;
   border: none;
   border-radius: 2px;
 }
+.s-button:disabled,
+.s-button[disabled] {
+  background-color: #072641;
+
+}
 
 #login-link {
   text-decoration: none;
-  color: #2E82D6;
+  color: #0095f6;
 }
 
 #s-text{
@@ -134,13 +170,14 @@
 #or-divider {
   padding: 0px;
   margin: 0px;
-  height: 10px;
-  width: 300px;
+  height: 15px;
+  width: 380px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: row;
   background-color: #000000;
+  /* border: purple solid 2px; */
 }
 
 .line {

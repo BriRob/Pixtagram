@@ -1,0 +1,40 @@
+.createPostModal {
+
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    z-index: 50;
+    background-color: rgba(0, 0, 0, 0.637);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid purple;
+    border-radius: 3%;
+    background-color: rgb(38, 38, 38);
+    height: 400px;
+    width: 400px;
+}
+
+.createPostForm input, .createPostForm textarea{
+    color: black;
+}
+
+/* .createPostForm > textarea {
+    color: black;
+} */
+
+.search-modal-parent{
+    width: 100px;
+    height: 400px;
+}
+
+.search-field-box{
+    color: red;
+}
