@@ -173,7 +173,7 @@ function EditUser() {
                           name="profile_pic_url"
                           onChange={updateImage}
                           // onChange={(e) => setProfilePicUrl(e.target.value)}
-                          accept="image/*"
+                          accept=".jpg, .jpeg, .png, .gif"
                         ></input>
                       </label>
                     </div>
