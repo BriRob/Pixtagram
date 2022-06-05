@@ -50,33 +50,33 @@ function Splash() {
     setShowPostOptions(true);
   };
 
-  async function likeAPost(e, postId, userId) {
-    e.stopPropagation();
-    setHeartState(likeHeartFilledIn)
-    await dispatch(addLikeThunk(postId, userId));
-    await dispatch(getAllPostsThunk())
-    console.log(postId, "this is postId");
-    console.log(userId, "this is the current person signed in");
-  }
+//   async function likeAPost(e, postId, userId) {
+//     e.stopPropagation();
+//     setHeartState(likeHeartFilledIn)
+//     await dispatch(addLikeThunk(postId, userId));
+//     await dispatch(getAllPostsThunk())
+//     console.log(postId, "this is postId");
+//     console.log(userId, "this is the current person signed in");
+//   }
 
-  async function removeLike(e, postId, userId) {
-    e.stopPropagation();
-    setHeartState(likeHeartIcon)
-    await dispatch(removeLikeThunk(postId, userId))
-    await dispatch(getAllPostsThunk())
-  }
+//   async function removeLike(e, postId, userId) {
+//     e.stopPropagation();
+//     setHeartState(likeHeartIcon)
+//     await dispatch(removeLikeThunk(postId, userId))
+//     await dispatch(getAllPostsThunk())
+//   }
 
-const likeOrRemoveLike = (e, postId, userId) => {
-  console.log(heartState === likeHeartIcon)
-  console.log("filled in", heartState === likeHeartFilledIn)
-  if (heartState === likeHeartIcon) {
-    console.log("heart is not filled in!")
+// const likeOrRemoveLike = (e, postId, userId) => {
+//   console.log(heartState === likeHeartIcon)
+//   console.log("filled in", heartState === likeHeartFilledIn)
+//   if (heartState === likeHeartIcon) {
+//     console.log("heart is not filled in!")
 
-    return likeAPost(e, postId, userId)
-  } else if (heartState === likeHeartFilledIn) {
-    return removeLike(e, postId, userId)
-  }
-}
+//     return likeAPost(e, postId, userId)
+//   } else if (heartState === likeHeartFilledIn) {
+//     return removeLike(e, postId, userId)
+//   }
+// }
 
   return (
     <>
@@ -162,6 +162,16 @@ const likeOrRemoveLike = (e, postId, userId) => {
                 <div className="bottom-post-feed">
                   <div>
                     <Likes post={post} sessionId={id}/>
+                    {/* {Object.keys(post.post_likes).length === 0 && (
+                      <div></div>
+                    )} */}
+                    {Object.keys(post.post_likes).length === 1 && (
+
+                    <div className="feedHowManyLikes">1 like</div>
+                    )}
+                    {Object.keys(post.post_likes).length > 1 && (
+                    <div className="feedHowManyLikes">{Object.keys(post.post_likes).length} likes</div>
+                    )}
                   </div>
                   {/* <div className="likes-post-feed"> */}
                     {/* <div
@@ -193,7 +203,7 @@ const likeOrRemoveLike = (e, postId, userId) => {
                   {/* </div> */}
                   {}
                   {/* <div>{post.post_likes.length} likes</div> */}
-                  <div>{Object.keys(post.post_likes).length} likes</div>
+                  {/* <div className="feedHowManyLikes">{Object.keys(post.post_likes).length} likes</div> */}
 
                   <div className="opinionsBox">
                     <div className="post-caption-feed">
