@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { deletePostThunk } from "../../store/post";
 import "./post.css";
 function PostModal({ postId, show }) {
+  const {pathname} = useLocation()
   const dispatch = useDispatch();
   const history = useHistory();
   const post = useSelector((state) => state?.posts?.post);
@@ -18,7 +19,10 @@ function PostModal({ postId, show }) {
 
   const deletePost = async (e) => {
     await dispatch(deletePostThunk(postId));
-    history.push(`/`);
+    if (pathname !== '/') {
+      history.push(`/`);
+    }
+    else window.location.reload()
   };
 
   return (

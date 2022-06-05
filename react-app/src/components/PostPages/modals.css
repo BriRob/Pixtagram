@@ -177,7 +177,7 @@ input[type="file"] {
 }
 
 .outerClass {
-  margin-top: 20px;
+  padding-top: 100px;
   width: 100vw;
   height: 100vh;
   display: flex;

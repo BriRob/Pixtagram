@@ -9,6 +9,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     height: 50vw;
+    padding-top: 60px;
 }
 
 .username-header{

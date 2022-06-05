@@ -37,7 +37,7 @@ def get_splash_comments(commentId):
 @comment_routes.route('/<int:postId>')
 @login_required
 def get_post_comments(postId):
-    comments = Comment.query.filter(Comment.post_id == postId).order_by(Comment.id.desc()).all()
+    comments = Comment.query.filter(Comment.post_id == postId).order_by(Comment.id.asc()).all()
     # print("\n\n", comments)
     # print("one comment", comments[0])
     return {"comments_list": [comment.to_dict() for comment in comments]}

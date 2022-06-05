@@ -8,6 +8,7 @@
   z-index: 1;
   width: 50%;
   left: 25%;
+  padding: 60px;
 }
 
 .feed-test {
@@ -43,6 +44,7 @@
   margin-bottom: 15px;
   background-color: black;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .user-profile-info-feed {
@@ -94,16 +96,62 @@
   margin: 0px 12px;
 }
 
-.bottom-post-feed{
+.bottom-post-feed {
   /* height: ; */
 }
 
 #id-nav {
-padding-left: 14px;
+  padding-left: 14px;
 }
 
 #id-nav:hover {
-
   text-decoration: underline;
+}
 
+/*MODAL CSS STARTS HERE */
+
+.postOptionsModalBckgFeed {
+  background-color: rgba(0, 0, 0, 0.504);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.actualModalComponentFeed {
+  position: fixed;
+  background-color: rgb(29, 29, 29);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  left: 40%;
+  top: 20%;
+  width: 300px;
+  height: fit-content;
+  border: 1px solid rgba(128, 128, 128, 0.346);
+  border-radius: 5px;
+  z-index: 40;
+  animation: grow 0.3s forwards;
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cancelPostButtonFeed {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+  padding: 10px 0px;
 }
