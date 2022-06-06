@@ -19,16 +19,25 @@ function EditPost() {
   useEffect(() => {
     const controller = new AbortController();
 
-    console.log(currPost);
+    dispatch(getOnePostThunk(postId))
+
     if (currPost) {
-      dispatch(getOnePostThunk(postId)).then(() => setIsLoaded(true));
       setIsLoaded(true);
-      console.log("if true", currPost);
     } else {
-      console.log("currPost is false", currPost);
-      history.push(`/posts/${postId}`);
-      return () => controller.abort();
+
     }
+    // const controller = new AbortController();
+
+    // console.log(currPost);
+    // if (currPost) {
+    //   dispatch(getOnePostThunk(postId)).then(() => setIsLoaded(true));
+    //   setIsLoaded(true);
+    //   console.log("if true", currPost);
+    // } else {
+    //   console.log("currPost is false", currPost);
+    //   history.push(`/posts/${postId}`);
+    //   return () => controller.abort();
+    // }
   }, [dispatch]);
 
   const handleCancel = async (e) => {
@@ -50,6 +59,10 @@ function EditPost() {
       history.push(`/posts/${postId}`);
     }
   };
+
+  if (user?.id !== currPost.user_id) {
+    history.push(`/posts/${postId}`)
+  }
 
   console.log("is loaded!!!! ", isLoaded);
 
