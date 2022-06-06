@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import * as sessionActions from "../../store/session";
-import { getUserThunk } from "../../store/user";
+// import { getUserThunk } from "../../store/user";
 import { profileDropDown, settingsDropDown } from "./Navicons";
 
 const ProfileButton = ({status}) => {
@@ -30,7 +30,7 @@ const ProfileButton = ({status}) => {
   //     return;
   //   }
   // }
-  console.log('RERENDERING FROM PROFILEBUTTON')
+  // console.log('RERENDERING FROM PROFILEBUTTON')
 
   // useEffect(() => {
   //   dispatch(sessionActions.authenticate());

@@ -8,7 +8,7 @@ import {
   deleteUserThunk,
 } from "../../store/user";
 import "./EditUser.css";
-import { authenticate, login, logout } from "../../store/session";
+import { authenticate, logout } from "../../store/session";
 
 function EditUser() {
   const dispatch = useDispatch();
@@ -25,7 +25,8 @@ function EditUser() {
     sessionUser?.profile_pic_url
   );
   const [isLoaded, setIsLoaded] = useState(false);
-  const [userName, setUserName] = useState(sessionUser?.username);
+  // const [userName, setUserName] = useState(sessionUser?.username);
+
   const [errors, setErrors] = useState([]);
   const [preImg, setPreImg] = useState(sessionUser?.profile_pic_url);
   const [showPostOptions, setShowPostOptions] = useState(false);
@@ -161,7 +162,7 @@ function EditUser() {
                 <div className="top-edit-part">
                   <img className="user-pic-edit" src={preImg} />
                   <div>
-                    {userName}
+                    {sessionUser?.username}
                     <div>
                       <label
                         htmlFor="editProfileUpload"

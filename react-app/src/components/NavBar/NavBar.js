@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 // import LogoutButton from "../auth/LogoutButton";
 import CreatePost from "../PostPages/CreatePost";
 import "./index.css";
@@ -10,9 +10,9 @@ import {
   darkModeExploreIcon,
   darkModeFilledInExploreIcon,
   darkModeFilledInPostIcon,
-  darkModeHeartHomeIcon,
+  // darkModeHeartHomeIcon,
   darkModePostIcon,
-  darkModeFilledInHeartHomeIcon,
+  // darkModeFilledInHeartHomeIcon,
 } from "./Navicons";
 import ProfileButton from "./ProfileButton";
 // import { getUserThunk } from "../../store/user";
@@ -21,26 +21,26 @@ import image from "./svgexport-17.png";
 import SearchBar from "../test/SearchBar";
 
 const NavBar = () => {
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const { pathname } = useLocation();
+  // const dispatch = useDispatch();
+  // const location = useLocation();
+  // const { pathname } = useLocation();
   const user = useSelector((state) => state.session.user);
   // const profile = useSelector(
   //   (state) => state?.userReducer?.user?.profile_pic_url
   // );
 
   const [showModal, setShowModal] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
-  const [searchInput, setSearchInput] = useState("");
+  // const [showSearch, setShowSearch] = useState(false);
+  // const [searchInput, setSearchInput] = useState("");
   const [houseColor, setHouseColor] = useState(darkModeFilledInHomeIcon);
   const [postIconColor, setPostIconColor] = useState(darkModePostIcon);
   const [exploreIconColor, setExploreIconColor] = useState(darkModeExploreIcon);
-  const [heartIconColor, setHeartIconColor] = useState(darkModeHeartHomeIcon);
+  // const [heartIconColor, setHeartIconColor] = useState(darkModeHeartHomeIcon);
   const [profileStatus, setProfileStatus] = useState(false);
-  const [myOptions, setMyOptions] = useState([]);
+  // const [myOptions, setMyOptions] = useState([]);
   // console.log("location pathname \n\n", pathname)
-  console.log('THIS IS THE STATUS FROM NAVBAR', profileStatus)
-  console.log('RERENDERING FROM NAVBAR', profileStatus)
+  // console.log('THIS IS THE STATUS FROM NAVBAR', profileStatus)
+  // console.log('RERENDERING FROM NAVBAR', profileStatus)
   // const getDataFromApi = () => {
   //   console.log('Options fetched from api')
   //   fetch('/api/users/all').then((response) => {return response.json()
@@ -131,7 +131,7 @@ const NavBar = () => {
     setHouseColor(darkModeHomeIcon);
     setPostIconColor(darkModePostIcon);
     setExploreIconColor(darkModeExploreIcon);
-    setHeartIconColor(darkModeHeartHomeIcon);
+    // setHeartIconColor(darkModeHeartHomeIcon);
   };
 
   const fillInHouse = (e) => {
@@ -140,7 +140,7 @@ const NavBar = () => {
     setHouseColor(darkModeFilledInHomeIcon);
     setProfileStatus(false);
   };
-  console.log("THIS IS THE PROFILESTATUS", profileStatus);
+  // console.log("THIS IS THE PROFILESTATUS", profileStatus);
 
   const fillInPost = (e) => {
     e.stopPropagation();
@@ -157,12 +157,12 @@ const NavBar = () => {
     setProfileStatus(false);
   };
 
-  const fillInNavHeart = (e) => {
-    e.stopPropagation();
-    removeIconColor();
-    setHeartIconColor(darkModeFilledInHeartHomeIcon);
-    setProfileStatus(false);
-  };
+  // const fillInNavHeart = (e) => {
+  //   e.stopPropagation();
+  //   removeIconColor();
+  //   // setHeartIconColor(darkModeFilledInHeartHomeIcon);
+  //   setProfileStatus(false);
+  // };
 
   // function toggleSearch(e) {
   //   if (!showSearch) {
@@ -230,7 +230,7 @@ const NavBar = () => {
               {heartIconColor}
             </NavLink> */}
             <button className="profile-button" onClick={() => openProfileDropdown()}>
-              <img src={user.profile_pic_url}></img>
+              <img src={user.profile_pic_url} alt='user'></img>
             </button>
             {profileStatus && (
               <>

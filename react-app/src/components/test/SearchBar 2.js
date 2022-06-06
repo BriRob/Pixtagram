@@ -17,7 +17,7 @@ function SearchBar() {
             })
     }, [])
 
-    console.log(jsonResults, "this is jsonresults")
+    // console.log(jsonResults, "this is jsonresults")
 
 
 

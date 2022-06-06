@@ -13,11 +13,11 @@ function EditPost() {
   const currPost = useSelector((state) => state?.posts?.post);
 
   const [caption, setCaption] = useState(currPost?.caption);
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(async () => {
-    const controller = new AbortController();
+    // const controller = new AbortController();
 
     let response = await dispatch(getOnePostThunk(postId));
 
@@ -54,10 +54,10 @@ function EditPost() {
     // }
   }, [dispatch]);
 
-  const handleCancel = async (e) => {
-    e.preventDefault();
-    history.push(`/posts/${postId}`);
-  };
+  // const handleCancel = async (e) => {
+  //   e.preventDefault();
+  //   history.push(`/posts/${postId}`);
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,14 +67,14 @@ function EditPost() {
     const data = await dispatch(editPostThunk(postId, form));
 
     if (data.errors) {
-      console.log("EDIT POST DATA HAS ERRORS \n\n", data.errors);
-      setErrors(data.errors);
+      // console.log("EDIT POST DATA HAS ERRORS \n\n", data.errors);
+      // setErrors(data.errors);
     } else {
       history.push(`/posts/${postId}`);
     }
   };
 
-  console.log("is loaded!!!! ", isLoaded);
+  // console.log("is loaded!!!! ", isLoaded);
 
   if (!isLoaded) {
     return <h1>Loading...</h1>;
@@ -123,12 +123,13 @@ function EditPost() {
             </div>
             <div className="lowerpartModal">
               <div className="leftEdit">
-                <img className="post-picture" src={currPost.img_url}></img>
+                <img className="post-picture" src={currPost.img_url} alt='post'></img>
               </div>
               <div className="rightEdit">
                 <div className="rightCreate">
                   <div className="userInfoNewPost">
                     <img
+                    alt="user"
                       className="userInfoNewPostImg"
                       src={user.profile_pic_url}
                     />

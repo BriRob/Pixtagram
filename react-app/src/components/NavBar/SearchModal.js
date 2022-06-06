@@ -27,7 +27,7 @@ function SearchModal({myOptions}) {
         const response = await fetch('/api/users/all')
         const people = await response.json()
         let allUsers = people.users
-        console.log(allUsers)
+        // console.log(allUsers)
         // setAllPeople(allUsers)
         setUsers(allUsers)
         setIsLoaded(true)

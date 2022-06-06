@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { deletePostThunk } from "../../store/post";
 import "./post.css";
@@ -7,11 +7,11 @@ function PostModal({ postId, show }) {
   const {pathname} = useLocation()
   const dispatch = useDispatch();
   const history = useHistory();
-  const post = useSelector((state) => state?.posts?.post);
+  // const post = useSelector((state) => state?.posts?.post);
   const [delModal, setDelModal] = useState(false);
-  const [showPostOptions, setShowPostOptions] = useState(show);
+  // const [showPostOptions, setShowPostOptions] = useState(show);
 
-  const userId = post?.user_id;
+  // const userId = post?.user_id;
 
   const openDelModal = (e) => {
     setDelModal(true);
