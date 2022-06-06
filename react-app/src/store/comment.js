@@ -9,9 +9,9 @@ const DELETE_COMMENT = "comment/DELETE_COMMENT";
 //   payload: comment
 // })
 
-const getComments = comments => ({
+const getComments = (comments) => ({
   type: GET_ALL_COMMENTS,
-  payload: comments
+  payload: comments,
 });
 
 // Create a Post
@@ -21,10 +21,10 @@ const getComments = comments => ({
 // });
 
 // Delete a Comment
-const deleteComment = commentId => ({
+const deleteComment = (commentId) => ({
   type: DELETE_COMMENT,
-  payload: commentId
-})
+  payload: commentId,
+});
 
 //Get a single comment
 // export const getOneCommentThunk = commentId => async (dispatch) => {
@@ -38,7 +38,7 @@ const deleteComment = commentId => ({
 // }
 
 // Get the Comments for a post
-export const getCommentsThunk = postId => async dispatch => {
+export const getCommentsThunk = (postId) => async (dispatch) => {
   // console.log("HELLO FROM BEGINNING OF COMMENTS THUNK \n\n")
   // console.log(postId)
   const response = await fetch(`/api/comments/${postId}`);
@@ -51,24 +51,25 @@ export const getCommentsThunk = postId => async dispatch => {
 };
 
 // Create a Comment
-export const createCommentThunk = (userId, postId, form) => async (dispatch) => {
-  const { text } = form
+export const createCommentThunk =
+  (userId, postId, form) => async (dispatch) => {
+    const { text } = form;
 
-  const response = await fetch(`/api/comments/${postId}/${userId}/new`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      userId,
-      postId,
-      text
-    })
-  });
+    const response = await fetch(`/api/comments/${postId}/${userId}/new`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId,
+        postId,
+        text,
+      }),
+    });
 
     if (response.ok) {
       const comment = await response.json();
-      dispatch(getComments(comment))
+      dispatch(getComments(comment));
       return comment;
     } else if (response.status < 500) {
       const data = await response.json();
@@ -76,24 +77,23 @@ export const createCommentThunk = (userId, postId, form) => async (dispatch) => 
         return data;
       }
     } else {
-      return ['An error occurred while creating a comment. Please Try again.']
+      return ["An error occurred while creating a comment. Please Try again."];
     }
-};
-
+  };
 
 // Delete a Comment
-export const deleteCommentThunk = (commentId) => async(dispatch) => {
+export const deleteCommentThunk = (commentId) => async (dispatch) => {
   // console.log("Hello from DELETE THUNK")
   const response = await fetch(`/api/comments/${commentId}/delete`, {
-    method: 'DELETE'
+    method: "DELETE",
   });
   // console.log("WHat is wrong with the response?", response)
   if (response.ok) {
     const comment = await response.json();
-    dispatch(deleteComment(comment))
+    dispatch(deleteComment(comment));
   }
   return response;
-}
+};
 
 const initialState = {};
 
@@ -110,10 +110,10 @@ export default function comments(state = initialState, action) {
       newState = { ...state.comments, [action.payload.id]: action.payload };
       return newState;
     case DELETE_COMMENT:
-      newState = {...state}
+      newState = { ...state };
       // console.log('<-----Hello from delete comment reducer---->')
-      delete newState.comment
-      return newState
+      delete newState.comment;
+      return newState;
     // case GET_ONE_COMMENT:
     //   // console.log('HELLO FROM ONE COMMENT REDUCER \n\n')
     //   newState = {...state};
