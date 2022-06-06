@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createCommentThunk,
-  getCommentsThunk,
-  getOneCommentThunk,
 } from "../../store/comment";
-import LoadingSpinner from "../Spinner/Spinner";
-import { deleteCommentThunk } from "../../store/comment";
-import checkmark from "../CheckMark/checkmark.png";
-import { closeButton } from "../NavBar/Navicons";
-import { NavLink, useHistory } from "react-router-dom";
+// import LoadingSpinner from "../Spinner/Spinner";
+// import { deleteCommentThunk } from "../../store/comment";
+// import checkmark from "../CheckMark/checkmark.png";
+// import { closeButton } from "../NavBar/Navicons";
+import { NavLink } from "react-router-dom";
 import { getAllPostsThunk } from "../../store/post";
 
 
@@ -19,15 +17,15 @@ function SplashComments({ post }) {
   // console.log('one post MAICA \n\n', post)
   const postId = post.id;
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
 
   const [text, setText] = useState("");
   const [errors, setErrors] = useState([]);
-  const [showMore, setShowMore] = useState(false);
+  // const [showMore, setShowMore] = useState(false);
 
-  const commentsFromPostState = useSelector(
-    (state) => state?.posts?.allPosts?.posts?.[post]?.comments
-  );
+  // const commentsFromPostState = useSelector(
+  //   (state) => state?.posts?.allPosts?.posts?.[post]?.comments
+  // );
 
 
 

@@ -1,8 +1,8 @@
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import "./post.css";
 
 function LikesModal({ views }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // console.log(views.post_likes)
   const likesArr = Object.values(views.post_likes);
 

@@ -1,18 +1,18 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getCommentsThunk } from "../../store/comment";
-import LoadingSpinner from "../Spinner/Spinner";
-import { deleteCommentThunk } from "../../store/comment";
+// import { useEffect } from "react";
+// import { useDispatch } from "react-redux";
+// import { getCommentsThunk } from "../../store/comment";
+// import LoadingSpinner from "../Spinner/Spinner";
+// import { deleteCommentThunk } from "../../store/comment";
 import "./PageNotFound.css";
-import checkmark from "../CheckMark/checkmark.png";
-import { closeButton } from "../NavBar/Navicons";
-import { Link, NavLink, useHistory } from "react-router-dom";
-import Comments from "../Comments/Comments";
+// import checkmark from "../CheckMark/checkmark.png";
+// import { closeButton } from "../NavBar/Navicons";
+import { Link } from "react-router-dom";
+// import Comments from "../Comments/Comments";
 import pagenotfound from '../../images/pagenotfound.gif'
 
 function PageNotFound() {
-    const dispatch = useDispatch()
-    const history = useHistory()
+    // const dispatch = useDispatch()
+    // const history = useHistory()
 
     return (
         <>
@@ -24,7 +24,7 @@ function PageNotFound() {
         </div>
             <div className="gif">
                 <div id='gif-container'>
-                    <img id='e-egg' src={pagenotfound}/>
+                    <img id='e-egg' src={pagenotfound} alt='tilting nessie'/>
                 </div>
             </div>
         </>

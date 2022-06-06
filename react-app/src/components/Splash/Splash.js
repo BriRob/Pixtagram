@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory, useParams } from "react-router-dom";
-import LoginForm from "../auth/LoginForm";
+import { Redirect } from "react-router-dom";
+// import LoginForm from "../auth/LoginForm";
 import "./Splash.css";
 import { getUserThunk } from "../../store/user";
 import { dotDotDotIcon } from "./SplashIcons";
-import { addLikeThunk, getAllPostsThunk, removeLikeThunk } from "../../store/post";
+import { getAllPostsThunk } from "../../store/post";
 import LoadingSpinner from "../Spinner/Spinner";
 import { NavLink } from "react-router-dom";
-import CheckMark from "../CheckMark/CheckMark";
+// import CheckMark from "../CheckMark/CheckMark";
 import checkmark from "../CheckMark/checkmark.png";
-import { getCommentsThunk } from "../../store/comment";
+// import { getCommentsThunk } from "../../store/comment";
 import SplashComments from "./SplashComments";
-import { likeHeartIcon, likeFilledHeartIcon } from "./SplashIcons";
-import { likeHeartFilledIn } from "../Post/postIcons";
+// import { likeHeartIcon, likeFilledHeartIcon } from "./SplashIcons";
+// import { likeHeartFilledIn } from "../Post/postIcons";
 import PostModal from "../Post/PostModal";
 import Likes from "./Likes";
 import LikesModal from "../Post/LikesModal";
 
 function Splash() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
   const id = useSelector((state) => state.session.user.id);
   const posts = useSelector((state) => state?.posts?.allPosts?.posts);
   //   console.log(posts);
@@ -38,11 +38,11 @@ function Splash() {
     // .then(() => dispatch(getCommentsThunk()))
   }, [dispatch]);
 
-  const sendToProfile = (e, id) => {
-    e.stopPropagation();
-    // console.log("wtf");
-    history.push(`/users/${id}`);
-  };
+  // const sendToProfile = (e, id) => {
+  //   e.stopPropagation();
+  //   // console.log("wtf");
+  //   history.push(`/users/${id}`);
+  // };
 
   if (!id) {
     return <Redirect to="/login" />;
@@ -151,6 +151,7 @@ function Splash() {
                   <div className="user-profile-info">
                     <NavLink to={`/users/${post.user.id}`}>
                       <img
+                      alt="user"
                         src={post.user.profile_pic_url}
                         style={{
                           height: "40px",
@@ -170,7 +171,7 @@ function Splash() {
                     >
                       {post.user.username}
                       {post.user.verified ? (
-                        <img style={{ height: "15px" }} src={checkmark}></img>
+                        <img alt="verified" style={{ height: "15px" }} src={checkmark}></img>
                       ) : null}
                     </NavLink>
                   </div>
@@ -191,7 +192,7 @@ function Splash() {
                     style={{ color: "white", fontWeight: "bold" }}
                     to={`/posts/${post.id}`}
                   >
-                    <img className="user-post-image" src={post.img_url}></img>
+                    <img alt="user" className="user-post-image" src={post.img_url}></img>
                   </NavLink>
                 </div>
 
@@ -261,7 +262,7 @@ function Splash() {
                       >
                         {post.user.username}
                         {post.user.verified ? (
-                          <img style={{ height: "15px" }} src={checkmark} />
+                          <img alt="verified" style={{ height: "15px" }} src={checkmark} />
                         ) : null}
                       </NavLink>
                       {post.caption}

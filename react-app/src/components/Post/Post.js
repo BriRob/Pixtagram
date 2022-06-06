@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import { useDispatch, useSelector, useStore } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useHistory, useParams } from "react-router-dom";
 import { getOnePostThunk } from "../../store/post";
-import daysSincePost from "./helpers";
-import { likeHeart, likeHeartFilledIn, commentIcon } from "./postIcons";
+// import daysSincePost from "./helpers";
+import { commentIcon } from "./postIcons";
 import "./post.css";
 import { dotDotDotIcon } from "../Splash/SplashIcons";
 import LoadingSpinner from "../Spinner/Spinner";
@@ -12,7 +12,7 @@ import PostModal from "./PostModal";
 import Comments from "../Comments/Comments";
 import { createCommentThunk, getCommentsThunk } from "../../store/comment";
 import checkmark from "../CheckMark/checkmark.png";
-import { closeButton } from "../NavBar/Navicons";
+// import { closeButton } from "../NavBar/Navicons";
 import PostLikes from "./PostLikes";
 import LikesModal from "./LikesModal";
 
@@ -27,8 +27,8 @@ function Post() {
   // console.log("Maica USER ID", currUser);
   const currPost = useSelector((state) => state?.posts?.post?.id);
   // console.log("This is current post id", currPost);
-  const [owner, setOwner] = useState(false);
-  const [likeStatus, setLikeStatus] = useState(false);
+  // const [owner, setOwner] = useState(false);
+  // const [likeStatus, setLikeStatus] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showPostOptions, setShowPostOptions] = useState(false);
   // useState to create a comment
@@ -71,7 +71,7 @@ function Post() {
     const userId = currUser;
     const form = { text };
     const comment = await dispatch(createCommentThunk(userId, postId, form));
-    console.log("COMMENT HERE \n\n", comment);
+    // console.log("COMMENT HERE \n\n", comment);
     // history.push(`/`)
     if (comment.errors) {
       // console.log("COMMENT ERRORS \n\n", comment.errors);
@@ -92,11 +92,11 @@ function Post() {
 
   // console.log("post comment errors", errors);
 
-  function changeHeart(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    likeStatus === false ? setLikeStatus(true) : setLikeStatus(false);
-  }
+  // function changeHeart(e) {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   likeStatus === false ? setLikeStatus(true) : setLikeStatus(false);
+  // }
 
   const openPostOptions = () => {
     setShowPostOptions(true);
@@ -168,13 +168,14 @@ function Post() {
             <div className="postCard">
               <div className="left">
                 <Link onClick={toProfile}>
-                  <img className="post-picture" src={post?.img_url}></img>
+                  <img className="post-picture" src={post?.img_url} alt='post'></img>
                 </Link>
               </div>
               <div className="right">
                 <div className="user-info">
                   <NavLink to={`/users/${post?.user.id}`}>
                     <img
+                    alt="user"
                       className="user-pic"
                       src={post?.user.profile_pic_url}
                     ></img>
@@ -184,11 +185,11 @@ function Post() {
                     <span className="user-name">
                       {`${post?.user?.username}`}
                       {post?.user?.verified ? (
-                        <img style={{ height: "15px" }} src={checkmark} />
+                        <img style={{ height: "15px" }} src={checkmark} alt='verified'/>
                       ) : null}
                     </span>
                   </a>
-                  {currUser == userId && (
+                  {currUser === userId && (
                     <div className="postOptions">
                       <span onClick={openPostOptions}>{dotDotDotIcon}</span>
                     </div>
@@ -197,13 +198,14 @@ function Post() {
                 <div className="comments">
                   <div className="user-caption">
                     <img
+                    alt="user"
                       className="user-pic"
                       src={post?.user.profile_pic_url}
                     ></img>
                     <span className="user-name">
                       {post?.user?.username}
                       {post?.user?.verified ? (
-                        <img style={{ height: "15px" }} src={checkmark} />
+                        <img style={{ height: "15px" }} src={checkmark} alt='verified'/>
                       ) : null}
                     </span>
                     <p className="caption">{post?.caption}</p>
@@ -281,18 +283,18 @@ function Post() {
                           id="for-input-focus"
                           onBlur={(e) => {
                             if (e.currentTarget === e.target) {
-                              console.log("unfocused input box");
+                              // console.log("unfocused input box");
                             }
                             if (!e.currentTarget.contains(e.relatedTarget)) {
-                              console.log("clicking somewhere else entirely");
+                              // console.log("clicking somewhere else entirely");
                             }
                           }}
                           onFocus={(e) => {
                             if (e.currentTarget === e.target) {
-                              console.log("focusing on input box");
+                              // console.log("focusing on input box");
                             }
                             if (!e.currentTarget.contains(e.relatedTarget)) {
-                              console.log("clicking on myself???");
+                              // console.log("clicking on myself???");
                             }
                           }}
                           // value={"text-area-box"}

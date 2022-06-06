@@ -83,11 +83,11 @@ export const createCommentThunk = (userId, postId, form) => async (dispatch) => 
 
 // Delete a Comment
 export const deleteCommentThunk = (commentId) => async(dispatch) => {
-  console.log("Hello from DELETE THUNK")
+  // console.log("Hello from DELETE THUNK")
   const response = await fetch(`/api/comments/${commentId}/delete`, {
     method: 'DELETE'
   });
-  console.log("WHat is wrong with the response?", response)
+  // console.log("WHat is wrong with the response?", response)
   if (response.ok) {
     const comment = await response.json();
     dispatch(deleteComment(comment))
@@ -106,7 +106,7 @@ export default function comments(state = initialState, action) {
       return newState;
     case CREATE_COMMENT:
       let comment;
-      console.log("Hello from Reducer what is payload? *****", action.payload.id);
+      // console.log("Hello from Reducer what is payload? *****", action.payload.id);
       newState = { ...state.comments, [action.payload.id]: action.payload };
       return newState;
     case DELETE_COMMENT:

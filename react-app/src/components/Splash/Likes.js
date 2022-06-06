@@ -1,4 +1,4 @@
-import { likeHeartIcon, likeFilledHeartIcon } from "./SplashIcons";
+import { likeHeartIcon } from "./SplashIcons";
 import { likeHeartFilledIn } from "../Post/postIcons";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -39,8 +39,8 @@ function Likes({ post, sessionId }) {
     setHeartState(likeHeartFilledIn);
     await dispatch(addLikeThunk(postId, userId));
     await dispatch(getAllPostsThunk());
-    console.log(postId, "this is postId");
-    console.log(userId, "this is the current person signed in");
+    // console.log(postId, "this is postId");
+    // console.log(userId, "this is the current person signed in");
   }
 
   async function removeLike(e, postId, userId) {
@@ -51,10 +51,10 @@ function Likes({ post, sessionId }) {
   }
 
   const likeOrRemoveLike = (e, postId, userId) => {
-    console.log(heartState === likeHeartIcon);
-    console.log("filled in", heartState === likeHeartFilledIn);
+    // console.log(heartState === likeHeartIcon);
+    // console.log("filled in", heartState === likeHeartFilledIn);
     if (heartState === likeHeartIcon) {
-      console.log("heart is not filled in!");
+      // console.log("heart is not filled in!");
 
       return likeAPost(e, postId, userId);
     } else if (heartState === likeHeartFilledIn) {
