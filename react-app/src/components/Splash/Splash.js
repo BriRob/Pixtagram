@@ -115,7 +115,7 @@ function Splash() {
             </div>
           </>
         )}
-        
+
         {showLikes && (
           <>
             <div className="backgroundFeed">
@@ -130,7 +130,7 @@ function Splash() {
                     show={showLikes}
                   />
                   <div
-                    className="cancelPostButtonFeed"
+                    className="closeLikesModal"
                     onClick={() => setShowLikes(false)}
                   >
                     Close
