@@ -63,6 +63,7 @@
 
 .caption {
   margin-left: 15px;
+  word-break: break-all;
 }
 
 .comments {
