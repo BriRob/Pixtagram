@@ -40,7 +40,7 @@
   /* removed height to dynamically change with comment length and errors validation -ms  */
   /* height: 820px; */
   border: 1px solid rgba(128, 128, 128, 0.302);
-  border-radius: 5px;
+  border-radius: 2%;
   margin-bottom: 15px;
   background-color: black;
   overflow-y: auto;
@@ -96,7 +96,7 @@
   padding-top: 5px;
   padding-bottom: 5px;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .user-profile-pic-caption {
@@ -112,6 +112,7 @@
 
 #id-nav {
   padding-left: 14px;
+
 }
 
 #id-nav:hover {
@@ -130,6 +131,7 @@
   z-index: 3;
 }
 
+
 .actualModalComponentFeed {
   position: fixed;
   background-color: rgb(29, 29, 29);
@@ -145,6 +147,27 @@
   border-radius: 5px;
   z-index: 40;
   animation: grow 0.3s forwards;
+
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.cancelPostButtonFeed {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+  padding: 10px 0px;
+
 }
 
 @keyframes grow {
