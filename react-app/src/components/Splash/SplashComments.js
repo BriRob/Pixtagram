@@ -11,7 +11,6 @@ import checkmark from "../CheckMark/checkmark.png";
 import { closeButton } from "../NavBar/Navicons";
 import { NavLink, useHistory } from "react-router-dom";
 import { getAllPostsThunk } from "../../store/post";
-import ShowMoreText from "react-show-more-text";
 
 
 import "./SplashComments.css";
@@ -26,22 +25,16 @@ function SplashComments({ post }) {
   const [errors, setErrors] = useState([]);
   const [showMore, setShowMore] = useState(false);
 
-  const showMoreClick = () => {
-
-  }
-
   const commentsFromPostState = useSelector(
     (state) => state?.posts?.allPosts?.posts?.[post]?.comments
   );
 
 
+
   const comments = post.comments;
 
-
-  // console.log('WHat is in comments?\n\n', comments)
   const currUser = useSelector((state) => state?.session?.user?.id);
 
-  // console.log('Help \n\n',comments.comment)
 
   //will delete the comment if it belongs to the user - need to find a way to get current comment it
   // const deleteComment = async (e, commentId) => {
@@ -54,7 +47,6 @@ function SplashComments({ post }) {
     e.preventDefault();
 
     const userId = currUser;
-
     const form = { text };
 
     const comment = await dispatch(createCommentThunk(userId, postId, form));
@@ -65,7 +57,6 @@ function SplashComments({ post }) {
       await dispatch(getAllPostsThunk());
     }
   };
-
 
   return (
     <>
