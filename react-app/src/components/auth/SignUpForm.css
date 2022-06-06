@@ -108,6 +108,14 @@
   border: #585858 solid 1px;
 }
 
+.s-input:focus{
+  outline: none;
+}
+
+.s-input::placeholder{
+  padding-left: 5px;
+}
+
 #disclaimer {
   /* border: yellow solid 3px; */
   width: 300px;
@@ -137,10 +145,10 @@
   border: none;
   border-radius: 2px;
 }
+
 .s-button:disabled,
 .s-button[disabled] {
   background-color: #072641;
-
 }
 
 #login-link {

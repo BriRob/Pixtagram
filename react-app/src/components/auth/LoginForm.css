@@ -1,5 +1,5 @@
 /* ms-comment may-30 */
-/* html, body {margin: 0; height: 100%; overflow: hidden} */  
+/* html, body {margin: 0; height: 100%; overflow: hidden} */
 
 
 #full-page-container {
@@ -75,6 +75,14 @@
     margin: 5px;
     background-color: #121212;
     color: white;
+}
+
+.l-input:focus{
+    outline: none;
+}
+
+.l-input::placeholder{
+    padding-left: 5px;
 }
 
 #login-form-div {
@@ -160,7 +168,7 @@ placeholder{
 }
 
 #l-demo-button:hover{
-    color: whitesmoke;
+    color: white;
 }
 
 #b-line{

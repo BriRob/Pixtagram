@@ -40,7 +40,7 @@
   /* removed height to dynamically change with comment length and errors validation -ms  */
   /* height: 820px; */
   border: 1px solid rgba(128, 128, 128, 0.302);
-  border-radius: 5px;
+  border-radius: 2%;
   margin-bottom: 15px;
   background-color: black;
   overflow-y: auto;
@@ -96,7 +96,7 @@
   padding-top: 5px;
   padding-bottom: 5px;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .user-profile-pic-caption {
@@ -165,4 +165,3 @@
   justify-content: center;
   padding: 10px 0px;
 }
-

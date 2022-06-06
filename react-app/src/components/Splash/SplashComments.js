@@ -11,6 +11,8 @@ import checkmark from "../CheckMark/checkmark.png";
 import { closeButton } from "../NavBar/Navicons";
 import { NavLink, useHistory } from "react-router-dom";
 import { getAllPostsThunk } from "../../store/post";
+import ShowMoreText from "react-show-more-text";
+
 
 import "./SplashComments.css";
 
@@ -24,47 +26,20 @@ function SplashComments({ post }) {
   const [errors, setErrors] = useState([]);
   const [showMore, setShowMore] = useState(false);
 
-  //Need comments specific to the post or postId
-  // console.log('CURRENT POST \n\n', currPost)
-  // const commentsM = currPost.comments
-  // console.log('Are these the comments you seek?? \n\n', commentsM)
+  const showMoreClick = () => {
+
+  }
 
   const commentsFromPostState = useSelector(
     (state) => state?.posts?.allPosts?.posts?.[post]?.comments
   );
 
-  // console.log(`What are comments?? for This post:${post} FROM THE POST\n\n`, commentsFromPostState)
-
-  // useEffect(() => {
-  //   dispatch
-  // })
-  // useEffect(() => {
-  //   // dispatch(getOnePostThunk(postId))
-  // dispatch(getCommentsThunk(post))
-  //   // then(() => dispatch(getCommentsThunk(post)))
-  //   // .then(() => dispatch(getOneCommentThunk()))
-  //   // .then(() => dispatch(getOnePostThunk(postId)))
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch
-  // })
-
-  // console.log('You need post comments \n\n', post)
 
   const comments = post.comments;
-  // console.log(`THESE ARE COMMENTS for POST ${post.id} \n\n`, comments)
-  // const comments = useSelector((state) => state?.comments?.comments_list);
-  // console.log('Need one comment please', comments)
+
 
   // console.log('WHat is in comments?\n\n', comments)
   const currUser = useSelector((state) => state?.session?.user?.id);
-  // const currUser = useSelector((state) => state?.session?.user?.id);
-  // // console.log("Maica USER ID", currUser);
-  // const currPost = useSelector((state) => state?.posts?.post?.id)
-
-  // need to grab comment text somehow
-  // const textC = comments[0]?.text
 
   // console.log('Help \n\n',comments.comment)
 
@@ -77,10 +52,9 @@ function SplashComments({ post }) {
   //will post a comment
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const postId = currPost;
-    // console.log('CURRPOST -MS \n\n', postId)
+
     const userId = currUser;
-    // console.log('USERID -MS \n\n', userId)
+
     const form = { text };
 
     const comment = await dispatch(createCommentThunk(userId, postId, form));
@@ -92,8 +66,6 @@ function SplashComments({ post }) {
     }
   };
 
-  let comment;
-  // {console.log("MAICA THIS IS THE LENGTH OF A COMMENT \n\n", comment[0])}
 
   return (
     <>
