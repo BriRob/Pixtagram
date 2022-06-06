@@ -12,7 +12,7 @@ import CheckMark from "../CheckMark/CheckMark";
 function User() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const {pathname} = useLocation();
+  const location = useLocation();
   const sessionUser = useSelector((state) => state.session.user);
   const user = useSelector((state) => state?.userReducer?.user);
   const posts = useSelector((state) => state?.posts?.allPosts?.posts);
@@ -49,19 +49,20 @@ function User() {
 
       if (response.id === undefined) {
         history.push("/page-not-found");
+      } else {
+        dispatch(getAllPostsThunk()).then(() => setIsLoaded(true));
       }
 
       // // .then(() => {
       //     if (pathname !== `/users/${userId}`) {
       //       // history.push("/page-not-found");
       //     }
-      };
-      dispatch(getAllPostsThunk()).then(() => setIsLoaded(true));
+
+      // }
+      // if(user === undefined){
+      //   history.push('/page-not-found')
     }
-    // if(user === undefined){
-    //   history.push('/page-not-found')
-    // }
-  , [dispatch]);
+  }, [location]);
 
   function toEdit() {
     history.push(`/users/${userId}/edit`);
