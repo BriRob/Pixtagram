@@ -297,3 +297,34 @@ align-items: center;
   padding-left: 5px;
 }
 
+.likesTitle {
+  padding: 10px 0;
+  font-size: 32px;
+  border-bottom: 1px solid grey;
+  width: 100%;
+  text-align: center;
+}
+
+.usersLikesDiv {
+  padding: 10px 0;
+  width: 100%;
+  border-bottom: 1px solid grey;
+
+
+}
+
+.eachUsername {
+  padding: 5px 0;
+  text-align: center;
+  font-size: 20px;
+}
+
+.closeLikesModal {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0px;
+  font-size: 13px;
+
+}

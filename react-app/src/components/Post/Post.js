@@ -152,7 +152,7 @@ function Post() {
                 <div className="actualModalComponentFeed">
                   <LikesModal views={postForViewLikes} show={showLikes} />
                   <div
-                    className="cancelPostButtonFeed"
+                    className="closeLikesModal"
                     onClick={() => setShowLikes(false)}
                   >
                     Close
@@ -235,7 +235,7 @@ function Post() {
                       className="comment-icon-post"
                     >
                       <label for='for-input-focus' >{commentIcon}</label>
-                      
+
                     </div>
                   </div>
                   <div className="liked-by">
