@@ -167,7 +167,7 @@ function Post() {
           <div className="singlePostPage">
             <div className="postCard">
               <div className="left">
-                <Link onClick={toProfile}>
+                <Link to={`/users/${post?.user?.id}`}>
                   <img className="post-picture" src={post?.img_url} alt='post'></img>
                 </Link>
               </div>
@@ -236,7 +236,7 @@ function Post() {
                       // onClick={(e) => console.log(e.target, "e.target", e.relatedTarget.addEventListener('text-area-box'), "e.related")}
                       className="comment-icon-post"
                     >
-                      <label for='for-input-focus' >{commentIcon}</label>
+                      <label htmlFor='for-input-focus' >{commentIcon}</label>
 
                     </div>
                   </div>

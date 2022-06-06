@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { postGridIcon } from './profileIcons';
+// import { postGridIcon } from './profileIcons';
 
 function UsersList() {
   const [users, setUsers] = useState([]);

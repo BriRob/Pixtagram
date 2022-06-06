@@ -2,7 +2,7 @@
 const GET_ALL_COMMENTS = "comment/GET_ALL_COMMENTS";
 const CREATE_COMMENT = "comment/CREATE_COMMENT";
 const DELETE_COMMENT = "comment/DELETE_COMMENT";
-const GET_ONE_COMMENT = "comment/GET_ONE_COMMENT";
+// const GET_ONE_COMMENT = "comment/GET_ONE_COMMENT";
 
 // const getOneComment = comment => ({
 //   type: GET_ONE_COMMENT,
@@ -15,10 +15,10 @@ const getComments = comments => ({
 });
 
 // Create a Post
-const createComment = comment => ({
-  type: CREATE_COMMENT,
-  payload: comment
-});
+// const createComment = comment => ({
+//   type: CREATE_COMMENT,
+//   payload: comment
+// });
 
 // Delete a Comment
 const deleteComment = commentId => ({
@@ -105,7 +105,7 @@ export default function comments(state = initialState, action) {
       //   newState["comments"] = action.payload.comments
       return newState;
     case CREATE_COMMENT:
-      let comment;
+      // let comment;
       // console.log("Hello from Reducer what is payload? *****", action.payload.id);
       newState = { ...state.comments, [action.payload.id]: action.payload };
       return newState;
