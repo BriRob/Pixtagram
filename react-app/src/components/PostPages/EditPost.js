@@ -16,16 +16,30 @@ function EditPost() {
   const [errors, setErrors] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
+  useEffect(async () => {
     const controller = new AbortController();
 
-    dispatch(getOnePostThunk(postId))
+    let response = await dispatch(getOnePostThunk(postId));
 
-    if (currPost) {
-      setIsLoaded(true);
+    if (response.id === undefined) {
+      history.push("/page-not-found");
+    } else if (response.user_id !== user.id) {
+      history.push(`/posts/${postId}`);
     } else {
-
+      setCaption(response.caption);
+      setIsLoaded(true);
     }
+
+    // if (currPost) {
+    //   // let response = await dispatch(getOnePostThunk(postId))
+    //   if (user?.id !== currPost?.user_id) {
+    //     return history.push(`/posts/${postId}`)
+    //   }
+    //   setIsLoaded(true);
+    // } else {
+
+    // }
+
     // const controller = new AbortController();
 
     // console.log(currPost);
@@ -59,10 +73,6 @@ function EditPost() {
       history.push(`/posts/${postId}`);
     }
   };
-
-  if (user?.id !== currPost.user_id) {
-    history.push(`/posts/${postId}`)
-  }
 
   console.log("is loaded!!!! ", isLoaded);
 
@@ -134,10 +144,13 @@ function EditPost() {
                     ></textarea>
                   </label>
                 </div>
-                <div
-                  className="cancelEdit"
-                >
-                  <div onClick={() => history.push(`/posts/${currPost.id}`)} className="cancelEditBtn">Cancel</div>
+                <div className="cancelEdit">
+                  <div
+                    onClick={() => history.push(`/posts/${currPost.id}`)}
+                    className="cancelEditBtn"
+                  >
+                    Cancel
+                  </div>
                 </div>
               </div>
             </div>
