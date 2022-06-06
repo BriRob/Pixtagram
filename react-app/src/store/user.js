@@ -56,7 +56,7 @@ export const editUserThunk = (userId, form) => async (dispatch) => {
   formData.append("full_name", full_name);
   formData.append("profile_pic_url", profile_pic_url);
   formData.append("bio", bio);
-  console.log("FORMDATA \n\n", formData["full_name"])
+  // console.log("FORMDATA \n\n", formData["full_name"])
 
 
   const option = {
@@ -67,8 +67,8 @@ export const editUserThunk = (userId, form) => async (dispatch) => {
     body: formData,
   };
 
-  console.log("option \n\n", option)
-  console.log("option.body \n\n", option.body)
+  // console.log("option \n\n", option)
+  // console.log("option.body \n\n", option.body)
 
   const response = await fetch(`/api/users/${userId}/edit`, option);
   if (response.ok) {
@@ -107,8 +107,8 @@ export default function userReducer(state = initialState, action) {
       action.users.users.forEach((user) => {
         allUsers[user.id] = user
       })
-      console.log("users array from backend", action.users.users)
-      console.log("allUsers obj", allUsers)
+      // console.log("users array from backend", action.users.users)
+      // console.log("allUsers obj", allUsers)
       newState = { ...state, users: allUsers };
       // newState = { ...state, ...action.users };
       // newState.users = action.users
@@ -125,7 +125,7 @@ export default function userReducer(state = initialState, action) {
     // return {...state: action.payload}
     case DELETE_USER:
       newState = {...state}
-      console.log('deleted newState.session :D')
+      // console.log('deleted newState.session :D')
       delete newState.user
       // console.log(delete newState['user'])
       // console.log(newState.session)

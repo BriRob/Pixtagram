@@ -29,7 +29,7 @@ function Comments({ postId }) {
 
   return (
     <>
-      <div className="page-container">
+      {/* <div className="page-container"> */}
         {comments ? (
           <div className="comments-components">
             {comments.map((comment, idx) => (
@@ -74,7 +74,7 @@ function Comments({ postId }) {
         ) : (
           <LoadingSpinner />
         )}
-      </div>
+      {/* </div> */}
     </>
   );
 }

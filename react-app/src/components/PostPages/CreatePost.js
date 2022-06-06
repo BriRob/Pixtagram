@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { createPostThunk } from "../../store/post";
-import * as sessionActions from "../../store/session";
+// import * as sessionActions from "../../store/session";
 import { closeButton, postImageModalIcon } from "../NavBar/Navicons";
 import "./modals.css";
 
@@ -89,13 +89,14 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
                   </>
                 )}
                 {!showUpload && (
-                  <img src={previewUrl} className="previewImage"></img>
+                  <img src={previewUrl} className="previewImage" alt="preview"></img>
                 )}
               </div>
               <div>
                 <div className="rightCreate">
                   <div className="userInfoNewPost">
                     <img
+                    alt="user"
                       className="userInfoNewPostImg"
                       src={user.profile_pic_url}
                     />

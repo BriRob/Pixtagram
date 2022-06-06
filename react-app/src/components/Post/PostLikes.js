@@ -11,8 +11,8 @@ import { likeHeartIcon } from "../Splash/SplashIcons";
 
 function PostLikes({ post, sessionId }) {
   const dispatch = useDispatch();
-  console.log(sessionId);
-  console.log(post);
+  // console.log(sessionId);
+  // console.log(post);
 
   const [heartState, setHeartState] = useState(likeHeartIcon);
 
@@ -30,8 +30,8 @@ function PostLikes({ post, sessionId }) {
     await dispatch(addLikeThunk(postId, userId));
     await dispatch(getOnePostThunk(postId));
     await dispatch(getAllPostsThunk(postId));
-    console.log(postId, "this is postId");
-    console.log(userId, "this is the current person signed in");
+    // console.log(postId, "this is postId");
+    // console.log(userId, "this is the current person signed in");
   }
 
   async function removeLike(e, postId, userId) {
@@ -44,10 +44,10 @@ function PostLikes({ post, sessionId }) {
   }
 
   const likeOrRemoveLike = (e, postId, userId) => {
-    console.log(heartState === likeHeartIcon);
-    console.log("filled in", heartState === likeHeartFilledIn);
+    // console.log(heartState === likeHeartIcon);
+    // console.log("filled in", heartState === likeHeartFilledIn);
     if (heartState === likeHeartIcon) {
-      console.log("heart is not filled in!");
+      // console.log("heart is not filled in!");
 
       return likeAPost(e, postId, userId);
     } else if (heartState === likeHeartFilledIn) {

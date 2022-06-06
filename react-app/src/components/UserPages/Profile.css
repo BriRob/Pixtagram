@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
 }
 /* containers the profile pic and the user info */
 #header-container{
@@ -70,6 +71,11 @@
 #bio-container{
     /* border: greenyellow solid 1px; */
     color: #C0C0C0;
+}
+
+#biography{
+    overflow-wrap: auto;
+    word-break: break-word;
 }
 
 #username-font{

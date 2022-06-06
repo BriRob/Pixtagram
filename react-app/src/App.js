@@ -14,7 +14,7 @@ import { authenticate } from "./store/session";
 import Post from "./components/Post/Post";
 import EditPost from "./components/PostPages/EditPost";
 import Explore from "./components/Explore/Explore";
-import AnimatedBackground from "./components/AnimatedBackground/AnimatedBackground";
+// import AnimatedBackground from "./components/AnimatedBackground/AnimatedBackground";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 
 function App() {
@@ -27,9 +27,9 @@ function App() {
 
   // console.log(users)
 
-  const pageNotFound = () => {
-    return <h1>Page Not Found</h1>;
-  };
+  // const pageNotFound = () => {
+  //   return <h1>Page Not Found</h1>;
+  // };
 
   useEffect(() => {
     (async () => {
@@ -81,17 +81,12 @@ function App() {
         <Route path="/test">
           {/* <AnimatedBackground /> */}
         </Route>
-
+         <Route path="/page-not-found">
           <PageNotFound />
-
-//         <Route path="/page-not-found">
-//           <h1>Page Not Found</h1>
-//         </Route>
-//         {/* </div> */}
-
+        </Route>
+        {/* </div> */}
         <Route path="/">
           <PageNotFound />
-//           <h1>Page Not Found</h1>
         </Route>
         <PageNotFound />
       </Switch>

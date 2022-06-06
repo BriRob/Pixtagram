@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createCommentThunk,
-  getCommentsThunk,
-  getOneCommentThunk,
 } from "../../store/comment";
-import LoadingSpinner from "../Spinner/Spinner";
-import { deleteCommentThunk } from "../../store/comment";
-import checkmark from "../CheckMark/checkmark.png";
-import { closeButton } from "../NavBar/Navicons";
-import { NavLink, useHistory } from "react-router-dom";
+// import LoadingSpinner from "../Spinner/Spinner";
+// import { deleteCommentThunk } from "../../store/comment";
+// import checkmark from "../CheckMark/checkmark.png";
+// import { closeButton } from "../NavBar/Navicons";
+import { NavLink } from "react-router-dom";
 import { getAllPostsThunk } from "../../store/post";
+
 
 import "./SplashComments.css";
 
@@ -18,55 +17,22 @@ function SplashComments({ post }) {
   // console.log('one post MAICA \n\n', post)
   const postId = post.id;
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
 
   const [text, setText] = useState("");
   const [errors, setErrors] = useState([]);
-  const [showMore, setShowMore] = useState(false);
+  // const [showMore, setShowMore] = useState(false);
 
-  //Need comments specific to the post or postId
-  // console.log('CURRENT POST \n\n', currPost)
-  // const commentsM = currPost.comments
-  // console.log('Are these the comments you seek?? \n\n', commentsM)
+  // const commentsFromPostState = useSelector(
+  //   (state) => state?.posts?.allPosts?.posts?.[post]?.comments
+  // );
 
-  const commentsFromPostState = useSelector(
-    (state) => state?.posts?.allPosts?.posts?.[post]?.comments
-  );
 
-  // console.log(`What are comments?? for This post:${post} FROM THE POST\n\n`, commentsFromPostState)
-
-  // useEffect(() => {
-  //   dispatch
-  // })
-  // useEffect(() => {
-  //   // dispatch(getOnePostThunk(postId))
-  // dispatch(getCommentsThunk(post))
-  //   // then(() => dispatch(getCommentsThunk(post)))
-  //   // .then(() => dispatch(getOneCommentThunk()))
-  //   // .then(() => dispatch(getOnePostThunk(postId)))
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch
-  // })
-
-  // console.log('You need post comments \n\n', post)
 
   const comments = post.comments;
-  // console.log(`THESE ARE COMMENTS for POST ${post.id} \n\n`, comments)
-  // const comments = useSelector((state) => state?.comments?.comments_list);
-  // console.log('Need one comment please', comments)
 
-  // console.log('WHat is in comments?\n\n', comments)
   const currUser = useSelector((state) => state?.session?.user?.id);
-  // const currUser = useSelector((state) => state?.session?.user?.id);
-  // // console.log("Maica USER ID", currUser);
-  // const currPost = useSelector((state) => state?.posts?.post?.id)
 
-  // need to grab comment text somehow
-  // const textC = comments[0]?.text
-
-  // console.log('Help \n\n',comments.comment)
 
   //will delete the comment if it belongs to the user - need to find a way to get current comment it
   // const deleteComment = async (e, commentId) => {
@@ -77,10 +43,8 @@ function SplashComments({ post }) {
   //will post a comment
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const postId = currPost;
-    // console.log('CURRPOST -MS \n\n', postId)
+
     const userId = currUser;
-    // console.log('USERID -MS \n\n', userId)
     const form = { text };
 
     const comment = await dispatch(createCommentThunk(userId, postId, form));
@@ -91,9 +55,6 @@ function SplashComments({ post }) {
       await dispatch(getAllPostsThunk());
     }
   };
-
-  let comment;
-  // {console.log("MAICA THIS IS THE LENGTH OF A COMMENT \n\n", comment[0])}
 
   return (
     <>

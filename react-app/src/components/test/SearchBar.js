@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 function SearchBar() {
     const history = useHistory()
     const [jsonResults, setJsonResults] = useState([])
-    const [value, setValue] = useState('')
+    // const [value, setValue] = useState('')
     useEffect(() => {
         fetch('/api/users/all')
             .then((response) => response.json())
@@ -17,7 +17,7 @@ function SearchBar() {
             })
     }, [])
 
-    console.log(jsonResults, "this is jsonresults")
+    // console.log(jsonResults, "this is jsonresults")
 
     return (
         <>
