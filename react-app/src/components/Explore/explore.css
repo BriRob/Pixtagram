@@ -1,39 +1,20 @@
 
 .page-container{
+    /* border: green solid  5px; */
+    padding-top: 70%;
     display: flex;
     align-items: center;
-}
-
-.profile-cards{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: 50vw;
-    padding-top: 60px;
-}
-
-.username-header{
-    font-size: 25px;
     justify-content: center;
-    align-items: center;
-    position: relative;
-    left: 2%;
-    width: 225px;
+    /* display: grid;
+    grid-template-columns: 2fr;
+    grid-template-rows: 2fr; */
+    height: 100vh;
+    width: 100vw;
+    text-decoration: none;
 
 }
 
-.admin-profile{
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    left: 10%;
-    bottom:187px;
-    cursor: pointer;
 
-}
 .square{
     display: flex;
     width: 50vw;
@@ -42,45 +23,92 @@
     align-items: center;
 }
 
+
+.username-header{
+    font-size: 25px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 2%;
+    width: 225px;
+}
+
 .info-card{
-    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    /* border: brown solid 1px; */
+    height: 50px;
+    text-decoration: none;
+}
+
+#img-container{
+    height: 250px;
+    width: 200px;
+}
+
+.admin-profile{
+    height: 100%;
+    width: 100%;
+}
+
+
+/* holds card-box */
+.square{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #838383 solid 1px;
+    height: 380px;
+    width: 330px;
+    background-color: black;
+    margin-bottom: 40px;
+    border-radius: 3%;
+    /* box-shadow: ; */
+    text-decoration: none;
 }
 
 .admin-bio{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
-    padding-top: 10%;
+    /* padding-top: 10%;
     position: relative;
-    bottom: 189px;
+    bottom: 189px; */
+    text-decoration: none;
 }
 
 .card-box{
-    width: 36%;
-    height: 200px;
+    /* border: wheat solid 3px; */
+    width: 80%;
+    /* height: 200px; */
+    height: 40vh;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    text-decoration: none;
+
 }
 
 .header-name{
+    /* border: yellowgreen solid 1px; */
     display: flex;
     justify-content: center;
+    text-decoration: none;
+    padding-bottom: 10px;
+    text-decoration: none;
 }
 
-
-/* .rotating-border{
-
-}
-.rotating-border::before{
-
-}
 
 .rotating-border::after{
 padding: 0;
 margin: 0;
 box-sizing: border-box;
 
-} */
+}
 
 /* .loading{
     position: relative;

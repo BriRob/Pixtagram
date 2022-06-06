@@ -230,6 +230,7 @@ placeholder{
 
 .c-name {
     color: #8E8E8E;
+    text-decoration: none;
 }
 
 .c-name:visited{

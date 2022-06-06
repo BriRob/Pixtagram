@@ -72,6 +72,11 @@
     color: #C0C0C0;
 }
 
+#biography{
+    overflow-wrap: auto;
+    word-break: break-word;
+}
+
 #username-font{
     margin-right: 40px;
     font-size: 30px;

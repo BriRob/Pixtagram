@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import './LoginForm.css'
 import pixta from '../../images/splash.png'
@@ -124,11 +124,11 @@ const LoginForm = () => {
         </div>
 
         <div id='creators'>
-          <p className='c-name'>© 2022 Pixtagram</p>
-            <p className='c-name'>Agustin Zucca</p>
-            <p className='c-name'>Anthony Bronca</p>
-            <p className='c-name'>Briana Robinson</p>
-            <p className='c-name'>Maica Santos</p>
+          <a href={`https://github.com/BriRob/Pixtagram`} className='c-name'>© 2022 Pixtagram</a>
+            <a href={`https://github.com/AgustinZucca`} className='c-name'>Agustin Zucca</a>
+            <a href={`https://github.com/AnthonyBronca`} className='c-name'>Anthony Bronca</a>
+            <a href={`https://github.com/BriRob`} className='c-name'>Briana Robinson</a>
+            <a href={`https://github.com/itsmaica`} className='c-name'>Maica Santos</a>
         </div>
       </div>
 
