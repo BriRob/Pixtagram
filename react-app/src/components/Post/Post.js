@@ -114,7 +114,6 @@ function Post() {
           <LoadingSpinner />
         </div>
       </>
-
     );
   } else {
     return (
@@ -167,15 +166,19 @@ function Post() {
           <div className="singlePostPage">
             <div className="postCard">
               <div className="left">
-                <Link onClick={toProfile}>
-                  <img className="post-picture" src={post?.img_url} alt='post'></img>
+                <Link to={`/users/${post?.user?.id}`}>
+                  <img
+                    className="post-picture"
+                    src={post?.img_url}
+                    alt="post"
+                  ></img>
                 </Link>
               </div>
               <div className="right">
                 <div className="user-info">
                   <NavLink to={`/users/${post?.user.id}`}>
                     <img
-                    alt="user"
+                      alt="user"
                       className="user-pic"
                       src={post?.user.profile_pic_url}
                     ></img>
@@ -185,7 +188,11 @@ function Post() {
                     <span className="user-name">
                       {`${post?.user?.username}`}
                       {post?.user?.verified ? (
-                        <img style={{ height: "15px" }} src={checkmark} alt='verified'/>
+                        <img
+                          style={{ height: "15px" }}
+                          src={checkmark}
+                          alt="verified"
+                        />
                       ) : null}
                     </span>
                   </a>
@@ -198,14 +205,18 @@ function Post() {
                 <div className="comments">
                   <div className="user-caption">
                     <img
-                    alt="user"
+                      alt="user"
                       className="user-pic"
                       src={post?.user.profile_pic_url}
                     ></img>
                     <span className="user-name">
                       {post?.user?.username}
                       {post?.user?.verified ? (
-                        <img style={{ height: "15px" }} src={checkmark} alt='verified'/>
+                        <img
+                          style={{ height: "15px" }}
+                          src={checkmark}
+                          alt="verified"
+                        />
                       ) : null}
                     </span>
                     <p className="caption">{post?.caption}</p>
@@ -236,8 +247,7 @@ function Post() {
                       // onClick={(e) => console.log(e.target, "e.target", e.relatedTarget.addEventListener('text-area-box'), "e.related")}
                       className="comment-icon-post"
                     >
-                      <label for='for-input-focus' >{commentIcon}</label>
-
+                      <label htmlFor="for-input-focus">{commentIcon}</label>
                     </div>
                   </div>
                   <div className="liked-by">

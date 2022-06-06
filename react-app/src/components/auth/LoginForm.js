@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import './LoginForm.css'
 import pixta from '../../images/splash.png'
@@ -52,13 +52,13 @@ const LoginForm = () => {
         <div id='top-page-container'>
 
           <div className='left-container'>
-            <img id='image' src={pixta}></img>
+            <img alt='pixtagram intro' id='image' src={pixta}></img>
           </div>
 
           <div id='right-container'>
             <div id='l-border-div'>
               <div id='heading-div'>
-                <img id='s-logo' src={logo}></img>
+                <img alt='pixtagram logo' id='s-logo' src={logo}></img>
               </div>
 
               <div id='login-form-div'>

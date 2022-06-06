@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { signUp, login } from '../../store/session';
 import './SignUpForm.css'
 import logo from '../../images/logo.png'
@@ -8,7 +8,7 @@ import logo from '../../images/logo.png'
 // ms-comment may-30
 
 const SignUpForm = () => {
-  const history = useHistory()
+  // const history = useHistory()
   const [errors, setErrors] = useState([]);
   const [full_name, setFullName] = useState('');
   const [username, setUsername] = useState('');
@@ -79,7 +79,7 @@ const SignUpForm = () => {
           <div id='s-border'>
 
               <div className='top-logo-container'>
-                <img id='s-logo' src={logo}></img>
+                <img alt='logo' id='s-logo' src={logo}></img>
                 <p id='text'>Signup to see photos and gifs from your friends.</p>
                 <button className='s-button' onClick={demoUser}>Log in as Demo</button>
               </div>

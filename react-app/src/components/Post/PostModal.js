@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { deletePostThunk } from "../../store/post";
 import "./post.css";
 function PostModal({ postId, show }) {
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
   // const post = useSelector((state) => state?.posts?.post);
@@ -17,12 +17,14 @@ function PostModal({ postId, show }) {
     setDelModal(true);
   };
 
-  const deletePost = async (e) => {
-    await dispatch(deletePostThunk(postId));
-    if (pathname !== '/') {
-      history.push(`/`);
-    }
-    else window.location.reload()
+  // console.log(pathname !== "/");
+  const deletePost = (e) => {
+    console.log('PATHNAME BEFORE THUNK', pathname)
+    dispatch(deletePostThunk(postId));
+    console.log('PATHNAME AFTER THUNK', pathname)
+    if (pathname === "/") {
+      window.location.reload();
+    } else history.push('/');
   };
 
   return (
@@ -31,7 +33,9 @@ function PostModal({ postId, show }) {
         <div className="editPostModal">
           <div className="deletePostConfirmText">
             <h3>Delete post</h3>
-            <p className="confirmdeltext">Are you sure you want to delete this post?</p>
+            <p className="confirmdeltext">
+              Are you sure you want to delete this post?
+            </p>
           </div>
           <div className="delPostBtnFinal" onClick={deletePost}>
             Delete

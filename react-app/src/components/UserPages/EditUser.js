@@ -160,7 +160,7 @@ function EditUser() {
               {/* <img src={profilePicUrl}></img> */}
               <div className="top-edit">
                 <div className="top-edit-part">
-                  <img className="user-pic-edit" src={preImg} />
+                  <img alt="user" className="user-pic-edit" src={preImg} />
                   <div>
                     {sessionUser?.username}
                     <div>

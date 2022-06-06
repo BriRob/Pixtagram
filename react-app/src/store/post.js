@@ -2,9 +2,9 @@ const GET_ALL_POSTS = "post/GET_ALL_POSTS";
 const GET_ONE_POST = "post/GET_ONE_POST";
 // const CREATE_POST = "post/CREATE_POST";
 // const EDIT_POST = "user/EDIT_POST";
-const DELETE_POST = "post/DELETE_POST"
+const DELETE_POST = "post/DELETE_POST";
 
-const ADD_LIKE = 'post/ADD_LIKE'
+const ADD_LIKE = "post/ADD_LIKE";
 
 const getAllPosts = (posts) => ({
   type: GET_ALL_POSTS,
@@ -19,9 +19,9 @@ const getOnePost = (post) => ({
 const addLike = (post) => {
   return {
     type: ADD_LIKE,
-    payload: post
-  }
-}
+    payload: post,
+  };
+};
 
 // const createPost = (post) => ({
 //   type: CREATE_POST,
@@ -53,31 +53,34 @@ export const getOnePostThunk = (postId) => async (dispatch) => {
   if (response.ok) {
     const post = await response.json();
     dispatch(getOnePost(post));
-    return post
+    return post;
   }
   return response;
 };
 
 export const addLikeThunk = (post_id, user_id) => async (dispatch) => {
   const options = {
-    method: 'PUT',
-  }
-  const response = await fetch(`/api/posts/${post_id}/${user_id}`, options)
-  const post = await response.json()
+    method: "PUT",
+  };
+  const response = await fetch(`/api/posts/${post_id}/${user_id}`, options);
+  const post = await response.json();
   // console.log(post)
-  dispatch(addLike(post))
-}
+  dispatch(addLike(post));
+};
 
 export const removeLikeThunk = (post_id, user_id) => async (dispatch) => {
   // console.log("you've hit removeLikeThunk!")
   const options = {
-    method: 'PUT',
-  }
-  const response = await fetch(`/api/posts/${post_id}/${user_id}/remove`, options)
-  const post = await response.json()
+    method: "PUT",
+  };
+  const response = await fetch(
+    `/api/posts/${post_id}/${user_id}/remove`,
+    options
+  );
+  // const post = await response.json()
   // console.log("post in remove like thunk", post)
   // dispatch(addLike(post))
-}
+};
 
 // create post
 export const createPostThunk = (userId, form) => async (dispatch) => {
@@ -102,7 +105,7 @@ export const createPostThunk = (userId, form) => async (dispatch) => {
     // console.log(post, "one post from the thunk!")
     // dispatch(createPost(post));
     dispatch(getOnePost(post));
-    return post
+    return post;
   } else if (response.status < 500) {
     // console.log("THUNK RESPONSE IS NOT OK but less than 500")
     const data = await response.json();
@@ -119,17 +122,13 @@ export const createPostThunk = (userId, form) => async (dispatch) => {
   // return response
 };
 
-
 // Edit Post Thunk
 export const editPostThunk = (postId, form) => async (dispatch) => {
-
-  const { caption } = form
+  const { caption } = form;
   const formData = new FormData();
 
   formData.append("caption", caption);
   // console.log("FORMDATA \n\n", formData["caption"])
-
-
 
   const option = {
     method: "PUT",
@@ -147,13 +146,13 @@ export const editPostThunk = (postId, form) => async (dispatch) => {
     const post = await response.json();
     // dispatch(editPost(user));
     dispatch(getOnePost(post));
-    return post
+    return post;
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
       return data;
     } else {
-      return ['An error occurred. Please try again.']
+      return ["An error occurred. Please try again."];
     }
   }
   return response;
@@ -161,18 +160,16 @@ export const editPostThunk = (postId, form) => async (dispatch) => {
 
 // Delete Post Think
 export const deletePostThunk = (postId) => async (dispatch) => {
-
   // console.log('<--------- HELLO From DELETE POST THUNK -------->')
   const response = await fetch(`/api/posts/${postId}/delete`, {
-    method: 'DELETE'
+    method: "DELETE",
   });
   if (response.ok) {
     const post = await response.json();
-    dispatch(deletePost(post))
+    dispatch(deletePost(post));
   }
   return response;
-}
-
+};
 
 const initialState = {};
 
@@ -188,10 +185,10 @@ export default function posts(state = initialState, action) {
       newState.post = action.payload;
       return newState;
     case DELETE_POST:
-      newState = { ...state }
+      newState = { ...state };
       // console.log('HELLO FROM DELETE REDUCER')
-      delete newState.post
-      return newState
+      delete newState.post;
+      return newState;
     // case ADD_LIKE:
     //   newState = { ...state }
     //   const upatedLike = action.payload.post_likes //array of likes
