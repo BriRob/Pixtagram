@@ -233,6 +233,10 @@ placeholder{
     text-decoration: none;
 }
 
+.c-name {
+    color: #8E8E8E;
+}
+
 .c-name:visited{
     text-decoration: none;
     color: #8E8E8E;

@@ -19,9 +19,9 @@ function PostModal({ postId, show }) {
 
   // console.log(pathname !== "/");
   const deletePost = (e) => {
-    console.log('PATHNAME BEFORE THUNK', pathname)
+    // console.log('PATHNAME BEFORE THUNK', pathname)
     dispatch(deletePostThunk(postId));
-    console.log('PATHNAME AFTER THUNK', pathname)
+    // console.log('PATHNAME AFTER THUNK', pathname)
     if (pathname === "/") {
       window.location.reload();
     } else history.push('/');

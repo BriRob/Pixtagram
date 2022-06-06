@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import "./Splash.css";
 import { getUserThunk } from "../../store/user";
 import { dotDotDotIcon } from "./SplashIcons";
-import { getAllPostsThunk } from "../../store/post";
+import { addLikeThunk, getAllPostsThunk, removeLikeThunk } from "../../store/post";
 import LoadingSpinner from "../Spinner/Spinner";
 import { NavLink } from "react-router-dom";
 // import CheckMark from "../CheckMark/CheckMark";
@@ -115,7 +115,6 @@ function Splash() {
             </div>
           </>
         )}
-
         {showLikes && (
           <>
             <div className="backgroundFeed">

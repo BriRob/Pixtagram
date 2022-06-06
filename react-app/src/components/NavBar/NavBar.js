@@ -30,7 +30,6 @@ const NavBar = () => {
   // );
 
   const [showModal, setShowModal] = useState(false);
-  // const [showSearch, setShowSearch] = useState(false);
   // const [searchInput, setSearchInput] = useState("");
   const [houseColor, setHouseColor] = useState(darkModeFilledInHomeIcon);
   const [postIconColor, setPostIconColor] = useState(darkModePostIcon);
@@ -42,19 +41,6 @@ const NavBar = () => {
   // console.log('THIS IS THE STATUS FROM NAVBAR', profileStatus)
   // console.log('RERENDERING FROM NAVBAR', profileStatus)
   // const getDataFromApi = () => {
-  //   console.log('Options fetched from api')
-  //   fetch('/api/users/all').then((response) => {return response.json()
-  //   }).then((res) => {
-  //       console.log(res.users)
-  //       for (let i = 0; i < res.users.length; i++) {
-  //         let user = res.users[i]
-  //         myOptions.push(user)
-  //       }
-  //       setMyOptions(myOptions)
-  //     })
-  // }
-
-  // console.log(showSearch, 'This is search status')
 
   // function menuToggle(e, showModal) {
   //   e.preventDefault()
@@ -140,7 +126,6 @@ const NavBar = () => {
     setHouseColor(darkModeFilledInHomeIcon);
     setProfileStatus(false);
   };
-  // console.log("THIS IS THE PROFILESTATUS", profileStatus);
 
   const fillInPost = (e) => {
     e.stopPropagation();
@@ -252,9 +237,8 @@ const NavBar = () => {
           )}
         </div>
       </div>
-
     </div>
-  );
+  )
 };
 
 export default NavBar;

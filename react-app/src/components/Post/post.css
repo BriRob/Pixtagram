@@ -328,3 +328,158 @@ align-items: center;
   font-size: 13px;
 
 }
+
+.editPostModal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+.editPostButton {
+  cursor: pointer;
+  border-bottom: 1px solid grey;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+  padding: 10px 0px;
+}
+
+.cancelPostButton {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+  padding: 10px 0px;
+}
+
+.delPostBtn {
+  cursor: pointer;
+  border-bottom: 1px solid grey;
+  width: 100%;
+  color: red;
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+  padding: 10px 0px;
+}
+
+.delPostBtnFinal {
+  cursor: pointer;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  width: 100%;
+  color: rgb(255, 0, 0);
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+  padding: 10px 0px;
+}
+
+#form-container {
+  /* border: red solid 1px; */
+  width: 100%;
+}
+
+
+#comment-form{
+  padding-top: 5px;
+  /* border: pink solid 1px; */
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 3%;
+  padding-left: 10px;
+}
+
+input[type="text"]::placeholder {
+
+  padding-top: 107px;
+}
+
+::-webkit-input-placeholder {
+  text-align: start;
+
+}
+
+:-moz-placeholder {
+  text-align: start;
+}
+
+#post-comment-button{
+  color: #3795F6;
+  /* color: pink; */
+  font-weight: bold;
+  background-color: black;
+  border: none;
+  padding-bottom: 9px;
+}
+
+#post-comment-button:disabled,
+#post-comment-button[disabled] {
+  color: #072641;
+}
+
+
+.deletePostConfirmText {
+  padding: 25px 0px;
+  display: flex;
+  flex-direction: column;
+align-items: center;
+}
+
+.confirmdeltext {
+  font-size: 13px;
+}
+
+#hide-me{
+  text-decoration: none;
+}
+
+::placeholder {
+  padding-top: 3px;
+}
+
+/*#footer {
+  position:absolute;
+  border: pink solid 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* height: 30%; */
+/*
+}
+
+#footer-line{
+  height: 1px;
+  background-color: #072641;
+  width: 800px;
+  /* margin-left: 20%; */
+/* }
+
+#parent{
+  height: 100vh;
+  width: 100vw;
+} */
+
+/* #for-input-focus */
+
+.comment-icon-post {
+  padding-left: 5px;
+}
+

@@ -6,6 +6,7 @@ const DELETE_POST = "post/DELETE_POST";
 
 const ADD_LIKE = "post/ADD_LIKE";
 
+
 const getAllPosts = (posts) => ({
   type: GET_ALL_POSTS,
   payload: posts,
