@@ -15,6 +15,8 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
   const [imgUrl, setImgUrl] = useState("");
   const [caption, setCaption] = useState("");
   const [errors, setErrors] = useState([]);
+  const [share, setShare] = useState(true);
+  const [sharing, setSharing] = useState(false);
 
   const [showUpload, setShowUpload] = useState(true);
   const [previewUrl, setPreviewUrl] = useState("");
@@ -37,6 +39,8 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setShare(false);
+    setSharing(true);
     const img_url = imgUrl;
     const form = { img_url, caption };
     const post = await dispatch(createPostThunk(user.id, form));
@@ -53,7 +57,7 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
       }
     }
 
-    // console.log("POST \n\n", post)
+    return post;
   };
 
   // console.log("Errors from CREATE POST \n\n", errors)
@@ -67,7 +71,8 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
             <div className="topCreatePostModal">
               <p>Create new post</p>
               <div className="shareButtonDiv">
-                <button className="shareButton">Share</button>
+                {share && <button className="shareButton">Share</button>}
+                {sharing && <div className="sharingButton">Sharing...</div>}
               </div>
             </div>
             <div className="lowerpartModal">
@@ -89,20 +94,23 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
                   </>
                 )}
                 {!showUpload && (
-                  <img src={previewUrl} className="previewImage" alt="preview"></img>
+                  <img
+                    src={previewUrl}
+                    className="previewImage"
+                    alt="preview"
+                  ></img>
                 )}
               </div>
               <div>
                 <div className="rightCreate">
                   <div className="userInfoNewPost">
                     <img
-                    alt="user"
+                      alt="user"
                       className="userInfoNewPostImg"
                       src={user.profile_pic_url}
                     />
                     {user.username}
                   </div>
-
 
                   <label>
                     <textarea
