@@ -50,9 +50,10 @@
 }
 
 .postOptions {
-  position: relative;
-  left: 63%;
+  width: 100%;
   cursor: pointer;
+  display: flex;
+  justify-content: end;
 }
 
 .user-caption {

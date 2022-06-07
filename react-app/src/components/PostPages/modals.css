@@ -66,6 +66,14 @@
   right: 3%;
 }
 
+.sharingButton {
+  background-color: transparent;
+  font-size: 13px;
+  border: 0;
+  color: rgb(0, 147, 242);
+  cursor: pointer;
+}
+
 .shareButton {
   background-color: transparent;
   border: 0;
