@@ -94,18 +94,22 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
                   </>
                 )}
                 {!showUpload && (
+
                   <img
                     src={previewUrl}
                     className="previewImage"
                     alt="preview"
                   ></img>
+
                 )}
               </div>
               <div>
                 <div className="rightCreate">
                   <div className="userInfoNewPost">
                     <img
+
                       alt="user"
+
                       className="userInfoNewPostImg"
                       src={user.profile_pic_url}
                     />
