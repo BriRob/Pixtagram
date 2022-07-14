@@ -48,6 +48,8 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
     if (post.errors) {
       // console.log("CREATE POST HAS ERRORS", post.errors)
       setErrors(post.errors);
+      setSharing(false)
+      setShare(true)
     } else {
       closeModal();
       if (pathname === "/") {
