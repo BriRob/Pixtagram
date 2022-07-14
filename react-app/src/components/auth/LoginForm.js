@@ -46,6 +46,9 @@ const LoginForm = () => {
     }
   }
 
+
+  const errorStyles = {'margin-top': '20px'};
+
   return (
     <>
       <div id='full-page-container'>
@@ -87,14 +90,14 @@ const LoginForm = () => {
                     />
                   </div>
                   <button disabled={!password || !email} id='login-button' type='submit'>Log In</button>
-                      <div>
+                      {errors && <div class='login-error-div'>
                         {errors.map((error, ind) => (
                           <div id='errors' key={ind}>{error}</div>
                         ))}
-                      </div>
+                      </div>}
                 </form>
               </div>
-                <div className='l-or-divider'>
+                <div style={errors.length > 0? errorStyles: null} className='l-or-divider'>
                   <div className='l-line'></div>
                   <div id='or'> OR </div>
                   <div className='l-line'></div>
