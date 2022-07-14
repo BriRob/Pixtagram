@@ -1,5 +1,6 @@
 from email.policy import default
 import datetime
+from turtle import back
 from .db import db
 from .likes import likes
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -27,6 +28,8 @@ class User(db.Model, UserMixin):
     posts = db.relationship('Post', cascade = 'all, delete', back_populates = 'user')
     comments = db.relationship('Comment', back_populates = 'user', cascade='all, delete')
     user_likes = db.relationship('Post', secondary=likes, back_populates='post_likes')
+    follower = db.relationship("Follow", back_populates="follower_user", foreign_keys="Follow.follower_id", cascade="all,delete-orphan")
+    following = db.relationship("Follow", back_populates="following_user", foreign_keys="Follow.following_id", cascade="all,delete-orphan")
 
     @property
     def password(self):
@@ -48,5 +51,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'bio': self.bio,
             'verified': self.verified,
+            # 'follows' : [follow.to_dict() for follow in self.follows],
+            # 'followers': [follower.to_dict() for follower in self.followers]
             # 'post': [post.to_dict() for post in self.posts]
         }
