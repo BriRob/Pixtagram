@@ -1,6 +1,6 @@
 from email.policy import default
 import datetime
-from turtle import back
+# from turtle import back
 from .db import db
 from .likes import likes
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -51,7 +51,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'bio': self.bio,
             'verified': self.verified,
-            # 'follows' : [follow.to_dict() for follow in self.follows],
-            # 'followers': [follower.to_dict() for follower in self.followers]
+            'following' : [follow.to_dict() for follow in self.follower],
+            'followers': [follower.to_dict() for follower in self.following]
             # 'post': [post.to_dict() for post in self.posts]
         }

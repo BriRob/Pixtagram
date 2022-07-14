@@ -8,17 +8,28 @@ import LoadingSpinner from "../Spinner/Spinner";
 import "./Profile.css";
 import { postGridIcon } from "./profileIcons";
 import CheckMark from "../CheckMark/CheckMark";
+import Followers from "../Follows/Followers";
+import Following from "../Follows/Following";
 
 function User() {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+
   const sessionUser = useSelector((state) => state.session.user);
   const user = useSelector((state) => state?.userReducer?.user);
   const posts = useSelector((state) => state?.posts?.allPosts?.posts);
+
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showFollowers, setShowFollowers] = useState(false);
+  const [showFollowing, setShowFollowing] = useState(false);
+
   const { userId } = useParams();
   const verified = user?.verified;
+
+  // console.log("user followers!!! \n\n", user.followers.length)
+  // console.log("user following!!! \n\n", user.following.length)
+
   function postCounter(posts) {
     let count = 0;
     posts?.forEach((post) => {
@@ -39,13 +50,12 @@ function User() {
     return arr;
   }
 
-
   const count = postCounter(posts);
   const userPosts = userPostsFinder(posts);
 
   useEffect(async () => {
     if (sessionUser) {
-      let response = await dispatch(getUserThunk(userId))
+      let response = await dispatch(getUserThunk(userId));
 
       if (response.id === undefined) {
         history.push("/page-not-found");
@@ -105,10 +115,56 @@ function User() {
               ) : null}
             </div>
 
+            {showFollowers && (
+              <div className="backgroundFeed">
+                <div className="postOptionsModalFeed">
+                  <div
+                    onClick={() => setShowFollowers(false)}
+                    className="postOptionsModalBckgFeed"
+                  ></div>
+                  <div className="actualModalComponentFeed">
+                    <Followers userId={userId}/>
+                    {/* <LikesModal views={postForViewLikes} show={showLikes} /> */}
+                    <div
+                      className="closeLikesModal"
+                      onClick={() => setShowFollowers(false)}
+                    >
+                      Close
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            {showFollowing && (
+              <div className="backgroundFeed">
+                <div className="postOptionsModalFeed">
+                  <div
+                    onClick={() => setShowFollowing(false)}
+                    className="postOptionsModalBckgFeed"
+                  ></div>
+                  <div className="actualModalComponentFeed">
+                    <Following userId={userId}/>
+                    {/* <LikesModal views={postForViewLikes} show={showLikes} /> */}
+                    <div
+                      className="closeLikesModal"
+                      onClick={() => setShowFollowing(false)}
+                    >
+                      Close
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="posts-followers">
               <span className="p-f">{`${count} Posts`}</span>
-              <span className="p-f">381 followers</span>
-              <span className="p-f">342 following</span>
+              {/* <span className="p-f">381 followers</span> */}
+              <span onClick={() => setShowFollowers(true)} className="p-f">
+                {user.followers?.length} followers
+              </span>
+              <span onClick={() => setShowFollowing(true)} className="p-f">
+                {user.following?.length} following
+              </span>
             </div>
             <div id="user-full-name">{`${user?.full_name}`}</div>
             <div id="biography">
