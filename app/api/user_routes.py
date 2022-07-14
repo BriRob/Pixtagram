@@ -131,7 +131,7 @@ def get_all_admins():
             admins[f"{user.full_name}"] = user.to_dict()
     return admins
 
-# @user_routes.route('/')
+# getting all followers for one user
 @user_routes.route('/followers/<int:user_id>', methods=['GET'])
 @login_required
 def get_all_followers(user_id):
@@ -141,5 +141,18 @@ def get_all_followers(user_id):
 
     # print("\n\n followers \n\n", followers)
     # user_followers = {follower.id: follower.to_dict() for follower in followers}
-    print("\n\n user_followers", user_followers)
+    # print("\n\n user_followers", user_followers)
     return user_followers
+
+# this user is following...
+@user_routes.route('/following/<int:user_id>', methods=['GET'])
+@login_required
+def get_all_following(user_id):
+    # followers = Follow.query.filter(Follow.following_id == user_id).join(User, User.id == Follow.follower_id).all()
+    followings = Follow.query.filter(Follow.follower_id == user_id).all()
+    user_following = {follow.id: User.query.get(follow.id).to_dict() for follow in followings}
+
+    # print("\n\n followers \n\n", followers)
+    # user_followers = {follower.id: follower.to_dict() for follower in followers}
+    # print("\n\n user_followers", user_following)
+    return user_following
