@@ -148,13 +148,14 @@
 .s-button:disabled,
 .s-button[disabled] {
   background-color: #072641;
+  color: gray;
 
 }
 
-.s-button:disabled,
+/* .s-button:disabled,
 .s-button[disabled] {
   background-color: #072641;
-}
+} */
 
 #login-link {
   text-decoration: none;
