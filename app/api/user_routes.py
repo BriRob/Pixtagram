@@ -130,4 +130,4 @@ def get_all_admins():
             admins[f"{user.full_name}"] = user.to_dict()
     return admins
 
-@user_routes.route('/')
+# @user_routes.route('/')
