@@ -1,5 +1,6 @@
 const GET_ALL_USERS = "user/getAllUsers";
 const GET_USER = "user/getUser";
+const GET_FOLLOWERS = "user/getFollowers";
 const EDIT_USER = "user/editUser";
 const DELETE_USER = "user/deleteUser";
 
@@ -12,6 +13,11 @@ const getUser = (user) => ({
   type: GET_USER,
   payload: user,
 });
+
+const getFollowers = (followers) => ({
+  type: GET_FOLLOWERS,
+  payload: followers
+})
 
 const deleteUser = (user) => ({
   type: DELETE_USER,
@@ -47,6 +53,19 @@ export const getUserThunk = (userId) => async (dispatch) => {
   }
   return response;
 };
+
+// Get Followers
+export const getFollowersThunk = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/users/followers/${userId}`);
+  if (response.ok) {
+    const followers = await response.json();
+    console.log('HERE ARE YOUR FOLLOWERS \n\n', followers)
+    dispatch(getFollowers(followers));
+    return followers
+  }
+  return response;
+};
+
 
 // Edit Thunk
 export const editUserThunk = (userId, form) => async (dispatch) => {
@@ -117,6 +136,11 @@ export default function userReducer(state = initialState, action) {
     case GET_USER:
       newState = { ...state };
       newState.user = action.payload;
+      // return { user: action.payload };
+      return newState;
+    case GET_FOLLOWERS:
+      newState = { ...state };
+      newState.userFollowers = action.payload;
       // return { user: action.payload };
       return newState;
     case EDIT_USER:
