@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
@@ -52,7 +52,7 @@ function App() {
           <LoginForm />
         </Route>
         {/* <div className="under-nav"> */}
-        <ProtectedRoute path="/users/:userId/edit" exact={true} >
+        <ProtectedRoute path="/users/:userId/edit" exact={true}>
           <EditUser />
           {/* <EditUser users={users}/> */}
         </ProtectedRoute>
@@ -78,16 +78,14 @@ function App() {
         <ProtectedRoute path="/explore-page" exact={true}>
           <Explore />
         </ProtectedRoute>
-        <Route path="/test">
-          {/* <AnimatedBackground /> */}
-        </Route>
-         <Route path="/page-not-found">
+        <Route path="/page-not-found">
           <PageNotFound />
         </Route>
+        <Route render={() => <Redirect to={{pathname: "/page-not-found"}} />} />
         {/* </div> */}
-        <Route path="/">
+        {/* <Route path="/">
           <PageNotFound />
-        </Route>
+        </Route> */}
         <PageNotFound />
       </Switch>
     </BrowserRouter>
