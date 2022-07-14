@@ -32,7 +32,7 @@ function Explore() {
         return (
             <>
                 <div className='page-container'>
-                    <h1>test</h1>
+                    <h1>About Us</h1>
                     <div className='profile-cards'>
                         {admins ? admins.map((admin, idx) => (
                             <div key={idx} className='card-container'>

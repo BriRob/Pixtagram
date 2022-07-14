@@ -129,3 +129,5 @@ def get_all_admins():
         if user.verified == True and user.email !='leah@leah.io' and user.email != 'bey@aa.io':
             admins[f"{user.full_name}"] = user.to_dict()
     return admins
+
+# @user_routes.route('/')
