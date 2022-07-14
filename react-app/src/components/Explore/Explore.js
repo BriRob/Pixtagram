@@ -32,10 +32,11 @@ function Explore() {
         return (
             <>
                 <div className='page-container'>
+                    <h1>test</h1>
                     <div className='profile-cards'>
                         {admins ? admins.map((admin, idx) => (
-                            <Link key={idx} to={`/users/${admin.id}`}>
-                            <div className='card-container'>
+                            <div key={idx} className='card-container'>
+                            <Link className='card-container-link' to={`/users/${admin.id}`}>
                             <div className='square'>
                                 <div className='card-box' onClick={(e)=> sendToProfile(admin.id)} key={admin.id}>
                                     <div className='header-name'>
@@ -53,8 +54,8 @@ function Explore() {
 
                                 </div>
                             </div>
-                            </div>
                             </Link>
+                            </div>
                         )) : <div className='loading'><LoadingSpinner /></div>}
                     </div>
                 </div>

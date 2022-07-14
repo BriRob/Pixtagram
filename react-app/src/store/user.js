@@ -40,6 +40,7 @@ export const getAllUsersThunk = () => async (dispatch) => {
 export const getUserThunk = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}`);
   if (response.ok) {
+    console.log('woahhhhh it looks like you should not have gotten here')
     const user = await response.json();
     dispatch(getUser(user));
     return user

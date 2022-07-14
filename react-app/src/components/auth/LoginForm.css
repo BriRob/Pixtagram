@@ -114,6 +114,7 @@ placeholder{
 #login-button:disabled,
 #login-button[disabled] {
     background-color: #072641;
+    color: gray;
 }
 
 #errors {
