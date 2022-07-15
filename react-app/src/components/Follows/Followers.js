@@ -4,7 +4,6 @@ import { getFollowersThunk } from "../../store/user";
 
 function Followers({userId}) {
 
-
     const dispatch = useDispatch()
     const followersObj = useSelector((state) => state.userReducer.userFollowers)
 
@@ -14,12 +13,17 @@ function Followers({userId}) {
 
     if (followersObj) {
         followers = Object.values(followersObj)
+        console.log("What are followers? \n\n", followers)
     }
 
 
     useEffect(() => {
-        dispatch(getFollowersThunk(userId))
-
+        (async() => {
+            let idk = await dispatch(getFollowersThunk(userId))
+            console.log("Hi IDK \n\n",idk)
+        })()
+        // let idk = dispatch(getFollowersThunk(userId))
+        // console.log("This is IDK \n\n",idk)
     }, [dispatch])
 
     return (<>

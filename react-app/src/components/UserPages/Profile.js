@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useLocation, useParams } from "react-router-dom";
 
 import { getAllPostsThunk } from "../../store/post";
-import { getUserThunk } from "../../store/user";
+import {
+  createFollow,
+  deleteFollow,
+  getFollowersThunk,
+  getUserThunk
+} from "../../store/user";
 import LoadingSpinner from "../Spinner/Spinner";
 import "./Profile.css";
 import { postGridIcon } from "./profileIcons";
@@ -23,6 +28,29 @@ function User() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [showFollowers, setShowFollowers] = useState(false);
   const [showFollowing, setShowFollowing] = useState(false);
+
+  const followersObj = useSelector(
+    (state) => state?.userReducer.userFollowers
+  );
+  console.log("SHow me Followers", followersObj);
+
+
+  let followers;
+
+  if (followersObj) {
+      followers = Object.values(followersObj)
+      console.log("What are followers? \n\n", followers)
+  }
+
+  // const followers = Object.values(followersObj);
+
+  let bats = followers?.filter(follower => follower.id === 11)
+
+  console.log("WILL THIS BE TRUE followers \n\n", followers?.filter(follower => follower.id === sessionUser.id).length === 0)
+
+  console.log("show me",bats)
+
+  console.log("MAICA",followers)
 
   const { userId } = useParams();
   const verified = user?.verified;
@@ -53,6 +81,23 @@ function User() {
   const count = postCounter(posts);
   const userPosts = userPostsFinder(posts);
 
+  const followFunc = async (sessionUserId, followingUserId) => {
+    await dispatch(createFollow(sessionUserId, followingUserId));
+    await dispatch(getFollowersThunk(followingUserId));
+    await dispatch(getUserThunk(followingUserId));
+  };
+
+  const unfollowFunc = async(sessionUserId, followingUserId) => {
+    await dispatch(deleteFollow(sessionUserId, followingUserId));
+    await dispatch(getFollowersThunk(followingUserId));
+    await dispatch(getUserThunk(followingUserId));
+  };
+
+  const usersFollowers = async (userId) => {
+    await dispatch(getFollowersThunk(userId));
+    setShowFollowers(true);
+  };
+
   useEffect(async () => {
     if (sessionUser) {
       let response = await dispatch(getUserThunk(userId));
@@ -62,6 +107,11 @@ function User() {
       } else {
         dispatch(getAllPostsThunk()).then(() => setIsLoaded(true));
       }
+
+      (async () => {
+        let idk = await dispatch(getFollowersThunk(userId));
+        console.log("Hi IDK \n\n", idk);
+      })();
 
       // // .then(() => {
       //     if (pathname !== `/users/${userId}`) {
@@ -115,6 +165,32 @@ function User() {
               ) : null}
             </div>
 
+            {/* Follow Button */}
+
+            {user.id !== sessionUser.id && followers?.filter(follower => follower.id === sessionUser.id).length === 0 && (
+              <>
+                <div className="follow-button-div">
+                  <button
+                    onClick={() => followFunc(sessionUser.id, userId)}
+                    id="follow-button"
+                  >
+                    Follow
+                  </button>
+                </div>
+              </>
+            )}
+
+            {/* Unfollow Button */}
+
+            {followers?.filter(follower => follower.id === sessionUser?.id).length > 0 && (
+              // console.log(follower)
+              <>
+                <div>
+                  <button onClick={() => unfollowFunc(sessionUser?.id, userId)} >Unfollow ++</button>
+                </div>
+              </>
+            )}
+
             {showFollowers && (
               <div className="backgroundFeed">
                 <div className="postOptionsModalFeed">
@@ -123,7 +199,7 @@ function User() {
                     className="postOptionsModalBckgFeed"
                   ></div>
                   <div className="actualModalComponentFeed">
-                    <Followers userId={userId}/>
+                    <Followers userId={userId} />
                     {/* <LikesModal views={postForViewLikes} show={showLikes} /> */}
                     <div
                       className="closeLikesModal"
@@ -143,7 +219,7 @@ function User() {
                     className="postOptionsModalBckgFeed"
                   ></div>
                   <div className="actualModalComponentFeed">
-                    <Following userId={userId}/>
+                    <Following userId={userId} />
                     {/* <LikesModal views={postForViewLikes} show={showLikes} /> */}
                     <div
                       className="closeLikesModal"
@@ -159,7 +235,8 @@ function User() {
             <div className="posts-followers">
               <span className="p-f">{`${count} Posts`}</span>
               {/* <span className="p-f">381 followers</span> */}
-              <span onClick={() => setShowFollowers(true)} className="p-f">
+              {/* <span onClick={() => setShowFollowers(true)} className="p-f"> */}
+              <span onClick={() => usersFollowers(userId)} className="p-f">
                 {user.followers?.length} followers
               </span>
               <span onClick={() => setShowFollowing(true)} className="p-f">

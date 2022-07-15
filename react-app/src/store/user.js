@@ -63,6 +63,7 @@ export const getUserThunk = (userId) => async (dispatch) => {
 // Get Followers
 export const getFollowersThunk = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/followers/${userId}`);
+  console.log("THUNK RES", response);
   if (response.ok) {
     const followers = await response.json();
     // console.log('HERE ARE YOUR FOLLOWERS \n\n', followers)
@@ -83,6 +84,22 @@ export const getFollowingThunk = (userId) => async (dispatch) => {
   }
   return response;
 };
+
+// Create Follow
+export const createFollow = (userId, followingUserId) => async(dispatch) => {
+ const options = { method: "PUT"}
+ const response = await fetch(`/api/users/follow/${userId}/${followingUserId}`, options)
+ const follow = await response.json();
+ return follow;
+}
+
+// Delete Follow
+export const deleteFollow = (userId, followingUserId) => async(dispatch) => {
+  const options = { method: "DELETE"}
+  const response = await fetch(`/api/users/unfollow/${userId}/${followingUserId}`, options)
+  const follow = await response.json();
+  return follow;
+ }
 
 
 // Edit Thunk
@@ -181,6 +198,8 @@ export default function userReducer(state = initialState, action) {
       // delete newState.session
       // console.log(newState);
       return newState
+
+
     default:
       return state;
   }

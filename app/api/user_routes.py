@@ -137,12 +137,26 @@ def get_all_admins():
 def get_all_followers(user_id):
     # followers = Follow.query.filter(Follow.following_id == user_id).join(User, User.id == Follow.follower_id).all()
     followers = Follow.query.filter(Follow.following_id == user_id).all()
-    user_followers = {follower.id: User.query.get(follower.id).to_dict() for follower in followers}
+    print("\n\n followers id \n\n", followers[0].id)
 
-    # print("\n\n followers \n\n", followers)
+    larry = User.query.get(followers[0].follower_id)
+
+    # print("HELLO \n\n", isinstance(User.query.get(followers[0].id), type(None))
+    # print("HELLO LARRY \n\n", larry)
+
+
+    # print("TRUE OR FALSE \n\n",User.query.get(followers[0].id) is None)
+
+
+    user_followers = {follower.id: User.query.get(follower.follower_id).to_dict() for follower in followers}
+    # user_followers_li = [User.query.get(follower.id) for follower in followers]
+    # print("Userfollowers_li", user_followers_li);
+    # user_followers = {fol.id: fol.to_dict() for fol in user_followers_li }
+
     # user_followers = {follower.id: follower.to_dict() for follower in followers}
     # print("\n\n user_followers", user_followers)
     return user_followers
+    # pass
 
 # this user is following...
 @user_routes.route('/following/<int:user_id>', methods=['GET'])
@@ -150,9 +164,49 @@ def get_all_followers(user_id):
 def get_all_following(user_id):
     # followers = Follow.query.filter(Follow.following_id == user_id).join(User, User.id == Follow.follower_id).all()
     followings = Follow.query.filter(Follow.follower_id == user_id).all()
-    user_following = {follow.id: User.query.get(follow.id).to_dict() for follow in followings}
+    user_following = {follow.id: User.query.get(follow.following_id).to_dict() for follow in followings}
 
     # print("\n\n followers \n\n", followers)
     # user_followers = {follower.id: follower.to_dict() for follower in followers}
     # print("\n\n user_followers", user_following)
     return user_following
+
+@user_routes.route('/follow/<int:user_id>/<int:following_user_id>', methods=['PUT'])
+@login_required
+def follow(user_id, following_user_id):
+    new_follow = Follow(follower_id=user_id, following_id=following_user_id)
+    print("Just in case - api \n\n", new_follow.to_dict())
+
+
+    db.session.add(new_follow)
+    db.session.commit()
+
+    return new_follow.to_dict()
+
+@user_routes.route('/unfollow/<int:user_id>/<int:following_user_id>', methods=['DELETE'])
+@login_required
+# def unfollow(user_id, following_user_id):
+def unfollow(user_id, following_user_id):
+    # print("HELLO????? \n\n")
+    ids = Follow.query.filter(Follow.follower_id == user_id).all()
+    print("SHOW ME IDs \n\n", ids)
+    # follow = Follow.query.filter(Follow.follower_id == )
+    # print("Just in case - api \n\n", new_follow.to_dict())
+
+    um = filter(lambda x: x.following_id == following_user_id, ids)
+
+    final_follows_list = list(um)
+    # print("THIS IS UM \n\n", final_follows_list)
+    # db.session.add(new_follow)
+    # db.session.commit()
+    for follow in final_follows_list :
+        db.session.delete(follow)
+
+    db.session.commit()
+
+    # print("FINAL FOLLOWS LIST \n\n", {"final_follows":final_follows_list})
+    return {"final_follows":"YOU DID IT ---->"};
+    # return new_follow.to_dict()
+
+
+    # pass

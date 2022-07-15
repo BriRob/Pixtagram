@@ -53,5 +53,7 @@ class User(db.Model, UserMixin):
             'verified': self.verified,
             'following' : [follow.to_dict() for follow in self.follower],
             'followers': [follower.to_dict() for follower in self.following]
+            # 'followers': {follower.id: follower.to_dict() for follower in self.following}
+
             # 'post': [post.to_dict() for post in self.posts]
         }
