@@ -1,5 +1,7 @@
 const GET_ALL_USERS = "user/getAllUsers";
 const GET_USER = "user/getUser";
+const GET_FOLLOWERS = "user/getFollowers";
+const GET_FOLLOWING = "user/getFollowing";
 const EDIT_USER = "user/editUser";
 const DELETE_USER = "user/deleteUser";
 
@@ -12,6 +14,16 @@ const getUser = (user) => ({
   type: GET_USER,
   payload: user,
 });
+
+const getFollowers = (followers) => ({
+  type: GET_FOLLOWERS,
+  payload: followers
+})
+
+const getFollowing = (following) => ({
+  type: GET_FOLLOWING,
+  payload: following
+})
 
 const deleteUser = (user) => ({
   type: DELETE_USER,
@@ -47,6 +59,48 @@ export const getUserThunk = (userId) => async (dispatch) => {
   }
   return response;
 };
+
+// Get Followers
+export const getFollowersThunk = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/users/followers/${userId}`);
+  console.log("THUNK RES", response);
+  if (response.ok) {
+    const followers = await response.json();
+    // console.log('HERE ARE YOUR FOLLOWERS \n\n', followers)
+    dispatch(getFollowers(followers));
+    return followers
+  }
+  return response;
+};
+
+// Get Following
+export const getFollowingThunk = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/users/following/${userId}`);
+  if (response.ok) {
+    const following = await response.json();
+    // console.log('HERE is your following \n\n', following)
+    dispatch(getFollowing(following));
+    return following
+  }
+  return response;
+};
+
+// Create Follow
+export const createFollow = (userId, followingUserId) => async(dispatch) => {
+ const options = { method: "PUT"}
+ const response = await fetch(`/api/users/follow/${userId}/${followingUserId}`, options)
+ const follow = await response.json();
+ return follow;
+}
+
+// Delete Follow
+export const deleteFollow = (userId, followingUserId) => async(dispatch) => {
+  const options = { method: "DELETE"}
+  const response = await fetch(`/api/users/unfollow/${userId}/${followingUserId}`, options)
+  const follow = await response.json();
+  return follow;
+ }
+
 
 // Edit Thunk
 export const editUserThunk = (userId, form) => async (dispatch) => {
@@ -114,16 +168,27 @@ export default function userReducer(state = initialState, action) {
       // newState = { ...state, ...action.users };
       // newState.users = action.users
       return newState;
+
     case GET_USER:
       newState = { ...state };
       newState.user = action.payload;
-      // return { user: action.payload };
       return newState;
+
+    case GET_FOLLOWERS:
+      newState = { ...state };
+      newState.userFollowers = action.payload;
+      return newState;
+
+    case GET_FOLLOWING:
+      newState = { ...state };
+      newState.userFollowing = action.payload;
+      return newState;
+
     case EDIT_USER:
       newState = { ...state };
       newState.user = action.payload.user;
       return newState;
-    // return {...state: action.payload}
+
     case DELETE_USER:
       newState = {...state}
       // console.log('deleted newState.session :D')
@@ -133,6 +198,8 @@ export default function userReducer(state = initialState, action) {
       // delete newState.session
       // console.log(newState);
       return newState
+
+
     default:
       return state;
   }

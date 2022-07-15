@@ -30,6 +30,7 @@ function EditUser() {
   const [errors, setErrors] = useState([]);
   const [preImg, setPreImg] = useState(sessionUser?.profile_pic_url);
   const [showPostOptions, setShowPostOptions] = useState(false);
+  const [demoUser, setDemoUser] = useState(false);
 
   // const setFunc = (currentUser) => {
   //   setBiography(currentUser?.bio);
@@ -46,6 +47,9 @@ function EditUser() {
 
     if (currentUser) {
       setIsLoaded(true);
+    }
+    if (sessionUser.id === 1) {
+      setDemoUser(true);
     }
     // if (currentUser?.id == sessionUser?.id) {
     //   // dispatch(getUserThunk(userId))
@@ -92,9 +96,13 @@ function EditUser() {
   async function deleteUser(e) {
     e.preventDefault();
     e.stopPropagation();
-    dispatch(deleteUserThunk(userId));
-    dispatch(logout());
-    return history.push("/");
+    if (sessionUser.id === 1) {
+      window.alert("You can't delete the Demo User.");
+    } else {
+      dispatch(deleteUserThunk(userId));
+      dispatch(logout());
+      return history.push("/");
+    }
   }
 
   const updateImage = (e) => {
@@ -114,39 +122,73 @@ function EditUser() {
     return (
       <>
         {showPostOptions && (
-          <div className="background">
-            <div className="postOptionsModal">
-              <div
-                onClick={() => setShowPostOptions(false)}
-                className="postOptionsModalBckg"
-              ></div>
-              <div className="actualModalComponent">
-                <div className="editPostModal">
-                  <div className="deletePostConfirmText">
-                    <h3>Delete user</h3>
-                    <p className="confirmdeltext">
-                      Are you sure you want to delete your user?
-                    </p>
-                  </div>
+          <>
+            {demoUser && (
+            <>
+              <div className="background">
+                <div className="postOptionsModal">
                   <div
-                    className="delPostBtnFinal"
-                    onClick={(e) => deleteUser(e)}
-                  >
-                    Delete
-                  </div>
-                  {/* <div className="cancelPostButton" onClick={(e) => setDelModal(false)}>
+                    onClick={() => setShowPostOptions(false)}
+                    className="postOptionsModalBckg"
+                  ></div>
+                  <div className="actualModalComponent">
+                    <div className="editPostModal">
+                      <div className="deletePostConfirmText">
+                        <h3>Delete user</h3>
+                        <p className="confirmdeltext">
+                          You cannot delete the Demo User.
+                        </p>
+                      </div>
+                      {/* <div className="cancelPostButton" onClick={(e) => setDelModal(false)}>
             Cancel
           </div> */}
-                </div>
-                <div
-                  className="cancelPostButton"
-                  onClick={() => setShowPostOptions(false)}
-                >
-                  Cancel
+                    </div>
+                    <div
+                      className="cancelPostButtonDemo"
+                      onClick={() => setShowPostOptions(false)}
+                    >
+                      Cancel
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </>)}
+            {!demoUser && (
+              <div className="background">
+                <div className="postOptionsModal">
+                  <div
+                    onClick={() => setShowPostOptions(false)}
+                    className="postOptionsModalBckg"
+                  ></div>
+                  <div className="actualModalComponent">
+                    <div className="editPostModal">
+                      <div className="deletePostConfirmText">
+                        <h3>Delete user</h3>
+                        <p className="confirmdeltext">
+                          Are you sure you want to delete your user?
+                        </p>
+                      </div>
+                      <div
+                        className="delPostBtnFinal"
+                        onClick={(e) => deleteUser(e)}
+                      >
+                        Delete
+                      </div>
+                      {/* <div className="cancelPostButton" onClick={(e) => setDelModal(false)}>
+            Cancel
+          </div> */}
+                    </div>
+                    <div
+                      className="cancelPostButton"
+                      onClick={() => setShowPostOptions(false)}
+                    >
+                      Cancel
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
         )}
 
         <div className="bigEditUserPage">

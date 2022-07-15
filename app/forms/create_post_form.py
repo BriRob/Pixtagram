@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError
-import re
+
 
 # will need error handling for text input that has more than one space and no other characters
 # def no_spaces_caption(form, field):
@@ -23,4 +23,3 @@ class CreatePostForm(FlaskForm):
 class EditPostForm(FlaskForm):
     caption = StringField("caption")
     # caption = StringField("caption", validators=[no_spaces_caption])
-

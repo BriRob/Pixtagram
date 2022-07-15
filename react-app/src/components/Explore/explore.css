@@ -1,29 +1,36 @@
 .page-container {
   /* border: green solid  5px; */
   /* position: relative; */
-  top: 450px;
+
+  padding-top: 5%;
+
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   /* display: grid;
     grid-template-columns: 2fr;
     grid-template-rows: 2fr; */
-  height: 100vh;
+
   width: 100vw;
   text-decoration: none;
 }
 
-.profile-cards{
-   display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    background-color: pink;
-    width: 80vw;
-    align-items: center;
-    justify-items: center;
+
+.profile-cards {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  /* background-color: pink; */
+  max-width: 900px;
+  width: 80vw;
+  align-items: center;
+  justify-items: center;
 }
 
-.card-container{
+.card-container {
+
   /* background-color: blue; */
   margin-bottom: 20px;
   border-radius: 3%;
@@ -72,7 +79,6 @@
   height: 100%;
   width: 100%;
 }
-
 
 .admin-bio {
   display: flex;
