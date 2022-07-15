@@ -32,25 +32,23 @@ function User() {
   const followersObj = useSelector(
     (state) => state?.userReducer.userFollowers
   );
-  console.log("SHow me Followers", followersObj);
+  console.log("Show me Followers Obj", followersObj);
 
 
   let followers;
 
   if (followersObj) {
       followers = Object.values(followersObj)
-      console.log("What are followers? \n\n", followers)
+      // console.log("What are followers? \n\n", followers)
   }
 
   // const followers = Object.values(followersObj);
 
-  let bats = followers?.filter(follower => follower.id === 11)
+  // let bats = followers?.filter(follower => follower.id === 11)
+  // console.log("show me",bats)
 
+  console.log("Followers Array from obj \n\n", followers)
   console.log("WILL THIS BE TRUE followers \n\n", followers?.filter(follower => follower.id === sessionUser.id).length === 0)
-
-  console.log("show me",bats)
-
-  console.log("MAICA",followers)
 
   const { userId } = useParams();
   const verified = user?.verified;
@@ -94,7 +92,7 @@ function User() {
   };
 
   const usersFollowers = async (userId) => {
-    await dispatch(getFollowersThunk(userId));
+    // await dispatch(getFollowersThunk(userId));
     setShowFollowers(true);
   };
 
@@ -109,8 +107,9 @@ function User() {
       }
 
       (async () => {
-        let idk = await dispatch(getFollowersThunk(userId));
-        console.log("Hi IDK \n\n", idk);
+        // let someFollowers = await dispatch(getFollowersThunk(userId));
+        await dispatch(getFollowersThunk(userId));
+        // console.log("Followers from useEffect \n\n", someFollowers);
       })();
 
       // // .then(() => {

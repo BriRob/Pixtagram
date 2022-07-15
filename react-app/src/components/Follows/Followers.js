@@ -19,8 +19,9 @@ function Followers({userId}) {
 
     useEffect(() => {
         (async() => {
-            let idk = await dispatch(getFollowersThunk(userId))
-            console.log("Hi IDK \n\n",idk)
+            // let idk = await dispatch(getFollowersThunk(userId))
+            await dispatch(getFollowersThunk(userId))
+            // console.log("Hi IDK \n\n",idk)
         })()
         // let idk = dispatch(getFollowersThunk(userId))
         // console.log("This is IDK \n\n",idk)
