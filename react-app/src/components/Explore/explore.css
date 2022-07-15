@@ -1,7 +1,9 @@
 .page-container {
   /* border: green solid  5px; */
   /* position: relative; */
+
   padding-top: 5%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,6 +15,7 @@
   width: 100vw;
   text-decoration: none;
 }
+
 
 .profile-cards {
   margin-top: 30px;
@@ -27,6 +30,7 @@
 }
 
 .card-container {
+
   /* background-color: blue; */
   margin-bottom: 20px;
   border-radius: 3%;
