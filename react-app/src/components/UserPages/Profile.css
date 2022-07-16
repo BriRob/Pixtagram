@@ -229,3 +229,15 @@
   z-index: 40;
   animation: grow 0.3s forwards;
 }
+
+
+.follow-button{
+  border: none;
+  background-color: #037afb;
+  color: white;
+  width: 6rem;
+  height: 2rem;
+  border-radius: 5px;
+  font-weight: bolder;
+  font-size: larger;
+}
