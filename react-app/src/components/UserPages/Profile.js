@@ -7,7 +7,7 @@ import {
   createFollow,
   deleteFollow,
   getFollowersThunk,
-  getUserThunk
+  getUserThunk,
 } from "../../store/user";
 import LoadingSpinner from "../Spinner/Spinner";
 import "./Profile.css";
@@ -29,17 +29,14 @@ function User() {
   const [showFollowers, setShowFollowers] = useState(false);
   const [showFollowing, setShowFollowing] = useState(false);
 
-  const followersObj = useSelector(
-    (state) => state?.userReducer.userFollowers
-  );
+  const followersObj = useSelector((state) => state?.userReducer.userFollowers);
   console.log("Show me Followers Obj", followersObj);
-
 
   let followers;
 
   if (followersObj) {
-      followers = Object.values(followersObj)
-      // console.log("What are followers? \n\n", followers)
+    followers = Object.values(followersObj);
+    // console.log("What are followers? \n\n", followers)
   }
 
   // const followers = Object.values(followersObj);
@@ -47,8 +44,11 @@ function User() {
   // let bats = followers?.filter(follower => follower.id === 11)
   // console.log("show me",bats)
 
-  console.log("Followers Array from obj \n\n", followers)
-  console.log("WILL THIS BE TRUE followers \n\n", followers?.filter(follower => follower.id === sessionUser.id).length === 0)
+  console.log("Followers Array from obj \n\n", followers);
+  console.log(
+    "WILL THIS BE TRUE followers \n\n",
+    followers?.filter((follower) => follower.id === sessionUser.id).length === 0
+  );
 
   const { userId } = useParams();
   const verified = user?.verified;
@@ -85,7 +85,7 @@ function User() {
     await dispatch(getUserThunk(followingUserId));
   };
 
-  const unfollowFunc = async(sessionUserId, followingUserId) => {
+  const unfollowFunc = async (sessionUserId, followingUserId) => {
     await dispatch(deleteFollow(sessionUserId, followingUserId));
     await dispatch(getFollowersThunk(followingUserId));
     await dispatch(getUserThunk(followingUserId));
@@ -165,36 +165,39 @@ function User() {
 
               {/* Follow Button */}
 
-              {user.id !== sessionUser.id && followers?.filter(follower => follower.id === sessionUser.id).length === 0 && (
+              {user.id !== sessionUser.id &&
+                followers?.filter((follower) => follower.id === sessionUser.id)
+                  .length === 0 && (
+                  <>
+                    <div className="follow-button-div">
+                      <button
+                        onClick={() => followFunc(sessionUser.id, userId)}
+                        id="follow-button"
+                        className="follow-button"
+                      >
+                        Follow
+                      </button>
+                    </div>
+                  </>
+                )}
+
+              {/* Unfollow Button */}
+
+              {followers?.filter((follower) => follower.id === sessionUser?.id)
+                .length > 0 && (
+                // console.log(follower)
                 <>
                   <div className="follow-button-div">
                     <button
-                      onClick={() => followFunc(sessionUser.id, userId)}
-                      id="follow-button"
+                      onClick={() => unfollowFunc(sessionUser?.id, userId)}
                       className="follow-button"
                     >
-                      Follow
+                      Unfollow
                     </button>
                   </div>
                 </>
               )}
-
-            {/* Unfollow Button */}
-
-            {followers?.filter(follower => follower.id === sessionUser?.id).length > 0 && (
-              // console.log(follower)
-              <>
-                <div className="follow-button-div">
-                  <button
-                    onClick={() => unfollowFunc(sessionUser?.id, userId)}
-                    className="follow-button"
-                  >Unfollow</button>
-                </div>
-              </>
-            )}
-
             </div>
-
 
             {showFollowers && (
               <div className="backgroundFeed">
@@ -203,8 +206,11 @@ function User() {
                     onClick={() => setShowFollowers(false)}
                     className="postOptionsModalBckgFeed"
                   ></div>
-                  <div className="actualModalComponentFeed">
-                    <Followers userId={userId} />
+                  <div className="bothFollowsBigDiv actualModalComponentFeed ">
+                    <Followers
+                      userId={userId}
+                      hideFollowers={() => setShowFollowers(false)}
+                    />
                     {/* <LikesModal views={postForViewLikes} show={showLikes} /> */}
                     <div
                       className="closeLikesModal"
@@ -223,8 +229,11 @@ function User() {
                     onClick={() => setShowFollowing(false)}
                     className="postOptionsModalBckgFeed"
                   ></div>
-                  <div className="actualModalComponentFeed">
-                    <Following userId={userId} />
+                  <div className="bothFollowsBigDiv actualModalComponentFeed">
+                    <Following
+                      userId={userId}
+                      hideFollowing={() => setShowFollowing(false)}
+                    />
                     {/* <LikesModal views={postForViewLikes} show={showLikes} /> */}
                     <div
                       className="closeLikesModal"
@@ -241,9 +250,18 @@ function User() {
               <span className="p-f">{`${count} Posts`}</span>
               {/* <span className="p-f">381 followers</span> */}
               {/* <span onClick={() => setShowFollowers(true)} className="p-f"> */}
-              <span onClick={() => usersFollowers(userId)} className="p-f">
+              {followers?.length === 1 ? (
+                <span onClick={() => usersFollowers(userId)} className="p-f">
+                  1 follower
+                </span>
+              ) : (
+                <span onClick={() => usersFollowers(userId)} className="p-f">
+                  {user.followers?.length} followers
+                </span>
+              )}
+              {/* <span onClick={() => usersFollowers(userId)} className="p-f">
                 {user.followers?.length} followers
-              </span>
+              </span> */}
               <span onClick={() => setShowFollowing(true)} className="p-f">
                 {user.following?.length} following
               </span>

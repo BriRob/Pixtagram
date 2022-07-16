@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFollowersThunk } from "../../store/user";
+import { Link, useHistory } from "react-router-dom";
+import { getFollowersThunk, getUserThunk } from "../../store/user";
+import "./Follows.css"
 
-function Followers({userId}) {
+function Followers({userId, hideFollowers}) {
 
     const dispatch = useDispatch()
+    const history = useHistory()
     const followersObj = useSelector((state) => state.userReducer.userFollowers)
 
     // console.log("Followers from COMPONENT", followersObj)
@@ -27,11 +30,21 @@ function Followers({userId}) {
         // console.log("This is IDK \n\n",idk)
     }, [dispatch])
 
-    return (<>
-    {followers?.map((follower, idx) => (
+    const goToProfile = async(followerId) => {
+        hideFollowers()
+        await dispatch(getUserThunk(followerId))
+        history.push(`/users/${followerId}`)
+    }
 
-        <div key={idx}> {follower.username}</div>
-    ))}
+    return (<>
+    <h3 className="h3Follow">Followers</h3>
+    {followers?.length === 0 ? <div className="noFollows">No Followers</div> :
+    followers?.map((follower, idx) => (
+
+        // <Link key={idx} to={`/users/${follower.id}`}>{follower.username}</Link>
+        <div className="eachFollowName" key={idx} onClick={() => goToProfile(follower.id)}> {follower.username}</div>
+    ))
+    }
     </>)
 }
 export default Followers;
