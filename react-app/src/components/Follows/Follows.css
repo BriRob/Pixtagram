@@ -1,0 +1,19 @@
+.h3Follow {
+    margin: 8px 0;
+
+}
+
+.eachFollowName {
+    cursor: pointer;
+    padding: 2px 0;
+    font-weight: bold;
+}
+
+.noFollows {
+    padding: 2px 0;
+    font-weight: bold;
+}
+
+.eachFollowName:hover {
+    text-decoration: underline;
+}
