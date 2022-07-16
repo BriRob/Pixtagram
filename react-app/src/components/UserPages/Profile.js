@@ -162,33 +162,39 @@ function User() {
                   Edit Profile
                 </button>
               ) : null}
-            </div>
 
-            {/* Follow Button */}
+              {/* Follow Button */}
 
-            {user.id !== sessionUser.id && followers?.filter(follower => follower.id === sessionUser.id).length === 0 && (
-              <>
-                <div className="follow-button-div">
-                  <button
-                    onClick={() => followFunc(sessionUser.id, userId)}
-                    id="follow-button"
-                  >
-                    Follow
-                  </button>
-                </div>
-              </>
-            )}
+              {user.id !== sessionUser.id && followers?.filter(follower => follower.id === sessionUser.id).length === 0 && (
+                <>
+                  <div className="follow-button-div">
+                    <button
+                      onClick={() => followFunc(sessionUser.id, userId)}
+                      id="follow-button"
+                      className="follow-button"
+                    >
+                      Follow
+                    </button>
+                  </div>
+                </>
+              )}
 
             {/* Unfollow Button */}
 
             {followers?.filter(follower => follower.id === sessionUser?.id).length > 0 && (
               // console.log(follower)
               <>
-                <div>
-                  <button onClick={() => unfollowFunc(sessionUser?.id, userId)} >Unfollow ++</button>
+                <div className="follow-button-div">
+                  <button
+                    onClick={() => unfollowFunc(sessionUser?.id, userId)}
+                    className="follow-button"
+                  >Unfollow</button>
                 </div>
               </>
             )}
+
+            </div>
+
 
             {showFollowers && (
               <div className="backgroundFeed">
