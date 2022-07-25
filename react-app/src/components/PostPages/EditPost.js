@@ -114,7 +114,7 @@ function EditPost() {
       // </div>
       <div className="outerClass">
         <div className="inner">
-          <form onSubmit={handleSubmit} className="createPostForm">
+          <form onSubmit={handleSubmit} autoComplete="off" className="createPostForm">
             <div className="topCreatePostModal">
               <p>Edit post</p>
               <div className="shareButtonDiv">
