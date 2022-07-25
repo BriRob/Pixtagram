@@ -142,6 +142,7 @@ def get_all_followers(user_id):
 
     # larry = User.query.get(followers[0].follower_id)
 
+
     # print("HELLO \n\n", isinstance(User.query.get(followers[0].id), type(None))
     # print("HELLO LARRY \n\n", larry)
 

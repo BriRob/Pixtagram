@@ -5,9 +5,9 @@ import { getFollowersThunk, getUserThunk } from "../../store/user";
 import "./Follows.css"
 
 function Followers({userId, hideFollowers}) {
-
     const dispatch = useDispatch()
     const history = useHistory()
+
     const followersObj = useSelector((state) => state.userReducer.userFollowers)
 
     // console.log("Followers from COMPONENT", followersObj)
@@ -22,6 +22,7 @@ function Followers({userId, hideFollowers}) {
 
     useEffect(() => {
         (async() => {
+
             // let idk = await dispatch(getFollowersThunk(userId))
             await dispatch(getFollowersThunk(userId))
             // console.log("Hi IDK \n\n",idk)

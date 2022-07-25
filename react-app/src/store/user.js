@@ -64,6 +64,7 @@ export const getUserThunk = (userId) => async (dispatch) => {
 export const getFollowersThunk = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/followers/${userId}`);
   // console.log("THUNK RES", response);
+
   if (response.ok) {
     const followers = await response.json();
     // console.log('HERE ARE YOUR FOLLOWERS \n\n', followers)

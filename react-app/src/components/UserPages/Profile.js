@@ -29,8 +29,10 @@ function User() {
   const [showFollowers, setShowFollowers] = useState(false);
   const [showFollowing, setShowFollowing] = useState(false);
 
+
   const followersObj = useSelector((state) => state?.userReducer.userFollowers);
   console.log("Show me Followers Obj", followersObj);
+
 
   let followers;
 
@@ -84,6 +86,7 @@ function User() {
     await dispatch(getFollowersThunk(followingUserId));
     await dispatch(getUserThunk(followingUserId));
   };
+
 
   const unfollowFunc = async (sessionUserId, followingUserId) => {
     await dispatch(deleteFollow(sessionUserId, followingUserId));
