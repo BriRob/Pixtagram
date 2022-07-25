@@ -137,9 +137,11 @@ def get_all_admins():
 def get_all_followers(user_id):
     # followers = Follow.query.filter(Follow.following_id == user_id).join(User, User.id == Follow.follower_id).all()
     followers = Follow.query.filter(Follow.following_id == user_id).all()
-    print("\n\n followers id \n\n", followers[0].id)
+    # print("\n\n followers id \n\n", followers[0].id)
+    # print("\n\n followers \n\n", followers)
 
-    larry = User.query.get(followers[0].follower_id)
+    # larry = User.query.get(followers[0].follower_id)
+
 
     # print("HELLO \n\n", isinstance(User.query.get(followers[0].id), type(None))
     # print("HELLO LARRY \n\n", larry)

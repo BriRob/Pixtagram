@@ -52,7 +52,7 @@ export const getAllUsersThunk = () => async (dispatch) => {
 export const getUserThunk = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}`);
   if (response.ok) {
-    console.log('woahhhhh it looks like you should not have gotten here')
+    // console.log('woahhhhh it looks like you should not have gotten here')
     const user = await response.json();
     dispatch(getUser(user));
     return user
@@ -63,7 +63,8 @@ export const getUserThunk = (userId) => async (dispatch) => {
 // Get Followers
 export const getFollowersThunk = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/followers/${userId}`);
-  console.log("THUNK RES", response);
+  // console.log("THUNK RES", response);
+
   if (response.ok) {
     const followers = await response.json();
     // console.log('HERE ARE YOUR FOLLOWERS \n\n', followers)
