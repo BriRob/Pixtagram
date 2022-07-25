@@ -15,7 +15,7 @@ const SignUpForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
-  
+
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
@@ -164,7 +164,8 @@ const SignUpForm = () => {
                       !repeatPassword
                     }
                     type='submit'
-                    className='s-button'>Sign Up</button>
+                    className='s-button'
+                    id="signupBtn">Sign Up</button>
                     <div>
                       {errors.map((error, ind) => (
                         <div id='errors' key={ind}>{error}</div>

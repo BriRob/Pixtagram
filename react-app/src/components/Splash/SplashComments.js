@@ -133,7 +133,7 @@ function SplashComments({ post }) {
             )}
             <div id="s-line"></div>
             <div id="s-comment-form">
-              <form id="splash-comment-form" onSubmit={handleSubmit}>
+              <form id="splash-comment-form" autoComplete="off" onSubmit={handleSubmit}>
                 <input
                   id="s-input"
                   placeholder="Add a comment.."

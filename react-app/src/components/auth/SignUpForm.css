@@ -144,13 +144,17 @@
   height: 30px;
   border: none;
   border-radius: 2px;
+  cursor: pointer;
 }
 .s-button:disabled,
 .s-button[disabled] {
   background-color: #072641;
   color: gray;
+  cursor:default;
 
 }
+
+
 
 /* .s-button:disabled,
 .s-button[disabled] {
@@ -198,4 +202,12 @@
   height: 1px;
   width: 100px;
   background-color: #8e8e8e;
+}
+
+#signupBtn:hover {
+  cursor: pointer;
+}
+
+#signupBtn:disabled:hover {
+  cursor: default;
 }

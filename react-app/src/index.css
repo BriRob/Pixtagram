@@ -21,3 +21,9 @@ html {
 input{
     padding-left: 5px;
 }
+
+button:hover, ._ab6-:hover {
+    cursor: pointer;
+}
+
+
