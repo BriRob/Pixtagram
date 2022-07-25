@@ -199,3 +199,7 @@
   width: 100px;
   background-color: #8e8e8e;
 }
+
+#sign-up-button:hover{
+  cursor: pointer;
+}
