@@ -69,7 +69,7 @@ const CreatePost = ({ hideModal, changePostIcon }) => {
       <div className="createPostModal">
         <div className="createPostBckg" onClick={() => closeModal()}></div>
         <div className="inner">
-          <form onSubmit={handleSubmit} className="createPostForm">
+          <form onSubmit={handleSubmit} autoComplete="off" className="createPostForm">
             <div className="topCreatePostModal">
               <p>Create new post</p>
               <div className="shareButtonDiv">

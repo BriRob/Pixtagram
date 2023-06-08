@@ -432,8 +432,9 @@ input[type="text"]::placeholder {
 }
 
 #post-comment-button:disabled,
-#post-comment-button[disabled] {
+#post-comment-button[disabled], #post-comment-button:disabled:hover{
   color: #072641;
+  cursor: default;
 }
 
 
@@ -484,4 +485,3 @@ align-items: center;
 .comment-icon-post {
   padding-left: 5px;
 }
-

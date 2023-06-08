@@ -165,7 +165,8 @@ const SignUpForm = () => {
                       !repeatPassword
                     }
                     type='submit'
-                    className='s-button'>Sign Up</button>
+                    className='s-button'
+                    id="signupBtn">Sign Up</button>
                     <div>
                       {errors.map((error, ind) => (
                         <div id='errors' key={ind}>{error}</div>

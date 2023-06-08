@@ -287,7 +287,7 @@ function Post() {
                       </div>
                     )}
                     <div id="form-container">
-                      <form onSubmit={handleSubmit} id="comment-form">
+                      <form onSubmit={handleSubmit} autoComplete="off" id="comment-form">
                         <textarea
                           className="comment-form"
                           id="for-input-focus"
