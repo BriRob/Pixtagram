@@ -204,10 +204,9 @@
   background-color: #8e8e8e;
 }
 
-#signupBtn:hover {
-  cursor: pointer;
-}
 
-#signupBtn:disabled:hover {
-  cursor: default;
+#sign-up-button:hover{
+  cursor: pointer;
+  /* cursor: pointer; */
+
 }

@@ -156,6 +156,7 @@ const SignUpForm = () => {
                       ))}
                   </div> */}
                   <button
+                    id="sign-up-button"
                     disabled={
                       !full_name ||
                       !username ||
